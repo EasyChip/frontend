@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Dark background -->
+  <rect width="32" height="32" rx="7" fill="#080a0c"/>
+
+  <!-- Top pins -->
+  <rect x="8"  y="5" width="4" height="3" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="14" y="5" width="4" height="3" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="20" y="5" width="4" height="3" rx="1" fill="#d4a843" opacity="0.9"/>
+
+  <!-- Left pins -->
+  <rect x="5" y="8"  width="3" height="4" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="5" y="14" width="3" height="4" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="5" y="20" width="3" height="4" rx="1" fill="#d4a843" opacity="0.9"/>
+
+  <!-- Right pins -->
+  <rect x="24" y="8"  width="3" height="4" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="24" y="14" width="3" height="4" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="24" y="20" width="3" height="4" rx="1" fill="#d4a843" opacity="0.9"/>
+
+  <!-- Bottom pins -->
+  <rect x="8"  y="24" width="4" height="3" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="14" y="24" width="4" height="3" rx="1" fill="#d4a843" opacity="0.9"/>
+  <rect x="20" y="24" width="4" height="3" rx="1" fill="#d4a843" opacity="0.9"/>
+
+  <!-- Chip body -->
+  <rect x="8" y="8" width="16" height="16" rx="3" fill="#d4a843"/>
+
+  <!-- Inner die (dark square) -->
+  <rect x="12" y="12" width="8" height="8" rx="1.5" fill="#080a0c"/>
+
+  <!-- Die core dot -->
+  <rect x="14.5" y="14.5" width="3" height="3" rx="0.75" fill="#d4a843" opacity="0.6"/>
+</svg>
