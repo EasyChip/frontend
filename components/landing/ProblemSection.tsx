@@ -37,8 +37,8 @@ export default function ProblemSection() {
           </span>
         </div>
         <h2 className="reveal" style={{
-          fontFamily: 'var(--sans)', fontWeight: 800,
-          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          fontFamily: 'var(--sans)', fontWeight: 300,
+          fontSize: 'clamp(2.25rem, 4.5vw, 4.25rem)',
           lineHeight: 1.1, letterSpacing: '-0.03em',
           color: 'var(--white)', marginBottom: 64,
           transitionDelay: '0.1s',
@@ -63,7 +63,7 @@ export default function ProblemSection() {
             onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(239,68,68,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.16)' }}
             onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
             >
-              <div style={{ fontFamily: 'var(--mono)', fontSize: 64, fontWeight: 800, color: 'rgba(255,255,255,0.04)', position: 'absolute', top: -10, right: 16, lineHeight: 1, userSelect: 'none' }}>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 64, fontWeight: 300, color: 'rgba(255,255,255,0.04)', position: 'absolute', top: -10, right: 16, lineHeight: 1, userSelect: 'none' }}>
                 {p.num}
               </div>
               <h3 style={{ fontFamily: 'var(--sans)', fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 12 }}>

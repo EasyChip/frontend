@@ -56,10 +56,10 @@ export default function Navbar() {
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
           style={{
-            fontFamily: 'var(--mono)', fontSize: 12, fontWeight: 600,
-            background: 'var(--blue, #00E5C3)', color: '#fff',
-            padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer',
-            transition: 'opacity 0.2s', letterSpacing: '0.02em', whiteSpace: 'nowrap',
+            fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
+            background: 'var(--teal)', color: '#080C12',
+            padding: '7px 14px', borderRadius: 2, border: 'none', cursor: 'pointer',
+            transition: 'opacity 0.2s', letterSpacing: '0.08em', whiteSpace: 'nowrap',
           }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}

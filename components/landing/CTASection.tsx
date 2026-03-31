@@ -19,7 +19,7 @@ export default function CTASection() {
       {/* Glow background */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(59,130,246,0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 80% 60% at 50% 50%, var(--teal-glow) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <div style={{
@@ -35,8 +35,8 @@ export default function CTASection() {
           </span>
         </div>
         <h2 className="reveal" style={{
-          fontFamily: 'var(--sans)', fontWeight: 800,
-          fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+          fontFamily: 'var(--sans)', fontWeight: 300,
+          fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
           lineHeight: 1.05, letterSpacing: '-0.03em',
           color: 'var(--white)', marginBottom: 20,
           transitionDelay: '0.1s',
@@ -54,18 +54,18 @@ export default function CTASection() {
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
             style={{
-              fontFamily: 'var(--mono)', fontSize: 14, fontWeight: 700,
-              background: '#00E5C3', color: '#080C12',
-              padding: '16px 36px', borderRadius: 10,
+              fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
+              background: 'var(--teal)', color: '#080C12',
+              padding: '0.75rem 1.5rem', borderRadius: 2,
               border: 'none', cursor: 'pointer',
-              boxShadow: '0 0 40px rgba(59,130,246,0.4)',
-              transition: 'opacity 0.2s, transform 0.2s',
-              letterSpacing: '0.02em',
+              boxShadow: '0 0 32px var(--teal-glow)',
+              transition: 'opacity 0.2s',
+              letterSpacing: '0.08em',
             }}
-            onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
           >
-            Register for Early Access &rarr;
+            Register for Early Access →
           </button>
         </div>
         <div className="reveal" style={{ marginTop: 24, transitionDelay: '0.4s' }}>

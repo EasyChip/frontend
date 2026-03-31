@@ -41,8 +41,8 @@ export default function StackSection() {
           </span>
         </div>
         <h2 className="reveal" style={{
-          fontFamily: 'var(--sans)', fontWeight: 800,
-          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          fontFamily: 'var(--sans)', fontWeight: 300,
+          fontSize: 'clamp(2.25rem, 4.5vw, 4.25rem)',
           lineHeight: 1.1, letterSpacing: '-0.03em',
           color: 'var(--white)', marginBottom: 56,
           transitionDelay: '0.1s',

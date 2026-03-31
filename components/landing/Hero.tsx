@@ -60,12 +60,12 @@ export default function Hero() {
           {/* Headline */}
           <h1 className="reveal" style={{
             fontFamily: 'var(--sans)',
-            fontSize: 'clamp(3rem, 5.5vw, 5.5rem)',
-            fontWeight: 800,
-            lineHeight: 1.05,
-            letterSpacing: '-0.03em',
+            fontSize: 'clamp(3.5rem, 9vw, 8rem)',
+            fontWeight: 300,
+            lineHeight: 0.95,
+            letterSpacing: '-0.04em',
             color: 'var(--white)',
-            marginBottom: 24,
+            marginBottom: 28,
             transitionDelay: '0.1s',
           }}>
             Natural Language<br />
@@ -90,29 +90,29 @@ export default function Hero() {
             <button
               onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
               style={{
-                fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
-                background: '#00E5C3', color: '#080C12',
-                padding: '12px 24px', borderRadius: 8,
+                fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
+                background: 'var(--teal)', color: '#080C12',
+                padding: '0.75rem 1.5rem', borderRadius: 2,
                 border: 'none', cursor: 'pointer',
-                transition: 'opacity 0.2s, transform 0.2s',
-                letterSpacing: '0.02em',
-                boxShadow: '0 0 24px rgba(59,130,246,0.3)',
+                transition: 'opacity 0.2s',
+                letterSpacing: '0.08em',
+                boxShadow: '0 0 20px var(--teal-glow)',
               }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
             >
-              Register for Early Access &rarr;
+              Register for Early Access →
             </button>
             <a href="#how-it-works"
               style={{
-                fontFamily: 'var(--mono)', fontSize: 13,
-                color: 'var(--gray)', border: '1px solid rgba(255,255,255,0.12)',
-                padding: '12px 24px', borderRadius: 8,
+                fontFamily: 'var(--mono)', fontSize: 11,
+                color: 'var(--gray)', border: '1px solid var(--border)',
+                padding: '0.75rem 1.5rem', borderRadius: 2,
                 textDecoration: 'none', transition: 'border-color 0.2s, color 0.2s',
-                letterSpacing: '0.02em',
+                letterSpacing: '0.08em',
               }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.color = '#FAFAFA' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'var(--gray)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--white)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--gray)' }}
             >
               See how it works &darr;
             </a>
