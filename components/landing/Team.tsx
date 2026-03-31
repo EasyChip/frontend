@@ -8,7 +8,7 @@ const FOUNDERS = [
     role: 'Co-founder & CEO',
     bio: 'Final-year student at BITS Pilani Goa. Background spanning embedded systems, edge AI, industrial automation, and chip design. Focused on go-to-market, fundraising, and product strategy.',
     linkedin: 'https://linkedin.com/in/rakshitmishra',
-    color: '#3B82F6',
+    color: '#00E5C3',
   },
   {
     initials: 'PP',
@@ -16,7 +16,7 @@ const FOUNDERS = [
     role: 'Co-founder & CTO',
     bio: "BITS Pilani. Leading EasyChip's core AI and RTL generation engine. Focused on model architecture, training infrastructure, and verification pipeline.",
     linkedin: 'https://linkedin.com/in/parthparekh',
-    color: '#10B981',
+    color: '#22C55E',
   },
 ]
 
@@ -45,7 +45,7 @@ export default function Team() {
           transitionDelay: '0.1s',
         }}>
           Built at BITS Pilani.<br />
-          <span style={{ color: '#3B82F6' }}>For the world&apos;s chip engineers.</span>
+          <span style={{ color: '#00E5C3' }}>For the world&apos;s chip engineers.</span>
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, maxWidth: 800, margin: '0 auto' }} className="team-grid">

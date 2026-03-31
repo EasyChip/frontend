@@ -35,12 +35,12 @@ export default function Footer() {
           >
             GitHub
           </a>
-          <a href="mailto:founders@easychip.in"
+          <a href="mailto:f20220056@goa.bits-pilani.ac.in"
             style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#FAFAFA' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
           >
-            founders@easychip.in
+            f20220056@goa.bits-pilani.ac.in
           </a>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function HowItWorks() {
           transitionDelay: '0.1s',
         }}>
           Three steps.<br />
-          <span style={{ color: '#3B82F6' }}>No EDA licence required.</span>
+          <span style={{ color: '#00E5C3' }}>No EDA licence required.</span>
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, position: 'relative' }} className="steps-grid">
@@ -68,7 +68,7 @@ export default function HowItWorks() {
               {/* Step number circle */}
               <div style={{
                 width: 48, height: 48, borderRadius: '50%',
-                background: '#3B82F6',
+                background: '#00E5C3',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 700, color: '#fff',
                 marginBottom: 24, boxShadow: '0 0 20px rgba(59,130,246,0.4)',

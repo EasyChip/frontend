@@ -50,9 +50,9 @@ export default function Hero() {
               border: '1px solid rgba(59,130,246,0.4)',
               borderRadius: 100, padding: '6px 14px',
               fontFamily: 'var(--mono)', fontSize: 11,
-              color: '#3B82F6', letterSpacing: '0.08em',
+              color: '#00E5C3', letterSpacing: '0.08em',
             }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', display: 'inline-block', animation: 'blink 1.5s ease-in-out infinite' }} />
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block', animation: 'blink 1.5s ease-in-out infinite' }} />
               AI-Native EDA
             </span>
           </div>
@@ -69,7 +69,7 @@ export default function Hero() {
             transitionDelay: '0.1s',
           }}>
             Natural Language<br />
-            to <span style={{ color: '#3B82F6', fontStyle: 'italic' }}>Silicon.</span>
+            to <span style={{ color: '#00E5C3', fontStyle: 'italic' }}>Silicon.</span>
           </h1>
 
           {/* Subheadline */}
@@ -91,7 +91,7 @@ export default function Hero() {
               onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
               style={{
                 fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
-                background: '#3B82F6', color: '#fff',
+                background: '#00E5C3', color: '#080C12',
                 padding: '12px 24px', borderRadius: 8,
                 border: 'none', cursor: 'pointer',
                 transition: 'opacity 0.2s, transform 0.2s',
@@ -129,10 +129,10 @@ export default function Hero() {
               <div key={i}>
                 <div style={{
                   fontFamily: 'var(--mono)', fontSize: 18, fontWeight: 700,
-                  color: s.green ? '#10B981' : 'var(--white)',
+                  color: s.green ? '#22C55E' : 'var(--white)',
                   letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 6,
                 }}>
-                  {s.green && <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />}
+                  {s.green && <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block' }} />}
                   {s.value}
                 </div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray)', letterSpacing: '0.08em', marginTop: 2 }}>

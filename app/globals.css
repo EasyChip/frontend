@@ -4,59 +4,59 @@
 
 :root {
   /* ── EasyChip Design System ── */
-  --bg:         #09090B;
-  --bg1:        #18181B;
-  --bg2:        #27272A;
-  --border:     rgba(255,255,255,0.08);
-  --blue:       #3B82F6;
-  --blue-faint: rgba(59,130,246,0.08);
-  --blue-glow:  rgba(59,130,246,0.25);
-  --green:      #10B981;
+  --bg:         #080C12;
+  --bg1:        #0C1018;
+  --bg2:        #111620;
+  --border:     rgba(255,255,255,0.07);
+  --teal:       #00E5C3;
+  --teal-faint: rgba(0,229,195,0.06);
+  --teal-glow:  rgba(0,229,195,0.22);
+  --green:      #22C55E;
   --red:        #EF4444;
-  --white:      #FAFAFA;
-  --gray:       #A1A1AA;
+  --white:      #F0F4FF;
+  --gray:       rgba(240,244,255,0.5);
 
-  --font-mono: var(--font-mono, 'JetBrains Mono', monospace);
-  --font-sans: var(--font-sans, 'Manrope', sans-serif);
-  --mono: var(--font-mono, 'JetBrains Mono', monospace);
-  --sans: var(--font-sans, 'Manrope', sans-serif);
+  --font-mono: var(--font-mono, 'IBM Plex Mono', monospace);
+  --font-sans: var(--font-sans, 'IBM Plex Sans', sans-serif);
+  --mono: var(--font-mono, 'IBM Plex Mono', monospace);
+  --sans: var(--font-sans, 'IBM Plex Sans', sans-serif);
 
   /* Backward compat */
-  --bg-void:     #09090B;
-  --bg-base:     #18181B;
-  --bg-raised:   #27272A;
-  --bg-elevated: #2D2D30;
-  --bg-overlay:  #323235;
-  --bg-card:     #18181B;
+  --bg-void:     #080C12;
+  --bg-base:     #0C1018;
+  --bg-raised:   #111620;
+  --bg-elevated: #161b20;
+  --bg-overlay:  #1c2228;
+  --bg-card:     #111620;
 
   --glass-0-bg: rgba(255,255,255,0.03);
   --glass-1-bg: rgba(255,255,255,0.05);
   --glass-2-bg: rgba(255,255,255,0.08);
 
-  --text-primary:   #FAFAFA;
-  --text-secondary: #A1A1AA;
-  --text-tertiary:  rgba(161,161,170,0.5);
-  --text-accent:    #FAFAFA;
-  --text-muted:     rgba(161,161,170,0.5);
+  --text-primary:   #F0F4FF;
+  --text-secondary: rgba(240,244,255,0.5);
+  --text-tertiary:  rgba(240,244,255,0.25);
+  --text-accent:    rgba(240,244,255,0.65);
+  --text-muted:     rgba(240,244,255,0.25);
 
-  --accent-amber:      #3B82F6;
-  --accent-amber-dim:  rgba(59,130,246,0.12);
-  --accent-amber-glow: rgba(59,130,246,0.25);
+  --accent-amber:      #00E5C3;
+  --accent-amber-dim:  rgba(0,229,195,0.12);
+  --accent-amber-glow: rgba(0,229,195,0.22);
 
-  --accent-primary:   #FAFAFA;
-  --accent-secondary: #A1A1AA;
-  --accent-tertiary:  #3B82F6;
-  --accent-gold:      #3B82F6;
-  --teal:             #3B82F6;
-  --teal-faint:       rgba(59,130,246,0.08);
-  --teal-glow:        rgba(59,130,246,0.25);
+  --accent-primary:   rgba(240,244,255,0.85);
+  --accent-secondary: rgba(240,244,255,0.65);
+  --accent-tertiary:  #00E5C3;
+  --accent-gold:      #00E5C3;
+  --blue:             #00E5C3;
+  --blue-faint:       rgba(0,229,195,0.08);
+  --blue-glow:        rgba(0,229,195,0.22);
 
-  --border-glass:  rgba(255,255,255,0.08);
-  --border-hover:  rgba(255,255,255,0.16);
-  --border-base:   rgba(255,255,255,0.08);
-  --border-raised: rgba(255,255,255,0.12);
-  --border-glow:   rgba(59,130,246,0.3);
-  --border-subtle: rgba(255,255,255,0.08);
+  --border-glass:  rgba(255,255,255,0.07);
+  --border-hover:  rgba(255,255,255,0.14);
+  --border-base:   rgba(255,255,255,0.07);
+  --border-raised: rgba(255,255,255,0.10);
+  --border-glow:   rgba(0,229,195,0.25);
+  --border-subtle: rgba(255,255,255,0.07);
 
   --ease-out:          cubic-bezier(0.165, 0.84, 0.44, 1);
   --ease-in-out:       cubic-bezier(0.77, 0, 0.175, 1);
@@ -409,8 +409,9 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(rgba(59,130,246,0.03) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(0,229,195,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,195,0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
 }
 
 /* Grain texture */
@@ -432,8 +433,8 @@ main, header, nav, footer { position: relative; z-index: 1; }
 
 ::-webkit-scrollbar         { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track   { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.4); }
+::-webkit-scrollbar-thumb { background: rgba(0,229,195,0.15); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,195,0.3); }
 
 /* ─── Responsive ─────────────────────────────────────────────── */
 

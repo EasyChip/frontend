@@ -17,7 +17,7 @@ export default function Navbar() {
     { label: 'How it works', href: '#how-it-works' },
     { label: 'Roadmap', href: '#roadmap' },
     { label: 'Team', href: '#team' },
-    { label: 'Contact', href: 'mailto:founders@easychip.in' },
+    { label: 'Contact', href: 'mailto:f20220056@goa.bits-pilani.ac.in' },
   ]
 
   return (
@@ -57,7 +57,7 @@ export default function Navbar() {
           onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
           style={{
             fontFamily: 'var(--mono)', fontSize: 12, fontWeight: 600,
-            background: 'var(--blue, #3B82F6)', color: '#fff',
+            background: 'var(--blue, #00E5C3)', color: '#fff',
             padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer',
             transition: 'opacity 0.2s', letterSpacing: '0.02em', whiteSpace: 'nowrap',
           }}
@@ -103,7 +103,7 @@ export default function Navbar() {
             onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('ec:openWaitlist')); }}
             style={{
               fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
-              background: '#3B82F6', color: '#fff',
+              background: '#00E5C3', color: '#080C12',
               padding: '12px 20px', borderRadius: 6, border: 'none', cursor: 'pointer',
               textAlign: 'left',
             }}

@@ -35,10 +35,10 @@ function getColor(type: string) {
   switch (type) {
     case 'cmd': return '#FAFAFA'
     case 'prompt': return '#A1A1AA'
-    case 'input': return '#10B981'
-    case 'check': return '#10B981'
+    case 'input': return '#22C55E'
+    case 'check': return '#22C55E'
     case 'comment': return '#A1A1AA'
-    case 'code-kw': return '#3B82F6'
+    case 'code-kw': return '#00E5C3'
     case 'code': return '#FAFAFA'
     default: return '#FAFAFA'
   }
@@ -93,7 +93,7 @@ export default function Terminal() {
       }}>
         <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#EF4444', display: 'block' }} />
         <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#F59E0B', display: 'block' }} />
-        <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#10B981', display: 'block' }} />
+        <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#22C55E', display: 'block' }} />
         <span style={{ flex: 1, textAlign: 'center', color: '#A1A1AA', fontSize: 11, marginRight: 28 }}>
           easychip — rtl-gen
         </span>
@@ -107,7 +107,7 @@ export default function Terminal() {
           </div>
         ))}
         {visibleLines < LINES.length && (
-          <span style={{ display: 'inline-block', width: 8, height: 14, background: '#3B82F6', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
+          <span style={{ display: 'inline-block', width: 8, height: 14, background: '#00E5C3', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
         )}
       </div>
     </div>

@@ -30,7 +30,7 @@ export default function CTASection() {
 
       <div style={{ maxWidth: 640, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="reveal" style={{ marginBottom: 16 }}>
-          <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#3B82F6', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#00E5C3', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
             Private Beta
           </span>
         </div>
@@ -55,7 +55,7 @@ export default function CTASection() {
             onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
             style={{
               fontFamily: 'var(--mono)', fontSize: 14, fontWeight: 700,
-              background: '#3B82F6', color: '#fff',
+              background: '#00E5C3', color: '#080C12',
               padding: '16px 36px', borderRadius: 10,
               border: 'none', cursor: 'pointer',
               boxShadow: '0 0 40px rgba(59,130,246,0.4)',
@@ -71,12 +71,12 @@ export default function CTASection() {
         <div className="reveal" style={{ marginTop: 24, transitionDelay: '0.4s' }}>
           <p style={{ fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--gray)' }}>
             Or reach out directly &mdash;{' '}
-            <a href="mailto:founders@easychip.in"
-              style={{ color: '#3B82F6', textDecoration: 'none' }}
+            <a href="mailto:f20220056@goa.bits-pilani.ac.in"
+              style={{ color: '#00E5C3', textDecoration: 'none' }}
               onMouseEnter={e => { e.currentTarget.style.textDecoration = 'underline' }}
               onMouseLeave={e => { e.currentTarget.style.textDecoration = 'none' }}
             >
-              founders@easychip.in
+              f20220056@goa.bits-pilani.ac.in / f20220687@goa.bits-pilani.ac.in
             </a>
           </p>
         </div>
