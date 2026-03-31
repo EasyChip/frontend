@@ -50,9 +50,9 @@ export default function CTASection() {
         }}>
           We&apos;re onboarding university labs, research teams, and fabless startups for our private beta. Drop your email and we&apos;ll reach out.
         </p>
-        <div className="reveal" style={{ transitionDelay: '0.3s' }}>
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
+        <div className="reveal" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', transitionDelay: '0.3s' }}>
+          <a
+            href="/login"
             style={{
               fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
               background: 'var(--teal)', color: '#080C12',
@@ -61,11 +61,27 @@ export default function CTASection() {
               boxShadow: '0 0 32px var(--teal-glow)',
               transition: 'opacity 0.2s',
               letterSpacing: '0.08em',
+              textDecoration: 'none', display: 'inline-block',
             }}
             onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
             onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
           >
-            Register for Early Access →
+            Try the Playground →
+          </a>
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
+            style={{
+              fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
+              background: 'transparent', color: 'var(--gray)',
+              padding: '0.75rem 1.5rem', borderRadius: 2,
+              border: '1px solid var(--border)', cursor: 'pointer',
+              transition: 'border-color 0.2s, color 0.2s',
+              letterSpacing: '0.08em',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--white)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--gray)' }}
+          >
+            Join Waitlist
           </button>
         </div>
         <div className="reveal" style={{ marginTop: 24, transitionDelay: '0.4s' }}>

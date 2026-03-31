@@ -53,19 +53,20 @@ export default function Navbar() {
         {links.map(l => (
           <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
         ))}
-        <button
-          onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
+        <a
+          href="/login"
           style={{
             fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
             background: 'var(--teal)', color: '#080C12',
             padding: '7px 14px', borderRadius: 2, border: 'none', cursor: 'pointer',
             transition: 'opacity 0.2s', letterSpacing: '0.08em', whiteSpace: 'nowrap',
+            textDecoration: 'none',
           }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
         >
-          Register for Early Access →
-        </button>
+          Try Playground →
+        </a>
       </div>
 
       {/* Mobile hamburger */}
@@ -99,17 +100,18 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <button
-            onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('ec:openWaitlist')); }}
+          <a
+            href="/login"
+            onClick={() => setMenuOpen(false)}
             style={{
               fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
               background: '#00E5C3', color: '#080C12',
               padding: '12px 20px', borderRadius: 6, border: 'none', cursor: 'pointer',
-              textAlign: 'left',
+              textAlign: 'left', textDecoration: 'none', display: 'block',
             }}
           >
-            Register for Early Access →
-          </button>
+            Try Playground →
+          </a>
         </div>
       )}
 
