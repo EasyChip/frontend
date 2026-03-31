@@ -44,7 +44,7 @@ export default function ProblemSection() {
           transitionDelay: '0.1s',
         }}>
           India has 20% of the world&apos;s chip designers.<br />
-          <span style={{ color: '#EF4444' }}>They can&apos;t afford the tools.</span>
+          <span style={{ color: '#C8962E' }}>They can&apos;t afford the tools.</span>
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }} className="problem-grid">
@@ -52,7 +52,7 @@ export default function ProblemSection() {
             <div key={i} className="reveal" style={{
               background: '#18181B',
               border: '1px solid rgba(255,255,255,0.08)',
-              borderLeft: '3px solid #EF4444',
+              borderLeft: '3px solid #C8962E',
               borderRadius: 10,
               padding: 28,
               position: 'relative', overflow: 'hidden',
@@ -60,10 +60,10 @@ export default function ProblemSection() {
               transitionDelay: `${i * 0.1}s`,
               cursor: 'default',
             }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(239,68,68,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.16)' }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(200,150,46,0.08)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.16)' }}
             onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
             >
-              <div style={{ fontFamily: 'var(--mono)', fontSize: 64, fontWeight: 300, color: 'rgba(255,255,255,0.04)', position: 'absolute', top: -10, right: 16, lineHeight: 1, userSelect: 'none' }}>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 64, fontWeight: 300, color: 'rgba(200,150,46,0.06)', position: 'absolute', top: -10, right: 16, lineHeight: 1, userSelect: 'none' }}>
                 {p.num}
               </div>
               <h3 style={{ fontFamily: 'var(--sans)', fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 12 }}>

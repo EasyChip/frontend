@@ -48,7 +48,7 @@ export default function StackSection() {
           transitionDelay: '0.1s',
         }}>
           RTL is the entry point.<br />
-          <span style={{ color: '#00E5C3' }}>GDSII is the destination.</span>
+          <span style={{ color: '#C8962E' }}>GDSII is the destination.</span>
         </h2>
 
         {/* Pipeline */}
@@ -60,18 +60,18 @@ export default function StackSection() {
                   flex: 1,
                   padding: '12px 16px',
                   textAlign: 'center',
-                  background: stage.active ? 'rgba(59,130,246,0.15)' : '#18181B',
-                  border: `1px solid ${stage.active ? 'rgba(59,130,246,0.5)' : 'rgba(255,255,255,0.08)'}`,
+                  background: stage.active ? 'rgba(200,150,46,0.10)' : '#18181B',
+                  border: `1px solid ${stage.active ? 'rgba(200,150,46,0.5)' : 'rgba(255,255,255,0.08)'}`,
                   borderRadius: i === 0 ? '8px 0 0 8px' : i === PIPELINE.length - 1 ? '0 8px 8px 0' : '0',
                   borderLeft: i > 0 ? 'none' : undefined,
                   fontFamily: 'var(--mono)', fontSize: 11,
-                  color: stage.active ? '#00E5C3' : 'var(--gray)',
+                  color: stage.active ? '#C8962E' : 'var(--gray)',
                   fontWeight: stage.active ? 600 : 400,
                   letterSpacing: '0.04em',
                   whiteSpace: 'nowrap',
                   transition: 'all 0.2s',
                 }}>
-                  {stage.active && <span style={{ color: '#22C55E', marginRight: 6 }}>&bull;</span>}
+                  {stage.active && <span style={{ color: '#C8962E', marginRight: 6 }}>&bull;</span>}
                   {stage.label}
                 </div>
               </div>
@@ -85,12 +85,12 @@ export default function StackSection() {
             background: '#18181B', border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: 10, padding: 28, transitionDelay: '0.3s',
           }}>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#22C55E', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>
+            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#C8962E', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>
               ● Live now
             </div>
             {LIVE.map((item, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 12 }}>
-                <span style={{ color: '#22C55E', fontFamily: 'var(--mono)', fontSize: 14, marginTop: 1 }}>✓</span>
+                <span style={{ color: '#C8962E', fontFamily: 'var(--mono)', fontSize: 14, marginTop: 1 }}>✓</span>
                 <span style={{ fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--gray)', lineHeight: 1.5 }}>{item}</span>
               </div>
             ))}
@@ -100,12 +100,12 @@ export default function StackSection() {
             background: '#18181B', border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: 10, padding: 28, transitionDelay: '0.4s',
           }}>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#00E5C3', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>
+            <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#C8962E', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>
               ◎ In progress
             </div>
             {IN_PROGRESS.map((item, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 12 }}>
-                <span style={{ color: '#00E5C3', fontFamily: 'var(--mono)', fontSize: 14, marginTop: 1 }}>◎</span>
+                <span style={{ color: 'rgba(200,150,46,0.5)', fontFamily: 'var(--mono)', fontSize: 14, marginTop: 1 }}>◎</span>
                 <span style={{ fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--gray)', lineHeight: 1.5 }}>{item}</span>
               </div>
             ))}

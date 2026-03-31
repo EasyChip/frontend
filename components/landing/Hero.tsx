@@ -35,7 +35,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', top: '-10%', left: '30%',
         width: '60vw', height: '60vw',
-        background: 'radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(200,150,46,0.08) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
 
@@ -47,12 +47,12 @@ export default function Hero() {
           <div className="reveal" style={{ marginBottom: 24 }}>
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              border: '1px solid rgba(59,130,246,0.4)',
+              border: '1px solid rgba(200,150,46,0.3)',
               borderRadius: 100, padding: '6px 14px',
               fontFamily: 'var(--mono)', fontSize: 11,
-              color: '#00E5C3', letterSpacing: '0.08em',
+              color: '#C8962E', letterSpacing: '0.08em',
             }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block', animation: 'blink 1.5s ease-in-out infinite' }} />
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#C8962E', display: 'inline-block', animation: 'blink 1.5s ease-in-out infinite' }} />
               AI-Native EDA
             </span>
           </div>
@@ -69,7 +69,7 @@ export default function Hero() {
             transitionDelay: '0.1s',
           }}>
             Natural Language<br />
-            to <span style={{ color: '#00E5C3', fontStyle: 'italic' }}>Silicon.</span>
+            to <span style={{ color: '#C8962E', fontStyle: 'italic' }}>Silicon.</span>
           </h1>
 
           {/* Subheadline */}
@@ -91,12 +91,12 @@ export default function Hero() {
               href="/login"
               style={{
                 fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
-                background: 'var(--teal)', color: '#080C12',
+                background: 'var(--amber)', color: '#0A0A0A',
                 padding: '0.75rem 1.5rem', borderRadius: 2,
                 border: 'none', cursor: 'pointer',
                 transition: 'opacity 0.2s',
                 letterSpacing: '0.08em',
-                boxShadow: '0 0 20px var(--teal-glow)',
+                boxShadow: '0 0 20px var(--amber-glow)',
                 textDecoration: 'none', display: 'inline-block',
               }}
               onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}

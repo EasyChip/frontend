@@ -44,7 +44,7 @@ export default function WhyNow() {
           transitionDelay: '0.1s',
         }}>
           Three tectonic shifts.<br />
-          <span style={{ color: '#00E5C3' }}>One window of opportunity.</span>
+          <span style={{ color: '#C8962E' }}>One window of opportunity.</span>
         </h2>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
@@ -58,7 +58,7 @@ export default function WhyNow() {
               alignItems: 'start',
               transitionDelay: `${i * 0.12}s`,
             }}>
-              <div style={{ fontFamily: 'var(--mono)', fontSize: 13, color: '#00E5C3', letterSpacing: '0.08em', paddingTop: 4 }}>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 13, color: '#C8962E', letterSpacing: '0.08em', paddingTop: 4 }}>
                 {s.num}
               </div>
               <div>

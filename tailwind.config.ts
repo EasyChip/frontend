@@ -43,9 +43,9 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-accent': 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%)',
-        'gradient-hero': 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(91,106,240,0.25) 0%, transparent 70%)',
-        'gradient-card': 'linear-gradient(135deg, rgba(91,106,240,0.08) 0%, rgba(130,87,230,0.05) 100%)',
-        'gradient-cta': 'linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #0e7490 100%)',
+        'gradient-hero': 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,150,46,0.12) 0%, transparent 70%)',
+        'gradient-card': 'linear-gradient(135deg, rgba(200,150,46,0.06) 0%, rgba(200,150,46,0.03) 100%)',
+        'gradient-cta': 'linear-gradient(135deg, #C8962E 0%, #A07524 100%)',
       },
       animation: {
         'gradient-shift': 'gradient-shift 6s ease infinite',
@@ -74,8 +74,8 @@ const config: Config = {
           '100%': { backgroundPosition: '200% center' },
         },
         'pulse-glow': {
-          '0%, 100%': { opacity: '0.6', boxShadow: '0 0 20px rgba(91, 106, 240, 0.3)' },
-          '50%': { opacity: '1', boxShadow: '0 0 40px rgba(91, 106, 240, 0.6)' },
+          '0%, 100%': { opacity: '0.6', boxShadow: '0 0 20px rgba(200, 150, 46, 0.3)' },
+          '50%': { opacity: '1', boxShadow: '0 0 40px rgba(200, 150, 46, 0.6)' },
         },
         'typing-cursor': {
           '0%, 100%': { opacity: '1' },

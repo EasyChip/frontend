@@ -35,10 +35,10 @@ function getColor(type: string) {
   switch (type) {
     case 'cmd': return '#FAFAFA'
     case 'prompt': return '#A1A1AA'
-    case 'input': return '#22C55E'
+    case 'input': return '#C8962E'
     case 'check': return '#22C55E'
-    case 'comment': return '#A1A1AA'
-    case 'code-kw': return '#00E5C3'
+    case 'comment': return '#555555'
+    case 'code-kw': return '#C8962E'
     case 'code': return '#FAFAFA'
     default: return '#FAFAFA'
   }
@@ -74,22 +74,22 @@ export default function Terminal() {
 
   return (
     <div ref={ref} style={{
-      background: '#0F0F12',
-      border: '1px solid rgba(255,255,255,0.1)',
+      background: '#0F0F0F',
+      border: '1px solid #1C1C1C',
       borderRadius: 10,
       overflow: 'hidden',
       fontFamily: 'var(--mono)',
       fontSize: 12,
       lineHeight: 1.7,
-      boxShadow: '0 0 40px rgba(59,130,246,0.1), 0 20px 60px rgba(0,0,0,0.5)',
+      boxShadow: '0 0 40px rgba(200,150,46,0.08), 0 20px 60px rgba(0,0,0,0.5)',
       maxWidth: '100%',
     }}>
       {/* Title bar */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
         padding: '10px 14px',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        background: '#1A1A1E',
+        borderBottom: '1px solid #1C1C1C',
+        background: '#1A1A1A',
       }}>
         <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#EF4444', display: 'block' }} />
         <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#F59E0B', display: 'block' }} />
@@ -107,7 +107,7 @@ export default function Terminal() {
           </div>
         ))}
         {visibleLines < LINES.length && (
-          <span style={{ display: 'inline-block', width: 8, height: 14, background: '#00E5C3', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
+          <span style={{ display: 'inline-block', width: 8, height: 14, background: '#C8962E', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
         )}
       </div>
     </div>

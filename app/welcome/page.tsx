@@ -82,8 +82,51 @@ export default function WelcomePage() {
         flexDirection: 'column',
       }}
     >
-      {/* Top Bar: Progress + Skip */}
+      {/* Top Bar: Logo + Progress + Skip */}
       <div style={{ padding: '24px 32px 0' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 16,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img
+              src="/logo.png"
+              alt="EasyChip"
+              style={{ width: 32, height: 'auto' }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 14,
+                color: '#C8962E',
+                fontWeight: 600,
+              }}
+            >
+              EasyChip
+            </span>
+          </div>
+          <button
+            onClick={finish}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#555555',
+              fontSize: 13,
+              fontFamily: 'var(--font-sans)',
+              cursor: 'pointer',
+              transition: 'color 0.2s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#FAFAFA')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#555555')}
+          >
+            Skip
+          </button>
+        </div>
+
         <div
           style={{
             display: 'flex',
@@ -101,22 +144,6 @@ export default function WelcomePage() {
           >
             Step {step + 1} of {TOTAL_STEPS}
           </span>
-          <button
-            onClick={finish}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#888888',
-              fontSize: 13,
-              fontFamily: 'var(--font-sans)',
-              cursor: 'pointer',
-              transition: 'color 0.2s',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#FAFAFA')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#888888')}
-          >
-            Skip
-          </button>
         </div>
 
         {/* Progress Bar */}
@@ -132,7 +159,7 @@ export default function WelcomePage() {
               key={i}
               style={{
                 flex: 1,
-                background: i <= step ? '#FAFAFA' : '#222222',
+                background: i <= step ? '#C8962E' : '#1C1C1C',
                 borderRadius: 1,
                 transition: 'background 0.3s',
               }}
@@ -180,8 +207,8 @@ export default function WelcomePage() {
           disabled={step === 0}
           style={{
             background: 'none',
-            border: '1px solid #222222',
-            color: step === 0 ? '#333333' : '#FAFAFA',
+            border: '1px solid #1C1C1C',
+            color: step === 0 ? '#2A2A2A' : '#888888',
             padding: '10px 20px',
             borderRadius: 8,
             fontSize: 14,
@@ -190,10 +217,10 @@ export default function WelcomePage() {
             transition: 'border-color 0.2s, color 0.2s',
           }}
           onMouseEnter={(e) => {
-            if (step !== 0) e.currentTarget.style.borderColor = '#333333'
+            if (step !== 0) e.currentTarget.style.borderColor = '#2A2A2A'
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = '#222222'
+            e.currentTarget.style.borderColor = '#1C1C1C'
           }}
         >
           ← Back
@@ -201,21 +228,21 @@ export default function WelcomePage() {
         <button
           onClick={next}
           style={{
-            background: '#FAFAFA',
+            background: '#C8962E',
             color: '#0A0A0A',
             border: 'none',
             padding: '10px 24px',
             borderRadius: 8,
             fontSize: 14,
-            fontWeight: 500,
-            fontFamily: 'var(--font-sans)',
+            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
             cursor: 'pointer',
             transition: 'opacity 0.2s',
           }}
           onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
         >
-          {step === TOTAL_STEPS - 1 ? 'Enter Playground →' : 'Next →'}
+          {step === TOTAL_STEPS - 1 ? 'Enter Playground →' : 'Continue →'}
         </button>
       </div>
     </div>
@@ -228,14 +255,15 @@ function SectionLabel({ number, title }: { number: number; title: string }) {
   return (
     <h1
       style={{
-        fontSize: 28,
-        fontWeight: 500,
+        fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+        fontWeight: 300,
         margin: '0 0 24px',
         fontFamily: 'var(--font-sans)',
         letterSpacing: '-0.02em',
+        color: '#FAFAFA',
       }}
     >
-      <span style={{ color: '#888888' }}>
+      <span style={{ color: '#888888', fontFamily: 'var(--font-mono)', fontSize: '0.6em' }}>
         {String(number).padStart(2, '0')} —{' '}
       </span>
       {title}
@@ -292,14 +320,14 @@ function Step1() {
                 fontSize: 14,
                 color: '#FAFAFA',
                 padding: '6px 14px',
-                border: '1px solid #222222',
+                border: '1px solid #1C1C1C',
                 borderRadius: 6,
               }}
             >
               {label}
             </span>
             {i < 3 && (
-              <span style={{ color: '#333333', fontSize: 14 }}>→</span>
+              <span style={{ color: '#555555', fontSize: 14 }}>→</span>
             )}
           </div>
         ))}
@@ -332,7 +360,7 @@ function Step2() {
               alignItems: 'center',
               gap: 12,
               padding: '8px 12px',
-              border: '1px solid #222222',
+              border: '1px solid #1C1C1C',
               borderRadius: 6,
               background: '#111111',
             }}
@@ -372,7 +400,7 @@ function Step3() {
           lineHeight: 1.8,
           color: '#FAFAFA',
           background: '#111111',
-          border: '1px solid #222222',
+          border: '1px solid #1C1C1C',
           borderRadius: 8,
           padding: '20px 24px',
           margin: '16px 0 20px',
@@ -401,7 +429,7 @@ function Step4() {
           fontSize: 13,
           color: '#FAFAFA',
           background: '#111111',
-          border: '1px solid #222222',
+          border: '1px solid #1C1C1C',
           borderRadius: 8,
           padding: '20px 24px',
           margin: '16px 0 20px',
@@ -414,7 +442,7 @@ function Step4() {
             display: 'inline-block',
             width: 8,
             height: 16,
-            background: '#FAFAFA',
+            background: '#C8962E',
             marginLeft: 2,
             verticalAlign: 'text-bottom',
             animation: 'cursor-blink 1s step-end infinite',

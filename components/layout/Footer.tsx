@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer style={{
-      borderTop: '1px solid rgba(255,255,255,0.07)',
+      borderTop: '1px solid #1C1C1C',
       padding: '40px 48px',
       position: 'relative', zIndex: 1,
     }}>
@@ -23,21 +23,21 @@ export default function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
           <a href="https://linkedin.com/company/easychip" target="_blank" rel="noopener noreferrer"
             style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#FAFAFA' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
           >
             LinkedIn
           </a>
           <a href="https://github.com/EasyChip" target="_blank" rel="noopener noreferrer"
             style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#FAFAFA' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
           >
             GitHub
           </a>
           <a href="mailto:f20220056@goa.bits-pilani.ac.in"
             style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#FAFAFA' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
           >
             f20220056@goa.bits-pilani.ac.in

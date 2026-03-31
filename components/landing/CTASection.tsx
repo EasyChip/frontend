@@ -19,7 +19,7 @@ export default function CTASection() {
       {/* Glow background */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse 80% 60% at 50% 50%, var(--teal-glow) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 80% 60% at 50% 50%, var(--amber-glow) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <div style={{
@@ -30,7 +30,7 @@ export default function CTASection() {
 
       <div style={{ maxWidth: 640, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="reveal" style={{ marginBottom: 16 }}>
-          <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#00E5C3', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#C8962E', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
             Private Beta
           </span>
         </div>
@@ -55,10 +55,10 @@ export default function CTASection() {
             href="/login"
             style={{
               fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
-              background: 'var(--teal)', color: '#080C12',
+              background: 'var(--amber)', color: '#0A0A0A',
               padding: '0.75rem 1.5rem', borderRadius: 2,
               border: 'none', cursor: 'pointer',
-              boxShadow: '0 0 32px var(--teal-glow)',
+              boxShadow: '0 0 32px var(--amber-glow)',
               transition: 'opacity 0.2s',
               letterSpacing: '0.08em',
               textDecoration: 'none', display: 'inline-block',
@@ -88,7 +88,7 @@ export default function CTASection() {
           <p style={{ fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--gray)' }}>
             Or reach out directly &mdash;{' '}
             <a href="mailto:f20220056@goa.bits-pilani.ac.in"
-              style={{ color: '#00E5C3', textDecoration: 'none' }}
+              style={{ color: '#C8962E', textDecoration: 'none' }}
               onMouseEnter={e => { e.currentTarget.style.textDecoration = 'underline' }}
               onMouseLeave={e => { e.currentTarget.style.textDecoration = 'none' }}
             >

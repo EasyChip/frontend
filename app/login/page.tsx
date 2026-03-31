@@ -118,25 +118,38 @@ export default function LoginPage() {
       <div
         style={{
           width: '100%',
-          maxWidth: 420,
-          border: '1px solid #222222',
-          borderRadius: 8,
+          maxWidth: 400,
+          border: '1px solid #1C1C1C',
+          borderRadius: 12,
           background: '#111111',
           padding: '40px 32px 32px',
+          boxShadow: '0 0 80px rgba(200,150,46,0.06)',
         }}
       >
-        {/* Logo + Tagline */}
+        {/* Logo + Brand + Tagline */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <img
             src="/logo.png"
             alt="EasyChip"
-            style={{ height: 40, margin: '0 auto 12px' }}
+            style={{ width: 48, margin: '0 auto 12px', display: 'block' }}
           />
+          <h1
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 20,
+              fontWeight: 600,
+              color: '#C8962E',
+              margin: '0 0 8px',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            EasyChip
+          </h1>
           <p
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 13,
-              color: '#888888',
+              color: '#555555',
               margin: 0,
             }}
           >
@@ -149,7 +162,7 @@ export default function LoginPage() {
           style={{
             display: 'flex',
             gap: 24,
-            borderBottom: '1px solid #222222',
+            borderBottom: '1px solid #1C1C1C',
             marginBottom: 24,
           }}
         >
@@ -160,12 +173,12 @@ export default function LoginPage() {
               style={{
                 background: 'none',
                 border: 'none',
-                color: tab === t ? '#FAFAFA' : '#888888',
+                color: tab === t ? '#FAFAFA' : '#555555',
                 fontSize: 14,
                 fontFamily: 'var(--font-sans)',
                 cursor: 'pointer',
                 paddingBottom: 10,
-                borderBottom: tab === t ? '2px solid #FAFAFA' : '2px solid transparent',
+                borderBottom: tab === t ? '2px solid #C8962E' : '2px solid transparent',
                 transition: 'color 0.2s, border-color 0.2s',
               }}
             >
@@ -258,10 +271,10 @@ export default function LoginPage() {
                 style={{
                   width: '100%',
                   padding: '10px 12px',
-                  background: '#0A0A0A',
-                  border: `1px solid ${errors.position ? '#EF4444' : '#222222'}`,
+                  background: '#111111',
+                  border: `1px solid ${errors.position ? '#EF4444' : '#1C1C1C'}`,
                   borderRadius: 6,
-                  color: position ? '#FAFAFA' : '#888888',
+                  color: position ? '#FAFAFA' : '#555555',
                   fontSize: 14,
                   fontFamily: 'var(--font-sans)',
                   outline: 'none',
@@ -270,10 +283,10 @@ export default function LoginPage() {
                   cursor: 'pointer',
                 }}
                 onFocus={(e) => {
-                  if (!errors.position) e.currentTarget.style.borderColor = '#333333'
+                  if (!errors.position) e.currentTarget.style.borderColor = '#C8962E'
                 }}
                 onBlur={(e) => {
-                  if (!errors.position) e.currentTarget.style.borderColor = '#222222'
+                  if (!errors.position) e.currentTarget.style.borderColor = '#1C1C1C'
                 }}
               >
                 <option value="" disabled>
@@ -300,15 +313,15 @@ export default function LoginPage() {
       <div
         style={{
           width: '100%',
-          maxWidth: 420,
+          maxWidth: 400,
           marginTop: 16,
           padding: '16px 20px',
-          border: '1px solid #222222',
+          border: '1px solid #1C1C1C',
           borderRadius: 8,
           background: '#111111',
           fontSize: 12,
           lineHeight: 1.6,
-          color: '#888888',
+          color: '#555555',
           fontFamily: 'var(--font-sans)',
         }}
       >
@@ -321,7 +334,7 @@ export default function LoginPage() {
         style={{
           marginTop: 32,
           fontSize: 12,
-          color: '#888888',
+          color: '#555555',
           fontFamily: 'var(--font-mono)',
         }}
       >
@@ -369,8 +382,8 @@ function Field({
         style={{
           width: '100%',
           padding: '10px 12px',
-          background: '#0A0A0A',
-          border: `1px solid ${error ? '#EF4444' : '#222222'}`,
+          background: '#111111',
+          border: `1px solid ${error ? '#EF4444' : '#1C1C1C'}`,
           borderRadius: 6,
           color: '#FAFAFA',
           fontSize: 14,
@@ -380,10 +393,10 @@ function Field({
           boxSizing: 'border-box',
         }}
         onFocus={(e) => {
-          if (!error) e.currentTarget.style.borderColor = '#333333'
+          if (!error) e.currentTarget.style.borderColor = '#C8962E'
         }}
         onBlur={(e) => {
-          if (!error) e.currentTarget.style.borderColor = '#222222'
+          if (!error) e.currentTarget.style.borderColor = '#1C1C1C'
         }}
       />
       {error && (
@@ -403,13 +416,13 @@ function SubmitButton({ loading }: { loading: boolean }) {
       style={{
         width: '100%',
         padding: '12px 0',
-        background: loading ? '#888888' : '#FAFAFA',
+        background: loading ? '#555555' : '#C8962E',
         color: '#0A0A0A',
         border: 'none',
         borderRadius: 8,
         fontSize: 14,
-        fontWeight: 500,
-        fontFamily: 'var(--font-sans)',
+        fontWeight: 600,
+        fontFamily: 'var(--font-mono)',
         cursor: loading ? 'not-allowed' : 'pointer',
         transition: 'opacity 0.2s',
         marginTop: 8,

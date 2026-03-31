@@ -47,14 +47,14 @@ export default function HowItWorks() {
           transitionDelay: '0.1s',
         }}>
           Three steps.<br />
-          <span style={{ color: '#00E5C3' }}>No EDA licence required.</span>
+          <span style={{ color: '#C8962E' }}>No EDA licence required.</span>
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, position: 'relative' }} className="steps-grid">
           {/* Connecting line */}
           <div style={{
             position: 'absolute', top: 40, left: '16.67%', right: '16.67%', height: 1,
-            background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.4), rgba(59,130,246,0.4), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(200,150,46,0.3), rgba(200,150,46,0.3), transparent)',
             zIndex: 0,
           }} className="steps-line" />
 
@@ -68,10 +68,10 @@ export default function HowItWorks() {
               {/* Step number circle */}
               <div style={{
                 width: 48, height: 48, borderRadius: '50%',
-                background: '#00E5C3',
+                background: '#C8962E',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 700, color: '#fff',
-                marginBottom: 24, boxShadow: '0 0 20px rgba(59,130,246,0.4)',
+                marginBottom: 24, boxShadow: '0 0 20px rgba(200,150,46,0.2)',
               }}>
                 {s.num}
               </div>
