@@ -41,14 +41,8 @@ export default function Footer() {
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 text-text-primary font-bold text-lg mb-3">
-              <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style={{ color: 'var(--accent-amber)' }}>
-                <rect x="7" y="1" width="8" height="4" rx="1" fill="currentColor" opacity="0.9"/>
-                <rect x="7" y="17" width="8" height="4" rx="1" fill="currentColor" opacity="0.9"/>
-                <rect x="1" y="7" width="4" height="8" rx="1" fill="currentColor" opacity="0.9"/>
-                <rect x="17" y="7" width="4" height="8" rx="1" fill="currentColor" opacity="0.9"/>
-                <rect x="6" y="6" width="10" height="10" rx="2" fill="currentColor" opacity="0.4"/>
-                <rect x="9" y="9" width="4" height="4" rx="1" fill="currentColor"/>
-              </svg>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="EasyChip logo" width={22} height={22} style={{ objectFit: 'contain' }} />
               EasyChip
             </div>
             <p className="text-sm text-text-tertiary leading-relaxed mb-5 max-w-[200px]">

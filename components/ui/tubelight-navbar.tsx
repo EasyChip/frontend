@@ -72,14 +72,7 @@ export function NavBar({ items, className, onOpenWaitlist }: NavBarProps) {
           style={{ color: "var(--text-primary)" }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style={{ color: 'var(--accent-amber)' }} aria-hidden="true">
-            <rect x="7" y="1" width="8" height="4" rx="1" fill="currentColor" opacity="0.9"/>
-            <rect x="7" y="17" width="8" height="4" rx="1" fill="currentColor" opacity="0.9"/>
-            <rect x="1" y="7" width="4" height="8" rx="1" fill="currentColor" opacity="0.9"/>
-            <rect x="17" y="7" width="4" height="8" rx="1" fill="currentColor" opacity="0.9"/>
-            <rect x="6" y="6" width="10" height="10" rx="2" fill="currentColor" opacity="0.4"/>
-            <rect x="9" y="9" width="4" height="4" rx="1" fill="currentColor"/>
-          </svg>
+          <img src="/logo.png" alt="EasyChip logo" width={22} height={22} style={{ objectFit: 'contain' }} />
           <span className="hidden sm:inline">EasyChip</span>
         </Link>
 

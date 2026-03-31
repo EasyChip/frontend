@@ -38,6 +38,8 @@ export default function Navbar() {
             textDecoration: 'none',
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="EasyChip" style={{ width: 28, height: 28, objectFit: 'contain' }} />
           <span style={{
             fontFamily: 'var(--mono)',
             fontSize: 14,
@@ -47,14 +49,6 @@ export default function Navbar() {
           }}>
             EasyChip
           </span>
-          <span style={{
-            width: 6, height: 6,
-            borderRadius: '50%',
-            background: 'var(--teal)',
-            display: 'inline-block',
-            animation: 'teal-pulse 2s ease-in-out infinite',
-            flexShrink: 0,
-          }} />
         </Link>
       </div>
 

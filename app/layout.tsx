@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   title: 'EasyChip — Natural Language to Silicon',
   description: 'Describe a hardware module in plain English. EasyChip generates verified, synthesisable Verilog — ready for tape-out.',
   icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
-    shortcut: '/icon.svg',
-    apple: '/icon.svg',
+    icon: [{ url: '/logo.png', type: 'image/png' }],
+    shortcut: '/logo.png',
+    apple: '/logo.png',
   },
 }
 
