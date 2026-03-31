@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { SPEC_CATEGORIES } from '@/lib/specs/spec-options'
 import { generateFolderStructure } from '@/lib/specs/folder-generator'
 import { usePlaygroundStore } from '@/stores/playground-store'
@@ -9,19 +9,23 @@ import { createClient } from '@/lib/supabase/client'
 export default function SpecsPanel() {
   const { specs, setSpec, setFolderTree, profile, projectName } = usePlaygroundStore()
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
-    architecture: true,
+    module_type: true,
   })
   const [generating, setGenerating] = useState(false)
+  const [justGenerated, setJustGenerated] = useState(false)
+  const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const toggleSection = (id: string) => {
     setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 
-  const canGenerate = !!specs.architecture
+  const canGenerate = !!specs.module_type
 
   const handleGenerate = useCallback(async () => {
     if (!canGenerate || generating) return
     setGenerating(true)
+    setJustGenerated(false)
+    if (flashTimerRef.current) clearTimeout(flashTimerRef.current)
 
     try {
       const tree = generateFolderStructure(specs)
@@ -38,6 +42,9 @@ export default function SpecsPanel() {
           updated_at: new Date().toISOString(),
         })
       }
+
+      setJustGenerated(true)
+      flashTimerRef.current = setTimeout(() => setJustGenerated(false), 1500)
     } catch (err) {
       console.error('Generation failed:', err)
     } finally {
@@ -198,25 +205,25 @@ export default function SpecsPanel() {
         style={{
           width: '100%',
           padding: '12px 0',
-          background: canGenerate ? '#C8962E' : '#1A1A1A',
-          color: canGenerate ? '#0A0A0A' : '#555555',
-          border: canGenerate ? 'none' : '1px solid #1C1C1C',
+          background: justGenerated ? '#22C55E' : canGenerate ? '#C8962E' : '#1A1A1A',
+          color: justGenerated ? '#FFFFFF' : canGenerate ? '#0A0A0A' : '#555555',
+          border: canGenerate || justGenerated ? 'none' : '1px solid #1C1C1C',
           borderRadius: 8,
           fontSize: 13,
           fontFamily: 'var(--font-sans)',
           fontWeight: 600,
-          cursor: canGenerate ? 'pointer' : 'not-allowed',
-          transition: 'opacity 200ms ease',
+          cursor: canGenerate && !generating ? 'pointer' : 'not-allowed',
+          transition: 'background 300ms ease, color 300ms ease, opacity 200ms ease',
           opacity: generating ? 0.7 : 1,
         }}
         onMouseEnter={(e) => {
-          if (canGenerate) e.currentTarget.style.opacity = '0.9'
+          if (canGenerate && !generating) e.currentTarget.style.opacity = '0.9'
         }}
         onMouseLeave={(e) => {
           if (canGenerate) e.currentTarget.style.opacity = generating ? '0.7' : '1'
         }}
       >
-        {generating ? 'Generating...' : 'Generate Project →'}
+        {generating ? 'Generating...' : justGenerated ? '✓ Generated' : 'Generate Project →'}
       </button>
     </div>
   )

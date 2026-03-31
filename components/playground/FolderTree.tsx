@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { usePlaygroundStore } from '@/stores/playground-store'
 
 interface FileNode {
@@ -130,6 +130,23 @@ export default function FolderTree() {
   const { folderTree, selectedFile, setSelectedFile } = usePlaygroundStore()
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set(['project_root']))
   const [previewNode, setPreviewNode] = useState<FileNode | null>(null)
+  const prevTreeRef = useRef<FileNode | null>(null)
+
+  // Auto-expand root and first-level folders when a tree is freshly generated
+  useEffect(() => {
+    if (folderTree && prevTreeRef.current !== folderTree) {
+      const paths = new Set<string>([folderTree.name])
+      if (folderTree.children) {
+        for (const child of folderTree.children) {
+          if (child.type === 'folder') {
+            paths.add(`${folderTree.name}/${child.name}`)
+          }
+        }
+      }
+      setExpandedPaths(paths)
+    }
+    prevTreeRef.current = folderTree
+  }, [folderTree])
 
   const toggleExpand = useCallback((path: string) => {
     setExpandedPaths((prev) => {

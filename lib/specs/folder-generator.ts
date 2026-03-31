@@ -1,3 +1,5 @@
+import { SPEC_CATEGORIES } from '@/lib/specs/spec-options'
+
 export interface FileNode {
   name: string
   type: 'file' | 'folder'
@@ -6,88 +8,431 @@ export interface FileNode {
   children?: FileNode[]
 }
 
-function getArchModule(archId: string): { name: string; content: string } {
-  switch (archId) {
-    case 'risc-v':
+/** Resolve a human-readable label for a spec selection */
+function getSpecLabel(categoryId: string, optionId: string | undefined): string {
+  if (!optionId) return '—'
+  const cat = SPEC_CATEGORIES.find((c) => c.id === categoryId)
+  const opt = cat?.options.find((o) => o.id === optionId)
+  return opt?.label ?? optionId
+}
+
+function getModuleVerilog(moduleType: string): { name: string; content: string; supportFiles: FileNode[] } {
+  switch (moduleType) {
+    case 'uart_tx':
       return {
-        name: 'riscv_core',
-        content: `module riscv_core (
-  input  wire        clk,
-  input  wire        rst_n,
-  input  wire [31:0] instr,
-  input  wire [31:0] mem_rdata,
-  output wire [31:0] mem_addr,
-  output wire [31:0] mem_wdata,
-  output wire        mem_we
+        name: 'uart_tx',
+        content: `module uart_tx #(
+  parameter BAUD_DIV = 868   // clk_freq / baud_rate (e.g. 100 MHz / 115200)
+)(
+  input  wire       clk,
+  input  wire       rst_n,
+  input  wire [7:0] tx_data,
+  input  wire       tx_start,
+  output reg        tx_out,
+  output reg        tx_busy,
+  output reg        tx_done
 );
 
-  // RV32I Core — Fetch, Decode, Execute
-  reg [31:0] pc;
-  reg [31:0] regfile [0:31];
-  
-  wire [6:0]  opcode = instr[6:0];
-  wire [4:0]  rd     = instr[11:7];
-  wire [2:0]  funct3 = instr[14:12];
-  wire [4:0]  rs1    = instr[19:15];
-  wire [4:0]  rs2    = instr[24:20];
-  wire [6:0]  funct7 = instr[31:25];
+  localparam IDLE  = 2'b00;
+  localparam START = 2'b01;
+  localparam DATA  = 2'b10;
+  localparam STOP  = 2'b11;
+
+  reg [1:0]  state;
+  reg [15:0] baud_cnt;
+  reg [2:0]  bit_idx;
+  reg [7:0]  shift_reg;
+
+  wire baud_tick = (baud_cnt == 0);
 
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      pc <= 32'h0000_0000;
+      state     <= IDLE;
+      tx_out    <= 1'b1;
+      tx_busy   <= 1'b0;
+      tx_done   <= 1'b0;
+      baud_cnt  <= 0;
+      bit_idx   <= 0;
+      shift_reg <= 8'b0;
     end else begin
-      pc <= pc + 4;
+      tx_done <= 1'b0;
+      case (state)
+        IDLE: begin
+          tx_out <= 1'b1;
+          if (tx_start) begin
+            shift_reg <= tx_data;
+            state     <= START;
+            tx_busy   <= 1'b1;
+            baud_cnt  <= BAUD_DIV - 1;
+          end
+        end
+        START: begin
+          tx_out <= 1'b0;  // start bit
+          if (baud_tick) begin
+            state    <= DATA;
+            bit_idx  <= 0;
+            baud_cnt <= BAUD_DIV - 1;
+          end else begin
+            baud_cnt <= baud_cnt - 1;
+          end
+        end
+        DATA: begin
+          tx_out <= shift_reg[0];
+          if (baud_tick) begin
+            shift_reg <= {1'b0, shift_reg[7:1]};
+            if (bit_idx == 7) begin
+              state    <= STOP;
+              baud_cnt <= BAUD_DIV - 1;
+            end else begin
+              bit_idx  <= bit_idx + 1;
+              baud_cnt <= BAUD_DIV - 1;
+            end
+          end else begin
+            baud_cnt <= baud_cnt - 1;
+          end
+        end
+        STOP: begin
+          tx_out <= 1'b1;  // stop bit
+          if (baud_tick) begin
+            state   <= IDLE;
+            tx_busy <= 1'b0;
+            tx_done <= 1'b1;
+          end else begin
+            baud_cnt <= baud_cnt - 1;
+          end
+        end
+      endcase
     end
   end
 
-  assign mem_addr  = pc;
-  assign mem_wdata = 32'b0;
-  assign mem_we    = 1'b0;
-
 endmodule`,
+        supportFiles: [],
       }
-    case 'custom-fsm':
+
+    case 'spi_master':
       return {
-        name: 'fsm_controller',
-        content: `module fsm_controller (
-  input  wire       clk,
-  input  wire       rst_n,
-  input  wire [3:0] cmd,
-  output reg  [7:0] status
+        name: 'spi_master',
+        content: `module spi_master #(
+  parameter CLK_DIV = 4,
+  parameter DATA_WIDTH = 8
+)(
+  input  wire                  clk,
+  input  wire                  rst_n,
+  input  wire [DATA_WIDTH-1:0] mosi_data,
+  input  wire                  start,
+  output reg  [DATA_WIDTH-1:0] miso_data,
+  output reg                   done,
+  output reg                   busy,
+  // SPI signals
+  output reg                   sclk,
+  output reg                   mosi,
+  input  wire                  miso,
+  output reg                   cs_n
 );
 
-  localparam IDLE    = 3'b000;
-  localparam FETCH   = 3'b001;
-  localparam DECODE  = 3'b010;
-  localparam EXECUTE = 3'b011;
-  localparam HALT    = 3'b100;
+  localparam IDLE    = 2'b00;
+  localparam LEADING = 2'b01;
+  localparam TRAILING= 2'b10;
 
-  reg [2:0] state, next_state;
+  reg [1:0]  state;
+  reg [15:0] clk_cnt;
+  reg [3:0]  bit_cnt;
+  reg [DATA_WIDTH-1:0] shift_out;
+  reg [DATA_WIDTH-1:0] shift_in;
 
   always @(posedge clk or negedge rst_n) begin
-    if (!rst_n)
-      state <= IDLE;
-    else
-      state <= next_state;
-  end
-
-  always @(*) begin
-    case (state)
-      IDLE:    next_state = (cmd != 0) ? FETCH : IDLE;
-      FETCH:   next_state = DECODE;
-      DECODE:  next_state = EXECUTE;
-      EXECUTE: next_state = (cmd == 4'hF) ? HALT : IDLE;
-      HALT:    next_state = HALT;
-      default: next_state = IDLE;
-    endcase
-  end
-
-  always @(posedge clk) begin
-    status <= {5'b0, state};
+    if (!rst_n) begin
+      state     <= IDLE;
+      sclk      <= 1'b0;
+      mosi      <= 1'b0;
+      cs_n      <= 1'b1;
+      done      <= 1'b0;
+      busy      <= 1'b0;
+      miso_data <= 0;
+      clk_cnt   <= 0;
+      bit_cnt   <= 0;
+      shift_out <= 0;
+      shift_in  <= 0;
+    end else begin
+      done <= 1'b0;
+      case (state)
+        IDLE: begin
+          sclk <= 1'b0;
+          cs_n <= 1'b1;
+          if (start) begin
+            shift_out <= mosi_data;
+            shift_in  <= 0;
+            bit_cnt   <= 0;
+            cs_n      <= 1'b0;
+            busy      <= 1'b1;
+            mosi      <= mosi_data[DATA_WIDTH-1];
+            clk_cnt   <= CLK_DIV / 2 - 1;
+            state     <= LEADING;
+          end
+        end
+        LEADING: begin
+          if (clk_cnt == 0) begin
+            sclk    <= 1'b1;
+            shift_in <= {shift_in[DATA_WIDTH-2:0], miso};
+            clk_cnt <= CLK_DIV / 2 - 1;
+            state   <= TRAILING;
+          end else begin
+            clk_cnt <= clk_cnt - 1;
+          end
+        end
+        TRAILING: begin
+          if (clk_cnt == 0) begin
+            sclk <= 1'b0;
+            if (bit_cnt == DATA_WIDTH - 1) begin
+              cs_n      <= 1'b1;
+              miso_data <= {shift_in[DATA_WIDTH-2:0], miso};
+              busy      <= 1'b0;
+              done      <= 1'b1;
+              state     <= IDLE;
+            end else begin
+              bit_cnt   <= bit_cnt + 1;
+              shift_out <= {shift_out[DATA_WIDTH-2:0], 1'b0};
+              mosi      <= shift_out[DATA_WIDTH-2];
+              clk_cnt   <= CLK_DIV / 2 - 1;
+              state     <= LEADING;
+            end
+          end else begin
+            clk_cnt <= clk_cnt - 1;
+          end
+        end
+        default: state <= IDLE;
+      endcase
+    end
   end
 
 endmodule`,
+        supportFiles: [],
       }
+
+    case 'fifo_buffer':
+      return {
+        name: 'fifo_buffer',
+        content: `module fifo_buffer #(
+  parameter DATA_WIDTH = 8,
+  parameter DEPTH      = 256
+)(
+  input  wire                  clk,
+  input  wire                  rst_n,
+  // Write port
+  input  wire [DATA_WIDTH-1:0] wr_data,
+  input  wire                  wr_en,
+  output wire                  full,
+  // Read port
+  output wire [DATA_WIDTH-1:0] rd_data,
+  input  wire                  rd_en,
+  output wire                  empty,
+  // Status
+  output wire [$clog2(DEPTH):0] count
+);
+
+  localparam ADDR_W = $clog2(DEPTH);
+
+  reg [DATA_WIDTH-1:0] mem [0:DEPTH-1];
+  reg [ADDR_W:0] wr_ptr, rd_ptr;
+
+  assign count = wr_ptr - rd_ptr;
+  assign full  = (count == DEPTH);
+  assign empty = (count == 0);
+  assign rd_data = mem[rd_ptr[ADDR_W-1:0]];
+
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      wr_ptr <= 0;
+      rd_ptr <= 0;
+    end else begin
+      if (wr_en && !full) begin
+        mem[wr_ptr[ADDR_W-1:0]] <= wr_data;
+        wr_ptr <= wr_ptr + 1;
+      end
+      if (rd_en && !empty) begin
+        rd_ptr <= rd_ptr + 1;
+      end
+    end
+  end
+
+endmodule`,
+        supportFiles: [],
+      }
+
+    case 'axi4_lite_slave':
+      return {
+        name: 'axi4_lite_slave',
+        content: `module axi4_lite_slave #(
+  parameter ADDR_WIDTH = 8,
+  parameter DATA_WIDTH = 32,
+  parameter NUM_REGS   = 16
+)(
+  input  wire                    aclk,
+  input  wire                    aresetn,
+  // Write address channel
+  input  wire [ADDR_WIDTH-1:0]   s_axi_awaddr,
+  input  wire                    s_axi_awvalid,
+  output reg                     s_axi_awready,
+  // Write data channel
+  input  wire [DATA_WIDTH-1:0]   s_axi_wdata,
+  input  wire [DATA_WIDTH/8-1:0] s_axi_wstrb,
+  input  wire                    s_axi_wvalid,
+  output reg                     s_axi_wready,
+  // Write response channel
+  output reg  [1:0]              s_axi_bresp,
+  output reg                     s_axi_bvalid,
+  input  wire                    s_axi_bready,
+  // Read address channel
+  input  wire [ADDR_WIDTH-1:0]   s_axi_araddr,
+  input  wire                    s_axi_arvalid,
+  output reg                     s_axi_arready,
+  // Read data channel
+  output reg  [DATA_WIDTH-1:0]   s_axi_rdata,
+  output reg  [1:0]              s_axi_rresp,
+  output reg                     s_axi_rvalid,
+  input  wire                    s_axi_rready
+);
+
+  reg [DATA_WIDTH-1:0] reg_bank [0:NUM_REGS-1];
+  reg [ADDR_WIDTH-1:0] aw_addr_latched;
+  reg [ADDR_WIDTH-1:0] ar_addr_latched;
+  integer i;
+
+  // Write address handshake
+  always @(posedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+      s_axi_awready <= 1'b0;
+      aw_addr_latched <= 0;
+    end else begin
+      if (s_axi_awvalid && !s_axi_awready) begin
+        s_axi_awready  <= 1'b1;
+        aw_addr_latched <= s_axi_awaddr;
+      end else begin
+        s_axi_awready <= 1'b0;
+      end
+    end
+  end
+
+  // Write data
+  always @(posedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+      s_axi_wready <= 1'b0;
+      for (i = 0; i < NUM_REGS; i = i + 1)
+        reg_bank[i] <= 0;
+    end else begin
+      if (s_axi_wvalid && !s_axi_wready) begin
+        s_axi_wready <= 1'b1;
+        reg_bank[aw_addr_latched[ADDR_WIDTH-1:2]] <= s_axi_wdata;
+      end else begin
+        s_axi_wready <= 1'b0;
+      end
+    end
+  end
+
+  // Write response
+  always @(posedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+      s_axi_bvalid <= 1'b0;
+      s_axi_bresp  <= 2'b00;
+    end else begin
+      if (s_axi_awready && s_axi_wready && !s_axi_bvalid) begin
+        s_axi_bvalid <= 1'b1;
+        s_axi_bresp  <= 2'b00;  // OKAY
+      end else if (s_axi_bready && s_axi_bvalid) begin
+        s_axi_bvalid <= 1'b0;
+      end
+    end
+  end
+
+  // Read address
+  always @(posedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+      s_axi_arready   <= 1'b0;
+      ar_addr_latched  <= 0;
+    end else begin
+      if (s_axi_arvalid && !s_axi_arready) begin
+        s_axi_arready   <= 1'b1;
+        ar_addr_latched  <= s_axi_araddr;
+      end else begin
+        s_axi_arready <= 1'b0;
+      end
+    end
+  end
+
+  // Read data
+  always @(posedge aclk or negedge aresetn) begin
+    if (!aresetn) begin
+      s_axi_rvalid <= 1'b0;
+      s_axi_rdata  <= 0;
+      s_axi_rresp  <= 2'b00;
+    end else begin
+      if (s_axi_arready && !s_axi_rvalid) begin
+        s_axi_rvalid <= 1'b1;
+        s_axi_rdata  <= reg_bank[ar_addr_latched[ADDR_WIDTH-1:2]];
+        s_axi_rresp  <= 2'b00;
+      end else if (s_axi_rready && s_axi_rvalid) begin
+        s_axi_rvalid <= 1'b0;
+      end
+    end
+  end
+
+endmodule`,
+        supportFiles: [],
+      }
+
+    case 'pwm_gen':
+      return {
+        name: 'pwm_gen',
+        content: `module pwm_gen #(
+  parameter NUM_CHANNELS = 4,
+  parameter RESOLUTION   = 12   // bit width of counter
+)(
+  input  wire                       clk,
+  input  wire                       rst_n,
+  input  wire [RESOLUTION-1:0]      duty  [0:NUM_CHANNELS-1],
+  input  wire [RESOLUTION-1:0]      period,
+  input  wire [RESOLUTION-1:0]      dead_time,
+  output reg  [NUM_CHANNELS-1:0]    pwm_out,
+  output reg  [NUM_CHANNELS-1:0]    pwm_out_n  // complementary with dead-time
+);
+
+  reg [RESOLUTION-1:0] counter;
+  integer ch;
+
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      counter <= 0;
+    end else begin
+      if (counter >= period)
+        counter <= 0;
+      else
+        counter <= counter + 1;
+    end
+  end
+
+  // PWM output generation with dead-time
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      pwm_out   <= 0;
+      pwm_out_n <= 0;
+    end else begin
+      for (ch = 0; ch < NUM_CHANNELS; ch = ch + 1) begin
+        pwm_out[ch]   <= (counter < duty[ch]) ? 1'b1 : 1'b0;
+        // Complementary output with dead-time insertion
+        if (counter < duty[ch] - dead_time)
+          pwm_out_n[ch] <= 1'b0;
+        else if (counter >= duty[ch] + dead_time)
+          pwm_out_n[ch] <= 1'b1;
+        else
+          pwm_out_n[ch] <= 1'b0;  // dead zone — both off
+      end
+    end
+  end
+
+endmodule`,
+        supportFiles: [],
+      }
+
     default:
       return {
         name: 'top_module',
@@ -106,62 +451,237 @@ endmodule`,
   end
 
 endmodule`,
+        supportFiles: [],
       }
   }
 }
 
-function getTestbench(moduleName: string, verif: string): string {
-  const isCocotb = verif === 'cocotb'
-  if (isCocotb) {
-    return `# cocotb testbench for ${moduleName}
-import cocotb
-from cocotb.triggers import RisingEdge, Timer
-from cocotb.clock import Clock
+function getTestbench(moduleName: string, moduleType: string): string {
+  const tbPorts: Record<string, string> = {
+    uart_tx: `  reg        clk;
+  reg        rst_n;
+  reg  [7:0] tx_data;
+  reg        tx_start;
+  wire       tx_out;
+  wire       tx_busy;
+  wire       tx_done;
 
-@cocotb.test()
-async def test_reset(dut):
-    """Test reset behavior"""
-    clock = Clock(dut.clk, 10, units="ns")
-    cocotb.start_soon(clock.start())
-    
-    dut.rst_n.value = 0
-    await Timer(20, units="ns")
-    dut.rst_n.value = 1
-    await RisingEdge(dut.clk)
-    
-    # Add assertions here
-    assert True, "Reset test passed"
-`
+  uart_tx #(.BAUD_DIV(4)) dut (
+    .clk      (clk),
+    .rst_n    (rst_n),
+    .tx_data  (tx_data),
+    .tx_start (tx_start),
+    .tx_out   (tx_out),
+    .tx_busy  (tx_busy),
+    .tx_done  (tx_done)
+  );
+
+  initial clk = 0;
+  always #5 clk = ~clk;
+
+  initial begin
+    rst_n = 0; tx_start = 0; tx_data = 8'h00;
+    #20; rst_n = 1;
+    #10;
+    tx_data = 8'hA5;
+    tx_start = 1;
+    #10; tx_start = 0;
+    wait(tx_done);
+    #20;
+    $display("UART TX test completed — sent 0xA5");
+    $finish;
+  end`,
+    spi_master: `  reg        clk;
+  reg        rst_n;
+  reg  [7:0] mosi_data;
+  reg        start;
+  wire [7:0] miso_data;
+  wire       done;
+  wire       busy;
+  wire       sclk;
+  wire       mosi;
+  reg        miso;
+  wire       cs_n;
+
+  spi_master #(.CLK_DIV(4), .DATA_WIDTH(8)) dut (
+    .clk       (clk),
+    .rst_n     (rst_n),
+    .mosi_data (mosi_data),
+    .start     (start),
+    .miso_data (miso_data),
+    .done      (done),
+    .busy      (busy),
+    .sclk      (sclk),
+    .mosi      (mosi),
+    .miso      (miso),
+    .cs_n      (cs_n)
+  );
+
+  initial clk = 0;
+  always #5 clk = ~clk;
+  always @(posedge sclk) miso <= $random;
+
+  initial begin
+    rst_n = 0; start = 0; mosi_data = 8'h00; miso = 0;
+    #20; rst_n = 1;
+    #10;
+    mosi_data = 8'hAB;
+    start = 1;
+    #10; start = 0;
+    wait(done);
+    #20;
+    $display("SPI transfer completed — MISO received: %h", miso_data);
+    $finish;
+  end`,
+    fifo_buffer: `  reg        clk;
+  reg        rst_n;
+  reg  [7:0] wr_data;
+  reg        wr_en;
+  wire       full;
+  wire [7:0] rd_data;
+  reg        rd_en;
+  wire       empty;
+
+  fifo_buffer #(.DATA_WIDTH(8), .DEPTH(16)) dut (
+    .clk     (clk),
+    .rst_n   (rst_n),
+    .wr_data (wr_data),
+    .wr_en   (wr_en),
+    .full    (full),
+    .rd_data (rd_data),
+    .rd_en   (rd_en),
+    .empty   (empty)
+  );
+
+  initial clk = 0;
+  always #5 clk = ~clk;
+
+  integer i;
+  initial begin
+    rst_n = 0; wr_en = 0; rd_en = 0; wr_data = 0;
+    #20; rst_n = 1;
+    // Write 8 values
+    for (i = 0; i < 8; i = i + 1) begin
+      @(posedge clk); wr_data = i; wr_en = 1;
+    end
+    @(posedge clk); wr_en = 0;
+    // Read them back
+    for (i = 0; i < 8; i = i + 1) begin
+      @(posedge clk); rd_en = 1;
+    end
+    @(posedge clk); rd_en = 0;
+    #20;
+    $display("FIFO test completed");
+    $finish;
+  end`,
+    axi4_lite_slave: `  reg         aclk;
+  reg         aresetn;
+  reg  [7:0]  awaddr;
+  reg         awvalid;
+  wire        awready;
+  reg  [31:0] wdata;
+  reg  [3:0]  wstrb;
+  reg         wvalid;
+  wire        wready;
+  wire [1:0]  bresp;
+  wire        bvalid;
+  reg         bready;
+  reg  [7:0]  araddr;
+  reg         arvalid;
+  wire        arready;
+  wire [31:0] rdata;
+  wire [1:0]  rresp;
+  wire        rvalid;
+  reg         rready;
+
+  axi4_lite_slave #(.ADDR_WIDTH(8), .DATA_WIDTH(32)) dut (
+    .aclk(aclk), .aresetn(aresetn),
+    .s_axi_awaddr(awaddr), .s_axi_awvalid(awvalid), .s_axi_awready(awready),
+    .s_axi_wdata(wdata), .s_axi_wstrb(wstrb), .s_axi_wvalid(wvalid), .s_axi_wready(wready),
+    .s_axi_bresp(bresp), .s_axi_bvalid(bvalid), .s_axi_bready(bready),
+    .s_axi_araddr(araddr), .s_axi_arvalid(arvalid), .s_axi_arready(arready),
+    .s_axi_rdata(rdata), .s_axi_rresp(rresp), .s_axi_rvalid(rvalid), .s_axi_rready(rready)
+  );
+
+  initial aclk = 0;
+  always #5 aclk = ~aclk;
+
+  initial begin
+    aresetn = 0; awvalid = 0; wvalid = 0; bready = 1;
+    arvalid = 0; rready = 1; wstrb = 4'hF;
+    #20; aresetn = 1;
+    // Write 0xDEADBEEF to register 0
+    #10; awaddr = 8'h00; awvalid = 1; wdata = 32'hDEADBEEF; wvalid = 1;
+    wait(awready && wready); @(posedge aclk); awvalid = 0; wvalid = 0;
+    wait(bvalid); @(posedge aclk);
+    // Read it back
+    #10; araddr = 8'h00; arvalid = 1;
+    wait(arready); @(posedge aclk); arvalid = 0;
+    wait(rvalid); @(posedge aclk);
+    $display("AXI4-Lite read back: %h (expect DEADBEEF)", rdata);
+    #20; $finish;
+  end`,
+    pwm_gen: `  reg        clk;
+  reg        rst_n;
+  reg [11:0] duty  [0:3];
+  reg [11:0] period;
+  reg [11:0] dead_time;
+  wire [3:0] pwm_out;
+  wire [3:0] pwm_out_n;
+
+  pwm_gen #(.NUM_CHANNELS(4), .RESOLUTION(12)) dut (
+    .clk       (clk),
+    .rst_n     (rst_n),
+    .duty      (duty),
+    .period    (period),
+    .dead_time (dead_time),
+    .pwm_out   (pwm_out),
+    .pwm_out_n (pwm_out_n)
+  );
+
+  initial clk = 0;
+  always #5 clk = ~clk;
+
+  initial begin
+    rst_n = 0; period = 12'd4095; dead_time = 12'd10;
+    duty[0] = 12'd1024; duty[1] = 12'd2048;
+    duty[2] = 12'd3072; duty[3] = 12'd512;
+    #20; rst_n = 1;
+    #200000;
+    $display("PWM test completed");
+    $finish;
+  end`,
   }
+
+  const body = tbPorts[moduleType] ?? `  reg        clk;
+  reg        rst_n;
+  reg  [7:0] data_in;
+  wire [7:0] data_out;
+
+  ${moduleName} dut (
+    .clk      (clk),
+    .rst_n    (rst_n),
+    .data_in  (data_in),
+    .data_out (data_out)
+  );
+
+  initial clk = 0;
+  always #5 clk = ~clk;
+
+  initial begin
+    rst_n = 0; data_in = 0;
+    #20; rst_n = 1;
+    #10; data_in = 8'hAA;
+    #100;
+    $display("Test completed");
+    $finish;
+  end`
+
   return `\`timescale 1ns / 1ps
 
 module ${moduleName}_tb;
 
-  reg        clk;
-  reg        rst_n;
-  
-  // Instantiate DUT
-  ${moduleName} dut (
-    .clk   (clk),
-    .rst_n (rst_n)
-  );
-
-  // Clock generation — 100 MHz
-  initial clk = 0;
-  always #5 clk = ~clk;
-
-  // Test sequence
-  initial begin
-    rst_n = 0;
-    #20;
-    rst_n = 1;
-    
-    // Test vectors
-    #100;
-    
-    $display("Test completed");
-    $finish;
-  end
+${body}
 
   // Waveform dump
   initial begin
@@ -172,22 +692,21 @@ module ${moduleName}_tb;
 endmodule`
 }
 
-function getConstraints(synth: string): string {
-  if (synth?.startsWith('fpga')) {
-    return `# Timing Constraints
-create_clock -period 10.000 -name sys_clk [get_ports clk]
-
-# I/O Constraints
-set_input_delay -clock sys_clk 2.0 [all_inputs]
-set_output_delay -clock sys_clk 2.0 [all_outputs]
-
-# False paths
-set_false_path -from [get_ports rst_n]
-`
+function getTimingPeriod(timingId: string | undefined): string {
+  switch (timingId) {
+    case '50mhz': return '20.000'
+    case '100mhz': return '10.000'
+    case '200mhz': return '5.000'
+    case '10mhz': return '100.000'
+    default: return '10.000'
   }
-  if (synth?.startsWith('asic')) {
-    return `# SDC Constraints — ASIC
-create_clock -name clk -period 10.0 [get_ports clk]
+}
+
+function getConstraints(targetTech: string | undefined, timingId: string | undefined): string {
+  const period = getTimingPeriod(timingId)
+  if (targetTech === 'sky130' || targetTech === 'gf180') {
+    return `# SDC Constraints — ASIC (${targetTech?.toUpperCase()})
+create_clock -name clk -period ${period} [get_ports clk]
 set_clock_uncertainty 0.1 [get_clocks clk]
 
 set_input_delay 1.5 -clock clk [remove_from_collection [all_inputs] clk]
@@ -197,18 +716,136 @@ set_max_area 0
 set_max_fanout 20 [current_design]
 `
   }
-  return `# Constraints placeholder
-# Configure for your target
+  if (targetTech === 'xilinx_7series' || targetTech === 'intel_cyclone_v') {
+    return `# Timing Constraints — FPGA
+create_clock -period ${period} -name sys_clk [get_ports clk]
+
+# I/O Constraints
+set_input_delay -clock sys_clk 2.0 [all_inputs]
+set_output_delay -clock sys_clk 2.0 [all_outputs]
+
+# False paths
+set_false_path -from [get_ports rst_n]
+`
+  }
+  return `# Constraints — technology-agnostic
+create_clock -period ${period} -name sys_clk [get_ports clk]
+set_input_delay -clock sys_clk 2.0 [all_inputs]
+set_output_delay -clock sys_clk 2.0 [all_outputs]
+`
+}
+
+function getMemoryMap(moduleType: string, memoryId: string | undefined): string {
+  if (memoryId === 'no_storage') {
+    return `// No internal storage — purely combinational logic
+`
+  }
+  if (moduleType === 'axi4_lite_slave') {
+    return `// Memory Map — AXI4-Lite Register Bank
+// Offset  | Register     | Access
+// --------+--------------+--------
+// 0x00    | CTRL_REG     | R/W
+// 0x04    | STATUS_REG   | R
+// 0x08    | DATA_REG_0   | R/W
+// 0x0C    | DATA_REG_1   | R/W
+// 0x10    | IRQ_ENABLE   | R/W
+// 0x14    | IRQ_STATUS   | R/W1C
+`
+  }
+  if (moduleType === 'fifo_buffer') {
+    return `// Storage: Internal FIFO memory
+// Depth: Parameterisable (default 256 entries)
+// Width: Parameterisable (default 8 bits)
+// Type:  Inferred block RAM or distributed RAM
+`
+  }
+  return `// Memory configuration
+// Storage type: ${getSpecLabel('memory', memoryId)}
+// Adapt memory map to design requirements.
+`
+}
+
+function buildReadme(moduleName: string, specs: Record<string, string>): string {
+  const lines: string[] = [
+    `# ${moduleName} Project`,
+    '',
+    'Generated by EasyChip Playground.',
+    '',
+    '## Specifications',
+  ]
+
+  const specMapping: { categoryId: string; label: string }[] = [
+    { categoryId: 'module_type', label: 'Module Type' },
+    { categoryId: 'interface_ports', label: 'Interface' },
+    { categoryId: 'clock_reset', label: 'Clock & Reset' },
+    { categoryId: 'parameters', label: 'Parameters' },
+    { categoryId: 'functional_behaviour', label: 'Functional Behaviour' },
+    { categoryId: 'timing', label: 'Timing' },
+    { categoryId: 'memory', label: 'Memory' },
+    { categoryId: 'edge_cases', label: 'Edge Cases' },
+    { categoryId: 'target_tech', label: 'Target Technology' },
+  ]
+
+  for (const { categoryId, label } of specMapping) {
+    const optionLabel = getSpecLabel(categoryId, specs[categoryId])
+    lines.push(`- ${label}: ${optionLabel}`)
+  }
+
+  lines.push(
+    '',
+    '## Structure',
+    '- `rtl/` — Synthesizable RTL modules',
+    '- `tb/` — Testbenches and verification',
+    '- `syn/` — Synthesis scripts and constraints',
+    '- `mem/` — Memory configuration',
+    '- `docs/` — Documentation',
+    ''
+  )
+  return lines.join('\n')
+}
+
+function buildSpecSheet(specs: Record<string, string>): string {
+  const specMapping: { categoryId: string; label: string }[] = [
+    { categoryId: 'module_type', label: 'Module Type' },
+    { categoryId: 'interface_ports', label: 'Interface' },
+    { categoryId: 'clock_reset', label: 'Clock & Reset' },
+    { categoryId: 'parameters', label: 'Parameters' },
+    { categoryId: 'functional_behaviour', label: 'Behaviour' },
+    { categoryId: 'timing', label: 'Timing' },
+    { categoryId: 'memory', label: 'Memory' },
+    { categoryId: 'edge_cases', label: 'Edge Cases' },
+    { categoryId: 'target_tech', label: 'Target Tech' },
+  ]
+
+  const rows = specMapping.map(({ categoryId, label }) => {
+    const val = getSpecLabel(categoryId, specs[categoryId])
+    return `| ${label.padEnd(20)} | ${val.padEnd(50)} |`
+  })
+
+  return `# Specification Sheet
+
+| Parameter            | Value                                              |
+|----------------------|----------------------------------------------------|
+${rows.join('\n')}
 `
 }
 
 export function generateFolderStructure(specs: Record<string, string>): FileNode {
-  const arch = getArchModule(specs.architecture || '')
-  const moduleName = arch.name
-  const verifType = specs.verification || 'basic-tb'
-  const synthTarget = specs.synthesis || 'sim-only'
-  const tbExt = verifType === 'cocotb' ? 'py' : 'v'
-  const tbTag = verifType === 'cocotb' ? 'TB' : 'TB'
+  const moduleType = specs.module_type || ''
+  const mod = getModuleVerilog(moduleType)
+  const moduleName = mod.name
+  const targetTech = specs.target_tech || 'tech_agnostic'
+  const timingId = specs.timing
+
+  const rtlChildren: FileNode[] = [
+    {
+      name: `${moduleName}.v`,
+      type: 'file',
+      tag: 'RTL',
+      content: mod.content,
+    },
+    ...mod.supportFiles,
+  ]
 
   const root: FileNode = {
     name: 'project_root',
@@ -217,87 +854,17 @@ export function generateFolderStructure(specs: Record<string, string>): FileNode
       {
         name: 'rtl',
         type: 'folder',
-        children: [
-          {
-            name: `${moduleName}.v`,
-            type: 'file',
-            tag: 'RTL',
-            content: arch.content,
-          },
-          {
-            name: 'alu.v',
-            type: 'file',
-            tag: 'RTL',
-            content: `module alu (
-  input  wire [31:0] a,
-  input  wire [31:0] b,
-  input  wire [3:0]  op,
-  output reg  [31:0] result,
-  output wire        zero
-);
-
-  always @(*) begin
-    case (op)
-      4'b0000: result = a + b;    // ADD
-      4'b0001: result = a - b;    // SUB
-      4'b0010: result = a & b;    // AND
-      4'b0011: result = a | b;    // OR
-      4'b0100: result = a ^ b;    // XOR
-      4'b0101: result = a << b[4:0]; // SLL
-      4'b0110: result = a >> b[4:0]; // SRL
-      default: result = 32'b0;
-    endcase
-  end
-
-  assign zero = (result == 32'b0);
-
-endmodule`,
-          },
-          {
-            name: 'register_file.v',
-            type: 'file',
-            tag: 'RTL',
-            content: `module register_file (
-  input  wire        clk,
-  input  wire        we,
-  input  wire [4:0]  rs1_addr,
-  input  wire [4:0]  rs2_addr,
-  input  wire [4:0]  rd_addr,
-  input  wire [31:0] rd_data,
-  output wire [31:0] rs1_data,
-  output wire [31:0] rs2_data
-);
-
-  reg [31:0] regs [0:31];
-
-  // x0 is hardwired to zero
-  assign rs1_data = (rs1_addr == 0) ? 32'b0 : regs[rs1_addr];
-  assign rs2_data = (rs2_addr == 0) ? 32'b0 : regs[rs2_addr];
-
-  always @(posedge clk) begin
-    if (we && rd_addr != 0)
-      regs[rd_addr] <= rd_data;
-  end
-
-endmodule`,
-          },
-        ],
+        children: rtlChildren,
       },
       {
         name: 'tb',
         type: 'folder',
         children: [
           {
-            name: `${moduleName}_tb.${tbExt}`,
-            type: 'file',
-            tag: tbTag,
-            content: getTestbench(moduleName, verifType),
-          },
-          {
-            name: `alu_tb.v`,
+            name: `${moduleName}_tb.v`,
             type: 'file',
             tag: 'TB',
-            content: getTestbench('alu', 'basic-tb'),
+            content: getTestbench(moduleName, moduleType),
           },
         ],
       },
@@ -309,18 +876,16 @@ endmodule`,
             name: 'constraints.sdc',
             type: 'file',
             tag: 'SYN',
-            content: getConstraints(synthTarget),
+            content: getConstraints(targetTech, timingId),
           },
           {
             name: 'synth.tcl',
             type: 'file',
             tag: 'SYN',
             content: `# Synthesis script
-# Target: ${synthTarget}
+# Target: ${getSpecLabel('target_tech', targetTech)}
 
 read_verilog ../rtl/${moduleName}.v
-read_verilog ../rtl/alu.v
-read_verilog ../rtl/register_file.v
 
 synth -top ${moduleName}
 
@@ -341,14 +906,7 @@ stat
             name: 'memory_map.txt',
             type: 'file',
             tag: 'MEM',
-            content: `// Memory Map
-// Address Range       | Region      | Size
-// ----------------------------------------
-// 0x0000_0000 - 0x0000_3FFF | ROM         | 16 KB
-// 0x0001_0000 - 0x0001_FFFF | RAM         | 64 KB
-// 0x4000_0000 - 0x4000_00FF | I/O Periph  |  256 B
-// 0x8000_0000 - 0x8000_0003 | Control Reg |    4 B
-`,
+            content: getMemoryMap(moduleType, specs.memory),
           },
         ],
       },
@@ -360,47 +918,13 @@ stat
             name: 'README.md',
             type: 'file',
             tag: 'DOC',
-            content: `# ${moduleName} Project
-
-Generated by EasyChip Playground.
-
-## Specifications
-- Architecture: ${specs.architecture || 'default'}
-- Pipeline: ${specs.pipeline || 'default'}
-- Memory: ${specs.memory || 'default'}
-- Bus: ${specs.bus || 'default'}
-- Clock: ${specs.clock || 'default'}
-- I/O: ${specs.io || 'default'}
-- Verification: ${specs.verification || 'default'}
-- Synthesis: ${specs.synthesis || 'default'}
-- Optimization: ${specs.optimization || 'default'}
-
-## Structure
-- \`rtl/\` — Synthesizable RTL modules
-- \`tb/\` — Testbenches and verification
-- \`syn/\` — Synthesis scripts and constraints
-- \`mem/\` — Memory configuration
-- \`docs/\` — Documentation
-`,
+            content: buildReadme(moduleName, specs),
           },
           {
             name: 'spec_sheet.md',
             type: 'file',
             tag: 'DOC',
-            content: `# Specification Sheet
-
-| Parameter       | Value          |
-|-----------------|----------------|
-| Architecture    | ${specs.architecture || '—'} |
-| Pipeline        | ${specs.pipeline || '—'} |
-| Memory          | ${specs.memory || '—'} |
-| Bus Protocol    | ${specs.bus || '—'} |
-| Clock Domain    | ${specs.clock || '—'} |
-| I/O             | ${specs.io || '—'} |
-| Verification    | ${specs.verification || '—'} |
-| Synthesis       | ${specs.synthesis || '—'} |
-| Optimization    | ${specs.optimization || '—'} |
-`,
+            content: buildSpecSheet(specs),
           },
         ],
       },
@@ -411,7 +935,7 @@ Generated by EasyChip Playground.
         content: `# EasyChip Project Makefile
 
 TOP = ${moduleName}
-RTL = rtl/$(TOP).v rtl/alu.v rtl/register_file.v
+RTL = rtl/$(TOP).v
 TB  = tb/$(TOP)_tb.v
 
 .PHONY: sim synth clean
