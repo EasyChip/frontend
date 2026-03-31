@@ -63,16 +63,16 @@ export default function Navbar() {
         <a href="mailto:f20220056@goa.bits-pilani.ac.in" className="nav-contact">
           Contact
         </a>
-        <a href="#cta" className="nav-cta">
-          Request Access →
-        </a>
+        <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="nav-cta">
+          Register for Early Access →
+        </button>
       </div>
 
       {/* Right: mobile — CTA only */}
       <div className="nav-right-mobile" style={{ display: 'none' }}>
-        <a href="#cta" className="nav-cta">
-          Request Access →
-        </a>
+        <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="nav-cta">
+          Register for Early Access →
+        </button>
       </div>
 
       <style>{`

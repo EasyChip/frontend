@@ -114,7 +114,7 @@ export default function VisionPage() {
                   className="px-6 py-3 rounded-full text-sm font-semibold transition-all"
                   style={{ background: 'var(--accent-amber)', color: '#0a0a0a' }}
                 >
-                  Join the waitlist
+                  Register for Early Access
                 </button>
                 <Link
                   href="/roadmap"
@@ -358,7 +358,7 @@ export default function VisionPage() {
                   className="px-8 py-3.5 rounded-full font-semibold transition-all text-sm"
                   style={{ background: 'var(--accent-amber)', color: '#0a0a0a' }}
                 >
-                  Request early access
+                  Register for Early Access
                 </button>
                 <Link
                   href="/use-cases"

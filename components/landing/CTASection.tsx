@@ -65,9 +65,9 @@ export default function CTASection() {
           </p>
 
           <div className="reveal" style={{ transitionDelay: '0.2s' }}>
-            <a href="mailto:f20220056@goa.bits-pilani.ac.in" className="btn-primary" style={{ fontSize: 13 }}>
-              Request Early Access →
-            </a>
+            <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="btn-primary" style={{ fontSize: 13 }}>
+              Register for Early Access →
+            </button>
           </div>
         </div>
       </section>

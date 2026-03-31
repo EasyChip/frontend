@@ -175,7 +175,7 @@ export default function RoadmapPage() {
                   className="px-6 py-3 rounded-full text-sm font-semibold transition-all"
                   style={{ background: 'var(--accent-amber)', color: '#0a0a0a' }}
                 >
-                  Follow our progress
+                  Register for Early Access
                 </button>
                 <Link
                   href="/vision"
@@ -296,7 +296,7 @@ export default function RoadmapPage() {
                 className="px-8 py-3.5 rounded-full font-semibold text-sm transition-all"
                 style={{ background: 'var(--accent-amber)', color: '#0a0a0a' }}
               >
-                Join the waitlist
+                Register for Early Access
               </button>
             </AnimatedSection>
           </div>

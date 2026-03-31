@@ -198,9 +198,9 @@ export default function Hero() {
               className="reveal"
               style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 40, animationDelay: '0.55s' }}
             >
-              <a href="#cta" className="btn-primary" style={{ fontSize: 12 }}>
-                Request Access →
-              </a>
+            <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="btn-primary" style={{ fontSize: 12 }}>
+                Register for Early Access →
+              </button>
               <a
                 href="#how-it-works"
                 style={{

@@ -252,7 +252,7 @@ export default function UseCasesPage() {
                   className="px-8 py-3.5 rounded-full font-semibold text-sm transition-all"
                   style={{ background: 'var(--accent-amber)', color: '#0a0a0a' }}
                 >
-                  Request early access
+                  Register for Early Access
                 </button>
                 <Link
                   href="/roadmap"

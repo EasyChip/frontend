@@ -107,7 +107,7 @@ export default function ComparisonSection() {
             onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
             className="btn-primary"
           >
-            Join the waitlist — it&apos;s free →
+            Register for Early Access →
           </button>
         </div>
       </div>

@@ -191,7 +191,7 @@ export default function WaitlistModal({ open, onClose }: Props) {
                     </div>
 
                     <h2 className="text-2xl font-extrabold text-text-primary mb-2">
-                      Join the waitlist
+                      Register for Early Access
                     </h2>
                     <p className="text-text-secondary text-sm mb-6 leading-relaxed">
                       Be among the first engineers to generate formally verified RTL with EasyChip. We&apos;re onboarding in batches.
@@ -249,7 +249,7 @@ export default function WaitlistModal({ open, onClose }: Props) {
                             Submitting…
                           </>
                         ) : (
-                          'Request early access →'
+                          'Register for Early Access →'
                         )}
                       </button>
                       {status === 'error' && (
