@@ -53,8 +53,8 @@ export default function TopBar() {
     <header
       style={{
         height: 48,
-        background: '#0A0A0A',
-        borderBottom: '1px solid #222222',
+        background: '#111111',
+        borderBottom: '1px solid #1C1C1C',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -65,7 +65,9 @@ export default function TopBar() {
     >
       {/* Left */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <img src="/logo.png" height={24} alt="EasyChip" style={{ height: 24 }} />
+        <Link href="/">
+          <img src="/logo.png" height={24} alt="EasyChip" style={{ height: 24, cursor: 'pointer' }} />
+        </Link>
         <span
           style={{
             fontFamily: 'var(--font-mono)',
@@ -101,7 +103,7 @@ export default function TopBar() {
             onBlur={handleSave}
             style={{
               background: '#111111',
-              border: '1px solid #333333',
+              border: '1px solid #2A2A2A',
               borderRadius: 8,
               padding: '4px 12px',
               color: '#FAFAFA',
@@ -175,9 +177,9 @@ export default function TopBar() {
               width: 32,
               height: 32,
               borderRadius: '50%',
-              background: '#FAFAFA',
-              color: '#0A0A0A',
-              border: 'none',
+              background: 'transparent',
+              color: '#C8962E',
+              border: '2px solid #C8962E',
               fontFamily: 'var(--font-mono)',
               fontSize: 13,
               fontWeight: 700,
@@ -199,14 +201,14 @@ export default function TopBar() {
                 right: 0,
                 width: 240,
                 background: '#111111',
-                border: '1px solid #222222',
+                border: '1px solid #1C1C1C',
                 borderRadius: 8,
                 padding: '8px 0',
                 zIndex: 100,
               }}
             >
               {/* Profile info */}
-              <div style={{ padding: '12px 16px', borderBottom: '1px solid #222222' }}>
+              <div style={{ padding: '12px 16px', borderBottom: '1px solid #1C1C1C' }}>
                 <div style={{ color: '#FAFAFA', fontSize: 13, fontFamily: 'var(--font-sans)', fontWeight: 500 }}>
                   {profile?.full_name || 'User'}
                 </div>
@@ -220,7 +222,7 @@ export default function TopBar() {
                       marginTop: 8,
                       padding: '2px 8px',
                       borderRadius: 8,
-                      border: '1px solid #222222',
+                      border: '1px solid #1C1C1C',
                       color: '#888888',
                       fontSize: 10,
                       fontFamily: 'var(--font-mono)',
@@ -245,7 +247,7 @@ export default function TopBar() {
                   transition: 'background 200ms ease, color 200ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#1A1A1A'
+                  e.currentTarget.style.background = 'rgba(200,150,46,0.08)'
                   e.currentTarget.style.color = '#FAFAFA'
                 }}
                 onMouseLeave={(e) => {
@@ -271,7 +273,7 @@ export default function TopBar() {
                   transition: 'background 200ms ease, color 200ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#1A1A1A'
+                  e.currentTarget.style.background = 'rgba(200,150,46,0.08)'
                   e.currentTarget.style.color = '#FAFAFA'
                 }}
                 onMouseLeave={(e) => {

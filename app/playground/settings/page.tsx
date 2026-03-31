@@ -90,7 +90,7 @@ export default function SettingsPage() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '16px 24px',
-          borderBottom: '1px solid #222222',
+          borderBottom: '1px solid #1C1C1C',
           background: '#0A0A0A',
           position: 'sticky',
           top: 0,
@@ -107,7 +107,7 @@ export default function SettingsPage() {
           onClick={() => router.push('/playground')}
           style={{
             background: 'transparent',
-            border: '1px solid #222222',
+            border: '1px solid #1C1C1C',
             borderRadius: 8,
             color: '#FAFAFA',
             padding: '8px 16px',
@@ -116,8 +116,8 @@ export default function SettingsPage() {
             fontFamily: 'var(--font-sans)',
             transition: 'border-color 0.15s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#333333')}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#222222')}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#2A2A2A')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#1C1C1C')}
         >
           ← Back to Project
         </button>
@@ -133,7 +133,7 @@ export default function SettingsPage() {
               alignItems: 'center',
               justifyContent: 'space-between',
               paddingBottom: 12,
-              borderBottom: '1px solid #222222',
+              borderBottom: '1px solid #1C1C1C',
               marginBottom: 24,
             }}
           >
@@ -143,17 +143,17 @@ export default function SettingsPage() {
                 onClick={() => setEditing(true)}
                 style={{
                   background: 'transparent',
-                  border: '1px solid #222222',
+                  border: '1px solid #1C1C1C',
                   borderRadius: 8,
-                  color: '#FAFAFA',
+                  color: '#C8962E',
                   padding: '6px 14px',
                   fontSize: 13,
                   cursor: 'pointer',
                   fontFamily: 'var(--font-sans)',
                   transition: 'border-color 0.15s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#333333')}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#222222')}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#C8962E')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#1C1C1C')}
               >
                 Edit →
               </button>
@@ -167,7 +167,7 @@ export default function SettingsPage() {
                   }}
                   style={{
                     background: 'transparent',
-                    border: '1px solid #222222',
+                    border: '1px solid #1C1C1C',
                     borderRadius: 8,
                     color: '#888888',
                     padding: '6px 14px',
@@ -176,8 +176,8 @@ export default function SettingsPage() {
                     fontFamily: 'var(--font-sans)',
                     transition: 'border-color 0.15s',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#333333')}
-                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#222222')}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#2A2A2A')}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#1C1C1C')}
                 >
                   Cancel
                 </button>
@@ -185,7 +185,7 @@ export default function SettingsPage() {
                   onClick={handleSave}
                   disabled={saving}
                   style={{
-                    background: '#FAFAFA',
+                    background: '#C8962E',
                     border: 'none',
                     borderRadius: 8,
                     color: '#0A0A0A',
@@ -224,7 +224,7 @@ export default function SettingsPage() {
                 <span
                   style={{
                     background: '#111111',
-                    border: '1px solid #222222',
+                    border: '1px solid #1C1C1C',
                     borderRadius: 6,
                     padding: '2px 10px',
                     fontSize: 12,
@@ -263,7 +263,7 @@ export default function SettingsPage() {
               fontWeight: 500,
               margin: 0,
               paddingBottom: 12,
-              borderBottom: '1px solid #222222',
+              borderBottom: '1px solid #1C1C1C',
               marginBottom: 24,
             }}
           >
@@ -272,7 +272,7 @@ export default function SettingsPage() {
           <div
             style={{
               background: '#111111',
-              border: '1px solid #222222',
+              border: '1px solid #1C1C1C',
               borderRadius: 8,
               padding: 24,
             }}
@@ -282,7 +282,7 @@ export default function SettingsPage() {
             </p>
             <div
               style={{
-                background: '#222222',
+                background: '#1C1C1C',
                 borderRadius: 8,
                 height: 4,
                 width: '100%',
@@ -292,7 +292,7 @@ export default function SettingsPage() {
             >
               <div
                 style={{
-                  background: '#FAFAFA',
+                  background: '#C8962E',
                   height: '100%',
                   borderRadius: 8,
                   width: `${Math.min(progressPct, 100)}%`,
@@ -317,7 +317,7 @@ export default function SettingsPage() {
               fontWeight: 500,
               margin: 0,
               paddingBottom: 12,
-              borderBottom: '1px solid #222222',
+              borderBottom: '1px solid #1C1C1C',
               marginBottom: 24,
             }}
           >
@@ -338,7 +338,7 @@ export default function SettingsPage() {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     background: 'transparent',
-                    border: '1px solid #222222',
+                    border: '1px solid #1C1C1C',
                     borderRadius: 8,
                     padding: '12px 16px',
                     cursor: 'pointer',
@@ -348,11 +348,11 @@ export default function SettingsPage() {
                     transition: 'border-color 0.15s, background 0.15s',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#333333'
+                    e.currentTarget.style.borderColor = '#2A2A2A'
                     e.currentTarget.style.background = '#111111'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#222222'
+                    e.currentTarget.style.borderColor = '#1C1C1C'
                     e.currentTarget.style.background = 'transparent'
                   }}
                 >
@@ -380,7 +380,7 @@ export default function SettingsPage() {
               fontWeight: 500,
               margin: 0,
               paddingBottom: 12,
-              borderBottom: '1px solid #222222',
+              borderBottom: '1px solid #1C1C1C',
               marginBottom: 24,
               color: '#EF4444',
             }}
@@ -430,7 +430,7 @@ export default function SettingsPage() {
               fontWeight: 500,
               margin: 0,
               paddingBottom: 12,
-              borderBottom: '1px solid #222222',
+              borderBottom: '1px solid #1C1C1C',
               marginBottom: 24,
             }}
           >
@@ -444,7 +444,7 @@ export default function SettingsPage() {
               onClick={handleLogout}
               style={{
                 background: 'transparent',
-                border: '1px solid #222222',
+                border: '1px solid #1C1C1C',
                 borderRadius: 8,
                 color: '#FAFAFA',
                 padding: '6px 14px',
@@ -454,8 +454,8 @@ export default function SettingsPage() {
                 flexShrink: 0,
                 transition: 'border-color 0.15s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#333333')}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#222222')}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#2A2A2A')}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#1C1C1C')}
             >
               Logout →
             </button>
@@ -481,7 +481,7 @@ function FieldRow({ label, children }: { label: string; children: React.ReactNod
 
 const inputStyle: React.CSSProperties = {
   background: '#111111',
-  border: '1px solid #222222',
+  border: '1px solid #1C1C1C',
   borderRadius: 8,
   color: '#FAFAFA',
   padding: '6px 12px',

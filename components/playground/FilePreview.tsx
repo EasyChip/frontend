@@ -42,7 +42,7 @@ export default function FilePreview({ filePath, fileNode }: FilePreviewProps) {
       <div
         style={{
           padding: '8px 16px',
-          borderBottom: '1px solid #222222',
+          borderBottom: '1px solid #1C1C1C',
           fontFamily: 'var(--font-mono)',
           fontSize: 11,
           color: '#555555',
@@ -109,7 +109,7 @@ function highlightCode(code: string): string {
 
   result = result.replace(
     /&quot;([^&]*?)&quot;/g,
-    '<span style="color:#22C55E">&quot;$1&quot;</span>'
+    '<span style="color:#C8962E">&quot;$1&quot;</span>'
   )
 
   result = result.replace(
@@ -126,7 +126,7 @@ function highlightCode(code: string): string {
     'default', 'or', 'and', 'not',
   ]
   const kwPattern = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g')
-  result = result.replace(kwPattern, '<span style="color:#FAFAFA;font-weight:bold">$1</span>')
+  result = result.replace(kwPattern, '<span style="color:#C8962E;font-weight:bold">$1</span>')
 
   return result
 }

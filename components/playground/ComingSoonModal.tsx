@@ -41,7 +41,7 @@ export default function ComingSoonModal() {
       <div
         style={{
           background: '#111111',
-          border: '1px solid #222222',
+          border: '1px solid #1C1C1C',
           borderRadius: 8,
           maxWidth: 420,
           width: '90%',
@@ -53,7 +53,7 @@ export default function ComingSoonModal() {
         <img
           src="/logo.png"
           alt="EasyChip"
-          style={{ height: 32, margin: '0 auto 28px' }}
+          style={{ height: 32, margin: '0 auto 28px', filter: 'drop-shadow(0 0 8px rgba(200,150,46,0.10))' }}
         />
 
         {/* Title */}
@@ -100,7 +100,7 @@ export default function ComingSoonModal() {
           style={{
             width: '100%',
             padding: '12px 0',
-            background: '#FAFAFA',
+            background: '#C8962E',
             color: '#0A0A0A',
             border: 'none',
             borderRadius: 8,
@@ -124,7 +124,7 @@ export default function ComingSoonModal() {
             padding: '12px 0',
             background: 'transparent',
             color: '#888888',
-            border: '1px solid #222222',
+            border: '1px solid #1C1C1C',
             borderRadius: 8,
             fontSize: 13,
             fontFamily: 'var(--font-sans)',
@@ -133,11 +133,11 @@ export default function ComingSoonModal() {
             transition: 'border-color 200ms ease, color 200ms ease',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#333333'
+            e.currentTarget.style.borderColor = '#2A2A2A'
             e.currentTarget.style.color = '#FAFAFA'
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = '#222222'
+            e.currentTarget.style.borderColor = '#1C1C1C'
             e.currentTarget.style.color = '#888888'
           }}
         >

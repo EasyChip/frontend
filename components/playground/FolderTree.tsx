@@ -12,12 +12,12 @@ interface FileNode {
 }
 
 const TAG_COLORS: Record<string, string> = {
-  RTL: '#22C55E',
-  TB: '#EAB308',
-  SYN: '#3B82F6',
-  DOC: '#FAFAFA',
-  PKG: '#A855F7',
-  MEM: '#F97316',
+  RTL: '#C8962E',
+  TB: '#C8962E',
+  SYN: '#C8962E',
+  DOC: '#C8962E',
+  PKG: '#C8962E',
+  MEM: '#C8962E',
 }
 
 function getFilePath(node: FileNode, parentPath: string): string {
@@ -63,20 +63,20 @@ function TreeNode({
           padding: '4px 8px',
           paddingLeft: depth * 16 + 8,
           cursor: 'pointer',
-          background: isSelected ? '#1A1A1A' : 'transparent',
-          borderLeft: isSelected ? '2px solid #FAFAFA' : '2px solid transparent',
+          background: isSelected ? 'rgba(200,150,46,0.06)' : 'transparent',
+          borderLeft: isSelected ? '2px solid #C8962E' : '2px solid transparent',
           transition: 'background 200ms ease',
           userSelect: 'none',
         }}
         onMouseEnter={(e) => {
-          if (!isSelected) e.currentTarget.style.background = '#111111'
+          if (!isSelected) e.currentTarget.style.background = 'rgba(200,150,46,0.04)'
         }}
         onMouseLeave={(e) => {
           if (!isSelected) e.currentTarget.style.background = 'transparent'
         }}
       >
         {isFolder ? (
-          <span style={{ color: '#555555', fontSize: 10, width: 12, flexShrink: 0, fontFamily: 'var(--font-mono)' }}>
+          <span style={{ color: isExpanded ? '#C8962E' : '#888888', fontSize: 10, width: 12, flexShrink: 0, fontFamily: 'var(--font-mono)' }}>
             {isExpanded ? '▾' : '▸'}
           </span>
         ) : (
@@ -184,7 +184,7 @@ export default function FolderTree() {
       <div
         style={{
           width: '35%',
-          borderRight: '1px solid #222222',
+          borderRight: '1px solid #1C1C1C',
           overflowY: 'auto',
           paddingTop: 8,
           paddingBottom: 8,
@@ -239,7 +239,7 @@ function FilePreviewInline({ node, filePath }: { node: FileNode | null; filePath
       <div
         style={{
           padding: '8px 16px',
-          borderBottom: '1px solid #222222',
+          borderBottom: '1px solid #1C1C1C',
           fontFamily: 'var(--font-mono)',
           fontSize: 11,
           color: '#555555',
@@ -310,7 +310,7 @@ function highlightCode(code: string): string {
   // Strings
   result = result.replace(
     /&quot;([^&]*?)&quot;/g,
-    '<span style="color:#22C55E">&quot;$1&quot;</span>'
+    '<span style="color:#C8962E">&quot;$1&quot;</span>'
   )
 
   // Numbers (standalone)
@@ -329,7 +329,7 @@ function highlightCode(code: string): string {
     'default', 'or', 'and', 'not',
   ]
   const kwPattern = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g')
-  result = result.replace(kwPattern, '<span style="color:#FAFAFA;font-weight:bold">$1</span>')
+  result = result.replace(kwPattern, '<span style="color:#C8962E;font-weight:bold">$1</span>')
 
   return result
 }

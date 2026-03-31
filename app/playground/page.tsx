@@ -22,7 +22,7 @@ export default function PlaygroundPage() {
         style={{
           padding: '8px 16px',
           background: '#111111',
-          borderBottom: '1px solid #222222',
+          borderBottom: '1px solid #1C1C1C',
           fontFamily: 'var(--font-mono)',
           fontSize: 11,
           color: '#555555',
@@ -36,7 +36,7 @@ export default function PlaygroundPage() {
       <div
         className="flex lg:hidden"
         style={{
-          borderBottom: '1px solid #222222',
+          borderBottom: '1px solid #1C1C1C',
           background: '#0A0A0A',
         }}
       >
@@ -49,7 +49,7 @@ export default function PlaygroundPage() {
               padding: '10px 0',
               background: 'transparent',
               border: 'none',
-              borderBottom: mobileTab === tab ? '2px solid #FAFAFA' : '2px solid transparent',
+              borderBottom: mobileTab === tab ? '2px solid #C8962E' : '2px solid transparent',
               color: mobileTab === tab ? '#FAFAFA' : '#555555',
               fontFamily: 'var(--font-mono)',
               fontSize: 11,
@@ -116,7 +116,7 @@ export default function PlaygroundPage() {
               height: '100%',
               background: '#111111',
               border: 'none',
-              borderRight: '1px solid #222222',
+              borderRight: '1px solid #1C1C1C',
               color: '#555555',
               cursor: 'pointer',
               display: 'flex',
@@ -134,7 +134,7 @@ export default function PlaygroundPage() {
 
           {/* Stacked: Folder + Prompt */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', minWidth: 0 }}>
-            <div style={{ height: '50%', overflow: 'hidden', borderBottom: '1px solid #222222' }}>
+            <div style={{ height: '50%', overflow: 'hidden', borderBottom: '1px solid #1C1C1C' }}>
               <FolderTree />
             </div>
             <div style={{ height: '50%', overflow: 'hidden' }}>
@@ -168,7 +168,7 @@ export default function PlaygroundPage() {
         style={{
           height: 32,
           background: '#0A0A0A',
-          borderTop: '1px solid #222222',
+          borderTop: '1px solid #1C1C1C',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',

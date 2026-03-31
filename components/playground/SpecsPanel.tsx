@@ -49,7 +49,7 @@ export default function SpecsPanel() {
     <div
       style={{
         background: '#0A0A0A',
-        borderRight: '1px solid #222222',
+        borderRight: '1px solid #1C1C1C',
         overflowY: 'auto',
         padding: 16,
         display: 'flex',
@@ -99,7 +99,7 @@ export default function SpecsPanel() {
                   style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: 10,
-                    color: '#555555',
+                    color: '#C8962E',
                     width: 18,
                     flexShrink: 0,
                   }}
@@ -118,11 +118,11 @@ export default function SpecsPanel() {
                   {cat.title}
                 </span>
                 {isSelected && (
-                  <span style={{ color: '#22C55E', fontSize: 12, flexShrink: 0 }}>✓</span>
+                  <span style={{ color: '#C8962E', fontSize: 12, flexShrink: 0 }}>✓</span>
                 )}
                 <span
                   style={{
-                    color: '#555555',
+                    color: isOpen ? '#C8962E' : '#555555',
                     fontSize: 10,
                     flexShrink: 0,
                     transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
@@ -143,7 +143,7 @@ export default function SpecsPanel() {
                       width: '100%',
                       padding: '8px 10px',
                       background: '#111111',
-                      border: '1px solid #222222',
+                      border: specs[cat.id] ? '1px solid #C8962E' : '1px solid #1C1C1C',
                       borderRadius: 8,
                       color: specs[cat.id] ? '#FAFAFA' : '#555555',
                       fontFamily: 'var(--font-mono)',
@@ -158,8 +158,8 @@ export default function SpecsPanel() {
                       backgroundPosition: 'right 10px center',
                       paddingRight: 28,
                     }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = '#333333')}
-                    onBlur={(e) => (e.currentTarget.style.borderColor = '#222222')}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#C8962E')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = specs[cat.id] ? '#C8962E' : '#1C1C1C')}
                   >
                     <option value="" disabled>
                       Select {cat.title.toLowerCase()}...
@@ -198,9 +198,9 @@ export default function SpecsPanel() {
         style={{
           width: '100%',
           padding: '12px 0',
-          background: canGenerate ? '#FAFAFA' : '#1A1A1A',
+          background: canGenerate ? '#C8962E' : '#1A1A1A',
           color: canGenerate ? '#0A0A0A' : '#555555',
-          border: canGenerate ? 'none' : '1px solid #222222',
+          border: canGenerate ? 'none' : '1px solid #1C1C1C',
           borderRadius: 8,
           fontSize: 13,
           fontFamily: 'var(--font-sans)',

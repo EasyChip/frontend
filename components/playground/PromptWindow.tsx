@@ -27,14 +27,14 @@ export default function PromptWindow() {
         display: 'flex',
         flexDirection: 'column',
         background: '#0A0A0A',
-        borderLeft: '1px solid #222222',
+        borderLeft: '1px solid #1C1C1C',
       }}
     >
       {/* Header */}
       <div
         style={{
           padding: '12px 16px',
-          borderBottom: '1px solid #222222',
+          borderBottom: '1px solid #1C1C1C',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -141,7 +141,7 @@ export default function PromptWindow() {
       <div
         style={{
           padding: '12px 16px',
-          borderTop: '1px solid #222222',
+          borderTop: '1px solid #1C1C1C',
           flexShrink: 0,
         }}
       >
@@ -151,7 +151,7 @@ export default function PromptWindow() {
             alignItems: 'flex-end',
             gap: 8,
             background: '#111111',
-            border: '1px solid #222222',
+            border: '1px solid #1C1C1C',
             borderRadius: 8,
             padding: '10px 12px',
             transition: 'border-color 200ms ease',
@@ -177,11 +177,11 @@ export default function PromptWindow() {
             }}
             onFocus={(e) => {
               const parent = e.currentTarget.parentElement
-              if (parent) parent.style.borderColor = '#333333'
+              if (parent) parent.style.borderColor = '#C8962E'
             }}
             onBlur={(e) => {
               const parent = e.currentTarget.parentElement
-              if (parent) parent.style.borderColor = '#222222'
+              if (parent) parent.style.borderColor = '#1C1C1C'
             }}
           />
           <button
@@ -190,7 +190,7 @@ export default function PromptWindow() {
               width: 32,
               height: 32,
               borderRadius: 8,
-              background: '#FAFAFA',
+              background: '#C8962E',
               color: '#0A0A0A',
               border: 'none',
               cursor: 'pointer',
