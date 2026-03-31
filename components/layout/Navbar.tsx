@@ -1,16 +1,24 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const links = [
+    { label: 'Problem', href: '#problem' },
+    { label: 'How it works', href: '#how-it-works' },
+    { label: 'Roadmap', href: '#roadmap' },
+    { label: 'Team', href: '#team' },
+    { label: 'Contact', href: 'mailto:founders@easychip.in' },
+  ]
 
   return (
     <nav
@@ -19,60 +27,96 @@ export default function Navbar() {
         top: 0, left: 0, right: 0,
         zIndex: 100,
         height: 60,
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        background: 'rgba(8,12,18,0.85)',
-        borderBottom: `1px solid rgba(255,255,255,${scrolled ? 0.15 : 0.07})`,
+        backdropFilter: scrolled ? 'blur(20px)' : 'blur(0px)',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'blur(0px)',
+        background: scrolled ? 'rgba(9,9,11,0.9)' : 'transparent',
+        borderBottom: `1px solid ${scrolled ? 'rgba(255,255,255,0.08)' : 'transparent'}`,
         display: 'flex',
         alignItems: 'center',
         padding: '0 48px',
-        transition: 'border-color 0.3s ease',
+        transition: 'all 0.3s ease',
       }}
     >
       {/* Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1 }}>
-        <Link
-          href="/"
-          style={{
-            display: 'flex', alignItems: 'center', gap: 10,
-            textDecoration: 'none',
-          }}
-        >
+      <div style={{ flex: 1 }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="EasyChip" style={{ width: 28, height: 28, objectFit: 'contain' }} />
-          <span style={{
-            fontFamily: 'var(--mono)',
-            fontSize: 14,
-            fontWeight: 500,
-            color: 'var(--white)',
-            letterSpacing: '0.02em',
-          }}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: 14, fontWeight: 600, color: 'var(--white)', letterSpacing: '0.02em' }}>
             EasyChip
           </span>
         </Link>
       </div>
 
-      {/* Right: desktop */}
-      <div className="nav-right-desktop" style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-        <a href="mailto:f20220056@goa.bits-pilani.ac.in" className="nav-contact">
-          Contact
-        </a>
-        <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="nav-cta">
+      {/* Desktop links */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="nav-desktop">
+        {links.map(l => (
+          <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
+        ))}
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
+          style={{
+            fontFamily: 'var(--mono)', fontSize: 12, fontWeight: 600,
+            background: 'var(--blue, #3B82F6)', color: '#fff',
+            padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer',
+            transition: 'opacity 0.2s', letterSpacing: '0.02em', whiteSpace: 'nowrap',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+        >
           Register for Early Access →
         </button>
       </div>
 
-      {/* Right: mobile — CTA only */}
-      <div className="nav-right-mobile" style={{ display: 'none' }}>
-        <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="nav-cta">
-          Register for Early Access →
-        </button>
-      </div>
+      {/* Mobile hamburger */}
+      <button
+        className="nav-mobile-toggle"
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, display: 'none' }}
+        aria-label="Toggle menu"
+      >
+        <div style={{ width: 20, display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <span style={{ display: 'block', height: 1.5, background: 'var(--white)', borderRadius: 2, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(6.5px)' : 'none' }} />
+          <span style={{ display: 'block', height: 1.5, background: 'var(--white)', borderRadius: 2, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display: 'block', height: 1.5, background: 'var(--white)', borderRadius: 2, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-6.5px)' : 'none' }} />
+        </div>
+      </button>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div style={{
+          position: 'fixed', top: 60, left: 0, right: 0,
+          background: 'rgba(9,9,11,0.97)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          padding: '24px 24px 32px',
+          display: 'flex', flexDirection: 'column', gap: 20,
+          zIndex: 99,
+        }}>
+          {links.map(l => (
+            <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
+              style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
+              {l.label}
+            </a>
+          ))}
+          <button
+            onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('ec:openWaitlist')); }}
+            style={{
+              fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
+              background: '#3B82F6', color: '#fff',
+              padding: '12px 20px', borderRadius: 6, border: 'none', cursor: 'pointer',
+              textAlign: 'left',
+            }}
+          >
+            Register for Early Access →
+          </button>
+        </div>
+      )}
 
       <style>{`
         @media (max-width: 768px) {
-          .nav-right-desktop { display: none !important; }
-          .nav-right-mobile  { display: flex !important; }
+          .nav-desktop { display: none !important; }
+          .nav-mobile-toggle { display: flex !important; }
           nav { padding: 0 24px !important; }
         }
       `}</style>

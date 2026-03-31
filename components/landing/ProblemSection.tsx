@@ -1,136 +1,85 @@
 'use client'
-
 import { useEffect, useRef } from 'react'
 
 const PROBLEMS = [
   {
     num: '01',
     title: 'The cost wall',
-    body: 'Commercial EDA licenses start at $50K/year per seat. University labs and startups are structurally locked out.',
+    body: 'A single Synopsys Design Compiler seat costs $50K+/year. A university VLSI lab needs 5\u201310 seats. The entire annual budget of most Indian EE departments is less than one EDA licence.',
   },
   {
     num: '02',
-    title: 'The translation gap',
-    body: 'Every hardware spec gets re-typed into Verilog by hand. A process unchanged since 1977.',
+    title: 'The manual bottleneck',
+    body: 'Every hardware specification gets translated to Verilog by hand \u2014 a process that consumes 40% of design cycle time and has barely changed in decades.',
   },
   {
     num: '03',
     title: 'Verification fails silently',
-    body: 'Human-written testbenches miss corner cases. A single missed bug costs $1.2M+ at tape-out.',
+    body: 'Human-written testbenches miss corner cases. A single undetected bug that reaches tape-out costs $1.2M+ to fix \u2014 more than most Indian startups raise in a seed round.',
   },
 ]
 
 export default function ProblemSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-
+  const ref = useRef<HTMLElement>(null)
   useEffect(() => {
-    const els = sectionRef.current?.querySelectorAll('.reveal, .reveal-left')
-    if (!els) return
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          (e.target as HTMLElement).classList.add('visible')
-          observer.unobserve(e.target)
-        }
-      }),
-      { threshold: 0.1 }
-    )
-    els.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+    const els = ref.current?.querySelectorAll('.reveal') ?? []
+    const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible') }), { threshold: 0.1 })
+    els.forEach(el => io.observe(el))
+    return () => io.disconnect()
   }, [])
 
   return (
-    <section ref={sectionRef} id="problem" className="section-pad">
-      <div className="section-container">
-        {/* Section label */}
-        <div
-          className="reveal-left"
-          style={{
-            fontFamily: 'var(--mono)',
-            fontSize: 11,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'var(--teal)',
-            marginBottom: 24,
-          }}
-        >
-          01 — The Problem
+    <section id="problem" ref={ref} style={{ padding: '100px 48px', position: 'relative' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+        <div className="reveal" style={{ marginBottom: 16 }}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--gray)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+            01 \u2014 The Problem
+          </span>
         </div>
-
-        {/* Headline */}
-        <h2
-          className="reveal"
-          style={{
-            fontFamily: 'var(--sans)',
-            fontSize: 'clamp(28px, 4vw, 36px)',
-            fontWeight: 300,
-            color: 'var(--white)',
-            lineHeight: 1.25,
-            letterSpacing: '-0.02em',
-            maxWidth: 600,
-            marginBottom: 56,
-          }}
-        >
-          EDA tools cost $150,000 a year.
-          <br />India has 20% of the world&apos;s chip engineers.
+        <h2 className="reveal" style={{
+          fontFamily: 'var(--sans)', fontWeight: 800,
+          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          lineHeight: 1.1, letterSpacing: '-0.03em',
+          color: 'var(--white)', marginBottom: 64,
+          transitionDelay: '0.1s',
+        }}>
+          India has 20% of the world&apos;s chip designers.<br />
+          <span style={{ color: '#EF4444' }}>They can&apos;t afford the tools.</span>
         </h2>
 
-        {/* Three items */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2px',
-        }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }} className="problem-grid">
           {PROBLEMS.map((p, i) => (
-            <div
-              key={p.num}
-              className="reveal"
-              style={{
-                padding: '32px',
-                border: '1px solid var(--border)',
-                borderRadius: 2,
-                background: 'var(--bg1)',
-                transitionDelay: `${i * 0.12}s`,
-              }}
+            <div key={i} className="reveal" style={{
+              background: '#18181B',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderLeft: '3px solid #EF4444',
+              borderRadius: 10,
+              padding: 28,
+              position: 'relative', overflow: 'hidden',
+              transition: 'border-color 0.25s, box-shadow 0.25s',
+              transitionDelay: `${i * 0.1}s`,
+              cursor: 'default',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(239,68,68,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.16)' }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
             >
-              <div style={{
-                fontFamily: 'var(--mono)',
-                fontSize: 11,
-                color: 'var(--teal)',
-                letterSpacing: '0.08em',
-                marginBottom: 16,
-              }}>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 64, fontWeight: 800, color: 'rgba(255,255,255,0.04)', position: 'absolute', top: -10, right: 16, lineHeight: 1, userSelect: 'none' }}>
                 {p.num}
               </div>
-              <div style={{
-                fontFamily: 'var(--sans)',
-                fontSize: 15,
-                fontWeight: 400,
-                color: 'var(--white)',
-                marginBottom: 10,
-                letterSpacing: '-0.01em',
-              }}>
+              <h3 style={{ fontFamily: 'var(--sans)', fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 12 }}>
                 {p.title}
-              </div>
-              <div style={{
-                fontFamily: 'var(--sans)',
-                fontSize: 14,
-                fontWeight: 300,
-                color: 'var(--gray)',
-                lineHeight: 1.6,
-              }}>
+              </h3>
+              <p style={{ fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--gray)', lineHeight: 1.7 }}>
                 {p.body}
-              </div>
+              </p>
             </div>
           ))}
         </div>
       </div>
-
       <style>{`
         @media (max-width: 768px) {
-          #problem > div > div:last-child {
-            grid-template-columns: 1fr !important;
-          }
+          .problem-grid { grid-template-columns: 1fr !important; }
+          section { padding: 60px 24px !important; }
         }
       `}</style>
     </section>

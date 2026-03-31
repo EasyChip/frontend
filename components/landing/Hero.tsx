@@ -1,307 +1,161 @@
 'use client'
+import { useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 
-import { useEffect, useRef, useState } from 'react'
+const Terminal = dynamic(() => import('./Terminal'), { ssr: false })
 
-const EXAMPLES = [
-  {
-    prompt: '> describe: 8-bit ALU with carry-lookahead',
-    verilog: [
-      'module alu_8bit (',
-      '  input  [7:0] a, b,',
-      '  input  [2:0] op,',
-      '  output [7:0] result,',
-      '  output       carry',
-      ');',
-    ],
-  },
-  {
-    prompt: '> describe: RISC-V pipeline stage with forwarding',
-    verilog: [
-      'module ex_stage (',
-      '  input  [31:0] rs1, rs2,',
-      '  input  [ 4:0] rd,',
-      '  input  [31:0] imm,',
-      '  output [31:0] alu_out',
-      ');',
-    ],
-  },
-  {
-    prompt: '> describe: SPI master with configurable clock divider',
-    verilog: [
-      'module spi_master (',
-      '  input        clk, rst_n,',
-      '  input  [7:0] tx_data,',
-      '  output       sclk, mosi,',
-      '  output       done',
-      ');',
-    ],
-  },
+const STATS = [
+  { value: 'Phase 1 → 2', label: '20-phase roadmap' },
+  { value: '31,000+', label: 'RTL training files' },
+  { value: '17/17', label: 'tests passing', green: true },
 ]
 
-type Phase = 'typing-prompt' | 'pause-after-prompt' | 'typing-verilog' | 'show-pass' | 'pause-end'
-
 export default function Hero() {
-  const [exIdx, setExIdx]             = useState(0)
-  const [promptText, setPromptText]   = useState('')
-  const [verilogLines, setVerilogLines] = useState<string[]>([])
-  const [showPass, setShowPass]       = useState(false)
-  const [phase, setPhase]             = useState<Phase>('typing-prompt')
-
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  useEffect(() => {
-    const ex = EXAMPLES[exIdx]
-    let charIdx = 0
-    let lineIdx = 0
-
-    const clearTimer = () => { if (timerRef.current) clearTimeout(timerRef.current) }
-
-    const typePrompt = () => {
-      if (charIdx < ex.prompt.length) {
-        setPromptText(ex.prompt.slice(0, charIdx + 1))
-        charIdx++
-        timerRef.current = setTimeout(typePrompt, 36)
-      } else {
-        setPhase('pause-after-prompt')
-        timerRef.current = setTimeout(startVerilog, 800)
-      }
-    }
-
-    const startVerilog = () => {
-      setPhase('typing-verilog')
-      typeVerilogLine()
-    }
-
-    const typeVerilogLine = () => {
-      if (lineIdx < ex.verilog.length) {
-        const line = ex.verilog[lineIdx]
-        lineIdx++
-        setVerilogLines(prev => [...prev, line])
-        timerRef.current = setTimeout(typeVerilogLine, 180)
-      } else {
-        setPhase('show-pass')
-        timerRef.current = setTimeout(() => {
-          setShowPass(true)
-          timerRef.current = setTimeout(reset, 2200)
-        }, 300)
-      }
-    }
-
-    const reset = () => {
-      setPromptText('')
-      setVerilogLines([])
-      setShowPass(false)
-      setPhase('typing-prompt')
-      charIdx = 0
-      lineIdx = 0
-      setExIdx(prev => (prev + 1) % EXAMPLES.length)
-    }
-
-    setPhase('typing-prompt')
-    timerRef.current = setTimeout(typePrompt, 400)
-
-    return clearTimer
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exIdx])
-
-  /* Scroll reveal */
   const sectionRef = useRef<HTMLElement>(null)
+
   useEffect(() => {
-    const els = sectionRef.current?.querySelectorAll('.reveal, .reveal-left')
-    if (!els) return
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('visible'); observer.unobserve(e.target) } }),
-      { threshold: 0.15 }
-    )
-    els.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+    const els = sectionRef.current?.querySelectorAll('.reveal') ?? []
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+    }, { threshold: 0.1 })
+    els.forEach(el => io.observe(el))
+    return () => io.disconnect()
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      id="hero"
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        paddingTop: 60,
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <div className="section-container" style={{ width: '100%' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '4rem',
-          alignItems: 'center',
-          padding: '5rem 0',
-        }}>
-          {/* Left: copy */}
-          <div>
-            {/* Label */}
-            <div
-              className="reveal"
-              style={{
-                fontFamily: 'var(--mono)',
-                fontSize: 11,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'var(--teal)',
-                marginBottom: 24,
-                animationDelay: '0.1s',
-              }}
-            >
-              — AI-Native EDA
-            </div>
+    <section ref={sectionRef} style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      padding: '100px 48px 80px',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      {/* Radial glow */}
+      <div style={{
+        position: 'absolute', top: '-10%', left: '30%',
+        width: '60vw', height: '60vw',
+        background: 'radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
 
-            {/* Headline */}
-            <h1
-              className="reveal"
-              style={{
-                fontFamily: 'var(--sans)',
-                fontSize: 'clamp(56px, 8vw, 96px)',
-                fontWeight: 300,
-                letterSpacing: '-0.03em',
-                lineHeight: 1.0,
-                color: 'var(--white)',
-                marginBottom: 28,
-                animationDelay: '0.25s',
-              }}
-            >
-              Natural Language<br />
-              to{' '}
-              <em style={{ color: 'var(--teal)', fontStyle: 'normal' }}>Silicon.</em>
-            </h1>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="hero-grid">
 
-            {/* Subtext */}
-            <p
-              className="reveal"
-              style={{
-                fontFamily: 'var(--sans)',
-                fontSize: 18,
-                fontWeight: 300,
-                color: 'var(--gray)',
-                maxWidth: 460,
-                lineHeight: 1.6,
-                marginBottom: 36,
-                animationDelay: '0.4s',
-              }}
-            >
-              Describe a hardware module in plain English. EasyChip generates
-              verified, synthesisable Verilog — ready for tape-out.
-            </p>
-
-            {/* CTAs */}
-            <div
-              className="reveal"
-              style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 40, animationDelay: '0.55s' }}
-            >
-            <button onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))} className="btn-primary" style={{ fontSize: 12 }}>
-                Register for Early Access →
-              </button>
-              <a
-                href="#how-it-works"
-                style={{
-                  fontFamily: 'var(--mono)',
-                  fontSize: 12,
-                  color: 'var(--gray)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--white)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--gray)')}
-              >
-                See how it works ↓
-              </a>
-            </div>
-
-            {/* Stat pills */}
-            <div
-              className="reveal"
-              style={{ display: 'flex', gap: 8, flexWrap: 'wrap', animationDelay: '0.7s' }}
-            >
-              {['Phase 12 / 20 complete', '31K+ RTL training files', '17/17 tests passing'].map(s => (
-                <span key={s} className="stat-pill">{s}</span>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: terminal */}
-          <div className="hero-terminal reveal" style={{ animationDelay: '0.4s' }}>
-            <div style={{
-              background: '#0a0f18',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              overflow: 'hidden',
-              fontFamily: 'var(--mono)',
-              fontSize: 13,
-              lineHeight: 1.7,
+        {/* Left column */}
+        <div>
+          {/* Overline badge */}
+          <div className="reveal" style={{ marginBottom: 24 }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              border: '1px solid rgba(59,130,246,0.4)',
+              borderRadius: 100, padding: '6px 14px',
+              fontFamily: 'var(--mono)', fontSize: 11,
+              color: '#3B82F6', letterSpacing: '0.08em',
             }}>
-              {/* Terminal chrome */}
-              <div style={{
-                padding: '10px 14px',
-                borderBottom: '1px solid var(--border)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-              }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
-                <span style={{ marginLeft: 8, fontSize: 10, color: 'rgba(240,244,255,0.25)', letterSpacing: '0.06em' }}>
-                  easychip — rtl-gen
-                </span>
-              </div>
-              {/* Terminal body */}
-              <div style={{ padding: '16px 20px', minHeight: 220 }}>
-                {/* Prompt line */}
-                <div style={{ color: 'var(--teal)', marginBottom: 6 }}>
-                  {promptText}
-                  {(phase === 'typing-prompt') && (
-                    <span style={{ animation: 'typing-cursor 1s step-end infinite' }}>▋</span>
-                  )}
-                </div>
-                {/* Verilog lines */}
-                {verilogLines.map((line, i) => (
-                  <div key={i} style={{ color: 'var(--white)', opacity: 0.9 }}>{line}</div>
-                ))}
-                {/* Cursor while typing verilog */}
-                {phase === 'typing-verilog' && (
-                  <span style={{ color: 'var(--white)', animation: 'typing-cursor 1s step-end infinite' }}>▋</span>
-                )}
-                {/* PASS badge */}
-                {showPass && (
-                  <div style={{
-                    marginTop: 12,
-                    color: '#22C55E',
-                    fontFamily: 'var(--mono)',
-                    fontSize: 12,
-                    letterSpacing: '0.04em',
-                  }}>
-                    ✓ PASS · verified · synthesisable
-                  </div>
-                )}
-              </div>
-            </div>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', display: 'inline-block', animation: 'blink 1.5s ease-in-out infinite' }} />
+              AI-Native EDA
+            </span>
           </div>
+
+          {/* Headline */}
+          <h1 className="reveal" style={{
+            fontFamily: 'var(--sans)',
+            fontSize: 'clamp(3rem, 5.5vw, 5.5rem)',
+            fontWeight: 800,
+            lineHeight: 1.05,
+            letterSpacing: '-0.03em',
+            color: 'var(--white)',
+            marginBottom: 24,
+            transitionDelay: '0.1s',
+          }}>
+            Natural Language<br />
+            to <span style={{ color: '#3B82F6', fontStyle: 'italic' }}>Silicon.</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="reveal" style={{
+            fontFamily: 'var(--sans)',
+            fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+            color: 'var(--gray)',
+            lineHeight: 1.7,
+            maxWidth: '52ch',
+            marginBottom: 36,
+            transitionDelay: '0.2s',
+          }}>
+            Describe a hardware module in plain English. EasyChip generates verified, synthesizable Verilog &mdash; ready for tape-out.
+          </p>
+
+          {/* CTA buttons */}
+          <div className="reveal" style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 48, flexWrap: 'wrap', transitionDelay: '0.3s' }}>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
+              style={{
+                fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
+                background: '#3B82F6', color: '#fff',
+                padding: '12px 24px', borderRadius: 8,
+                border: 'none', cursor: 'pointer',
+                transition: 'opacity 0.2s, transform 0.2s',
+                letterSpacing: '0.02em',
+                boxShadow: '0 0 24px rgba(59,130,246,0.3)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
+            >
+              Register for Early Access &rarr;
+            </button>
+            <a href="#how-it-works"
+              style={{
+                fontFamily: 'var(--mono)', fontSize: 13,
+                color: 'var(--gray)', border: '1px solid rgba(255,255,255,0.12)',
+                padding: '12px 24px', borderRadius: 8,
+                textDecoration: 'none', transition: 'border-color 0.2s, color 0.2s',
+                letterSpacing: '0.02em',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.color = '#FAFAFA' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'var(--gray)' }}
+            >
+              See how it works &darr;
+            </a>
+          </div>
+
+          {/* Stats bar */}
+          <div className="reveal" style={{
+            display: 'flex', gap: 32, flexWrap: 'wrap',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            paddingTop: 24,
+            transitionDelay: '0.4s',
+          }}>
+            {STATS.map((s, i) => (
+              <div key={i}>
+                <div style={{
+                  fontFamily: 'var(--mono)', fontSize: 18, fontWeight: 700,
+                  color: s.green ? '#10B981' : 'var(--white)',
+                  letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 6,
+                }}>
+                  {s.green && <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />}
+                  {s.value}
+                </div>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray)', letterSpacing: '0.08em', marginTop: 2 }}>
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right column — Terminal */}
+        <div className="reveal hero-terminal" style={{ transitionDelay: '0.2s' }}>
+          <Terminal />
         </div>
       </div>
 
-      {/* Responsive: hide terminal on mobile */}
       <style>{`
-        @media (max-width: 768px) {
-          #hero > div > div {
-            grid-template-columns: 1fr !important;
-          }
-          .hero-terminal { display: none !important; }
-          #hero h1 {
-            font-size: clamp(40px, 10vw, 56px) !important;
-          }
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr !important; gap: 2rem !important; padding: 0 !important; }
+          section { padding: 100px 24px 60px !important; }
+          .hero-terminal { display: none; }
         }
       `}</style>
     </section>
   )
 }
-

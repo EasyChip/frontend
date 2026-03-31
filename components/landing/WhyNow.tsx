@@ -1,111 +1,84 @@
 'use client'
+import { useEffect, useRef } from 'react'
 
-import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
-
-const tailwinds = [
+const SHIFTS = [
   {
-    id: 'llm',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M11 2C6.03 2 2 6.03 2 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9Z" stroke="currentColor" strokeWidth="1.6"/>
-        <path d="M8 11h6M11 8v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: 'LLMs finally understand hardware',
-    body: 'Code-specialized language models can now generate structurally valid, synthesizable Verilog for most common hardware patterns. This was not possible at sufficient quality before 2023. The capability threshold was just crossed.',
-    tag: 'AI CAPABILITY',
+    num: '01',
+    title: 'Open-source EDA reached production quality.',
+    body: 'Yosys, OpenROAD, and the SKY130 PDK mean the synthesis-to-GDSII pipeline no longer requires a $150K/yr licence. The infrastructure layer is finally free.',
   },
   {
-    id: 'oss',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
-        <rect x="12" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
-        <rect x="3" y="12" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
-        <rect x="12" y="12" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
-      </svg>
-    ),
-    title: 'Open-source EDA reached production quality',
-    body: 'The full RTL-to-GDSII toolchain — simulation, formal verification, synthesis, place & route, physical verification — is now available open-source. We can build the AI layer without acquiring $10M in EDA licenses.',
-    tag: 'EDA MATURITY',
+    num: '02',
+    title: 'LLMs can generate hardware.',
+    body: 'Foundation models now produce compilable, synthesizable Verilog. EasyChip fine-tunes on 31,000+ real RTL files to go from "compiles" to "correct and verified."',
   },
   {
-    id: 'silicon',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M11 2l2.5 5.5H19l-4.5 3.5 2 6L11 13.5 5.5 17l2-6L3 7.5h5.5L11 2Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
-      </svg>
-    ),
-    title: 'Custom silicon demand is exploding',
-    body: 'Every major AI company is building custom chips. The demand for chip design talent exceeds supply by a wide margin. Organizations are willing to pay for automation because the alternative is years of waiting for scarce expertise.',
-    tag: 'MARKET PULL',
+    num: '03',
+    title: 'India Semiconductor Mission is creating buyers.',
+    body: "The government is investing \u20B976,000 crore into semiconductor self-reliance. University labs, C-DAC, ISRO, and DRDO need tools they can actually access. That market didn't exist 3 years ago.",
   },
 ]
 
 export default function WhyNow() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.15 })
-  const prefersReduced = useReducedMotion()
+  const ref = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const els = ref.current?.querySelectorAll('.reveal') ?? []
+    const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible') }), { threshold: 0.1 })
+    els.forEach(el => io.observe(el))
+    return () => io.disconnect()
+  }, [])
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
-      {/* Top divider glow */}
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
-
-      <div className="section-container relative z-10">
-        <div className="text-center mb-14">
-          <p className="text-label text-text-tertiary mb-4">Why Now</p>
-          <h2 className="text-display-2 text-text-primary mb-5">
-            Three forces converging
-            <br />
-            <span className="text-text-secondary">at the same moment.</span>
-          </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            EasyChip is only possible because of what happened in the last two years.
-            The window to build this is open — and it won&apos;t stay open forever.
-          </p>
+    <section id="why-now" ref={ref} style={{ padding: '100px 48px', position: 'relative' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+        <div className="reveal" style={{ marginBottom: 16 }}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--gray)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+            02 \u2014 Why Now
+          </span>
         </div>
+        <h2 className="reveal" style={{
+          fontFamily: 'var(--sans)', fontWeight: 800,
+          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          lineHeight: 1.1, letterSpacing: '-0.03em',
+          color: 'var(--white)', marginBottom: 72,
+          transitionDelay: '0.1s',
+        }}>
+          Three tectonic shifts.<br />
+          <span style={{ color: '#3B82F6' }}>One window of opportunity.</span>
+        </h2>
 
-        <div
-          ref={ref}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
-        >
-          {tailwinds.map((t, i) => (
-            <motion.div
-              key={t.id}
-              className="glass-1 rounded-2xl p-8 border border-white/8 flex flex-col"
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: prefersReduced ? 0 : i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Tag */}
-              <p className="text-label text-text-tertiary mb-4">{t.tag}</p>
-
-              {/* Icon */}
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-                style={{
-                  background: 'rgba(212,168,67,0.07)',
-                  border: '1px solid rgba(212,168,67,0.18)',
-                  color: 'var(--accent-amber)',
-                }}
-              >
-                {t.icon}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {SHIFTS.map((s, i) => (
+            <div key={i} className="reveal" style={{
+              display: 'grid',
+              gridTemplateColumns: '80px 1fr',
+              gap: 32,
+              padding: '36px 0',
+              borderBottom: i < SHIFTS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+              alignItems: 'start',
+              transitionDelay: `${i * 0.12}s`,
+            }}>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 13, color: '#3B82F6', letterSpacing: '0.08em', paddingTop: 4 }}>
+                {s.num}
               </div>
-
-              <h3 className="text-heading text-text-primary mb-3">{t.title}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed flex-1">{t.body}</p>
-
-              {/* Bottom accent line */}
-              <div
-                className="mt-6 h-px w-12 rounded-full"
-                style={{ background: 'rgba(212,168,67,0.4)' }}
-              />
-            </motion.div>
+              <div>
+                <h3 style={{ fontFamily: 'var(--sans)', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', fontWeight: 700, color: 'var(--white)', marginBottom: 12, lineHeight: 1.3 }}>
+                  {s.title}
+                </h3>
+                <p style={{ fontFamily: 'var(--sans)', fontSize: 15, color: 'var(--gray)', lineHeight: 1.75, maxWidth: '72ch' }}>
+                  {s.body}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          section { padding: 60px 24px !important; }
+          div[style*="grid-template-columns: 80px"] { grid-template-columns: 48px 1fr !important; gap: 16px !important; }
+        }
+      `}</style>
     </section>
   )
 }

@@ -1,40 +1,50 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
+import { JetBrains_Mono, Manrope } from 'next/font/google'
 import './globals.css'
 import WaitlistProvider from '@/components/layout/WaitlistProvider'
 import CustomCursor from '@/components/shared/CustomCursor'
 
-const ibmPlexMono = IBM_Plex_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-mono',
   display: 'swap',
 })
 
-const ibmPlexSans = IBM_Plex_Sans({
+const manrope = Manrope({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-sans',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: 'EasyChip — Natural Language to Silicon',
-  description: 'Describe a hardware module in plain English. EasyChip generates verified, synthesisable Verilog — ready for tape-out.',
+  description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog. Open-source stack. No $150K licence required.',
   icons: {
     icon: [{ url: '/logo.png', type: 'image/png' }],
     shortcut: '/logo.png',
     apple: '/logo.png',
   },
+  openGraph: {
+    title: 'EasyChip — Natural Language to Silicon',
+    description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog. Open-source stack. No $150K licence required.',
+    url: 'https://easychip.vercel.app',
+    siteName: 'EasyChip',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'EasyChip — Natural Language to Silicon',
+    description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog.',
+    images: ['/og-image.png'],
+  },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${ibmPlexMono.variable} ${ibmPlexSans.variable}`}>
+    <html lang="en" className={`dark ${jetbrainsMono.variable} ${manrope.variable}`}>
       <body>
         <CustomCursor />
         {children}
