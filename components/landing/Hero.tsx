@@ -1,203 +1,307 @@
 'use client'
 
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
-const SpotCounter = dynamic(() => import('./SpotCounter'), { ssr: false })
-const CountdownTimer = dynamic(() => import('./CountdownTimer'), { ssr: false })
-
-const CODE_PREVIEW = `module counter_4bit (
-    input  wire clk,
-    input  wire rst_n,
-    input  wire en,
-    output reg  [3:0] count,
-    output wire overflow
-);
-    assign overflow = (count == 4'hF) & en;
-
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) count <= 4'h0;
-        else if (en)  count <= count + 1'b1;
-    end
-endmodule`
-
-const STATS = [
-  { value: '10K+', label: 'Designs' },
-  { value: '94%', label: 'First-Pass' },
-  { value: '<30s', label: 'Generation' },
-  { value: '100%', label: 'Verified' },
+const EXAMPLES = [
+  {
+    prompt: '> describe: 8-bit ALU with carry-lookahead',
+    verilog: [
+      'module alu_8bit (',
+      '  input  [7:0] a, b,',
+      '  input  [2:0] op,',
+      '  output [7:0] result,',
+      '  output       carry',
+      ');',
+    ],
+  },
+  {
+    prompt: '> describe: RISC-V pipeline stage with forwarding',
+    verilog: [
+      'module ex_stage (',
+      '  input  [31:0] rs1, rs2,',
+      '  input  [ 4:0] rd,',
+      '  input  [31:0] imm,',
+      '  output [31:0] alu_out',
+      ');',
+    ],
+  },
+  {
+    prompt: '> describe: SPI master with configurable clock divider',
+    verilog: [
+      'module spi_master (',
+      '  input        clk, rst_n,',
+      '  input  [7:0] tx_data,',
+      '  output       sclk, mosi,',
+      '  output       done',
+      ');',
+    ],
+  },
 ]
 
-interface Props {
-  onOpenWaitlist?: () => void
-}
+type Phase = 'typing-prompt' | 'pause-after-prompt' | 'typing-verilog' | 'show-pass' | 'pause-end'
 
-export default function Hero({ onOpenWaitlist }: Props) {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+export default function Hero() {
+  const [exIdx, setExIdx]             = useState(0)
+  const [promptText, setPromptText]   = useState('')
+  const [verilogLines, setVerilogLines] = useState<string[]>([])
+  const [showPass, setShowPass]       = useState(false)
+  const [phase, setPhase]             = useState<Phase>('typing-prompt')
+
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    const ex = EXAMPLES[exIdx]
+    let charIdx = 0
+    let lineIdx = 0
+
+    const clearTimer = () => { if (timerRef.current) clearTimeout(timerRef.current) }
+
+    const typePrompt = () => {
+      if (charIdx < ex.prompt.length) {
+        setPromptText(ex.prompt.slice(0, charIdx + 1))
+        charIdx++
+        timerRef.current = setTimeout(typePrompt, 36)
+      } else {
+        setPhase('pause-after-prompt')
+        timerRef.current = setTimeout(startVerilog, 800)
+      }
+    }
+
+    const startVerilog = () => {
+      setPhase('typing-verilog')
+      typeVerilogLine()
+    }
+
+    const typeVerilogLine = () => {
+      if (lineIdx < ex.verilog.length) {
+        const line = ex.verilog[lineIdx]
+        lineIdx++
+        setVerilogLines(prev => [...prev, line])
+        timerRef.current = setTimeout(typeVerilogLine, 180)
+      } else {
+        setPhase('show-pass')
+        timerRef.current = setTimeout(() => {
+          setShowPass(true)
+          timerRef.current = setTimeout(reset, 2200)
+        }, 300)
+      }
+    }
+
+    const reset = () => {
+      setPromptText('')
+      setVerilogLines([])
+      setShowPass(false)
+      setPhase('typing-prompt')
+      charIdx = 0
+      lineIdx = 0
+      setExIdx(prev => (prev + 1) % EXAMPLES.length)
+    }
+
+    setPhase('typing-prompt')
+    timerRef.current = setTimeout(typePrompt, 400)
+
+    return clearTimer
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exIdx])
+
+  /* Scroll reveal */
+  const sectionRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const els = sectionRef.current?.querySelectorAll('.reveal, .reveal-left')
+    if (!els) return
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('visible'); observer.unobserve(e.target) } }),
+      { threshold: 0.15 }
+    )
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden px-4 pt-20 pb-8">
-      {/* Subtle dot grid */}
-      <div className="absolute inset-0 dot-grid pointer-events-none" style={{ opacity: 0.4 }} />
-
-      {/* Very subtle amber glow top */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at top, rgba(212,168,67,0.06) 0%, transparent 70%)',
-        }}
-      />
-
-      {/* Gradient fade at bottom */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-base))' }}
-      />
-
-      <div className="relative z-10 section-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-          {/* Left: Content */}
+    <section
+      ref={sectionRef}
+      id="hero"
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: 60,
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div className="section-container" style={{ width: '100%' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '4rem',
+          alignItems: 'center',
+          padding: '5rem 0',
+        }}>
+          {/* Left: copy */}
           <div>
-            {/* Amber label badge */}
-            <div className="flex items-center gap-2 mb-8">
-              <div className="inline-flex items-center gap-2 glass-1 px-3 py-1.5 rounded-full border border-white/8">
-                <span
-                  className="w-1.5 h-1.5 rounded-full animate-pulse"
-                  style={{ backgroundColor: 'var(--accent-amber)' }}
-                />
-                <span className="text-label" style={{ color: 'var(--accent-amber)' }}>Now in closed beta</span>
-                <span className="text-text-tertiary">·</span>
-                <span className="text-label text-text-tertiary">April 28 launch</span>
-              </div>
+            {/* Label */}
+            <div
+              className="reveal"
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: 11,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--teal)',
+                marginBottom: 24,
+                animationDelay: '0.1s',
+              }}
+            >
+              — AI-Native EDA
             </div>
 
-            {/* H1 */}
-            <h1 className="text-display-1 mb-6">
-              <span className="block text-text-primary">Prompt In.</span>
-              <span className="block text-text-primary">Silicon Out.</span>
+            {/* Headline */}
+            <h1
+              className="reveal"
+              style={{
+                fontFamily: 'var(--sans)',
+                fontSize: 'clamp(56px, 8vw, 96px)',
+                fontWeight: 300,
+                letterSpacing: '-0.03em',
+                lineHeight: 1.0,
+                color: 'var(--white)',
+                marginBottom: 28,
+                animationDelay: '0.25s',
+              }}
+            >
+              Natural Language<br />
+              to{' '}
+              <em style={{ color: 'var(--teal)', fontStyle: 'normal' }}>Silicon.</em>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-lg text-text-secondary leading-relaxed mb-2 max-w-xl">
-              EasyChip converts hardware prompts into production-ready, formally verified Verilog/SystemVerilog RTL — automatically.
-            </p>
-            <p className="text-sm text-text-tertiary mb-10">
-              No manual Verilog. No testbenches. No respin.
+            {/* Subtext */}
+            <p
+              className="reveal"
+              style={{
+                fontFamily: 'var(--sans)',
+                fontSize: 18,
+                fontWeight: 300,
+                color: 'var(--gray)',
+                maxWidth: 460,
+                lineHeight: 1.6,
+                marginBottom: 36,
+                animationDelay: '0.4s',
+              }}
+            >
+              Describe a hardware module in plain English. EasyChip generates
+              verified, synthesisable Verilog — ready for tape-out.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              <button onClick={onOpenWaitlist} className="btn-primary">
-                Join Waitlist →
-              </button>
-              <Link href="/playground" className="btn-ghost">
-                Try Playground →
-              </Link>
+            <div
+              className="reveal"
+              style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 40, animationDelay: '0.55s' }}
+            >
+              <a href="#cta" className="btn-primary" style={{ fontSize: 12 }}>
+                Request Access →
+              </a>
+              <a
+                href="#how-it-works"
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 12,
+                  color: 'var(--gray)',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--white)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--gray)')}
+              >
+                See how it works ↓
+              </a>
             </div>
 
-            {/* Stats row */}
-            <div className="flex flex-wrap items-start gap-6 mb-6">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="flex flex-col">
-                  <div
-                    className="text-2xl font-extrabold font-mono leading-none mb-0.5 whitespace-nowrap"
-                    style={{ color: 'var(--accent-amber)' }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-text-tertiary">{stat.label}</div>
-                </div>
+            {/* Stat pills */}
+            <div
+              className="reveal"
+              style={{ display: 'flex', gap: 8, flexWrap: 'wrap', animationDelay: '0.7s' }}
+            >
+              {['Phase 12 / 20 complete', '31K+ RTL training files', '17/17 tests passing'].map(s => (
+                <span key={s} className="stat-pill">{s}</span>
               ))}
             </div>
-
-            {/* Countdown */}
-            <div className="mb-3">
-              <CountdownTimer />
-            </div>
-
-            {/* Spot Counter */}
-            <SpotCounter />
           </div>
 
-          {/* Right: Code window */}
-          {mounted ? (
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.2 }}
-            >
-              <CodeWindow />
-            </motion.div>
-          ) : (
-            <div>
-              <CodeWindow />
+          {/* Right: terminal */}
+          <div className="hero-terminal reveal" style={{ animationDelay: '0.4s' }}>
+            <div style={{
+              background: '#0a0f18',
+              border: '1px solid var(--border)',
+              borderRadius: 4,
+              overflow: 'hidden',
+              fontFamily: 'var(--mono)',
+              fontSize: 13,
+              lineHeight: 1.7,
+            }}>
+              {/* Terminal chrome */}
+              <div style={{
+                padding: '10px 14px',
+                borderBottom: '1px solid var(--border)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+              }}>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', display: 'inline-block' }} />
+                <span style={{ marginLeft: 8, fontSize: 10, color: 'rgba(240,244,255,0.25)', letterSpacing: '0.06em' }}>
+                  easychip — rtl-gen
+                </span>
+              </div>
+              {/* Terminal body */}
+              <div style={{ padding: '16px 20px', minHeight: 220 }}>
+                {/* Prompt line */}
+                <div style={{ color: 'var(--teal)', marginBottom: 6 }}>
+                  {promptText}
+                  {(phase === 'typing-prompt') && (
+                    <span style={{ animation: 'typing-cursor 1s step-end infinite' }}>▋</span>
+                  )}
+                </div>
+                {/* Verilog lines */}
+                {verilogLines.map((line, i) => (
+                  <div key={i} style={{ color: 'var(--white)', opacity: 0.9 }}>{line}</div>
+                ))}
+                {/* Cursor while typing verilog */}
+                {phase === 'typing-verilog' && (
+                  <span style={{ color: 'var(--white)', animation: 'typing-cursor 1s step-end infinite' }}>▋</span>
+                )}
+                {/* PASS badge */}
+                {showPass && (
+                  <div style={{
+                    marginTop: 12,
+                    color: '#22C55E',
+                    fontFamily: 'var(--mono)',
+                    fontSize: 12,
+                    letterSpacing: '0.04em',
+                  }}>
+                    ✓ PASS · verified · synthesisable
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
+
+      {/* Responsive: hide terminal on mobile */}
+      <style>{`
+        @media (max-width: 768px) {
+          #hero > div > div {
+            grid-template-columns: 1fr !important;
+          }
+          .hero-terminal { display: none !important; }
+          #hero h1 {
+            font-size: clamp(40px, 10vw, 56px) !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
-
-function CodeWindow() {
-  return (
-    <div className="relative rounded-2xl overflow-hidden glass-1 border border-white/8 shadow-2xl shadow-black/60">
-      {/* Title bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
-        <span className="w-3 h-3 rounded-full bg-red-500/60" />
-        <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-        <span className="w-3 h-3 rounded-full bg-green-500/60" />
-        <span className="ml-3 text-xs text-text-tertiary font-mono">easychip — rtl generation</span>
-      </div>
-
-      {/* Tab bar */}
-      <div className="flex items-center gap-0 border-b border-white/5 px-2">
-        <div
-          className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-text-primary border-b-2"
-          style={{ borderBottomColor: 'var(--accent-amber)' }}
-        >
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <rect x="1" y="1" width="8" height="8" rx="1" fill="rgba(212,168,67,0.3)" stroke="rgba(212,168,67,0.6)" strokeWidth="0.5"/>
-          </svg>
-          rtl
-        </div>
-        <div className="px-4 py-2 text-xs text-text-tertiary">testbench</div>
-        <div className="px-4 py-2 text-xs text-text-tertiary">logs</div>
-      </div>
-
-      {/* Code with line numbers */}
-      <div className="flex overflow-x-auto" style={{ background: 'rgba(4,8,16,0.8)' }}>
-        {/* Line numbers */}
-        <div
-          className="select-none py-5 pl-4 pr-3 text-xs font-mono leading-relaxed text-right flex-shrink-0 border-r border-white/5"
-          style={{ color: 'rgba(240,237,232,0.18)' }}
-        >
-          {CODE_PREVIEW.split('\n').map((_, i) => (
-            <div key={i}>{i + 1}</div>
-          ))}
-        </div>
-        {/* Code */}
-        <pre className="p-5 text-xs font-mono text-green-400 leading-relaxed flex-1 min-w-0">
-          <code>{CODE_PREVIEW}</code>
-          <span className="cursor-blink" style={{ color: 'var(--accent-amber)' }}>█</span>
-        </pre>
-      </div>
-
-      {/* PASS badge footer */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-t border-white/5">
-        <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-400">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <circle cx="6" cy="6" r="5.5" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.6)" strokeWidth="1"/>
-            <path d="M3.5 6l1.8 1.8 3.2-3.6" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          PASS · 1 attempt · formal verified
-        </span>
-        <span className="text-xs text-text-tertiary font-mono">14 lines</span>
-      </div>
-    </div>
-  )
-}
+

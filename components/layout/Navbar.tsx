@@ -3,116 +3,85 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-function openWaitlist() {
-  window.dispatchEvent(new CustomEvent('ec:openWaitlist'))
-}
-
-interface Props {
-  onOpenWaitlist?: () => void
-}
-
-export default function Navbar({ onOpenWaitlist }: Props) {
-  const [mobileOpen, setMobileOpen] = useState(false)
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const handleWaitlist = onOpenWaitlist ?? openWaitlist
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
-      {/* Floating pill — centered */}
-      <nav
-        className={`flex items-center gap-4 px-4 py-2.5 rounded-full transition-all duration-300 border border-white/8 ${
-          scrolled ? 'glass-1 shadow-xl shadow-black/30' : 'glass-0'
-        }`}
-      >
-        {/* Brand */}
-        <Link href="/" className="flex items-center gap-2 text-text-primary font-bold text-sm tracking-tight flex-shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icon.svg" alt="EasyChip" width={20} height={20} style={{ imageRendering: 'crisp-edges' }} />
-          EasyChip
+    <nav
+      style={{
+        position: 'fixed',
+        top: 0, left: 0, right: 0,
+        zIndex: 100,
+        height: 60,
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        background: 'rgba(8,12,18,0.85)',
+        borderBottom: `1px solid rgba(255,255,255,${scrolled ? 0.15 : 0.07})`,
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 48px',
+        transition: 'border-color 0.3s ease',
+      }}
+    >
+      {/* Logo */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1 }}>
+        <Link
+          href="/"
+          style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            textDecoration: 'none',
+          }}
+        >
+          <span style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 14,
+            fontWeight: 500,
+            color: 'var(--white)',
+            letterSpacing: '0.02em',
+          }}>
+            EasyChip
+          </span>
+          <span style={{
+            width: 6, height: 6,
+            borderRadius: '50%',
+            background: 'var(--teal)',
+            display: 'inline-block',
+            animation: 'teal-pulse 2s ease-in-out infinite',
+            flexShrink: 0,
+          }} />
         </Link>
+      </div>
 
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-5 flex-1 justify-center">
-          <Link href="/#how-it-works" className="text-label text-text-secondary hover:text-text-primary transition-colors">
-            How it works
-          </Link>
-          <Link href="/#features" className="text-label text-text-secondary hover:text-text-primary transition-colors">
-            Features
-          </Link>
-          <a href="#" className="text-label text-text-secondary hover:text-text-primary transition-colors">
-            Docs
-          </a>
-        </div>
+      {/* Right: desktop */}
+      <div className="nav-right-desktop" style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+        <a href="mailto:f20220056@goa.bits-pilani.ac.in" className="nav-contact">
+          Contact
+        </a>
+        <a href="#cta" className="nav-cta">
+          Request Access →
+        </a>
+      </div>
 
-        {/* CTA + hamburger */}
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <button
-            onClick={handleWaitlist}
-            className="hidden md:inline-flex items-center justify-center font-mono font-semibold uppercase tracking-[0.12em] rounded-full cursor-pointer transition-opacity hover:opacity-85"
-            style={{
-              fontSize: '0.65rem',
-              padding: '0.5rem 1rem',
-              background: 'var(--text-primary)',
-              color: 'var(--bg-void)',
-            }}
-          >
-            Early Access
-          </button>
+      {/* Right: mobile — CTA only */}
+      <div className="nav-right-mobile" style={{ display: 'none' }}>
+        <a href="#cta" className="nav-cta">
+          Request Access →
+        </a>
+      </div>
 
-          <button
-            className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-0.5"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 3l12 12M15 3L3 15"/>
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M2 5h14M2 9h14M2 13h14"/>
-              </svg>
-            )}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile dropdown */}
-      {mobileOpen && (
-        <div className="md:hidden absolute top-14 left-0 w-64 glass-1 rounded-2xl border border-white/8 px-4 py-4 space-y-1 animate-slide-down shadow-xl shadow-black/40">
-          <Link
-            href="/#how-it-works"
-            onClick={() => setMobileOpen(false)}
-            className="block text-text-secondary hover:text-text-primary text-sm py-2.5 transition-colors border-b border-white/5"
-          >
-            How it works
-          </Link>
-          <Link
-            href="/#features"
-            onClick={() => setMobileOpen(false)}
-            className="block text-text-secondary hover:text-text-primary text-sm py-2.5 transition-colors border-b border-white/5"
-          >
-            Features
-          </Link>
-          <a href="#" className="block text-text-secondary hover:text-text-primary text-sm py-2.5 transition-colors border-b border-white/5">
-            Docs
-          </a>
-          <div className="pt-2">
-            <button
-              onClick={() => { setMobileOpen(false); handleWaitlist() }}
-              className="btn-primary w-full"
-            >
-              Get early access
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .nav-right-desktop { display: none !important; }
+          .nav-right-mobile  { display: flex !important; }
+          nav { padding: 0 24px !important; }
+        }
+      `}</style>
+    </nav>
   )
 }

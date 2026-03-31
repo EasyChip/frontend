@@ -1,99 +1,162 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
-const steps = [
+const STEPS = [
   {
-    number: '01',
+    num: '01',
     title: 'Describe',
-    description: 'Type your hardware specification as a prompt — no HDL knowledge required.',
-    example: '"Design a 4-bit synchronous up-counter with active-low reset and clock enable."',
-    tag: 'Prompt',
+    body: 'Type a hardware specification in plain English. No HDL knowledge needed.',
   },
   {
-    number: '02',
+    num: '02',
     title: 'Generate',
-    description: "EasyChip's multi-agent pipeline architects, generates, and refines synthesizable Verilog RTL and a self-checking testbench.",
-    example: '✓ RTL + testbench generated in < 30 seconds.',
-    tag: 'AI Pipeline',
+    body: 'EasyChip produces synthesisable Verilog with a self-checking testbench in under 30 seconds.',
   },
   {
-    number: '03',
-    title: 'Verify',
-    description: 'Simulation, formal BMC verification, and synthesis checks run automatically. Bugs are fixed in an agentic loop.',
-    example: '✓ PASS — 1 attempt · formal verified · ready to synthesize.',
-    tag: 'Auto-Verified',
+    num: '03',
+    title: 'Verify + Synthesise',
+    body: 'Simulation, formal verification, and Yosys synthesis run automatically. Output is tape-out ready.',
   },
 ]
 
 export default function HowItWorks() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const prefersReduced = useReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const els = sectionRef.current?.querySelectorAll('.reveal, .reveal-left')
+    if (!els) return
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          (e.target as HTMLElement).classList.add('visible')
+          observer.unobserve(e.target)
+        }
+      }),
+      { threshold: 0.1 }
+    )
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section id="how-it-works" className="py-14 px-4">
+    <section ref={sectionRef} id="how-it-works" className="section-pad">
       <div className="section-container">
-        <div className="text-center mb-12">
-          <p className="text-label text-text-tertiary mb-4">How It Works</p>
-          <h2 className="text-display-2 text-text-primary mb-4">
-            From description to silicon
-            <br />
-            <span className="text-text-secondary">in three steps</span>
-          </h2>
-          <p className="text-lg text-text-secondary max-w-xl mx-auto">
-            No Verilog expertise required. EasyChip handles the full design pipeline from your prompt to verified RTL.
-          </p>
+        {/* Section label */}
+        <div
+          className="reveal-left"
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 11,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'var(--teal)',
+            marginBottom: 24,
+          }}
+        >
+          02 — How it works
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-3 relative">
-          {/* Connector line (desktop) */}
-          <div className="hidden md:block absolute top-10 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px overflow-hidden">
-            <motion.div
-              className="h-full rounded-full origin-left"
-              style={{ background: 'rgba(255,255,255,0.12)' }}
-              initial={{ scaleX: 0 }}
-              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: prefersReduced ? 0 : 1.2, delay: prefersReduced ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number]}}
-            />
-          </div>
+        {/* Headline */}
+        <h2
+          className="reveal"
+          style={{
+            fontFamily: 'var(--sans)',
+            fontSize: 'clamp(28px, 4vw, 36px)',
+            fontWeight: 300,
+            color: 'var(--white)',
+            lineHeight: 1.25,
+            letterSpacing: '-0.02em',
+            marginBottom: 64,
+          }}
+        >
+          Three steps. No EDA licence required.
+        </h2>
 
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              className="glass-1 p-7 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
-              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 32, filter: 'blur(8px)' }}
-              animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-              transition={{ duration: 0.7, delay: prefersReduced ? 0 : 0.2 + i * 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number]}}
+        {/* Steps with connecting line */}
+        <div style={{ position: 'relative', maxWidth: 560 }}>
+          {/* Vertical connecting line */}
+          <div
+            className="reveal"
+            style={{
+              position: 'absolute',
+              left: 19,
+              top: 32,
+              bottom: 32,
+              width: 1,
+              background: 'linear-gradient(to bottom, var(--teal), rgba(0,229,195,0.1))',
+              transformOrigin: 'top',
+              animation: 'connect-grow 1.2s ease forwards',
+              animationDelay: '0.4s',
+              opacity: 0,
+            }}
+          />
+
+          {STEPS.map((step, i) => (
+            <div
+              key={step.num}
+              className="reveal"
+              style={{
+                display: 'flex',
+                gap: 28,
+                marginBottom: i < STEPS.length - 1 ? 40 : 0,
+                transitionDelay: `${i * 0.15}s`,
+              }}
             >
-              {/* Step number + tag */}
-              <div className="flex items-start justify-between mb-5">
-                <span className="text-6xl font-black font-mono leading-none text-text-primary" style={{ opacity: 0.06 }}>
-                  {step.number}
-                </span>
-                <span
-                  className="text-label px-2.5 py-1 rounded-full border mt-1"
-                  style={{
-                    color: 'var(--accent-amber)',
-                    background: 'rgba(212,168,67,0.08)',
-                    borderColor: 'rgba(212,168,67,0.2)',
-                  }}
-                >
-                  {step.tag}
-                </span>
+              {/* Number circle */}
+              <div style={{ flexShrink: 0 }}>
+                <div style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 2,
+                  border: '1px solid var(--teal)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: 'var(--mono)',
+                  fontSize: 11,
+                  color: 'var(--teal)',
+                  background: 'rgba(0,229,195,0.04)',
+                  position: 'relative',
+                  zIndex: 1,
+                }}>
+                  {step.num}
+                </div>
               </div>
 
-              <h3 className="text-xl font-bold text-text-primary mb-3">{step.title}</h3>
-              <p className="text-text-secondary leading-relaxed mb-5 text-sm">{step.description}</p>
-
-              <div className="bg-bg-void/60 border border-white/5 rounded-lg px-4 py-3">
-                <p className="text-xs font-mono text-emerald-400 leading-relaxed italic">{step.example}</p>
+              {/* Content */}
+              <div style={{ paddingTop: 6 }}>
+                <div style={{
+                  fontFamily: 'var(--sans)',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  color: 'var(--white)',
+                  marginBottom: 6,
+                  letterSpacing: '-0.01em',
+                }}>
+                  {step.title}
+                </div>
+                <div style={{
+                  fontFamily: 'var(--sans)',
+                  fontSize: 14,
+                  fontWeight: 300,
+                  color: 'var(--gray)',
+                  lineHeight: 1.6,
+                }}>
+                  {step.body}
+                </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes connect-grow {
+          from { transform: scaleY(0); opacity: 0; }
+          to   { transform: scaleY(1); opacity: 1; }
+        }
+      `}</style>
     </section>
   )
 }
