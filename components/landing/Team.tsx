@@ -7,7 +7,7 @@ const FOUNDERS = [
     name: 'Rakshit Mishra',
     role: 'Co-founder & CEO',
     bio: 'Final-year student at BITS Pilani Goa. Background spanning embedded systems, edge AI, industrial automation, and chip design. Focused on go-to-market, fundraising, and product strategy.',
-    linkedin: 'https://linkedin.com/in/rakshitmishra',
+    linkedin: 'https://www.linkedin.com/in/rakshitmishra9695/',
     color: '#C8962E',
   },
   {
@@ -15,7 +15,7 @@ const FOUNDERS = [
     name: 'Parth Parekh',
     role: 'Co-founder & CTO',
     bio: "BITS Pilani. Leading EasyChip's core AI and RTL generation engine. Focused on model architecture, training infrastructure, and verification pipeline.",
-    linkedin: 'https://linkedin.com/in/parthparekh',
+    linkedin: 'https://www.linkedin.com/in/parth-parekh-131820357/',
     color: '#C8962E',
   },
 ]
