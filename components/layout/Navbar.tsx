@@ -17,7 +17,7 @@ export default function Navbar() {
     { label: 'How it works', href: '#how-it-works' },
     { label: 'Roadmap', href: '#roadmap' },
     { label: 'Team', href: '#team' },
-    { label: 'Contact', href: 'mailto:f20220056@goa.bits-pilani.ac.in' },
+    { label: 'Contact', href: '#contact' },
   ]
 
   return (
