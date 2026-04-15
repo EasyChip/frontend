@@ -1,27 +1,29 @@
 'use client'
 
-import Hero from '@/components/landing/Hero'
-import ProblemSection from '@/components/landing/ProblemSection'
-import WhyNow from '@/components/landing/WhyNow'
-import HowItWorks from '@/components/landing/HowItWorks'
-import StackSection from '@/components/landing/StackSection'
-import Contact from '@/components/landing/Contact'
-import CTASection from '@/components/landing/CTASection'
-import ModelComingSoon from '@/components/landing/ModelComingSoon'
+import NewHero from '@/components/landing/NewHero'
+import Premise from '@/components/landing/Premise'
+import TwoPaths from '@/components/landing/TwoPaths'
+import BuildToday from '@/components/landing/BuildToday'
+import ImagineTomorrow from '@/components/landing/ImagineTomorrow'
+import WhyMatters from '@/components/landing/WhyMatters'
+import Founders from '@/components/landing/Founders'
+import Horizon from '@/components/landing/Horizon'
+import FinalCTA from '@/components/landing/FinalCTA'
 import Footer from '@/components/layout/Footer'
 
 export default function HomePage() {
   return (
     <>
       <main>
-        <Hero />
-        <ProblemSection />
-        <WhyNow />
-        <HowItWorks />
-        <StackSection />
-        <Contact />
-        <CTASection />
-        <ModelComingSoon />
+        <NewHero />
+        <Premise />
+        <TwoPaths />
+        <BuildToday />
+        <ImagineTomorrow />
+        <WhyMatters />
+        <Founders />
+        <Horizon />
+        <FinalCTA />
       </main>
       <Footer />
     </>

@@ -24,6 +24,7 @@
 
   --font-mono: var(--font-mono, 'IBM Plex Mono', monospace);
   --font-sans: var(--font-sans, 'IBM Plex Sans', sans-serif);
+  --display: var(--font-display, var(--font-sans, 'Inter', 'IBM Plex Sans', sans-serif));
   --mono: var(--font-mono, 'IBM Plex Mono', monospace);
   --sans: var(--font-sans, 'IBM Plex Sans', sans-serif);
 
@@ -440,3 +441,15 @@ main, header, nav, footer { position: relative; z-index: 1; }
   letter-spacing: 0.02em;
 }
 .nav-link:hover { color: var(--white); }
+
+/* ─── Silicon Trace Animations ───────────────────────────────── */
+
+@keyframes trace-flow {
+  0%   { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes trace-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.8; }
+}

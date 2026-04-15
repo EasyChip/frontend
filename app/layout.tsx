@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
+import { IBM_Plex_Mono, IBM_Plex_Sans, Inter } from 'next/font/google'
 import './globals.css'
 import WaitlistProvider from '@/components/layout/WaitlistProvider'
 import CustomCursor from '@/components/shared/CustomCursor'
 import Navbar from '@/components/layout/Navbar'
+import SmoothScroll from '@/components/landing/SmoothScroll'
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
@@ -16,6 +17,13 @@ const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['200', '400', '600'],
+  variable: '--font-display',
   display: 'swap',
 })
 
@@ -46,11 +54,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${ibmPlexMono.variable} ${ibmPlexSans.variable}`}>
+    <html lang="en" className={`dark ${ibmPlexMono.variable} ${ibmPlexSans.variable} ${inter.variable}`}>
       <body>
         <CustomCursor />
         <Navbar />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
         <WaitlistProvider />
       </body>
     </html>
