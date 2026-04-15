@@ -26,7 +26,7 @@ export default function NotFound() {
         }}>Go Home →</Link>
         <Link href="/tools" style={{
           fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 500,
-          background: 'transparent', color: '#888888', padding: '12px 24px',
+          background: '#0A0A0A', color: '#888888', padding: '12px 24px',
           borderRadius: 2, border: '1px solid #1C1C1C', textDecoration: 'none',
           letterSpacing: '0.08em',
         }}>Browse Tools</Link>

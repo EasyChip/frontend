@@ -159,7 +159,7 @@ function VisUPFContent() {
               <a href="https://github.com/EasyChip" target="_blank" rel="noopener noreferrer"
                 style={{
                   fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 500,
-                  background: 'transparent', color: '#888888', padding: '14px 28px',
+                  background: '#0A0A0A', color: '#888888', padding: '14px 28px',
                   borderRadius: 2, border: '1px solid #1C1C1C', cursor: 'pointer',
                   letterSpacing: '0.08em', textDecoration: 'none',
                   transition: 'border-color 0.2s',

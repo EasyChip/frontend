@@ -270,7 +270,7 @@ function LoginContent() {
                 <button
                   onClick={() => setMode('email-link')}
                   style={{
-                    width: '100%', padding: '11px 0', background: 'transparent',
+                    width: '100%', padding: '11px 0', background: '#0A0A0A',
                     border: '1px solid #1C1C1C', borderRadius: 8, color: '#FAFAFA',
                     fontSize: 14, fontFamily: 'var(--font-sans)', cursor: 'pointer',
                     transition: 'border-color 0.2s',

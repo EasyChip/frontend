@@ -5,6 +5,7 @@ import WaitlistProvider from '@/components/layout/WaitlistProvider'
 import CustomCursor from '@/components/shared/CustomCursor'
 import Navbar from '@/components/layout/Navbar'
 import SmoothScroll from '@/components/landing/SmoothScroll'
+import { ChipGridBackground } from '@/components/ui/chip-grid-background'
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`dark ${ibmPlexMono.variable} ${ibmPlexSans.variable} ${inter.variable}`}>
       <body>
+        <ChipGridBackground />
         <CustomCursor />
         <Navbar />
         <SmoothScroll>

@@ -225,7 +225,7 @@ export default function OnboardingPage() {
                 {loading ? 'Saving...' : 'Continue →'}
               </button>
               <button type="button" onClick={handleSkip} style={{
-                padding: '12px 24px', background: 'transparent',
+                padding: '12px 24px', background: '#0A0A0A',
                 border: '1px solid #1C1C1C', borderRadius: 8, color: '#555555',
                 fontSize: 13, fontFamily: 'var(--font-sans)', cursor: 'pointer',
                 transition: 'border-color 0.2s, color 0.2s',

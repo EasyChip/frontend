@@ -83,17 +83,46 @@ export const content = {
     label: 'Where This Is Going',
     description: 'Describe what you need. Get verified silicon.',
     prompt: 'Design a 4-bit ALU with carry lookahead, registered outputs, and async reset.',
-    outputLines: [
-      'module alu_4bit (',
-      '  input  wire [3:0] a, b,',
-      '  input  wire [2:0] op,',
-      '  input  wire       clk, rst_n,',
-      '  output reg  [3:0] result,',
-      '  output reg        carry_out,',
-      '  output reg        zero_flag',
-      ');',
+    stages: [
+      {
+        label: 'Understanding intent',
+        lines: [
+          'Parsing natural-language specification…',
+          'Identified: 4-bit ALU · carry lookahead · registered outputs · async reset',
+          'Mapping to micro-architecture template → alu_cla_registered',
+        ],
+      },
+      {
+        label: 'Generating RTL',
+        lines: [
+          'module alu_4bit (',
+          '  input  wire [3:0] a, b,',
+          '  input  wire [2:0] op,',
+          '  input  wire       clk, rst_n,',
+          '  output reg  [3:0] result,',
+          '  output reg        carry_out,',
+          '  output reg        zero_flag',
+          ');',
+        ],
+      },
+      {
+        label: 'Running verification',
+        lines: [
+          'Generating testbench → tb_alu_4bit.sv',
+          'Running formal checks… 17 / 17 properties',
+          'Coverage: statement 98.2% · branch 94.7% · toggle 91.3%',
+        ],
+      },
+      {
+        label: 'Synthesis complete',
+        lines: [
+          'Synthesising → Yosys (target: sky130)',
+          'Area: 412 cells · Max freq: 285 MHz',
+          'Output: alu_4bit.v · tb_alu_4bit.sv · alu_4bit_synth.json · alu_4bit.sdc',
+        ],
+      },
     ],
-    statusLine: 'All 17 properties verified. 0 violations.',
+    statusLine: 'All 17 properties verified. 4 files generated. 0 violations.',
     note: 'Early access — 2026.',
   },
 
@@ -119,8 +148,8 @@ export const content = {
   founders: {
     marker: '06',
     label: 'The Team',
-    headline: 'Built by the people who\'ll use it.',
-    subtitle: 'We\'re chip designers. We got tired of the status quo. So we\'re building what we wish existed.',
+    headline: 'Built by people who understand the problem.',
+    subtitle: 'We\'re VLSI and electronic engineers. We got tired of the status quo. So we\'re building what we wish existed.',
     people: [
       {
         initials: 'RM',

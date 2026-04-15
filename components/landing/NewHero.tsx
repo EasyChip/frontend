@@ -58,7 +58,7 @@ export default function NewHero() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        background: 'var(--bg)',
+        background: 'transparent',
         paddingTop: 80,
       }}
     >
