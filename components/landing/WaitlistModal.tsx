@@ -4,21 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer-motion'
 
 const FORMSPREE_ID = 'mlgpjjbl'
-const SEED_COUNT = 312
-
-function getStoredCount(): number {
-  if (typeof window === 'undefined') return SEED_COUNT
-  const v = localStorage.getItem('ec_submissions')
-  return SEED_COUNT + (v ? parseInt(v, 10) : 0)
-}
-
-function incrementStoredCount(): number {
-  if (typeof window === 'undefined') return SEED_COUNT + 1
-  const v = localStorage.getItem('ec_submissions')
-  const next = (v ? parseInt(v, 10) : 0) + 1
-  localStorage.setItem('ec_submissions', String(next))
-  return SEED_COUNT + next
-}
 
 interface Props {
   open: boolean
@@ -28,14 +13,8 @@ interface Props {
 export default function WaitlistModal({ open, onClose }: Props) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [spotNumber, setSpotNumber] = useState(SEED_COUNT)
-  const [count, setCount] = useState(SEED_COUNT)
   const inputRef = useRef<HTMLInputElement>(null)
   const prefersReduced = useReducedMotion()
-
-  useEffect(() => {
-    setCount(getStoredCount())
-  }, [open])
 
   useEffect(() => {
     if (open) {
@@ -65,8 +44,6 @@ export default function WaitlistModal({ open, onClose }: Props) {
         body: JSON.stringify({ email }),
       })
       if (res.ok) {
-        const n = incrementStoredCount()
-        setSpotNumber(n)
         setStatus('success')
       } else {
         setStatus('error')
@@ -75,9 +52,6 @@ export default function WaitlistModal({ open, onClose }: Props) {
       setStatus('error')
     }
   }
-
-  const filled = Math.min(count, 1000)
-  const pct = (filled / 1000) * 100
 
   const backdropVariant: Variants = prefersReduced
     ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
@@ -158,9 +132,6 @@ export default function WaitlistModal({ open, onClose }: Props) {
                       </svg>
                     </div>
                     <h3 className="text-2xl font-bold text-text-primary mb-2">You&apos;re on the list!</h3>
-                    <p className="text-text-secondary text-sm mb-1">
-                      You&apos;re <span className="font-bold" style={{ color: 'var(--accent-amber)' }}>#{spotNumber}</span> on the waitlist.
-                    </p>
                     <p className="text-text-tertiary text-xs">We&apos;ll email you when early access opens.</p>
                     <button
                       onClick={onClose}
@@ -196,28 +167,6 @@ export default function WaitlistModal({ open, onClose }: Props) {
                     <p className="text-text-secondary text-sm mb-6 leading-relaxed">
                       Be among the first engineers to generate formally verified RTL with EasyChip. We&apos;re onboarding in batches.
                     </p>
-
-                    {/* Spot counter + progress bar */}
-                    <div className="mb-6">
-                      <div className="flex items-center justify-between text-xs mb-2">
-                        <span className="text-text-secondary">
-                          <span className="text-text-primary font-semibold">{count.toLocaleString()}</span> engineers on the waitlist
-                        </span>
-                        <span className="text-text-tertiary">{filled} / 1,000 spots</span>
-                      </div>
-                      <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-700"
-                          style={{
-                            width: `${pct}%`,
-                            background: 'linear-gradient(90deg, var(--accent-amber), rgba(212,168,67,0.6))',
-                          }}
-                        />
-                      </div>
-                      <p className="text-xs mt-1.5 text-text-tertiary">
-                        {1000 - filled} of 1,000 early access spots remain
-                      </p>
-                    </div>
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-3">

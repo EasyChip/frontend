@@ -21,6 +21,13 @@ export default function Footer() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+          <a href="/book"
+            style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
+          >
+            Book a Meeting
+          </a>
           <a href="https://www.linkedin.com/in/rakshitmishra9695/" target="_blank" rel="noopener noreferrer"
             style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
@@ -40,7 +47,7 @@ export default function Footer() {
             onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
           >
-            f20220056@goa.bits-pilani.ac.in
+            Email
           </a>
         </div>
       </div>

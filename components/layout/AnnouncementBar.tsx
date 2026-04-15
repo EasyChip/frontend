@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
 const LAUNCH_DATE = new Date('2026-04-28T00:00:00Z')
-const SEED_COUNT = 312
 
 function getCountdownText() {
   const diff = LAUNCH_DATE.getTime() - Date.now()
@@ -19,7 +18,6 @@ function getCountdownText() {
 export default function AnnouncementBar() {
   const [dismissed, setDismissed] = useState(true)
   const [countdown, setCountdown] = useState('')
-  const [count, setCount] = useState(SEED_COUNT)
   const [msgIndex, setMsgIndex] = useState(0)
   const prefersReduced = useReducedMotion()
 
@@ -32,7 +30,7 @@ export default function AnnouncementBar() {
         className="underline underline-offset-2 hover:text-text-primary transition-colors ml-1"
         style={{ color: 'var(--accent-amber)' }}
       >
-        Join {count.toLocaleString()}+ engineers →
+        Join the waitlist →
       </button>
     </>,
     <>
@@ -48,9 +46,6 @@ export default function AnnouncementBar() {
   useEffect(() => {
     const isDismissed = localStorage.getItem('ec_bar_dismissed') === '1'
     setDismissed(isDismissed)
-
-    const v = localStorage.getItem('ec_submissions')
-    setCount(SEED_COUNT + (v ? parseInt(v, 10) : 0))
 
     setCountdown(getCountdownText() ?? '')
     const countId = setInterval(() => setCountdown(getCountdownText() ?? ''), 60000)

@@ -15,7 +15,7 @@ export default function Navbar() {
   const links = [
     { label: 'Problem', href: '#problem' },
     { label: 'How it works', href: '#how-it-works' },
-    { label: 'Roadmap', href: '#roadmap' },
+    { label: 'Tools', href: '/tools' },
     { label: 'Team', href: '#team' },
     { label: 'Contact', href: '#contact' },
   ]
@@ -51,22 +51,25 @@ export default function Navbar() {
       {/* Desktop links */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="nav-desktop">
         {links.map(l => (
-          <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
+          l.href.startsWith('#') ? (
+            <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
+          ) : (
+            <Link key={l.label} href={l.href} className="nav-link">{l.label}</Link>
+          )
         ))}
-        <a
-          href="/login"
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
           style={{
             fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
             background: 'var(--amber)', color: '#0A0A0A',
             padding: '7px 14px', borderRadius: 2, border: 'none', cursor: 'pointer',
             transition: 'opacity 0.2s', letterSpacing: '0.08em', whiteSpace: 'nowrap',
-            textDecoration: 'none',
           }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
         >
-          Try Playground →
-        </a>
+          Join Waitlist →
+        </button>
       </div>
 
       {/* Mobile hamburger */}
@@ -95,23 +98,29 @@ export default function Navbar() {
           zIndex: 99,
         }}>
           {links.map(l => (
-            <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-              style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
-              {l.label}
-            </a>
+            l.href.startsWith('#') ? (
+              <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
+                style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
+                {l.label}
+              </a>
+            ) : (
+              <Link key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
+                style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
+                {l.label}
+              </Link>
+            )
           ))}
-          <a
-            href="/login"
-            onClick={() => setMenuOpen(false)}
+          <button
+            onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('ec:openWaitlist')) }}
             style={{
               fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
               background: '#C8962E', color: '#0A0A0A',
               padding: '12px 20px', borderRadius: 6, border: 'none', cursor: 'pointer',
-              textAlign: 'left', textDecoration: 'none', display: 'block',
+              textAlign: 'left', display: 'block', width: '100%',
             }}
           >
-            Try Playground →
-          </a>
+            Join Waitlist →
+          </button>
         </div>
       )}
 

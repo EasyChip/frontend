@@ -19,6 +19,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://easychip.vercel.app'),
   title: 'EasyChip — Natural Language to Silicon',
   description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog. Open-source stack. No $150K licence required.',
   icons: {

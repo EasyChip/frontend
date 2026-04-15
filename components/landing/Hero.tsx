@@ -87,8 +87,8 @@ export default function Hero() {
 
           {/* CTA buttons */}
           <div className="reveal" style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 48, flexWrap: 'wrap', transitionDelay: '0.3s' }}>
-            <a
-              href="/login"
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
               style={{
                 fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
                 background: 'var(--amber)', color: '#0A0A0A',
@@ -97,13 +97,12 @@ export default function Hero() {
                 transition: 'opacity 0.2s',
                 letterSpacing: '0.08em',
                 boxShadow: '0 0 20px var(--amber-glow)',
-                textDecoration: 'none', display: 'inline-block',
               }}
               onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
               onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
             >
-              Try the Playground →
-            </a>
+              Join Waitlist →
+            </button>
             <a href="#how-it-works"
               style={{
                 fontFamily: 'var(--mono)', fontSize: 11,

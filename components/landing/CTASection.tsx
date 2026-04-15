@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 
 export default function CTASection() {
   const ref = useRef<HTMLElement>(null)
@@ -48,11 +49,11 @@ export default function CTASection() {
           color: 'var(--gray)', lineHeight: 1.7, marginBottom: 40,
           transitionDelay: '0.2s',
         }}>
-          We&apos;re onboarding university labs, research teams, and fabless startups for our private beta. Drop your email and we&apos;ll reach out.
+          We&apos;re onboarding university labs, research teams, and fabless startups for our private beta. Drop your email or book a meeting with us.
         </p>
-        <div className="reveal" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', transitionDelay: '0.3s' }}>
-          <a
-            href="/login"
+        <div className="reveal" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', transitionDelay: '0.3s' }}>
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
             style={{
               fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
               background: 'var(--amber)', color: '#0A0A0A',
@@ -61,28 +62,26 @@ export default function CTASection() {
               boxShadow: '0 0 32px var(--amber-glow)',
               transition: 'opacity 0.2s',
               letterSpacing: '0.08em',
-              textDecoration: 'none', display: 'inline-block',
             }}
             onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
             onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
           >
-            Try the Playground →
-          </a>
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
-            style={{
-              fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
-              background: 'transparent', color: 'var(--gray)',
-              padding: '0.75rem 1.5rem', borderRadius: 2,
-              border: '1px solid var(--border)', cursor: 'pointer',
-              transition: 'border-color 0.2s, color 0.2s',
-              letterSpacing: '0.08em',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--white)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--gray)' }}
-          >
-            Join Waitlist
+            Join Waitlist →
           </button>
+          <Link href="/book" style={{
+            fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
+            background: 'transparent', color: 'var(--white)',
+            padding: '0.75rem 1.5rem', borderRadius: 2,
+            border: '1px solid rgba(255,255,255,0.15)', cursor: 'pointer',
+            transition: 'border-color 0.2s',
+            letterSpacing: '0.08em', textDecoration: 'none',
+            display: 'inline-block',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = '#C8962E' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)' }}
+          >
+            Book a Meeting →
+          </Link>
         </div>
         <div className="reveal" style={{ marginTop: 24, transitionDelay: '0.4s' }}>
           <p style={{ fontFamily: 'var(--sans)', fontSize: 14, color: 'var(--gray)' }}>
@@ -92,7 +91,7 @@ export default function CTASection() {
               onMouseEnter={e => { e.currentTarget.style.textDecoration = 'underline' }}
               onMouseLeave={e => { e.currentTarget.style.textDecoration = 'none' }}
             >
-              f20220056@goa.bits-pilani.ac.in / f20220687@goa.bits-pilani.ac.in
+              f20220056@goa.bits-pilani.ac.in
             </a>
           </p>
         </div>
