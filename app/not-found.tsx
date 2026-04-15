@@ -6,7 +6,7 @@ export default function NotFound() {
       minHeight: '100vh', background: '#0A0A0A', display: 'flex',
       alignItems: 'center', justifyContent: 'center', flexDirection: 'column',
       fontFamily: 'var(--font-sans)', color: '#FAFAFA', textAlign: 'center',
-      padding: '32px',
+      padding: '32px', paddingTop: 80,
     }}>
       <span style={{
         fontFamily: 'var(--font-mono)', fontSize: 80, fontWeight: 700,

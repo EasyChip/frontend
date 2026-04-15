@@ -13,11 +13,11 @@ export default function Navbar() {
   }, [])
 
   const links = [
-    { label: 'Problem', href: '#problem' },
-    { label: 'How it works', href: '#how-it-works' },
+    { label: 'Problem', href: '/#problem' },
+    { label: 'How it works', href: '/#how-it-works' },
     { label: 'Tools', href: '/tools' },
-    { label: 'Team', href: '#team' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Team', href: '/#team' },
+    { label: 'Contact', href: '/#contact' },
   ]
 
   return (
@@ -51,11 +51,7 @@ export default function Navbar() {
       {/* Desktop links */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="nav-desktop">
         {links.map(l => (
-          l.href.startsWith('#') ? (
-            <a key={l.label} href={l.href} className="nav-link">{l.label}</a>
-          ) : (
-            <Link key={l.label} href={l.href} className="nav-link">{l.label}</Link>
-          )
+          <Link key={l.label} href={l.href} className="nav-link">{l.label}</Link>
         ))}
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
@@ -98,17 +94,10 @@ export default function Navbar() {
           zIndex: 99,
         }}>
           {links.map(l => (
-            l.href.startsWith('#') ? (
-              <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-                style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
-                {l.label}
-              </a>
-            ) : (
-              <Link key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-                style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
-                {l.label}
-              </Link>
-            )
+            <Link key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
+              style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
+              {l.label}
+            </Link>
           ))}
           <button
             onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('ec:openWaitlist')) }}

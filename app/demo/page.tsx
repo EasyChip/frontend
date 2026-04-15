@@ -22,7 +22,7 @@ export default function DemoPage() {
         style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.18) 0%, transparent 70%)' }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-4 py-12">
+      <div className="relative max-w-6xl mx-auto px-4 py-12" style={{ paddingTop: 80 }}>
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <Link href="/" className="flex items-center gap-2 text-text-primary font-bold text-lg tracking-tight">

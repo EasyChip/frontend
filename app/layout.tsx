@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
 import './globals.css'
 import WaitlistProvider from '@/components/layout/WaitlistProvider'
 import CustomCursor from '@/components/shared/CustomCursor'
+import Navbar from '@/components/layout/Navbar'
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`dark ${ibmPlexMono.variable} ${ibmPlexSans.variable}`}>
       <body>
         <CustomCursor />
+        <Navbar />
         {children}
         <WaitlistProvider />
       </body>

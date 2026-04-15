@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
-import Image from 'next/image'
 
 interface Profile {
   id: string
@@ -88,31 +87,18 @@ export default function DashboardPage() {
   return (
     <div style={{
       minHeight: '100vh', background: '#0A0A0A', fontFamily: 'var(--font-sans)',
-      color: '#FAFAFA',
+      color: '#FAFAFA', paddingTop: 60,
     }}>
-      {/* Top bar */}
-      <header style={{
-        height: 56, borderBottom: '1px solid #1C1C1C', display: 'flex',
-        alignItems: 'center', padding: '0 24px', justifyContent: 'space-between',
-      }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="EasyChip" width={28} height={28} />
-          <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 600,
-            color: '#C8962E', letterSpacing: '-0.01em',
-          }}>EasyChip</span>
-        </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+
+      <main style={{ maxWidth: 960, margin: '0 auto', padding: '40px 24px' }}>
+        {/* Top actions */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginBottom: 24 }}>
           {isFounder && (
             <Link href="/admin/events" style={{ fontSize: 13, color: '#C8962E', textDecoration: 'none', transition: 'opacity 0.2s', fontFamily: 'var(--font-mono)' }}
               onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
               onMouseLeave={e => e.currentTarget.style.opacity = '1'}
             >Admin</Link>
           )}
-          <Link href="/" style={{ fontSize: 13, color: '#555555', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.color = '#888888'}
-            onMouseLeave={e => e.currentTarget.style.color = '#555555'}
-          >← Home</Link>
           <button onClick={handleLogout} style={{
             background: 'none', border: '1px solid #1C1C1C', borderRadius: 6,
             color: '#888888', padding: '6px 14px', fontSize: 12, cursor: 'pointer',
@@ -122,9 +108,6 @@ export default function DashboardPage() {
             onMouseLeave={e => e.currentTarget.style.borderColor = '#1C1C1C'}
           >Sign out</button>
         </div>
-      </header>
-
-      <main style={{ maxWidth: 960, margin: '0 auto', padding: '40px 24px' }}>
         {/* Greeting */}
         <div style={{ marginBottom: 40 }}>
           <h1 style={{ fontSize: 28, fontWeight: 600, margin: '0 0 8px' }}>

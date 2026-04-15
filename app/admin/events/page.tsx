@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import Image from 'next/image'
 
 interface ToolEvent {
   id: number
@@ -44,28 +43,18 @@ export default async function AdminEventsPage() {
   return (
     <div style={{
       minHeight: '100vh', background: '#0A0A0A', fontFamily: 'var(--font-sans)',
-      color: '#FAFAFA',
+      color: '#FAFAFA', paddingTop: 60,
     }}>
-      <header style={{
-        height: 56, borderBottom: '1px solid #1C1C1C', display: 'flex',
-        alignItems: 'center', padding: '0 24px', justifyContent: 'space-between',
-      }}>
-        <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="EasyChip" width={28} height={28} />
-          <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 600,
-            color: '#C8962E',
-          }}>EasyChip Admin</span>
-        </Link>
-        <Link href="/dashboard" style={{ fontSize: 13, color: '#555555', textDecoration: 'none' }}>
-          ← Dashboard
-        </Link>
-      </header>
 
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '40px 24px' }}>
-        <h1 style={{ fontSize: 24, fontWeight: 600, margin: '0 0 8px' }}>
-          Funnel Events
-        </h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+          <h1 style={{ fontSize: 24, fontWeight: 600, margin: 0 }}>
+            Funnel Events
+          </h1>
+          <Link href="/dashboard" style={{ fontSize: 13, color: '#555555', textDecoration: 'none' }}>
+            ← Dashboard
+          </Link>
+        </div>
         <p style={{ fontSize: 14, color: '#555555', margin: '0 0 32px' }}>
           Recent tool downloads, demo requests, and page views.
         </p>

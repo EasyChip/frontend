@@ -4,7 +4,6 @@ import { useState, FormEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import CircuitBackground from '@/components/ui/CircuitBackground'
-import Image from 'next/image'
 
 const COMPANY_STAGES = ['Academia', 'Startup', 'Mid-size', 'Enterprise'] as const
 const INTEREST_OPTIONS = ['FlowBit', 'VisUPF', 'RTL-to-GDS workflow', 'Just exploring'] as const
@@ -119,7 +118,7 @@ export default function OnboardingPage() {
       <div style={{
         position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex',
         alignItems: 'center', justifyContent: 'center', padding: '32px 16px',
-        fontFamily: 'var(--font-sans)', color: '#FAFAFA',
+        fontFamily: 'var(--font-sans)', color: '#FAFAFA', paddingTop: 80,
       }}>
         <div style={{
           width: '100%', maxWidth: 520, background: '#111111',
@@ -128,13 +127,6 @@ export default function OnboardingPage() {
         }}>
           {/* Header */}
           <div style={{ marginBottom: 28 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <Image src="/logo.png" alt="EasyChip" width={32} height={32} />
-              <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 600,
-                color: '#C8962E',
-              }}>EasyChip</span>
-            </div>
             <h2 style={{ fontSize: 22, fontWeight: 600, margin: '0 0 6px' }}>
               Complete your profile
             </h2>

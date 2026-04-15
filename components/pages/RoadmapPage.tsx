@@ -3,9 +3,7 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { NavBar } from '@/components/ui/tubelight-navbar'
 import Footer from '@/components/layout/Footer'
-import { Workflow, Layers, Telescope, Map, Users, BookOpen } from 'lucide-react'
 
 function openWaitlist() {
   if (typeof window !== 'undefined') {
@@ -13,16 +11,7 @@ function openWaitlist() {
   }
 }
 
-const NAV_ITEMS = [
-  { name: 'How it works', url: '/#how-it-works', icon: Workflow  },
-  { name: 'Features',     url: '/#features',     icon: Layers    },
-  { name: 'Vision',       url: '/vision',        icon: Telescope },
-  { name: 'Roadmap',      url: '/roadmap',       icon: Map       },
-  { name: 'Use Cases',    url: '/use-cases',     icon: Users     },
-  { name: 'Docs',         url: '#',              icon: BookOpen  },
-]
-
-type StageStatus = 'done' | 'active' | 'planned' | 'end'
+type StageStatus= 'done' | 'active' | 'planned' | 'end'
 
 const stages: Array<{
   label: string
@@ -126,7 +115,6 @@ export default function RoadmapPage() {
 
   return (
     <>
-      <NavBar items={NAV_ITEMS} onOpenWaitlist={openWaitlist} />
       <main className="pt-24">
 
         {/* ── Hero ─────────────────────────────────────────────── */}

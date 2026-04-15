@@ -1,6 +1,5 @@
 'use client'
 
-import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/landing/Hero'
 import ProblemSection from '@/components/landing/ProblemSection'
 import WhyNow from '@/components/landing/WhyNow'
@@ -14,7 +13,6 @@ import Footer from '@/components/layout/Footer'
 export default function HomePage() {
   return (
     <>
-      <Navbar />
       <main>
         <Hero />
         <ProblemSection />

@@ -138,7 +138,7 @@ function LoginContent() {
         <div style={{
           position: 'relative', zIndex: 1, minHeight: '100vh',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font-sans)', color: '#FAFAFA',
+          fontFamily: 'var(--font-sans)', color: '#FAFAFA', paddingTop: 60,
         }}>
           <div style={{
             maxWidth: 420, width: '100%', padding: '48px 32px',
@@ -179,7 +179,7 @@ function LoginContent() {
 
       <div style={{
         position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex',
-        fontFamily: 'var(--font-sans)', color: '#FAFAFA',
+        fontFamily: 'var(--font-sans)', color: '#FAFAFA', paddingTop: 60,
       }}>
         {/* Left — visual side */}
         <div style={{

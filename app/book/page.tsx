@@ -1,32 +1,13 @@
 'use client'
 
 import BookMeeting from '@/components/booking/BookMeeting'
-import Link from 'next/link'
-import Image from 'next/image'
 
 export default function BookPage() {
   return (
     <div style={{
       minHeight: '100vh', background: '#0A0A0A', fontFamily: 'var(--font-sans)',
-      color: '#FAFAFA', display: 'flex', flexDirection: 'column',
+      color: '#FAFAFA', display: 'flex', flexDirection: 'column', paddingTop: 60,
     }}>
-      {/* Top bar */}
-      <header style={{
-        height: 56, borderBottom: '1px solid #1C1C1C', display: 'flex',
-        alignItems: 'center', padding: '0 24px', justifyContent: 'space-between',
-        flexShrink: 0,
-      }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="EasyChip" width={28} height={28} />
-          <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 600,
-            color: '#C8962E', letterSpacing: '-0.01em',
-          }}>EasyChip</span>
-        </Link>
-        <Link href="/" style={{ fontSize: 13, color: '#555555', textDecoration: 'none' }}>
-          ← Back to site
-        </Link>
-      </header>
 
       {/* Booking content */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 24px' }}>
