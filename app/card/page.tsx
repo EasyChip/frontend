@@ -9,7 +9,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#0F1B2D',
+  themeColor: '#0A0A0A',
 }
 
 export const metadata: Metadata = {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
 
 export default function CardPage() {
   return (
-    <div className="fixed inset-0 z-[100] bg-navy-900 overflow-hidden">
+    <div className="fixed inset-0 z-[100] bg-bg-void overflow-hidden">
       {/* Subtle radial gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(27,79,114,0.20) 0%, transparent 70%)',
+            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,150,46,0.12) 0%, transparent 70%)',
         }}
       />
 

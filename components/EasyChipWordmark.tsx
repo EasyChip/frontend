@@ -14,7 +14,7 @@ export default function EasyChipWordmark({
         EasyChip
       </h1>
       {showTagline && (
-        <p className="font-display text-[13px] text-mint uppercase mt-1 tracking-[0.12em]">
+        <p className="font-display text-[13px] text-accent-amber uppercase mt-1 tracking-[0.12em]">
           Prompt In. Silicon Out.
         </p>
       )}

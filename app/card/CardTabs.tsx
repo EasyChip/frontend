@@ -74,9 +74,9 @@ export default function CardTabs() {
               role="tab"
               aria-selected={activeTab === tab.id}
               onClick={() => handleTabChange(tab.id)}
-              className={`flex-1 pb-3 text-[14px] font-medium font-display border-b-2 transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 ${
+              className={`flex-1 pb-3 text-[14px] font-medium font-display border-b-2 transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber focus-visible:ring-offset-2 focus-visible:ring-offset-bg-void ${
                 activeTab === tab.id
-                  ? 'text-white border-mint'
+                  ? 'text-white border-accent-amber'
                   : 'text-white/50 border-transparent hover:text-white/70'
               }`}
             >
@@ -86,8 +86,8 @@ export default function CardTabs() {
         </div>
       </nav>
 
-      {/* Mint label above QR */}
-      <span className="text-[10px] font-semibold font-display text-mint uppercase tracking-[0.12em] mb-3">
+      {/* Amber label above QR */}
+      <span className="text-[10px] font-semibold font-display text-accent-amber uppercase tracking-[0.12em] mb-3">
         {active.label}
       </span>
 
@@ -115,7 +115,7 @@ export default function CardTabs() {
               size={420}
               level="M"
               includeMargin={false}
-              fgColor="#0F1B2D"
+              fgColor="#0A0A0A"
               bgColor="#FFFFFF"
               className="w-full h-full"
             />
