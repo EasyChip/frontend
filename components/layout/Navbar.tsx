@@ -18,6 +18,7 @@ export default function Navbar() {
     { label: 'Tools', href: '/tools' },
     { label: 'Team', href: '/#team' },
     { label: 'Contact', href: '/#contact' },
+    { label: 'Connect', href: '/card' },
   ]
 
   return (
