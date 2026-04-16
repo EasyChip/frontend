@@ -33,6 +33,10 @@ const config: Config = {
         'text-tertiary': 'var(--text-tertiary)',
         'text-accent': 'var(--text-accent)',
         'text-muted': 'var(--text-tertiary)',
+        // Event card tokens
+        'navy-900': '#0F1B2D',
+        'navy-800': '#1B4F72',
+        'mint': '#00C896',
         // Legacy compat
         background: 'var(--bg-base)',
         surface: 'var(--bg-raised)',
@@ -110,6 +114,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)', 'IBM Plex Sans', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'IBM Plex Mono', 'Menlo', 'monospace'],
+        display: ['var(--font-display)', 'Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
