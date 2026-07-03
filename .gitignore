@@ -38,3 +38,6 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# internal docs - NEVER deploy or commit (IP-sensitive)
+/internal/

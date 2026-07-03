@@ -102,10 +102,10 @@ export default function OnboardingPage() {
   if (pageLoading) {
     return (
       <div style={{
-        minHeight: '100vh', background: '#0A0A0A', display: 'flex',
+        minHeight: '100vh', background: '#04060F', display: 'flex',
         alignItems: 'center', justifyContent: 'center',
       }}>
-        <div style={{ color: '#555555', fontFamily: 'var(--font-mono)', fontSize: 14 }}>
+        <div style={{ color: '#6B7590', fontFamily: 'var(--font-mono)', fontSize: 14 }}>
           Loading...
         </div>
       </div>
@@ -118,11 +118,11 @@ export default function OnboardingPage() {
       <div style={{
         position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex',
         alignItems: 'center', justifyContent: 'center', padding: '32px 16px',
-        fontFamily: 'var(--font-sans)', color: '#FAFAFA', paddingTop: 80,
+        fontFamily: 'var(--font-sans)', color: '#F5F7FA', paddingTop: 80,
       }}>
         <div style={{
-          width: '100%', maxWidth: 520, background: '#111111',
-          border: '1px solid #1C1C1C', borderRadius: 16,
+          width: '100%', maxWidth: 520, background: '#0D1120',
+          border: '1px solid #1E2740', borderRadius: 16,
           padding: '40px 32px 32px',
         }}>
           {/* Header */}
@@ -130,16 +130,16 @@ export default function OnboardingPage() {
             <h2 style={{ fontSize: 22, fontWeight: 600, margin: '0 0 6px' }}>
               Complete your profile
             </h2>
-            <p style={{ fontSize: 13, color: '#555555', margin: 0 }}>
+            <p style={{ fontSize: 13, color: '#6B7590', margin: 0 }}>
               Help us personalize your experience. Takes 30 seconds.
             </p>
           </div>
 
           {error && (
             <div style={{
-              padding: '10px 14px', background: 'rgba(239,68,68,0.08)',
-              border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8,
-              fontSize: 13, color: '#EF4444', marginBottom: 16,
+              padding: '10px 14px', background: 'rgba(255,77,109,0.08)',
+              border: '1px solid rgba(255,77,109,0.2)', borderRadius: 8,
+              fontSize: 13, color: '#FF4D6D', marginBottom: 16,
             }}>{error}</div>
           )}
 
@@ -155,7 +155,7 @@ export default function OnboardingPage() {
 
             {/* Company Stage */}
             <div>
-              <label style={{ display: 'block', fontSize: 13, color: '#888888', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>
+              <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>
                 Organization type
               </label>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -164,9 +164,9 @@ export default function OnboardingPage() {
                     style={{
                       padding: '8px 16px', borderRadius: 6, fontSize: 13,
                       fontFamily: 'var(--font-sans)', cursor: 'pointer',
-                      border: companyStage === stage ? '1px solid #C8962E' : '1px solid #1C1C1C',
-                      background: companyStage === stage ? 'rgba(200,150,46,0.1)' : 'transparent',
-                      color: companyStage === stage ? '#C8962E' : '#888888',
+                      border: companyStage === stage ? '1px solid #00E5EE' : '1px solid #1E2740',
+                      background: companyStage === stage ? 'rgba(0,229,238,0.1)' : 'transparent',
+                      color: companyStage === stage ? '#00E5EE' : '#A7B0C6',
                       transition: 'all 0.2s',
                     }}
                   >{stage}</button>
@@ -176,7 +176,7 @@ export default function OnboardingPage() {
 
             {/* Interests */}
             <div>
-              <label style={{ display: 'block', fontSize: 13, color: '#888888', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>
+              <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>
                 What are you interested in?
               </label>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -185,9 +185,9 @@ export default function OnboardingPage() {
                     style={{
                       padding: '8px 16px', borderRadius: 6, fontSize: 13,
                       fontFamily: 'var(--font-sans)', cursor: 'pointer',
-                      border: interests.includes(item) ? '1px solid #C8962E' : '1px solid #1C1C1C',
-                      background: interests.includes(item) ? 'rgba(200,150,46,0.1)' : 'transparent',
-                      color: interests.includes(item) ? '#C8962E' : '#888888',
+                      border: interests.includes(item) ? '1px solid #00E5EE' : '1px solid #1E2740',
+                      background: interests.includes(item) ? 'rgba(0,229,238,0.1)' : 'transparent',
+                      color: interests.includes(item) ? '#00E5EE' : '#A7B0C6',
                       transition: 'all 0.2s',
                     }}
                   >{item}</button>
@@ -197,41 +197,41 @@ export default function OnboardingPage() {
 
             {/* Use Case */}
             <div>
-              <label style={{ display: 'block', fontSize: 13, color: '#888888', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
+              <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
                 Primary use case (optional)
               </label>
               <textarea value={useCase} onChange={e => setUseCase(e.target.value)}
                 placeholder="What problem are you trying to solve?"
                 rows={3}
                 style={{
-                  width: '100%', padding: '10px 12px', background: '#0A0A0A',
-                  border: '1px solid #1C1C1C', borderRadius: 6, color: '#FAFAFA',
+                  width: '100%', padding: '10px 12px', background: '#04060F',
+                  border: '1px solid #1E2740', borderRadius: 6, color: '#F5F7FA',
                   fontSize: 14, fontFamily: 'var(--font-sans)', outline: 'none',
                   resize: 'vertical', transition: 'border-color 0.2s', boxSizing: 'border-box',
                 }}
-                onFocus={e => e.currentTarget.style.borderColor = '#C8962E'}
-                onBlur={e => e.currentTarget.style.borderColor = '#1C1C1C'}
+                onFocus={e => e.currentTarget.style.borderColor = '#00E5EE'}
+                onBlur={e => e.currentTarget.style.borderColor = '#1E2740'}
               />
             </div>
 
             {/* Actions */}
             <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
               <button type="submit" disabled={loading} style={{
-                flex: 1, padding: '12px 0', background: loading ? '#555555' : '#C8962E',
-                color: '#0A0A0A', border: 'none', borderRadius: 8, fontSize: 14,
+                flex: 1, padding: '12px 0', background: loading ? '#6B7590' : '#00E5EE',
+                color: '#04060F', border: 'none', borderRadius: 8, fontSize: 14,
                 fontWeight: 600, fontFamily: 'var(--font-mono)',
                 cursor: loading ? 'not-allowed' : 'pointer', transition: 'opacity 0.2s',
               }}>
                 {loading ? 'Saving...' : 'Continue →'}
               </button>
               <button type="button" onClick={handleSkip} style={{
-                padding: '12px 24px', background: '#0A0A0A',
-                border: '1px solid #1C1C1C', borderRadius: 8, color: '#555555',
+                padding: '12px 24px', background: '#04060F',
+                border: '1px solid #1E2740', borderRadius: 8, color: '#6B7590',
                 fontSize: 13, fontFamily: 'var(--font-sans)', cursor: 'pointer',
                 transition: 'border-color 0.2s, color 0.2s',
               }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#888888'; e.currentTarget.style.color = '#888888' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#1C1C1C'; e.currentTarget.style.color = '#555555' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#A7B0C6'; e.currentTarget.style.color = '#A7B0C6' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#1E2740'; e.currentTarget.style.color = '#6B7590' }}
               >Skip</button>
             </div>
           </form>
@@ -246,18 +246,18 @@ function InputField({ label, value, onChange, placeholder }: {
 }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: 13, color: '#888888', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
+      <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
         {label}
       </label>
       <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={{
-          width: '100%', padding: '10px 12px', background: '#0A0A0A',
-          border: '1px solid #1C1C1C', borderRadius: 6, color: '#FAFAFA',
+          width: '100%', padding: '10px 12px', background: '#04060F',
+          border: '1px solid #1E2740', borderRadius: 6, color: '#F5F7FA',
           fontSize: 14, fontFamily: 'var(--font-sans)', outline: 'none',
           transition: 'border-color 0.2s', boxSizing: 'border-box',
         }}
-        onFocus={e => e.currentTarget.style.borderColor = '#C8962E'}
-        onBlur={e => e.currentTarget.style.borderColor = '#1C1C1C'}
+        onFocus={e => e.currentTarget.style.borderColor = '#00E5EE'}
+        onBlur={e => e.currentTarget.style.borderColor = '#1E2740'}
       />
     </div>
   )

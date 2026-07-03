@@ -138,28 +138,28 @@ function LoginContent() {
         <div style={{
           position: 'relative', zIndex: 1, minHeight: '100vh',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font-sans)', color: '#FAFAFA', paddingTop: 60,
+          fontFamily: 'var(--font-sans)', color: '#F5F7FA', paddingTop: 60,
         }}>
           <div style={{
             maxWidth: 420, width: '100%', padding: '48px 32px',
-            background: '#111111', border: '1px solid #1C1C1C',
+            background: '#0D1120', border: '1px solid #1E2740',
             borderRadius: 16, textAlign: 'center',
           }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>✉</div>
             <h2 style={{ fontSize: 22, fontWeight: 600, margin: '0 0 12px' }}>Check your email</h2>
-            <p style={{ fontSize: 14, color: '#888888', lineHeight: 1.6, margin: '0 0 24px' }}>
-              We sent a {isRegister ? 'confirmation' : 'sign-in'} link to <strong style={{ color: '#C8962E' }}>{email}</strong>.
+            <p style={{ fontSize: 14, color: '#A7B0C6', lineHeight: 1.6, margin: '0 0 24px' }}>
+              We sent a {isRegister ? 'confirmation' : 'sign-in'} link to <strong style={{ color: '#00E5EE' }}>{email}</strong>.
               Click the link to continue.
             </p>
             <button
               onClick={() => { setMagicLinkSent(false); setEmail(''); setMode('oauth') }}
               style={{
-                background: 'none', border: '1px solid #1C1C1C', borderRadius: 8,
-                color: '#888888', padding: '10px 24px', fontSize: 13, cursor: 'pointer',
+                background: 'none', border: '1px solid #1E2740', borderRadius: 8,
+                color: '#A7B0C6', padding: '10px 24px', fontSize: 13, cursor: 'pointer',
                 fontFamily: 'var(--font-sans)', transition: 'border-color 0.2s',
               }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = '#C8962E'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#1C1C1C'}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#00E5EE'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#1E2740'}
             >
               ← Back to login
             </button>
@@ -179,7 +179,7 @@ function LoginContent() {
 
       <div style={{
         position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex',
-        fontFamily: 'var(--font-sans)', color: '#FAFAFA', paddingTop: 60,
+        fontFamily: 'var(--font-sans)', color: '#F5F7FA', paddingTop: 60,
       }}>
         {/* Left — visual side */}
         <div style={{
@@ -188,16 +188,16 @@ function LoginContent() {
         }} className="login-left-panel">
           <div style={{ maxWidth: 480 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
-              <Image src="/logo.png" alt="EasyChip" width={40} height={40} />
+              <Image src="/brand/logo.png" alt="EasyChip" width={40} height={40} />
               <span style={{
                 fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 600,
-                color: '#C8962E', letterSpacing: '-0.01em',
+                color: '#00E5EE', letterSpacing: '-0.01em',
               }}>EasyChip</span>
             </div>
-            <h2 style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.2, margin: '0 0 16px', color: '#FAFAFA' }}>
-              Prompt In.<br /><span style={{ color: '#C8962E' }}>Silicon Out.</span>
+            <h2 style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.2, margin: '0 0 16px', color: '#F5F7FA' }}>
+              Prompt In.<br /><span style={{ color: '#00E5EE' }}>Silicon Out.</span>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: '#888888', margin: 0, maxWidth: 400 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: '#A7B0C6', margin: 0, maxWidth: 400 }}>
               AI-native EDA platform. Sign in to access tools, book demos,
               and track your semiconductor design workflow.
             </p>
@@ -211,33 +211,33 @@ function LoginContent() {
           minHeight: '100vh',
         }}>
           <div style={{
-            width: '100%', maxWidth: 420, border: '1px solid #1C1C1C',
-            borderRadius: 16, background: '#111111', padding: '36px 32px 28px',
-            boxShadow: '0 0 60px rgba(200,150,46,0.05)',
+            width: '100%', maxWidth: 420, border: '1px solid #1E2740',
+            borderRadius: 16, background: '#0D1120', padding: '36px 32px 28px',
+            boxShadow: '0 0 60px rgba(0,229,238,0.05)',
           }}>
             {/* Mobile brand */}
             <div style={{ textAlign: 'center', marginBottom: 24 }} className="login-card-brand">
-              <Image src="/logo.png" alt="EasyChip" width={44} height={44} style={{ margin: '0 auto 10px', display: 'block' }} />
+              <Image src="/brand/logo.png" alt="EasyChip" width={44} height={44} style={{ margin: '0 auto 10px', display: 'block' }} />
               <h1 style={{
                 fontFamily: 'var(--font-mono)', fontSize: 20, fontWeight: 600,
-                color: '#C8962E', margin: '0 0 4px', letterSpacing: '-0.01em',
+                color: '#00E5EE', margin: '0 0 4px', letterSpacing: '-0.01em',
               }}>EasyChip</h1>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#555555', margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#6B7590', margin: 0 }}>
                 Prompt In. Silicon Out.
               </p>
             </div>
 
             <h3 style={{ fontSize: 18, fontWeight: 600, margin: '0 0 4px' }}>Welcome</h3>
-            <p style={{ fontSize: 13, color: '#555555', margin: '0 0 24px' }}>
+            <p style={{ fontSize: 13, color: '#6B7590', margin: '0 0 24px' }}>
               Sign in to continue to EasyChip
             </p>
 
             {/* Error */}
             {error && (
               <div style={{
-                padding: '10px 14px', background: 'rgba(239,68,68,0.08)',
-                border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8,
-                fontSize: 13, color: '#EF4444', marginBottom: 16,
+                padding: '10px 14px', background: 'rgba(255,77,109,0.08)',
+                border: '1px solid rgba(255,77,109,0.2)', borderRadius: 8,
+                fontSize: 13, color: '#FF4D6D', marginBottom: 16,
               }}>{error}</div>
             )}
 
@@ -261,35 +261,35 @@ function LoginContent() {
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: 12, margin: '8px 0',
                 }}>
-                  <div style={{ flex: 1, height: 1, background: '#1C1C1C' }} />
-                  <span style={{ fontSize: 12, color: '#555555', fontFamily: 'var(--font-mono)' }}>or</span>
-                  <div style={{ flex: 1, height: 1, background: '#1C1C1C' }} />
+                  <div style={{ flex: 1, height: 1, background: '#1E2740' }} />
+                  <span style={{ fontSize: 12, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>or</span>
+                  <div style={{ flex: 1, height: 1, background: '#1E2740' }} />
                 </div>
 
                 {/* Email options */}
                 <button
                   onClick={() => setMode('email-link')}
                   style={{
-                    width: '100%', padding: '11px 0', background: '#0A0A0A',
-                    border: '1px solid #1C1C1C', borderRadius: 8, color: '#FAFAFA',
+                    width: '100%', padding: '11px 0', background: '#04060F',
+                    border: '1px solid #1E2740', borderRadius: 8, color: '#F5F7FA',
                     fontSize: 14, fontFamily: 'var(--font-sans)', cursor: 'pointer',
                     transition: 'border-color 0.2s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = '#C8962E'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = '#1C1C1C'}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = '#00E5EE'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = '#1E2740'}
                 >
                   Sign in with email link
                 </button>
                 <button
                   onClick={() => setMode('email-password')}
                   style={{
-                    background: 'none', border: 'none', color: '#555555',
+                    background: 'none', border: 'none', color: '#6B7590',
                     fontSize: 12, cursor: 'pointer', padding: '4px 0',
                     fontFamily: 'var(--font-sans)', textAlign: 'center',
                     transition: 'color 0.2s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#888888'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#555555'}
+                  onMouseEnter={e => e.currentTarget.style.color = '#A7B0C6'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#6B7590'}
                 >
                   Use email & password instead
                 </button>
@@ -299,7 +299,7 @@ function LoginContent() {
             {/* Email Magic Link */}
             {mode === 'email-link' && (
               <form onSubmit={handleMagicLink} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <p style={{ fontSize: 13, color: '#888888', margin: 0 }}>
+                <p style={{ fontSize: 13, color: '#A7B0C6', margin: 0 }}>
                   Enter your email and we&apos;ll send you a sign-in link.
                 </p>
                 <Field label="Email" type="email" value={email} onChange={setEmail} placeholder="you@example.com" />
@@ -312,14 +312,14 @@ function LoginContent() {
             {mode === 'email-password' && (
               <form onSubmit={handleEmailPassword} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 {/* Toggle login/register */}
-                <div style={{ display: 'flex', gap: 16, borderBottom: '1px solid #1C1C1C', marginBottom: 4 }}>
+                <div style={{ display: 'flex', gap: 16, borderBottom: '1px solid #1E2740', marginBottom: 4 }}>
                   {(['Sign in', 'Register'] as const).map((t) => (
                     <button key={t} type="button"
                       onClick={() => { setIsRegister(t === 'Register'); setError('') }}
                       style={{
                         background: 'none', border: 'none', paddingBottom: 8,
-                        borderBottom: (t === 'Register') === isRegister ? '2px solid #C8962E' : '2px solid transparent',
-                        color: (t === 'Register') === isRegister ? '#FAFAFA' : '#555555',
+                        borderBottom: (t === 'Register') === isRegister ? '2px solid #00E5EE' : '2px solid transparent',
+                        color: (t === 'Register') === isRegister ? '#F5F7FA' : '#6B7590',
                         fontSize: 13, fontFamily: 'var(--font-sans)', cursor: 'pointer',
                         transition: 'color 0.2s, border-color 0.2s',
                       }}
@@ -341,15 +341,15 @@ function LoginContent() {
           {/* Notice */}
           <div style={{
             width: '100%', maxWidth: 420, marginTop: 16, padding: '12px 20px',
-            border: '1px solid #1C1C1C', borderRadius: 10,
-            background: 'rgba(17, 17, 17, 0.8)', fontSize: 12, lineHeight: 1.6,
-            color: '#555555', fontFamily: 'var(--font-sans)',
+            border: '1px solid #1E2740', borderRadius: 10,
+            background: 'rgba(13,17,32, 0.8)', fontSize: 12, lineHeight: 1.6,
+            color: '#6B7590', fontFamily: 'var(--font-sans)',
           }}>
             EasyChip is building an AI-native EDA platform. The AI model is not yet
             live — we&apos;re training and validating now. Beta access begins Q3 2026.
           </div>
 
-          <p style={{ marginTop: 20, fontSize: 12, color: '#555555', fontFamily: 'var(--font-mono)' }}>
+          <p style={{ marginTop: 20, fontSize: 12, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>
             © 2026 EasyChip — BITS Pilani
           </p>
         </div>
@@ -370,8 +370,8 @@ function LoginContent() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div style={{ minHeight: '100vh', background: '#0A0A0A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#555555', fontFamily: 'var(--font-mono)', fontSize: 14 }}>Loading...</div>
+      <div style={{ minHeight: '100vh', background: '#04060F', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: '#6B7590', fontFamily: 'var(--font-mono)', fontSize: 14 }}>Loading...</div>
       </div>
     }>
       <LoginContent />
@@ -386,8 +386,8 @@ function OAuthButton({ onClick, loading, icon, label }: {
 }) {
   return (
     <button onClick={onClick} disabled={loading} style={{
-      width: '100%', padding: '11px 0', background: '#FAFAFA', border: 'none',
-      borderRadius: 8, color: '#0A0A0A', fontSize: 14, fontWeight: 500,
+      width: '100%', padding: '11px 0', background: '#F5F7FA', border: 'none',
+      borderRadius: 8, color: '#04060F', fontSize: 14, fontWeight: 500,
       fontFamily: 'var(--font-sans)', cursor: loading ? 'not-allowed' : 'pointer',
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
       transition: 'opacity 0.2s',
@@ -426,18 +426,18 @@ function Field({ label, type, value, onChange, placeholder }: {
 }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: 13, color: '#888888', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
+      <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
         {label}
       </label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={{
-          width: '100%', padding: '10px 12px', background: '#0A0A0A',
-          border: '1px solid #1C1C1C', borderRadius: 6, color: '#FAFAFA',
+          width: '100%', padding: '10px 12px', background: '#04060F',
+          border: '1px solid #1E2740', borderRadius: 6, color: '#F5F7FA',
           fontSize: 14, fontFamily: 'var(--font-sans)', outline: 'none',
           transition: 'border-color 0.2s', boxSizing: 'border-box',
         }}
-        onFocus={e => e.currentTarget.style.borderColor = '#C8962E'}
-        onBlur={e => e.currentTarget.style.borderColor = '#1C1C1C'}
+        onFocus={e => e.currentTarget.style.borderColor = '#00E5EE'}
+        onBlur={e => e.currentTarget.style.borderColor = '#1E2740'}
       />
     </div>
   )
@@ -446,8 +446,8 @@ function Field({ label, type, value, onChange, placeholder }: {
 function SubmitButton({ loading, label }: { loading: boolean; label: string }) {
   return (
     <button type="submit" disabled={loading} style={{
-      width: '100%', padding: '12px 0', background: loading ? '#555555' : '#C8962E',
-      color: '#0A0A0A', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 600,
+      width: '100%', padding: '12px 0', background: loading ? '#6B7590' : '#00E5EE',
+      color: '#04060F', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 600,
       fontFamily: 'var(--font-mono)', cursor: loading ? 'not-allowed' : 'pointer',
       transition: 'opacity 0.2s', marginTop: 4,
       animation: loading ? 'pulse-auth 1.5s ease-in-out infinite' : 'none',
@@ -460,12 +460,12 @@ function SubmitButton({ loading, label }: { loading: boolean; label: string }) {
 function BackButton({ onClick }: { onClick: () => void }) {
   return (
     <button type="button" onClick={onClick} style={{
-      background: 'none', border: 'none', color: '#555555', fontSize: 12,
+      background: 'none', border: 'none', color: '#6B7590', fontSize: 12,
       cursor: 'pointer', padding: '4px 0', fontFamily: 'var(--font-sans)',
       textAlign: 'center', transition: 'color 0.2s',
     }}
-      onMouseEnter={e => e.currentTarget.style.color = '#888888'}
-      onMouseLeave={e => e.currentTarget.style.color = '#555555'}
+      onMouseEnter={e => e.currentTarget.style.color = '#A7B0C6'}
+      onMouseLeave={e => e.currentTarget.style.color = '#6B7590'}
     >
       ← Back to all sign-in options
     </button>

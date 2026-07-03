@@ -1,126 +1,171 @@
 'use client'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
 
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import { NAV, CTA, SITE } from '@/lib/site'
+import { cn } from '@/lib/utils'
+
+/**
+ * Sticky top nav (build spec C2): transparent over the void, blur on scroll.
+ * One primary CTA (Book a Demo) + one utility link (Log In).
+ */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const links = [
-    { label: 'Problem', href: '/#problem' },
-    { label: 'How it works', href: '/#how-it-works' },
-    { label: 'Tools', href: '/tools' },
-    { label: 'Team', href: '/#team' },
-    { label: 'Contact', href: '/#contact' },
-    { label: 'Connect', href: '/card' },
-  ]
+  // Close the mobile menu on navigation
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
+  // Lock body scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
 
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0,
-        zIndex: 100,
-        height: 60,
-        backdropFilter: scrolled ? 'blur(20px)' : 'blur(0px)',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'blur(0px)',
-        background: scrolled ? 'rgba(9,9,11,0.9)' : 'transparent',
-        borderBottom: `1px solid ${scrolled ? '#1C1C1C' : 'transparent'}`,
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 48px',
-        transition: 'all 0.3s ease',
-      }}
+    <header
+      className={cn(
+        'sticky top-0 z-40 transition-all duration-300',
+        scrolled || mobileOpen
+          ? 'border-b border-hair bg-void/80 backdrop-blur-xl'
+          : 'border-b border-transparent bg-transparent'
+      )}
     >
-      {/* Logo */}
-      <div style={{ flex: 1 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="EasyChip" style={{ width: 28, height: 28, objectFit: 'contain' }} />
-          <span style={{ fontFamily: 'var(--mono)', fontSize: 14, fontWeight: 600, color: 'var(--white)', letterSpacing: '0.02em' }}>
-            EasyChip
-          </span>
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6" aria-label="Main">
+        {/* Mark + name */}
+        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${SITE.name} home`}>
+          <Image src="/brand/logo.png" alt="" width={32} height={22} className="h-6 w-auto" priority />
+          <span className="font-display text-lg font-bold tracking-tight text-ink">EasyChip</span>
         </Link>
-      </div>
 
-      {/* Desktop links */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="nav-desktop">
-        {links.map(l => (
-          <Link key={l.label} href={l.href} className="nav-link">{l.label}</Link>
-        ))}
-        <button
-          onClick={() => window.dispatchEvent(new CustomEvent('ec:openWaitlist'))}
-          style={{
-            fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
-            background: 'var(--amber)', color: '#0A0A0A',
-            padding: '7px 14px', borderRadius: 2, border: 'none', cursor: 'pointer',
-            transition: 'opacity 0.2s', letterSpacing: '0.08em', whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-        >
-          Join Waitlist →
-        </button>
-      </div>
-
-      {/* Mobile hamburger */}
-      <button
-        className="nav-mobile-toggle"
-        onClick={() => setMenuOpen(!menuOpen)}
-        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, display: 'none' }}
-        aria-label="Toggle menu"
-      >
-        <div style={{ width: 20, display: 'flex', flexDirection: 'column', gap: 5 }}>
-          <span style={{ display: 'block', height: 1.5, background: 'var(--white)', borderRadius: 2, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(6.5px)' : 'none' }} />
-          <span style={{ display: 'block', height: 1.5, background: 'var(--white)', borderRadius: 2, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-          <span style={{ display: 'block', height: 1.5, background: 'var(--white)', borderRadius: 2, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-6.5px)' : 'none' }} />
+        {/* Desktop links */}
+        <div className="hidden items-center gap-1 lg:flex">
+          {NAV.map((item) =>
+            item.children ? (
+              <div key={item.label} className="group relative">
+                <button
+                  type="button"
+                  className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-ink-2 transition-colors hover:text-ink"
+                >
+                  {item.label}
+                  <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
+                </button>
+                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="w-72 rounded-lg border border-hair bg-surface-1 p-2 shadow-xl shadow-black/40">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block rounded-md px-3 py-2.5 transition-colors hover:bg-surface-2"
+                      >
+                        <span className="block text-sm font-medium text-ink">{child.label}</span>
+                        {child.description && (
+                          <span className="mt-0.5 block text-xs text-ink-3">{child.description}</span>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={item.label}
+                href={item.href!}
+                className={cn(
+                  'rounded-md px-3 py-2 text-sm transition-colors hover:text-ink',
+                  pathname === item.href ? 'text-ink' : 'text-ink-2'
+                )}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </div>
-      </button>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div style={{
-          position: 'fixed', top: 60, left: 0, right: 0,
-          background: 'rgba(9,9,11,0.97)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          padding: '24px 24px 32px',
-          display: 'flex', flexDirection: 'column', gap: 20,
-          zIndex: 99,
-        }}>
-          {links.map(l => (
-            <Link key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-              style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--gray)', textDecoration: 'none' }}>
-              {l.label}
-            </Link>
-          ))}
-          <button
-            onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('ec:openWaitlist')) }}
-            style={{
-              fontFamily: 'var(--mono)', fontSize: 13, fontWeight: 600,
-              background: '#C8962E', color: '#0A0A0A',
-              padding: '12px 20px', borderRadius: 6, border: 'none', cursor: 'pointer',
-              textAlign: 'left', display: 'block', width: '100%',
-            }}
+        {/* Desktop CTAs */}
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link href="/login" className="px-2 py-2 text-sm text-ink-2 transition-colors hover:text-ink">
+            Log In
+          </Link>
+          <Link
+            href={CTA.primary.href}
+            className="inline-flex h-9 items-center rounded-md bg-brand-violet px-4 text-sm font-medium text-white transition-all hover:shadow-glow-violet-sm hover:brightness-110"
           >
-            Join Waitlist →
-          </button>
+            {CTA.primary.label}
+          </Link>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          className="text-ink lg:hidden"
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </nav>
+
+      {/* Mobile full-screen menu, CTA pinned */}
+      {mobileOpen && (
+        <div className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-void/95 backdrop-blur-xl lg:hidden">
+          <div className="flex-1 space-y-6 px-6 py-8">
+            {NAV.map((item) =>
+              item.children ? (
+                <div key={item.label}>
+                  <p className="eyebrow mb-3 text-ink-3">{item.label}</p>
+                  <div className="space-y-1">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block rounded-md px-3 py-2.5 text-lg font-medium text-ink hover:bg-surface-1"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href!}
+                  className="block rounded-md px-3 py-2.5 text-lg font-medium text-ink hover:bg-surface-1"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
+            <Link href="/login" className="block rounded-md px-3 py-2.5 text-lg font-medium text-ink-2 hover:bg-surface-1">
+              Log In
+            </Link>
+          </div>
+          <div className="sticky bottom-0 border-t border-hair bg-void/95 p-6">
+            <Link
+              href={CTA.primary.href}
+              className="flex h-12 w-full items-center justify-center rounded-md bg-brand-violet text-base font-medium text-white"
+            >
+              {CTA.primary.label}
+            </Link>
+          </div>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 768px) {
-          .nav-desktop { display: none !important; }
-          .nav-mobile-toggle { display: flex !important; }
-          nav { padding: 0 24px !important; }
-        }
-      `}</style>
-    </nav>
+    </header>
   )
 }

@@ -31,7 +31,7 @@ export default function BookMeeting({ context, inline = false }: BookMeetingProp
       const cal = await getCalApi()
       cal('ui', {
         theme: 'dark',
-        styles: { branding: { brandColor: '#C8962E' } },
+        styles: { branding: { brandColor: '#7C08F5' } },
       })
 
       // Log booking event
@@ -98,7 +98,7 @@ export function BookMeetingButton({ context, label = 'Book a Meeting', style }: 
       const cal = await getCalApi()
       cal('ui', {
         theme: 'dark',
-        styles: { branding: { brandColor: '#C8962E' } },
+        styles: { branding: { brandColor: '#7C08F5' } },
       })
       cal('on', {
         action: 'bookingSuccessful',

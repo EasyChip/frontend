@@ -1,57 +1,61 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { FOOTER_COLUMNS, SOCIALS, SITE, CONTACT_EMAIL } from '@/lib/site'
+import ObfuscatedEmail from '@/components/layout/ObfuscatedEmail'
+
+/** Deep footer (build spec C5). */
 export default function Footer() {
   return (
-    <footer style={{
-      borderTop: '1px solid #1C1C1C',
-      padding: '40px 48px',
-      position: 'relative', zIndex: 1,
-    }}>
-      <div style={{
-        maxWidth: '80rem', margin: '0 auto',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexWrap: 'wrap', gap: 20,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)' }}>
-            &copy; 2026 EasyChip
-          </span>
-          <span style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'rgba(161,161,170,0.4)' }}>&middot;</span>
-          <span style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)' }}>
-            Built in India 🇮🇳
-          </span>
+    <footer className="border-t border-hair bg-void">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(4,1fr)]">
+          {/* Brand block */}
+          <div>
+            <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
+              <Image src="/brand/logo.png" alt="" width={32} height={22} className="h-6 w-auto" />
+              <span className="font-display text-lg font-bold text-ink">EasyChip</span>
+            </Link>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-2">{SITE.positioning}</p>
+            <p className="eyebrow mt-6 text-ink-3">{SITE.tagline}</p>
+          </div>
+
+          {/* Link columns */}
+          {FOOTER_COLUMNS.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <p className="eyebrow mb-4 text-ink-3">{col.title}</p>
+              <ul className="space-y-2.5">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-ink-2 transition-colors hover:text-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-          <a href="/book"
-            style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
-          >
-            Book a Meeting
-          </a>
-          <a href="https://www.linkedin.com/in/rakshitmishra9695/" target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
-          >
-            LinkedIn
-          </a>
-          <a href="https://github.com/EasyChip" target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
-          >
-            GitHub
-          </a>
-          <a href="mailto:f20220056@goa.bits-pilani.ac.in"
-            style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--gray)', textDecoration: 'none', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#C8962E' }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gray)' }}
-          >
-            Email
-          </a>
+        <div className="mt-14 flex flex-col gap-4 border-t border-hair pt-8 text-sm text-ink-3 md:flex-row md:items-center md:justify-between">
+          <p>
+            © {new Date().getFullYear()} EasyChip · {SITE.region}
+          </p>
+          <div className="flex items-center gap-6">
+            <a
+              href={SOCIALS.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-ink"
+            >
+              GitHub
+            </a>
+            <ObfuscatedEmail user={CONTACT_EMAIL.user} domain={CONTACT_EMAIL.domain} />
+          </div>
         </div>
       </div>
-      <style>{`@media (max-width: 768px) { footer { padding: 32px 24px !important; } }`}</style>
     </footer>
   )
 }

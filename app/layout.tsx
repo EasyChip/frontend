@@ -1,69 +1,74 @@
-import type { Metadata } from 'next'
-import { IBM_Plex_Mono, IBM_Plex_Sans, Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Sora, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
-import WaitlistProvider from '@/components/layout/WaitlistProvider'
-import CustomCursor from '@/components/shared/CustomCursor'
-import Navbar from '@/components/layout/Navbar'
-import SmoothScroll from '@/components/landing/SmoothScroll'
-import { ChipGridBackground } from '@/components/ui/chip-grid-background'
 
-const ibmPlexMono = IBM_Plex_Mono({
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
-})
-
-const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-sans',
+  weight: ['600', '700'],
+  variable: '--font-sora',
   display: 'swap',
 })
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['200', '400', '600'],
-  variable: '--font-display',
+  weight: ['400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-jetbrains',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://easychip.vercel.app'),
-  title: 'EasyChip — Natural Language to Silicon',
-  description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog. Open-source stack. No $150K licence required.',
-  icons: {
-    icon: [{ url: '/logo.png', type: 'image/png' }],
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+  metadataBase: new URL('https://www.easychip.org'),
+  title: {
+    default: 'EasyChip — AI-native EDA platform',
+    template: '%s — EasyChip',
+  },
+  description:
+    'One platform for everything around chip signoff. Consolidate your secondary EDA toolchain — the cockpit above your signoff engines.',
+  applicationName: 'EasyChip',
+  alternates: {
+    canonical: './',
   },
   openGraph: {
-    title: 'EasyChip — Natural Language to Silicon',
-    description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog. Open-source stack. No $150K licence required.',
-    url: 'https://easychip.vercel.app',
     siteName: 'EasyChip',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     type: 'website',
+    url: 'https://www.easychip.org',
+    images: [{ url: '/brand/banner.png', width: 1983, height: 793, alt: 'EasyChip — Prompt In. Silicon Out' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'EasyChip — Natural Language to Silicon',
-    description: 'AI-native EDA platform that converts plain English hardware specs into verified, synthesizable Verilog.',
-    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const viewport: Viewport = {
+  themeColor: '#04060F',
+  width: 'device-width',
+  initialScale: 1,
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
-    <html lang="en" className={`dark ${ibmPlexMono.variable} ${ibmPlexSans.variable} ${inter.variable}`}>
-      <body>
-        <ChipGridBackground />
-        <CustomCursor />
-        <Navbar />
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
-        <WaitlistProvider />
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${sora.variable} ${inter.variable} ${jetbrains.variable}`}
+    >
+      <body className="min-h-dvh bg-void text-ink antialiased">
+        {children}
       </body>
     </html>
   )

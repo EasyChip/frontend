@@ -30,9 +30,9 @@ export default function CircuitBackground() {
     let edges: [number, number][] = []
     let pulses: Pulse[] = []
 
-    const AMBER = { r: 200, g: 150, b: 46 }
-    const TRACE_COLOR = 'rgba(200, 150, 46, 0.08)'
-    const NODE_COLOR = 'rgba(200, 150, 46, 0.15)'
+    const AMBER = { r: 0, g: 229, b: 238 } // brand-cyan pulse (name kept for minimal diff)
+    const TRACE_COLOR = 'rgba(0,229,238, 0.08)'
+    const NODE_COLOR = 'rgba(0,229,238, 0.15)'
     const PULSE_COLOR = `rgba(${AMBER.r}, ${AMBER.g}, ${AMBER.b}, 0.6)`
 
     function resize() {
@@ -205,7 +205,7 @@ export default function CircuitBackground() {
         // Glow
         const gradient = ctx!.createRadialGradient(px, py, 0, px, py, 12)
         gradient.addColorStop(0, PULSE_COLOR)
-        gradient.addColorStop(1, 'rgba(200, 150, 46, 0)')
+        gradient.addColorStop(1, 'rgba(0,229,238, 0)')
         ctx!.fillStyle = gradient
         ctx!.beginPath()
         ctx!.arc(px, py, 12, 0, Math.PI * 2)
@@ -233,9 +233,9 @@ export default function CircuitBackground() {
         h * 0.5,
         Math.max(w, h) * 0.7
       )
-      gradient.addColorStop(0, 'rgba(10, 10, 10, 0.6)')
-      gradient.addColorStop(0.5, 'rgba(10, 10, 10, 0.2)')
-      gradient.addColorStop(1, 'rgba(10, 10, 10, 0)')
+      gradient.addColorStop(0, 'rgba(4,6,15, 0.6)')
+      gradient.addColorStop(0.5, 'rgba(4,6,15, 0.2)')
+      gradient.addColorStop(1, 'rgba(4,6,15, 0)')
       ctx!.fillStyle = gradient
       ctx!.fillRect(0, 0, w, h)
 
@@ -259,7 +259,7 @@ export default function CircuitBackground() {
         position: 'fixed',
         inset: 0,
         zIndex: 0,
-        background: '#0A0A0A',
+        background: '#04060F',
         pointerEvents: 'none',
       }}
     />
