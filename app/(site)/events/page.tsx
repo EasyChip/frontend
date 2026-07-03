@@ -4,7 +4,7 @@ import CtaBand from '@/components/ui/CtaBand'
 
 export const metadata: Metadata = {
   title: 'Events',
-  description: 'Where to meet EasyChip — conferences, workshops, and talks.',
+  description: 'Where to meet EasyChip - conferences, workshops, and talks.',
   alternates: { canonical: '/events' },
 }
 
@@ -18,7 +18,7 @@ export default function EventsPage() {
             Meet <span className="text-gradient">EasyChip.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Talks, booths, and workshops — published here once they&apos;re confirmed, not before.
+            Talks, booths, and workshops - published here once they&apos;re confirmed, not before.
             The upcoming calendar is being locked in now.
           </p>
         </div>
@@ -26,12 +26,12 @@ export default function EventsPage() {
 
       <Section eyebrow="Can't wait?" title="Meet us anyway">
         <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
-          You don&apos;t need a conference floor — book a call and we&apos;ll bring the demo to
+          You don&apos;t need a conference floor - book a call and we&apos;ll bring the demo to
           you. If you&apos;d like us at your meetup, university, or team offsite, say the word.
         </p>
       </Section>
 
-      <CtaBand headline="The demo travels well." sub="Book a time — we'll meet you where you are." />
+      <CtaBand headline="The demo travels well." sub="Book a time - we'll meet you where you are." />
     </>
   )
 }

@@ -13,7 +13,7 @@ const items = [
   {
     date: 'July 2026',
     title: 'VisUPF goes open source',
-    body: 'Our visual UPF authoring and low-power static-check tool is going free and open source. The release package is being finalized — early-access members get the download link first.',
+    body: 'Our visual UPF authoring and low-power static-check tool is going free and open source. The release package is being finalized - early-access members get the download link first.',
     href: '/tools/visupf',
     linkLabel: 'About VisUPF',
   },
@@ -29,7 +29,7 @@ export default function NewsroomPage() {
             Milestones, <span className="text-gradient">as they happen.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Only what&apos;s real: launches, partnerships, and wins — announced when they&apos;re
+            Only what&apos;s real: launches, partnerships, and wins - announced when they&apos;re
             won, not when they&apos;re wished for.
           </p>
         </div>

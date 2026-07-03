@@ -34,7 +34,7 @@ export default function ContactForm() {
   if (status === 'sent') {
     return (
       <div className="rounded-lg border border-brand-cyan/30 bg-surface-1 p-8 text-center">
-        <p className="font-display text-xl font-semibold text-ink">Thanks — we&apos;ll be in touch.</p>
+        <p className="font-display text-xl font-semibold text-ink">Thanks - we&apos;ll be in touch.</p>
         <p className="mt-2 text-ink-2">
           Want to skip the queue? Book a time directly below.
         </p>
@@ -79,9 +79,9 @@ export default function ContactForm() {
               Select…
             </option>
             <option>Just me</option>
-            <option>2–10</option>
-            <option>11–50</option>
-            <option>51–200</option>
+            <option>2-10</option>
+            <option>11-50</option>
+            <option>51-200</option>
             <option>200+</option>
           </select>
         </div>
@@ -104,7 +104,7 @@ export default function ContactForm() {
       </div>
 
       {status === 'error' && (
-        <p className="text-sm text-error">That didn&apos;t send — check your email address and try again.</p>
+        <p className="text-sm text-error">That didn&apos;t send - check your email address and try again.</p>
       )}
 
       <button

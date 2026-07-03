@@ -8,7 +8,7 @@ const base =
   'inline-flex items-center justify-center gap-2 rounded-md font-medium transition-all duration-200 whitespace-nowrap'
 
 const variants: Record<Variant, string> = {
-  // DESIGN §6 — solid violet primary, white text, glow + specular sheen on hover. One per view.
+  // DESIGN §6 - solid violet primary, white text, glow + specular sheen on hover. One per view.
   primary:
     'sheen bg-brand-violet text-white hover:shadow-glow-violet-sm hover:brightness-110 active:scale-[0.98] active:brightness-95',
   secondary:

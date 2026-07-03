@@ -14,7 +14,7 @@ import { LiveToolCard } from '@/components/ui/ToolCard'
 import HeroVisual from '@/components/three/HeroVisual'
 
 export const metadata: Metadata = {
-  title: 'EasyChip — AI-native EDA platform',
+  title: 'EasyChip - AI-native EDA platform',
   description: SITE.description,
   alternates: { canonical: '/' },
 }
@@ -34,7 +34,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ---------- 1. Hero — the Prism Die ---------- */}
+      {/* ---------- 1. Hero - the Prism Die ---------- */}
       <section className="relative overflow-hidden">
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 pb-16 pt-16 md:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4 lg:pb-24">
           <div className="relative z-10 text-center lg:text-left">
@@ -44,7 +44,7 @@ export default function Home() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 md:text-xl lg:mx-0">
               EasyChip consolidates the dozens of secondary EDA tools chip teams juggle into one
-              platform — the cockpit above your signoff engines, not a replacement for them.
+              platform - the cockpit above your signoff engines, not a replacement for them.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <Button href={CTA.primary.href} size="lg">
@@ -63,7 +63,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Pipeline strip — the journey as a powered bus */}
+        {/* Pipeline strip - the journey as a powered bus */}
         <div className="relative mx-auto max-w-7xl px-6 pb-20 md:pb-24">
           <div className="relative">
             {/* bus track + traveling signal (desktop) */}
@@ -114,7 +114,7 @@ export default function Home() {
           <Reveal>
             <p className="text-lg leading-relaxed text-ink-2">
               A modern chip team runs forty-plus tools from a handful of vendors just to get to
-              signoff — linting here, CDC there, register maps in a spreadsheet, PDKs wrangled by
+              signoff - linting here, CDC there, register maps in a spreadsheet, PDKs wrangled by
               hand. Every tool is its own island, its own licence, its own context.
             </p>
             <p className="mt-5 text-lg leading-relaxed text-ink">
@@ -152,7 +152,7 @@ export default function Home() {
         }
         lede={
           <>
-            EasyChip sits above proven engines — {WRAPPED_ENGINES.slice(0, 4).join(', ')} and more —
+            EasyChip sits above proven engines - {WRAPPED_ENGINES.slice(0, 4).join(', ')} and more -
             and unifies the secondary toolchain into a single cockpit.
           </>
         }
@@ -161,7 +161,7 @@ export default function Home() {
         <Reveal>
           <div className="mx-auto flex max-w-3xl flex-col items-center">
             <div className="w-full rounded-lg border border-brand-violet/40 bg-gradient-to-r from-brand-violet/15 via-surface-1 to-brand-cyan/10 px-6 py-4 text-center">
-              <span className="font-display font-semibold text-ink">EasyChip — the cockpit</span>
+              <span className="font-display font-semibold text-ink">EasyChip - the cockpit</span>
               <span className="eyebrow ml-3 text-[0.6rem] text-ink-3">Escanor · FlowBit · Silicrate</span>
             </div>
             <div aria-hidden className="h-6 w-px bg-gradient-to-b from-brand-violet/60 to-brand-cyan/40" />
@@ -174,7 +174,7 @@ export default function Home() {
             </div>
             <div aria-hidden className="h-6 w-px bg-gradient-to-b from-brand-cyan/40 to-hair" />
             <div className="w-full rounded-lg border border-hair bg-base px-6 py-4 text-center">
-              <span className="eyebrow text-ink-3">Your deterministic signoff engines — untouched</span>
+              <span className="eyebrow text-ink-3">Your deterministic signoff engines - untouched</span>
             </div>
           </div>
           <div className="mt-8 text-center">
@@ -189,7 +189,7 @@ export default function Home() {
       <Section
         eyebrow="Live today"
         title={`${TOOL_COUNTS.live} tools you can put to work now`}
-        lede="Not a roadmap — shipped. Breadth is the point: every tool below is live, local-first, and built to compose."
+        lede="Not a roadmap - shipped. Breadth is the point: every tool below is live, local-first, and built to compose."
         className="border-t border-hair bg-base"
         wide
       >
@@ -202,7 +202,7 @@ export default function Home() {
         </div>
         <div className="mt-10 text-center">
           <Button href="/tools" variant="secondary" size="lg">
-            See all {TOOL_COUNTS.total} tools — and what&apos;s next
+            See all {TOOL_COUNTS.total} tools - and what&apos;s next
           </Button>
         </div>
       </Section>
@@ -212,12 +212,12 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
           <Reveal>
             <div className="rounded-xl border border-brand-violet/30 bg-gradient-to-br from-brand-violet/15 via-surface-1 to-void p-10 md:p-14">
-              <p className="eyebrow text-[#C79BFF]">Escanor — local-first</p>
+              <p className="eyebrow text-[#C79BFF]">Escanor - local-first</p>
               <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold md:text-4xl">
                 Your IP never leaves your infrastructure.
               </h2>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-2">
-                Escanor runs EasyChip entirely on your own hardware — no data egress, no cloud
+                Escanor runs EasyChip entirely on your own hardware - no data egress, no cloud
                 round-trip. Built for teams under foundry NDAs and IP that can&apos;t leave the
                 building.
               </p>
@@ -246,8 +246,8 @@ export default function Home() {
       <Section eyebrow="How it works" title="Four steps, no rip-and-replace" center>
         <ol className="mx-auto grid max-w-5xl gap-5 md:grid-cols-4">
           {[
-            { step: '01', title: 'Connect', body: 'Point EasyChip at your existing flow — it wraps what you already run.' },
-            { step: '02', title: 'Run', body: 'Linting, constraints, power intent, registers, timing and more — one place.' },
+            { step: '01', title: 'Connect', body: 'Point EasyChip at your existing flow - it wraps what you already run.' },
+            { step: '02', title: 'Run', body: 'Linting, constraints, power intent, registers, timing and more - one place.' },
             { step: '03', title: 'Trust', body: 'Every result is checked by deterministic engines before you rely on it.' },
             { step: '04', title: 'Stay local', body: 'Deploy with Escanor if your IP can’t leave. Nothing ever egresses.' },
           ].map((item, i) => (
@@ -269,7 +269,7 @@ export default function Home() {
             <p className="eyebrow text-ink-3">Where this is going</p>
             <blockquote className="mx-auto mt-5 max-w-3xl font-display text-2xl font-semibold leading-snug text-ink md:text-3xl">
               Silicon should be as easy to create as software. We&apos;re building toward an
-              AI-native path from intent to silicon — with one discipline throughout:{' '}
+              AI-native path from intent to silicon - with one discipline throughout:{' '}
               <span className="text-gradient">AI proposes, deterministic engines verify.</span>
             </blockquote>
             <div className="mt-8">

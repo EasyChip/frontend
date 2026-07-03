@@ -25,7 +25,7 @@ export default function TermsPage() {
           </li>
           <li>
             <span className="text-ink">Your IP stays yours.</span> Nothing you design with
-            EasyChip tools grants us any rights to your designs — and with Escanor, your design
+            EasyChip tools grants us any rights to your designs - and with Escanor, your design
             data never reaches us at all.
           </li>
           <li>

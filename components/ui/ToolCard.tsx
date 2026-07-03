@@ -3,12 +3,12 @@ import type { Tool } from '@/lib/tools'
 import StatusPill from '@/components/ui/StatusPill'
 import GlowCard from '@/components/ui/GlowCard'
 
-/** Rich card for live tools — probe spotlight + border-beam, links to the tool page. */
+/** Rich card for live tools - probe spotlight + border-beam, links to the tool page. */
 export function LiveToolCard({ tool }: { tool: Tool }) {
   return (
     <GlowCard className="h-full border border-hair bg-surface-1 transition-transform duration-200 hover:-translate-y-0.5">
       <div className="relative flex h-full flex-col p-6">
-        {/* corner via — pin-1 marker */}
+        {/* corner via - pin-1 marker */}
         <span
           aria-hidden
           className="absolute right-4 top-4 h-1.5 w-1.5 rounded-full bg-line transition-colors duration-200 group-hover/glow:bg-brand-cyan"
@@ -31,7 +31,7 @@ export function LiveToolCard({ tool }: { tool: Tool }) {
   )
 }
 
-/** Compact tile for in-development tools — name + category only, probe shimmer on hover. */
+/** Compact tile for in-development tools - name + category only, probe shimmer on hover. */
 export function DevToolTile({ tool }: { tool: Tool }) {
   return (
     <div className="group flex items-center justify-between gap-3 rounded-md border border-hair bg-surface-1/60 px-4 py-3 transition-colors duration-200 hover:border-line hover:bg-surface-1">
@@ -46,7 +46,7 @@ export function DevToolTile({ tool }: { tool: Tool }) {
   )
 }
 
-/** Muted tile for future tracks (Analog / RF) — honest roadmap state. */
+/** Muted tile for future tracks (Analog / RF) - honest roadmap state. */
 export function FutureTrackTile({ name }: { name: string }) {
   return (
     <div className="flex items-center justify-between gap-3 rounded-md border border-dashed border-hair bg-transparent px-4 py-3">

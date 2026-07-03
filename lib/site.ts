@@ -8,12 +8,12 @@ export const SITE = {
   url: 'https://www.easychip.org',
   h1: 'Chip Design Made Simpler',
   tagline: 'Prompt In. Silicon Out',
-  positioning: 'The cockpit for chip design — not the engine.',
+  positioning: 'The cockpit for chip design - not the engine.',
   region: 'Built in India, for chip teams worldwide.',
   elevator:
-    'EasyChip is an AI-native platform that consolidates the dozens of secondary EDA tools chip teams juggle into one — the cockpit above your signoff engines, not a replacement for them.',
+    'EasyChip is an AI-native platform that consolidates the dozens of secondary EDA tools chip teams juggle into one - the cockpit above your signoff engines, not a replacement for them.',
   description:
-    'One platform for everything around chip signoff. Consolidate your secondary EDA toolchain — the cockpit above your signoff engines.',
+    'One platform for everything around chip signoff. Consolidate your secondary EDA toolchain - the cockpit above your signoff engines.',
 } as const
 
 export const CTA = {
@@ -21,7 +21,7 @@ export const CTA = {
   secondary: { label: 'Get Early Access', href: '/contact#early-access' },
 } as const
 
-/** Announcement bar — single true message (VisUPF open-source launch). */
+/** Announcement bar - single true message (VisUPF open-source launch). */
 export const ANNOUNCEMENT = {
   message: 'VisUPF is now free and open source',
   linkLabel: 'Get it',
@@ -46,7 +46,7 @@ export const NAV: NavItem[] = [
     label: 'Platform',
     children: [
       { label: 'The Suite', href: '/platform', description: 'Every tool, one cockpit' },
-      { label: 'Escanor', href: '/escanor', description: 'Local-first — your IP never leaves' },
+      { label: 'Escanor', href: '/escanor', description: 'Local-first - your IP never leaves' },
       { label: 'Vision', href: '/vision', description: 'Where this is going' },
     ],
   },
@@ -114,14 +114,14 @@ export const SOCIALS = {
   github: 'https://github.com/EasyChip',
 } as const
 
-/** Obfuscated at render time — never a plain mailto in the HTML. */
+/** Obfuscated at render time - never a plain mailto in the HTML. */
 export const CONTACT_EMAIL = { user: 'hello', domain: 'easychip.org' } as const
 
 /** Cal.com booking (env-driven, personal link as fallback until team link exists). */
 export const CALCOM_URL =
   process.env.NEXT_PUBLIC_CALCOM_BOOKING_URL || 'https://cal.com/rakshit-mishra-5x7tan'
 
-/** Formspree endpoint id (waitlist + contact forms) — carried over from the previous site. */
+/** Formspree endpoint id (waitlist + contact forms) - carried over from the previous site. */
 export const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'mlgpjjbl'
 
 /**

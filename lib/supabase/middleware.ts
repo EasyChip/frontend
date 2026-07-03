@@ -36,7 +36,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Protected routes — redirect unauthenticated users to login
+  // Protected routes - redirect unauthenticated users to login
   const protectedPaths = ['/dashboard', '/onboarding', '/admin']
   const isProtected = protectedPaths.some(p => pathname.startsWith(p))
   if (!user && isProtected) {
@@ -46,7 +46,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Admin routes — only founders can access
+  // Admin routes - only founders can access
   if (user && pathname.startsWith('/admin')) {
     const founderEmails = [
       'f20220056@goa.bits-pilani.ac.in',

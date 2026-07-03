@@ -10,7 +10,7 @@ interface CtaBandProps {
   secondaryHref?: string
 }
 
-/** Full-width closer — ends every page (build spec C4.6). */
+/** Full-width closer - ends every page (build spec C4.6). */
 export default function CtaBand({
   headline = 'Stop stitching your toolchain together.',
   sub = 'See the platform, or run it on your own infrastructure.',
@@ -21,7 +21,7 @@ export default function CtaBand({
 }: CtaBandProps) {
   return (
     <section className="relative overflow-hidden border-t border-hair bg-base">
-      {/* drifting chevron light streak — ambient, one per view */}
+      {/* drifting chevron light streak - ambient, one per view */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 w-40 opacity-[0.06]"

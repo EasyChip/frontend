@@ -10,9 +10,9 @@ import Button from '@/components/ui/Button'
 import StatusPill from '@/components/ui/StatusPill'
 
 export const metadata: Metadata = {
-  title: 'The Suite — one platform for everything around signoff',
+  title: 'The Suite - one platform for everything around signoff',
   description:
-    'Linting, constraints, power intent, verification, implementation, signoff and 3D-IC — the fragmented EDA toolchain, consolidated into one platform above your signoff engines.',
+    'Linting, constraints, power intent, verification, implementation, signoff and 3D-IC - the fragmented EDA toolchain, consolidated into one platform above your signoff engines.',
   alternates: { canonical: '/platform' },
 }
 
@@ -36,7 +36,7 @@ export default function PlatformPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             Chip teams juggle dozens of secondary tools between the big signoff engines. EasyChip
-            consolidates them — {TOOL_COUNTS.total} tools across five stages, one shared context,
+            consolidates them - {TOOL_COUNTS.total} tools across five stages, one shared context,
             one cockpit.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -58,15 +58,15 @@ export default function PlatformPage() {
             The suite sits <span className="text-gradient">above</span> your engines
           </>
         }
-        lede="One platform layer orchestrating five stages of tooling — on top of the deterministic engines that actually sign off silicon."
+        lede="One platform layer orchestrating five stages of tooling - on top of the deterministic engines that actually sign off silicon."
         center
         wide
       >
         <Reveal>
           <div className="mx-auto max-w-5xl">
-            {/* Layer 1 — the cockpit */}
+            {/* Layer 1 - the cockpit */}
             <div className="rounded-lg border border-brand-violet/40 bg-gradient-to-r from-brand-violet/15 via-surface-1 to-brand-cyan/10 p-5 text-center">
-              <p className="eyebrow text-[#C79BFF]">The Cockpit — cross-cutting platform</p>
+              <p className="eyebrow text-[#C79BFF]">The Cockpit - cross-cutting platform</p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 font-display text-lg font-semibold">
                 <Link href="/escanor" className="text-ink transition-colors hover:text-brand-cyan">
                   Escanor
@@ -93,7 +93,7 @@ export default function PlatformPage() {
               />
             </svg>
 
-            {/* Layer 2 — five stage facets */}
+            {/* Layer 2 - five stage facets */}
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {BUCKETS.map((bucket) => {
                 const tools = toolsByBucket(bucket.id)
@@ -125,9 +125,9 @@ export default function PlatformPage() {
               />
             </svg>
 
-            {/* Layer 3 — the engines */}
+            {/* Layer 3 - the engines */}
             <div className="rounded-lg border border-hair bg-base p-5 text-center">
-              <p className="eyebrow text-ink-3">Deterministic engines — orchestrated, never replaced</p>
+              <p className="eyebrow text-ink-3">Deterministic engines - orchestrated, never replaced</p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
                 {WRAPPED_ENGINES.map((engine) => (
                   <span key={engine} className="eyebrow rounded-full bg-surface-2 px-3 py-1.5 text-[0.65rem] text-ink-2">
@@ -147,22 +147,22 @@ export default function PlatformPage() {
       <Section
         eyebrow="We wrap, we don't rebuild"
         title="Keep the engines the industry trusts"
-        lede="EasyChip orchestrates industry-standard engines rather than reinventing them. You keep the tools already trusted for signoff — EasyChip owns the layer above: integration, context, and developer experience."
+        lede="EasyChip orchestrates industry-standard engines rather than reinventing them. You keep the tools already trusted for signoff - EasyChip owns the layer above: integration, context, and developer experience."
         className="border-t border-hair bg-base"
       >
         <div className="grid gap-5 md:grid-cols-3">
           {[
             {
               title: 'One context across every tool',
-              body: 'Today each tool is its own island — its own setup, its own outputs, its own mental model. In EasyChip, every tool reads and writes shared design state, so results compound instead of scattering.',
+              body: 'Today each tool is its own island - its own setup, its own outputs, its own mental model. In EasyChip, every tool reads and writes shared design state, so results compound instead of scattering.',
             },
             {
               title: 'One vendor instead of forty',
-              body: 'The secondary toolchain today means dozens of vendor relationships, licences, and support contracts. A bundle collapses that into one — with one consistent interface over it.',
+              body: 'The secondary toolchain today means dozens of vendor relationships, licences, and support contracts. A bundle collapses that into one - with one consistent interface over it.',
             },
             {
               title: 'Non-threatening by design',
-              body: "We don't compete with your signoff engines — we make everything around them coherent. That means adopting EasyChip is an addition to your flow, not a bet-the-company migration.",
+              body: "We don't compete with your signoff engines - we make everything around them coherent. That means adopting EasyChip is an addition to your flow, not a bet-the-company migration.",
             },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.06}>
@@ -191,7 +191,7 @@ export default function PlatformPage() {
                   <StatusPill status="in-development" />
                 </div>
                 <p className="mt-2 max-w-xl text-ink-2">
-                  Escanor runs the whole platform locally — no data egress, built for teams whose IP
+                  Escanor runs the whole platform locally - no data egress, built for teams whose IP
                   can&apos;t leave the building.
                 </p>
               </div>

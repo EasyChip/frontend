@@ -12,7 +12,7 @@ import Terminal from '@/components/escanor/Terminal'
 import { ShieldCheck, HardDrive, Plug, WifiOff } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Escanor — local-first EDA',
+  title: 'Escanor - local-first EDA',
   description:
     'Run EasyChip entirely on your own infrastructure. Your RTL and PDKs never leave. Built for IP-sensitive teams.',
   alternates: { canonical: '/escanor' },
@@ -27,12 +27,12 @@ const guarantees = [
   {
     icon: ShieldCheck,
     title: 'No data egress',
-    body: 'Zero design-data exfiltration is a hard invariant across the platform — nothing about your RTL, constraints, or PDKs is sent out.',
+    body: 'Zero design-data exfiltration is a hard invariant across the platform - nothing about your RTL, constraints, or PDKs is sent out.',
   },
   {
     icon: WifiOff,
     title: 'Built for isolated environments',
-    body: 'Designed for the networks chip IP actually lives on — including environments that never touch the public internet.',
+    body: 'Designed for the networks chip IP actually lives on - including environments that never touch the public internet.',
   },
   {
     icon: Plug,
@@ -64,7 +64,7 @@ export default function EscanorPage() {
               Your IP <span className="text-gradient">never leaves</span> your infrastructure.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-              Escanor runs EasyChip entirely on your own hardware — a local-first orchestrator for
+              Escanor runs EasyChip entirely on your own hardware - a local-first orchestrator for
               teams whose RTL and PDKs can&apos;t go to the cloud. Early access is opening.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -86,11 +86,11 @@ export default function EscanorPage() {
           <p className="max-w-3xl text-lg leading-relaxed text-ink-2">
             Most AI-EDA tools require shipping your RTL and PDKs to someone else&apos;s cloud. For
             teams under foundry NDAs, defense and aerospace constraints, or with IP that simply
-            can&apos;t leave the building, that&apos;s a hard no — so they miss out on modern
+            can&apos;t leave the building, that&apos;s a hard no - so they miss out on modern
             tooling entirely.
           </p>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink">
-            Escanor exists so the most IP-sensitive teams get the most capable tooling — without a
+            Escanor exists so the most IP-sensitive teams get the most capable tooling - without a
             single byte of design data leaving their control.
           </p>
         </Reveal>
@@ -166,7 +166,7 @@ export default function EscanorPage() {
           {[
             { title: 'Foundry-NDA teams', body: 'PDKs under NDA can’t touch third-party clouds. With Escanor they never have to.' },
             { title: 'Defense & aerospace', body: 'Programs with strict data-handling constraints get modern tooling inside their own perimeter.' },
-            { title: 'IP vendors', body: 'When the design is the product, data egress is an existential risk — so there is none.' },
+            { title: 'IP vendors', body: 'When the design is the product, data egress is an existential risk - so there is none.' },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.06}>
               <div className="h-full rounded-lg border border-hair bg-surface-1 p-7">

@@ -50,7 +50,7 @@ export default function BookMeeting({ context, inline = false }: BookMeetingProp
               })
             }
           } catch {
-            // Silent fail — don't block UX for analytics
+            // Silent fail - don't block UX for analytics
           }
         },
       })

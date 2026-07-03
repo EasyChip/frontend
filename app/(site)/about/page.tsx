@@ -5,7 +5,7 @@ import Reveal from '@/components/ui/Reveal'
 import CtaBand from '@/components/ui/CtaBand'
 
 export const metadata: Metadata = {
-  title: 'About — the team and the thesis',
+  title: 'About - the team and the thesis',
   description: "Why we're consolidating the EDA toolchain, and the team building it.",
   alternates: { canonical: '/about' },
 }
@@ -30,7 +30,7 @@ const values = [
   },
   {
     title: 'Breadth over point solutions',
-    body: 'The toolchain is the problem, so the platform is the answer — one context, not another island.',
+    body: 'The toolchain is the problem, so the platform is the answer - one context, not another island.',
   },
   {
     title: 'Your IP stays yours',
@@ -63,14 +63,14 @@ export default function AboutPage() {
               fragmented tool cycles than actually designing.
             </p>
             <p>
-              The insight: the big signoff engines weren&apos;t the bottleneck —{' '}
+              The insight: the big signoff engines weren&apos;t the bottleneck -{' '}
               <span className="text-ink">everything around them was.</span> The linting, the
               constraints, the register maps, the power intent, the PDK wrangling; dozens of
               disconnected tools with dozens of disconnected contexts.
             </p>
             <p>
               EasyChip is the platform we wished we&apos;d had: one cockpit for the secondary
-              toolchain, built AI-native from the start — with deterministic engines verifying
+              toolchain, built AI-native from the start - with deterministic engines verifying
               every step.
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
           ))}
         </div>
         <p className="mt-8 text-sm text-ink-3">
-          Full team profiles — including advisors and the engineers behind the tools — are on the
+          Full team profiles - including advisors and the engineers behind the tools - are on the
           way.
         </p>
       </Section>

@@ -21,7 +21,7 @@ export async function generateMetadata(props: PageProps<'/tools/[slug]'>): Promi
   const tool = getTool(slug)
   if (!tool) return {}
   return {
-    title: `${tool.name} — ${tool.category}`,
+    title: `${tool.name} - ${tool.category}`,
     description: tool.tagline,
     alternates: { canonical: `/tools/${tool.slug}` },
   }
@@ -42,7 +42,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
     '@type': 'SoftwareApplication',
     name: tool.name,
     applicationCategory: 'DeveloperApplication',
-    applicationSubCategory: `EDA — ${tool.category}`,
+    applicationSubCategory: `EDA - ${tool.category}`,
     operatingSystem: 'Windows, Linux, macOS',
     description: tool.tagline,
     url: `${SITE.url}/tools/${tool.slug}`,
@@ -74,7 +74,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
             {tool.openSource ? (
               VISUPF_DOWNLOAD ? (
                 <Button href={VISUPF_DOWNLOAD} size="lg">
-                  <Download size={18} /> Download — free &amp; open source
+                  <Download size={18} /> Download - free &amp; open source
                 </Button>
               ) : (
                 <Button href="#get-it" size="lg">
@@ -124,7 +124,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
               {tool.name} vs. <span className="text-gradient">the field</span>
             </>
           }
-          lede="Where this tool stands against the open-source path and the commercial incumbents — capability by capability."
+          lede="Where this tool stands against the open-source path and the commercial incumbents - capability by capability."
         >
           <Reveal>
             <ComparisonTable comparison={tool.comparison} toolName={tool.name} />
@@ -164,7 +164,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
               >
                 {String(bucket.order).padStart(2, '0')} {bucket.name}
               </Link>{' '}
-              bucket — one node in the platform flow.
+              bucket - one node in the platform flow.
             </p>
           )}
         </div>
@@ -194,7 +194,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
                 <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                   <div>
                     <p className="text-lg text-ink">
-                      {tool.name} is going open source — the release package is being finalized right now.
+                      {tool.name} is going open source - the release package is being finalized right now.
                     </p>
                     <p className="mt-2 text-sm text-ink-2">
                       Want it the moment it drops? Join early access and we&apos;ll email you the download

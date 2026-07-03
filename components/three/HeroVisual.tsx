@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useInView, useReducedMotion } from 'framer-motion'
 
-/** Static poster — SSR placeholder, reduced-motion and WebGL-failure fallback. */
+/** Static poster - SSR placeholder, reduced-motion and WebGL-failure fallback. */
 function Poster() {
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden">

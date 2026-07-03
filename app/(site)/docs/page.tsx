@@ -17,7 +17,7 @@ const sections = [
   },
   {
     title: 'VisUPF (open source)',
-    body: 'Install, first project, and power-intent authoring guide — shipping with the open-source release.',
+    body: 'Install, first project, and power-intent authoring guide - shipping with the open-source release.',
     status: 'Shipping with release',
   },
   {
@@ -42,7 +42,7 @@ export default function DocsPage() {
             Read first, <span className="text-gradient">then believe.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Engineers evaluate with documentation, not landing pages — we agree. The doc set below
+            Engineers evaluate with documentation, not landing pages - we agree. The doc set below
             is being written alongside the tools; nothing here will be an empty tree.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function DocsPage() {
           <Link href="/contact" className="text-brand-cyan hover:underline underline-offset-4">
             Ask us directly
           </Link>{' '}
-          — we&apos;ll get you real answers instead of a placeholder page.
+          - we&apos;ll get you real answers instead of a placeholder page.
         </p>
         <div className="mt-12 max-w-xl">
           <p className="eyebrow mb-4 text-brand-cyan">Get notified as docs land</p>

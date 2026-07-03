@@ -69,7 +69,7 @@ export default function CircuitBackground() {
         }
       }
 
-      // Create connections — horizontal, vertical, and some diagonal
+      // Create connections - horizontal, vertical, and some diagonal
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
           const idx = row * cols + col
@@ -224,7 +224,7 @@ export default function CircuitBackground() {
         spawnPulse()
       }
 
-      // Radial vignette overlay — darker center for card readability
+      // Radial vignette overlay - darker center for card readability
       const gradient = ctx!.createRadialGradient(
         w * 0.5,
         h * 0.5,

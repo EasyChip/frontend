@@ -26,11 +26,11 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.easychip.org'),
   title: {
-    default: 'EasyChip — AI-native EDA platform',
-    template: '%s — EasyChip',
+    default: 'EasyChip - AI-native EDA platform',
+    template: '%s - EasyChip',
   },
   description:
-    'One platform for everything around chip signoff. Consolidate your secondary EDA toolchain — the cockpit above your signoff engines.',
+    'One platform for everything around chip signoff. Consolidate your secondary EDA toolchain - the cockpit above your signoff engines.',
   applicationName: 'EasyChip',
   alternates: {
     canonical: './',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: 'EasyChip',
     type: 'website',
     url: 'https://www.easychip.org',
-    images: [{ url: '/brand/banner.png', width: 1983, height: 793, alt: 'EasyChip — Prompt In. Silicon Out' }],
+    images: [{ url: '/brand/banner.png', width: 1983, height: 793, alt: 'EasyChip - Prompt In. Silicon Out' }],
   },
   twitter: {
     card: 'summary_large_image',

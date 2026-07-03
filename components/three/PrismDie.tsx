@@ -14,7 +14,7 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
 
 /**
- * The Prism Die — the signature visual.
+ * The Prism Die - the signature visual.
  * A luminous faceted crystal refracting the brand spectrum, hovering above
  * a silicon-die grid: the cockpit above the engines.
  */
@@ -43,7 +43,7 @@ function Crystal() {
   return (
     <Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.7}>
       <group ref={group}>
-        {/* main faceted prism — bright glass, long attenuation so it stays luminous */}
+        {/* main faceted prism - bright glass, long attenuation so it stays luminous */}
         <mesh>
           <icosahedronGeometry args={[CRYSTAL_RADIUS, 0]} />
           <MeshTransmissionMaterial
@@ -65,12 +65,12 @@ function Crystal() {
           />
         </mesh>
 
-        {/* facet wireframe — engineered edge definition, catches bloom */}
+        {/* facet wireframe - engineered edge definition, catches bloom */}
         <lineSegments geometry={edges}>
           <lineBasicMaterial color="#00E5EE" transparent opacity={0.55} />
         </lineSegments>
 
-        {/* emissive heart — the glow the glass carries */}
+        {/* emissive heart - the glow the glass carries */}
         <mesh scale={0.4}>
           <icosahedronGeometry args={[CRYSTAL_RADIUS, 0]} />
           <meshStandardMaterial
@@ -120,7 +120,7 @@ function Scene() {
       <color attach="background" args={['#04060F']} />
       <ambientLight intensity={0.5} />
 
-      {/* brand-spectrum rim lights — the crystal reads as lit, not silhouetted */}
+      {/* brand-spectrum rim lights - the crystal reads as lit, not silhouetted */}
       <pointLight color="#00E5EE" intensity={90} distance={16} decay={2} position={[-4.5, 2.5, 4]} />
       <pointLight color="#C400FE" intensity={70} distance={16} decay={2} position={[4.5, -0.5, 3]} />
       <pointLight color="#0196E8" intensity={60} distance={18} decay={2} position={[0, 3.5, -4]} />
@@ -146,7 +146,7 @@ function Scene() {
       {/* stray carriers */}
       <Sparkles count={40} scale={[8, 4.5, 7]} size={2.4} speed={0.3} opacity={0.55} color="#00E5EE" />
 
-      {/* bright spectrum environment — what the glass actually refracts */}
+      {/* bright spectrum environment - what the glass actually refracts */}
       <Environment resolution={256} frames={1}>
         <Lightformer intensity={9} color="#00E5EE" position={[-5, 2, 2]} scale={[5, 9, 1]} />
         <Lightformer intensity={7} color="#7C08F5" position={[5, 1, 3]} scale={[5, 8, 1]} />

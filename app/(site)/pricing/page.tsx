@@ -10,9 +10,9 @@ import Reveal from '@/components/ui/Reveal'
 import { Check } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Pricing — plans for every kind of chip team',
+  title: 'Pricing - plans for every kind of chip team',
   description:
-    'From an individual designer to an IP-sensitive enterprise — the same platform, shaped for how you work. Talk to us.',
+    'From an individual designer to an IP-sensitive enterprise - the same platform, shaped for how you work. Talk to us.',
   alternates: { canonical: '/pricing' },
 }
 
@@ -22,7 +22,7 @@ const tiers = [
     idealFor: 'Solo designers, labs, students',
     highlight: false,
     points: [
-      'VisUPF — free and open source',
+      'VisUPF - free and open source',
       'Early access to tools as they open',
       'Real documentation, no paywall',
       'Community support',
@@ -49,7 +49,7 @@ const tiers = [
     highlight: false,
     points: [
       'The full platform on your infrastructure',
-      'No data egress — hard invariant',
+      'No data egress - hard invariant',
       'Built for isolated environments',
       'Deployment support & priority engineering',
     ],
@@ -69,7 +69,7 @@ export default function PricingPage() {
             Plans for every kind of <span className="text-gradient">chip team.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            From an individual designer to an IP-sensitive enterprise — the same platform, shaped
+            From an individual designer to an IP-sensitive enterprise - the same platform, shaped
             for how you work. We price by conversation while the platform is in early access:
             talk to us.
           </p>
@@ -120,7 +120,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-8 text-center text-sm text-ink-3">
-          Using EasyChip for research or coursework? Tell us — academic teams are a priority, not
+          Using EasyChip for research or coursework? Tell us - academic teams are a priority, not
           an afterthought. And{' '}
           <Link href="/tools/visupf" className="text-brand-cyan hover:underline underline-offset-4">
             VisUPF is free for everyone
@@ -136,7 +136,7 @@ export default function PricingPage() {
 
       <CtaBand
         headline="Tell us how you work."
-        sub="We'll show you what the platform looks like on your flow — and what it costs for your team."
+        sub="We'll show you what the platform looks like on your flow - and what it costs for your team."
       />
     </>
   )

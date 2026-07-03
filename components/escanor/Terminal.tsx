@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 
 /**
- * Illustrative Escanor session — clearly labeled, no real tool output.
+ * Illustrative Escanor session - clearly labeled, no real tool output.
  * Types once when scrolled into view; renders instantly for reduced motion.
  */
 
@@ -12,7 +12,7 @@ type Line = { text: string; kind: 'cmd' | 'ok' | 'run' | 'note' }
 
 const SCRIPT: Line[] = [
   { text: '$ escanor run lint --local', kind: 'cmd' },
-  { text: '✓ analysis complete — results on this machine only', kind: 'ok' },
+  { text: '✓ analysis complete - results on this machine only', kind: 'ok' },
   { text: '$ escanor flow tapeout.fb', kind: 'cmd' },
   { text: '▸ synth ✓   timing ✓   power-intent ✓   drc …', kind: 'run' },
   { text: '0 bytes left this network.', kind: 'note' },
@@ -50,7 +50,7 @@ export default function Terminal() {
         <span className="h-2.5 w-2.5 rounded-full bg-brand-magenta/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-brand-violet/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-brand-cyan/70" />
-        <span className="eyebrow ml-3 text-[0.6rem] text-ink-3">escanor — local session</span>
+        <span className="eyebrow ml-3 text-[0.6rem] text-ink-3">escanor - local session</span>
       </div>
       <div className="min-h-[190px] px-5 py-4 font-mono text-[13px] leading-7">
         {SCRIPT.map((line, i) => {
@@ -82,7 +82,7 @@ export default function Terminal() {
         )}
       </div>
       <p className="border-t border-hair px-5 py-2.5 text-[0.65rem] text-ink-3">
-        Illustrative session — not actual tool output.
+        Illustrative session - not actual tool output.
       </p>
     </div>
   )

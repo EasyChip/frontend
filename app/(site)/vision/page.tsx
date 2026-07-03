@@ -6,9 +6,9 @@ import Reveal from '@/components/ui/Reveal'
 import CtaBand from '@/components/ui/CtaBand'
 
 export const metadata: Metadata = {
-  title: 'Vision — where EasyChip is going',
+  title: 'Vision - where EasyChip is going',
   description:
-    'Silicon should be as easy to create as software. Our direction for AI-native chip design — AI proposes, deterministic engines verify.',
+    'Silicon should be as easy to create as software. Our direction for AI-native chip design - AI proposes, deterministic engines verify.',
   alternates: { canonical: '/vision' },
 }
 
@@ -16,7 +16,7 @@ const direction = [
   {
     phase: 'Today',
     title: 'The live suite deepens',
-    body: 'Nine tools live across design, verification, implementation, and the platform layer — with the verification and implementation stages filling in around them.',
+    body: 'Nine tools live across design, verification, implementation, and the platform layer - with the verification and implementation stages filling in around them.',
     state: 'now' as const,
   },
   {
@@ -34,7 +34,7 @@ const direction = [
   {
     phase: 'The horizon',
     title: 'Intent to silicon',
-    body: 'An AI-native path from what you mean to what gets manufactured — with deterministic verification gating every step.',
+    body: 'An AI-native path from what you mean to what gets manufactured - with deterministic verification gating every step.',
     state: 'direction' as const,
   },
 ]
@@ -59,7 +59,7 @@ export default function VisionPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             The suite is here today. Our direction: an AI-native path from intent to working
-            silicon. What follows is direction, not shipped product — we label the difference,
+            silicon. What follows is direction, not shipped product - we label the difference,
             always.
           </p>
         </div>
@@ -72,7 +72,7 @@ export default function VisionPage() {
             One discipline runs through everything we build: no output is trusted until a
             deterministic engine has checked it. Lint proves the RTL. Formal proves the
             constraints. Timing proves the paths. That discipline is what separates an AI-native
-            flow from a chatbot writing Verilog — and it&apos;s non-negotiable at every stage,
+            flow from a chatbot writing Verilog - and it&apos;s non-negotiable at every stage,
             today and at the horizon.
           </p>
         </Reveal>
@@ -84,16 +84,16 @@ export default function VisionPage() {
           <Reveal>
             <p className="eyebrow text-[#C79BFF]">The demo</p>
             <h2 className="mx-auto mt-4 max-w-2xl font-display text-2xl font-semibold md:text-3xl">
-              We run this live in demos — not on the public internet.
+              We run this live in demos - not on the public internet.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-ink-2">
-              The intent-to-RTL pipeline is real and working — and it&apos;s core IP, so we
+              The intent-to-RTL pipeline is real and working - and it&apos;s core IP, so we
               don&apos;t expose it on a public page. Book a demo and we&apos;ll run it on a spec
               you choose, live.
             </p>
             <div className="mt-7">
               <Button href={CTA.primary.href} size="lg">
-                See it live — {CTA.primary.label}
+                See it live - {CTA.primary.label}
               </Button>
             </div>
           </Reveal>
@@ -104,7 +104,7 @@ export default function VisionPage() {
       <Section
         eyebrow="Direction"
         title="The road, coarsely"
-        lede="No dates, no promises dressed as plans — just the order in which the platform grows."
+        lede="No dates, no promises dressed as plans - just the order in which the platform grows."
       >
         <ol className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {direction.map((item, i) => (

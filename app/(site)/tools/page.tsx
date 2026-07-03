@@ -16,9 +16,9 @@ import StatusPill from '@/components/ui/StatusPill'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: 'EDA Tools — RTL to GDSII and beyond',
+  title: 'EDA Tools - RTL to GDSII and beyond',
   description:
-    'The full EasyChip toolset across five stages — Design, Verify, Implement, Sign Off, Advance. What is live today and what is coming next.',
+    'The full EasyChip toolset across five stages - Design, Verify, Implement, Sign Off, Advance. What is live today and what is coming next.',
   alternates: { canonical: '/tools' },
 }
 
@@ -42,7 +42,7 @@ export default function ToolsPage() {
             Every stage of silicon. <span className="text-gradient">One platform.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Five stages cover the journey from spec to GDSII to 3D-IC — with analog and RF ahead.
+            Five stages cover the journey from spec to GDSII to 3D-IC - with analog and RF ahead.
             Live tools ship deep; everything else is labeled honestly.
           </p>
           <div className="mt-8">
@@ -128,7 +128,7 @@ export default function ToolsPage() {
                 </div>
               </Reveal>
 
-              {/* Live tools — rich cards */}
+              {/* Live tools - rich cards */}
               {live.length > 0 && (
                 <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                   {live.map((tool, j) => (
@@ -139,12 +139,12 @@ export default function ToolsPage() {
                 </div>
               )}
 
-              {/* In development — names only, by design */}
+              {/* In development - names only, by design */}
               {inDev.length > 0 && (
                 <div className="mt-10">
                   <p className="eyebrow mb-4 text-ink-3">
                     In development{' '}
-                    <span className="text-ink-3/60">· names only until they ship — honest status, always</span>
+                    <span className="text-ink-3/60">· names only until they ship - honest status, always</span>
                   </p>
                   <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {inDev.map((tool) => (
@@ -189,7 +189,7 @@ export default function ToolsPage() {
                   <StatusPill status="in-development" />
                 </div>
                 <p className="mt-2 max-w-xl text-ink-2">
-                  The local-first CLI agent that drives every tool on this page — entirely on your
+                  The local-first CLI agent that drives every tool on this page - entirely on your
                   infrastructure. Your RTL and PDKs never leave.
                 </p>
               </div>

@@ -1,5 +1,5 @@
 /**
- * EasyChip tool registry — the single public-safe source of truth for
+ * EasyChip tool registry - the single public-safe source of truth for
  * every tool surface on the site (/tools, /platform, tool pages, sitemap,
  * structured data).
  *
@@ -51,7 +51,7 @@ export interface Tool {
   /** Live tools have full pages at /tools/[slug]; in-dev tools have none */
   slug: string | null
   bucket: BucketId | 'platform'
-  /** Flow stage label, e.g. "S2 — RTL Quality / Static Signoff" */
+  /** Flow stage label, e.g. "S2 - RTL Quality / Static Signoff" */
   stage: string
   category: string
   status: ToolStatus
@@ -62,7 +62,7 @@ export interface Tool {
   capabilities?: Capability[]
   /** Supported formats / standards / outputs */
   specs?: string[]
-  /** Proven engines/libraries we build on — public credibility signal */
+  /** Proven engines/libraries we build on - public credibility signal */
   engines?: string[]
   /** Open-source distribution (VisUPF) */
   openSource?: {
@@ -75,7 +75,7 @@ export interface Tool {
 }
 
 /* ================================================================
-   The five buckets — RTL → GDSII → 3D-IC, plus Analog & RF ahead.
+   The five buckets - RTL → GDSII → 3D-IC, plus Analog & RF ahead.
    The Platform layer (Escanor, FlowBit, Silicrate…) sits above them.
    ================================================================ */
 
@@ -86,7 +86,7 @@ export const BUCKETS: Bucket[] = [
     order: 1,
     tagline: 'From intent to RTL',
     description:
-      'Turn specs and architecture decisions into clean, reviewable RTL — register maps, interconnect, memory, and clocking included.',
+      'Turn specs and architecture decisions into clean, reviewable RTL - register maps, interconnect, memory, and clocking included.',
     stages: ['S0 Spec & Architecture', 'S1 RTL Design'],
   },
   {
@@ -104,7 +104,7 @@ export const BUCKETS: Bucket[] = [
     order: 3,
     tagline: 'From netlist to routed silicon',
     description:
-      'Synthesis, floorplanning, power delivery, place-and-route, static timing, extraction, and ECO — the physical flow as one connected cockpit.',
+      'Synthesis, floorplanning, power delivery, place-and-route, static timing, extraction, and ECO - the physical flow as one connected cockpit.',
     stages: ['S4 Synthesis & DFT', 'S5 Floorplan → Route → Timing/ECO'],
   },
   {
@@ -113,7 +113,7 @@ export const BUCKETS: Bucket[] = [
     order: 4,
     tagline: 'From analysis to tapeout confidence',
     description:
-      'Power integrity, electromigration, thermal, DRC, LVS, ERC and final GDS checks — the last mile before silicon, without the last-mile chaos.',
+      'Power integrity, electromigration, thermal, DRC, LVS, ERC and final GDS checks - the last mile before silicon, without the last-mile chaos.',
     stages: ['S6 Power Integrity & Reliability', 'S7 Physical Verification & Signoff'],
   },
   {
@@ -128,7 +128,7 @@ export const BUCKETS: Bucket[] = [
 ]
 
 /* ================================================================
-   Live tools — full marketing pages
+   Live tools - full marketing pages
    ================================================================ */
 
 const LIVE_TOOLS: Tool[] = [
@@ -137,18 +137,18 @@ const LIVE_TOOLS: Tool[] = [
     name: 'LintBit',
     slug: 'lintbit',
     bucket: 'verify',
-    stage: 'S2 — RTL Quality / Static Signoff',
+    stage: 'S2 - RTL Quality / Static Signoff',
     category: 'RTL Linting',
     status: 'live',
-    tagline: 'Catch RTL issues before they reach signoff — deep SystemVerilog linting in your editor and your CI.',
+    tagline: 'Catch RTL issues before they reach signoff - deep SystemVerilog linting in your editor and your CI.',
     problem:
       'RTL problems found at signoff cost days; the same problems found while typing cost seconds. Most teams either pay for a heavyweight static-signoff licence or run fragmented open-source checks with no editor integration and no consistent reporting.',
     description:
-      'LintBit is a modern RTL linter built on the pyslang SystemVerilog frontend — with an LSP server for live in-editor diagnostics, SARIF output for CI pipelines, and guided fixers that repair issues instead of just flagging them.',
+      'LintBit is a modern RTL linter built on the pyslang SystemVerilog frontend - with an LSP server for live in-editor diagnostics, SARIF output for CI pipelines, and guided fixers that repair issues instead of just flagging them.',
     capabilities: [
       {
         title: 'Deep SystemVerilog analysis',
-        body: 'Full-fidelity parsing via the slang frontend — the same class of language accuracy the big static tools rely on, on every file you save.',
+        body: 'Full-fidelity parsing via the slang frontend - the same class of language accuracy the big static tools rely on, on every file you save.',
       },
       {
         title: 'Live in your editor',
@@ -184,18 +184,18 @@ const LIVE_TOOLS: Tool[] = [
     name: 'VisUPF',
     slug: 'visupf',
     bucket: 'verify',
-    stage: 'S2 — RTL Quality / Static Signoff',
+    stage: 'S2 - RTL Quality / Static Signoff',
     category: 'Power Intent (UPF)',
     status: 'live',
-    tagline: 'Author and visualize UPF power intent — see your power domains instead of hand-writing brittle files.',
+    tagline: 'Author and visualize UPF power intent - see your power domains instead of hand-writing brittle files.',
     problem:
-      'UPF is written by hand, reviewed by eye, and debugged at integration — where a wrong isolation strategy or a missed level shifter becomes a silicon-threatening bug. Low-power static checking is locked behind enterprise licences.',
+      'UPF is written by hand, reviewed by eye, and debugged at integration - where a wrong isolation strategy or a missed level shifter becomes a silicon-threatening bug. Low-power static checking is locked behind enterprise licences.',
     description:
       'VisUPF gives power intent a visual, checkable workflow: author UPF with structure instead of raw text, see domains, supplies and strategies rendered as a diagram, and run low-power static checks against your RTL before integration. Open source, and free to use.',
     capabilities: [
       {
         title: 'Visual power-domain authoring',
-        body: 'Domains, supply networks, isolation and retention strategies as a live diagram — the review artifact and the source of truth are the same thing.',
+        body: 'Domains, supply networks, isolation and retention strategies as a live diagram - the review artifact and the source of truth are the same thing.',
       },
       {
         title: 'Low-power static checks',
@@ -207,7 +207,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'Open source',
-        body: 'VisUPF is open source — download it, run it, and inspect exactly what it does with your design data.',
+        body: 'VisUPF is open source - download it, run it, and inspect exactly what it does with your design data.',
       },
     ],
     specs: ['UPF power intent', 'Verilog RTL', 'Desktop app (Tauri)', 'Runs locally'],
@@ -234,12 +234,12 @@ const LIVE_TOOLS: Tool[] = [
     name: 'VisSDC',
     slug: 'vissdc',
     bucket: 'verify',
-    stage: 'S2 — RTL Quality / Static Signoff',
+    stage: 'S2 - RTL Quality / Static Signoff',
     category: 'Timing Constraints (SDC)',
     status: 'live',
-    tagline: 'Lint, merge, and formally prove your timing constraints — and draft them from natural language.',
+    tagline: 'Lint, merge, and formally prove your timing constraints - and draft them from natural language.',
     problem:
-      'Bad SDC is invisible until timing signoff disagrees with reality. Constraints drift across blocks, merges silently conflict, and nobody can prove an exception is actually safe — the tools that can are six-figure enterprise seats.',
+      'Bad SDC is invisible until timing signoff disagrees with reality. Constraints drift across blocks, merges silently conflict, and nobody can prove an exception is actually safe - the tools that can are six-figure enterprise seats.',
     description:
       'VisSDC treats constraints as a first-class design artifact: a rule-based linter for SDC hygiene, structured merging across blocks, formal proofs of constraint properties using Yosys and the Z3 solver, and natural-language drafting for the boilerplate.',
     capabilities: [
@@ -249,7 +249,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'Formal constraint proofs',
-        body: 'Formally check constraint properties against the design with Yosys + Z3 — turning "we think this false path is safe" into a proof.',
+        body: 'Formally check constraint properties against the design with Yosys + Z3 - turning "we think this false path is safe" into a proof.',
       },
       {
         title: 'Block-to-top merging',
@@ -257,7 +257,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'Natural-language drafting',
-        body: 'Describe the constraint you mean; get syntactically correct SDC to review — the deterministic checks still gate everything.',
+        body: 'Describe the constraint you mean; get syntactically correct SDC to review - the deterministic checks still gate everything.',
       },
     ],
     specs: ['SDC constraints', 'Verilog RTL', 'Formal engine: Yosys + Z3', 'Runs locally via Escanor'],
@@ -280,14 +280,14 @@ const LIVE_TOOLS: Tool[] = [
     name: 'RegBit',
     slug: 'regbit',
     bucket: 'design',
-    stage: 'S1 — RTL Design',
+    stage: 'S1 - RTL Design',
     category: 'Register Automation',
     status: 'live',
-    tagline: 'One register spec, every output — RTL, UVM RAL, C headers, and documentation that never drift apart.',
+    tagline: 'One register spec, every output - RTL, UVM RAL, C headers, and documentation that never drift apart.',
     problem:
       'Registers live in a spreadsheet, the RTL lives in a repo, the firmware headers live in another, and the documentation lies about all three. Every mismatch is an integration bug waiting for bring-up to find it.',
     description:
-      'RegBit generates everything from a single register specification: synthesizable RTL, UVM register-abstraction-layer models for verification, C headers for firmware, and human-readable documentation — all guaranteed consistent because they share one source.',
+      'RegBit generates everything from a single register specification: synthesizable RTL, UVM register-abstraction-layer models for verification, C headers for firmware, and human-readable documentation - all guaranteed consistent because they share one source.',
     capabilities: [
       {
         title: 'Spec → synthesizable RTL',
@@ -299,7 +299,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'Firmware-ready headers',
-        body: 'C headers generated in lockstep — hardware and software teams read from the same truth.',
+        body: 'C headers generated in lockstep - hardware and software teams read from the same truth.',
       },
       {
         title: 'Docs that stay true',
@@ -327,14 +327,14 @@ const LIVE_TOOLS: Tool[] = [
     name: 'WaveBit',
     slug: 'wavebit',
     bucket: 'verify',
-    stage: 'S3 — Functional Verification',
+    stage: 'S3 - Functional Verification',
     category: 'Waveform Debug',
     status: 'live',
-    tagline: 'A waveform viewer that understands your design — protocol decoding and AI-assisted debug, at desktop speed.',
+    tagline: 'A waveform viewer that understands your design - protocol decoding and AI-assisted debug, at desktop speed.',
     problem:
       'Debug is where verification time actually goes, and the standard options are a dated free viewer or an enterprise debug seat. Raw signal traces make you decode protocols in your head, bit by bit.',
     description:
-      'WaveBit is a modern, desktop-native waveform viewer built in Rust for speed on large dumps — with six protocol decoders that turn raw signals into readable transactions, and AI assistance that helps you interrogate what you\'re seeing.',
+      'WaveBit is a modern, desktop-native waveform viewer built in Rust for speed on large dumps - with six protocol decoders that turn raw signals into readable transactions, and AI assistance that helps you interrogate what you\'re seeing.',
     capabilities: [
       {
         title: 'Built for large waveforms',
@@ -342,7 +342,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'Protocol decoding',
-        body: 'Six protocol decoders render buses as transactions, not bit soup — read what the design did, not just what the wires held.',
+        body: 'Six protocol decoders render buses as transactions, not bit soup - read what the design did, not just what the wires held.',
       },
       {
         title: 'AI-assisted investigation',
@@ -373,14 +373,14 @@ const LIVE_TOOLS: Tool[] = [
     name: 'Stella',
     slug: 'stella',
     bucket: 'implement',
-    stage: 'S4 — Synthesis & DFT',
+    stage: 'S4 - Synthesis & DFT',
     category: 'RTL Synthesis',
     status: 'live',
-    tagline: 'A modern RTL synthesis suite — clean C++ core, built to be scripted, inspected, and trusted.',
+    tagline: 'A modern RTL synthesis suite - clean C++ core, built to be scripted, inspected, and trusted.',
     problem:
       'Synthesis sits at the center of the flow, but for most teams it\'s either a black-box enterprise licence or an open engine that\'s hard to integrate cleanly into modern, reproducible pipelines.',
     description:
-      'Stella is EasyChip\'s synthesis suite: a modern C++17 codebase in the Yosys class of open synthesis technology, designed from the start for platform integration — structured inputs and outputs, scriptability, and reproducible runs inside FlowBit pipelines.',
+      'Stella is EasyChip\'s synthesis suite: a modern C++17 codebase in the Yosys class of open synthesis technology, designed from the start for platform integration - structured inputs and outputs, scriptability, and reproducible runs inside FlowBit pipelines.',
     capabilities: [
       {
         title: 'Modern synthesis core',
@@ -392,7 +392,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'Inspectable by design',
-        body: 'Structured, machine-readable outputs at every stage — what happened in synthesis is data you can query, not a log you grep.',
+        body: 'Structured, machine-readable outputs at every stage - what happened in synthesis is data you can query, not a log you grep.',
       },
     ],
     specs: ['Verilog RTL input', 'Gate-level netlist output', 'FlowBit-native', 'Runs locally via Escanor'],
@@ -414,14 +414,14 @@ const LIVE_TOOLS: Tool[] = [
     name: 'SAC',
     slug: 'sac',
     bucket: 'implement',
-    stage: 'S5c — Timing / Parasitic / ECO',
+    stage: 'S5c - Timing / Parasitic / ECO',
     category: 'Static Timing Analysis',
     status: 'live',
-    tagline: 'A static timing engine with a real Python API — timing analysis you can script, query, and automate.',
+    tagline: 'A static timing engine with a real Python API - timing analysis you can script, query, and automate.',
     problem:
       'STA is the heartbeat of physical design, yet most teams interact with it through TCL incantations and log files. Automating timing-driven decisions means parsing text meant for humans.',
     description:
-      'SAC is a modern static timing analysis engine (C++20) with first-class Python bindings and structured JSON/YAML reporting — so timing data becomes something your scripts, your flows, and your AI tooling can actually consume.',
+      'SAC is a modern static timing analysis engine (C++20) with first-class Python bindings and structured JSON/YAML reporting - so timing data becomes something your scripts, your flows, and your AI tooling can actually consume.',
     capabilities: [
       {
         title: 'Modern STA core',
@@ -456,18 +456,18 @@ const LIVE_TOOLS: Tool[] = [
     name: 'FlowBit',
     slug: 'flowbit',
     bucket: 'platform',
-    stage: 'X — Platform',
+    stage: 'X - Platform',
     category: 'Flow Orchestration',
     status: 'live',
-    tagline: 'Orchestrate your entire EDA flow as a graph — reproducible runs, convergence loops, and full visibility.',
+    tagline: 'Orchestrate your entire EDA flow as a graph - reproducible runs, convergence loops, and full visibility.',
     problem:
       'Real chip flows are DAGs pretending to be Makefiles. Reruns aren\'t reproducible, partial failures mean starting over, and nobody can see where time actually went.',
     description:
-      'FlowBit is a desktop-native DAG orchestrator built in Rust for EDA workloads: compose tools into flow graphs with subgraphs and convergence loops, run them reproducibly, and watch execution live. It\'s the connective tissue of the EasyChip platform — every tool is a FlowBit node.',
+      'FlowBit is a desktop-native DAG orchestrator built in Rust for EDA workloads: compose tools into flow graphs with subgraphs and convergence loops, run them reproducibly, and watch execution live. It\'s the connective tissue of the EasyChip platform - every tool is a FlowBit node.',
     capabilities: [
       {
         title: 'Flows as graphs',
-        body: 'Model the real structure of your flow — dependencies, subgraphs, and iterative convergence loops — instead of flattening it into scripts.',
+        body: 'Model the real structure of your flow - dependencies, subgraphs, and iterative convergence loops - instead of flattening it into scripts.',
       },
       {
         title: 'Reproducible by construction',
@@ -479,7 +479,7 @@ const LIVE_TOOLS: Tool[] = [
       },
       {
         title: 'The platform\'s backbone',
-        body: 'Every EasyChip tool ships as a first-class FlowBit node — one graph from RTL to GDSII.',
+        body: 'Every EasyChip tool ships as a first-class FlowBit node - one graph from RTL to GDSII.',
       },
     ],
     specs: ['DAG flows + subgraphs', 'Convergence loops', 'Desktop app (Tauri + Rust)', 'Runs locally via Escanor'],
@@ -502,18 +502,18 @@ const LIVE_TOOLS: Tool[] = [
     name: 'Silicrate',
     slug: 'silicrate',
     bucket: 'platform',
-    stage: 'X — Platform',
+    stage: 'X - Platform',
     category: 'PDK Management',
     status: 'live',
-    tagline: 'The PDK substrate — immutable, content-addressed process kits with lockfiles, so every run is reproducible.',
+    tagline: 'The PDK substrate - immutable, content-addressed process kits with lockfiles, so every run is reproducible.',
     problem:
-      'PDKs are giant, versioned-by-folder-name, and quietly mutated. When a run can\'t be reproduced six months later, the kit is usually why — and nobody can prove what changed.',
+      'PDKs are giant, versioned-by-folder-name, and quietly mutated. When a run can\'t be reproduced six months later, the kit is usually why - and nobody can prove what changed.',
     description:
-      'Silicrate manages process design kits the way modern software manages dependencies: content-addressed immutable storage, lockfiles that pin exactly what a flow consumed, and a clean API for tools to resolve kit assets — reproducibility as infrastructure, not discipline.',
+      'Silicrate manages process design kits the way modern software manages dependencies: content-addressed immutable storage, lockfiles that pin exactly what a flow consumed, and a clean API for tools to resolve kit assets - reproducibility as infrastructure, not discipline.',
     capabilities: [
       {
         title: 'Content-addressed storage',
-        body: 'Every kit asset is stored by content hash — identical inputs are provably identical, and mutation is impossible by construction.',
+        body: 'Every kit asset is stored by content hash - identical inputs are provably identical, and mutation is impossible by construction.',
       },
       {
         title: 'Lockfiles for silicon',
@@ -541,7 +541,7 @@ const LIVE_TOOLS: Tool[] = [
 ]
 
 /* ================================================================
-   In-development tools — name + category only, by design.
+   In-development tools - name + category only, by design.
    No descriptions until they ship (honest status labels).
    ================================================================ */
 
@@ -630,13 +630,13 @@ export function getBucket(id: BucketId): Bucket {
   return BUCKETS.find((b) => b.id === id)!
 }
 
-/** Future expansion tracks shown in the Advance bucket — no tool names yet, honestly labeled. */
+/** Future expansion tracks shown in the Advance bucket - no tool names yet, honestly labeled. */
 export const FUTURE_TRACKS = [
   { name: 'Analog Design Suite', note: 'In development' },
   { name: 'RF Design Suite', note: 'In development' },
 ]
 
-/** Counts for metric bands — derived, never hand-maintained. */
+/** Counts for metric bands - derived, never hand-maintained. */
 export const TOOL_COUNTS = {
   total: TOOLS.length,
   live: LIVE_TOOLS.length,

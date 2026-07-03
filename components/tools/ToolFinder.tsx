@@ -8,7 +8,7 @@ import StatusPill from '@/components/ui/StatusPill'
 
 /**
  * Client-side quick finder over the full registry. The bucket sections
- * below remain server-rendered HTML — this only enhances navigation.
+ * below remain server-rendered HTML - this only enhances navigation.
  */
 export default function ToolFinder({ tools }: { tools: Tool[] }) {
   const [query, setQuery] = useState('')
@@ -34,7 +34,7 @@ export default function ToolFinder({ tools }: { tools: Tool[] }) {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Find a tool — linting, CDC, timing, DRC…"
+          placeholder="Find a tool - linting, CDC, timing, DRC…"
           aria-label="Search tools"
           className="h-12 w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
         />

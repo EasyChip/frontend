@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { FORMSPREE_ID } from '@/lib/site'
 
-/** Early-access capture — the secondary CTA target sitewide. */
+/** Early-access capture - the secondary CTA target sitewide. */
 export default function WaitlistForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
@@ -29,7 +29,7 @@ export default function WaitlistForm() {
   if (status === 'sent') {
     return (
       <p className="rounded-md border border-brand-cyan/30 bg-surface-1 px-5 py-4 text-ink">
-        You&apos;re on the list. We&apos;ll email you when early access opens — VisUPF download link
+        You&apos;re on the list. We&apos;ll email you when early access opens - VisUPF download link
         included the moment it ships.
       </p>
     )
@@ -59,10 +59,10 @@ export default function WaitlistForm() {
         </button>
       </div>
       {status === 'error' && (
-        <p className="text-sm text-error">That didn&apos;t send — check your email address and try again.</p>
+        <p className="text-sm text-error">That didn&apos;t send - check your email address and try again.</p>
       )}
       <p className="text-xs text-ink-3">
-        Early access members get launches first — starting with the VisUPF open-source release. By
+        Early access members get launches first - starting with the VisUPF open-source release. By
         submitting, you agree to our{' '}
         <Link href="/privacy" className="text-brand-cyan hover:underline underline-offset-4">
           Privacy Policy

@@ -6,7 +6,7 @@ export interface Metric {
 }
 
 /**
- * 3–4 hard numbers, big type (build spec C4.2), counting up on view.
+ * 3-4 hard numbers, big type (build spec C4.2), counting up on view.
  * Every number must be true-by-derivation or labeled via `caveat`.
  */
 export default function MetricBand({ metrics, caveat }: { metrics: Metric[]; caveat?: string }) {

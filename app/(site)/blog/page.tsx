@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const upcoming = [
   {
     tag: 'Thesis',
-    title: 'Why chip teams run 40 tools to tape out one design — and what that costs',
+    title: 'Why chip teams run 40 tools to tape out one design - and what that costs',
   },
   {
     tag: 'Technical',
@@ -38,7 +38,7 @@ export default function BlogPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             Technical deep-dives, the consolidation thesis, and build-in-public notes. The first
-            posts are being written now — here&apos;s what&apos;s on the desk.
+            posts are being written now - here&apos;s what&apos;s on the desk.
           </p>
         </div>
       </section>
@@ -53,7 +53,7 @@ export default function BlogPage() {
           ))}
         </div>
         <div className="mt-12 max-w-xl">
-          <p className="eyebrow mb-4 text-brand-cyan">Don&apos;t refresh — subscribe</p>
+          <p className="eyebrow mb-4 text-brand-cyan">Don&apos;t refresh - subscribe</p>
           <WaitlistForm />
         </div>
       </Section>

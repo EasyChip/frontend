@@ -7,7 +7,7 @@ import ObfuscatedEmail from '@/components/layout/ObfuscatedEmail'
 import { CONTACT_EMAIL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Contact — book a demo',
+  title: 'Contact - book a demo',
   description: 'Book a demo or talk to the team about tools, Escanor, or a partnership.',
   alternates: { canonical: '/contact' },
 }
@@ -44,7 +44,7 @@ export default function ContactPage() {
             <div id="early-access" className="scroll-mt-28 rounded-lg border border-hair bg-surface-1 p-7">
               <p className="eyebrow text-brand-cyan">Get early access</p>
               <p className="mt-3 text-sm leading-relaxed text-ink-2">
-                Not ready for a demo? Join the early-access list — launches land in your inbox
+                Not ready for a demo? Join the early-access list - launches land in your inbox
                 first.
               </p>
               <div className="mt-4">
@@ -58,11 +58,11 @@ export default function ContactPage() {
       <Section
         eyebrow="Or pick a time"
         title="Straight onto the calendar"
-        lede="Grab a slot that works for you — the meeting comes with a live walkthrough of the platform."
+        lede="Grab a slot that works for you - the meeting comes with a live walkthrough of the platform."
         className="border-t border-hair bg-base"
       >
         <div className="h-[640px] overflow-hidden rounded-lg border border-hair bg-surface-1">
-          <BookMeeting inline context="Website — Book a Demo" />
+          <BookMeeting inline context="Website - Book a Demo" />
         </div>
       </Section>
     </>

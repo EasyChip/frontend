@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 
 interface CountUpProps {
-  /** Display value, e.g. "51", "9", "100%", "5" — numeric prefix animates, suffix rides along */
+  /** Display value, e.g. "51", "9", "100%", "5" - numeric prefix animates, suffix rides along */
   value: string
   className?: string
   durationMs?: number
 }
 
-/** Mono count-up with settle — runs once when scrolled into view. */
+/** Mono count-up with settle - runs once when scrolled into view. */
 export default function CountUp({ value, className, durationMs = 1100 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })

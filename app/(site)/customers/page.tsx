@@ -16,10 +16,10 @@ export default function CustomersPage() {
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
           <p className="eyebrow mb-5 text-brand-cyan">Customers</p>
           <h1 className="max-w-3xl font-display text-4xl font-bold md:text-display-l">
-            Real teams, real flows — <span className="text-gradient">stories coming.</span>
+            Real teams, real flows - <span className="text-gradient">stories coming.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            We publish design-partner stories only with permission and only when they&apos;re true —
+            We publish design-partner stories only with permission and only when they&apos;re true -
             no invented customers, no anonymous hype. The first case studies will appear here as
             partners go on the record.
           </p>

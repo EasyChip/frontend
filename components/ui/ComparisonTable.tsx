@@ -3,7 +3,7 @@ import type { Comparison } from '@/lib/tools'
 /**
  * Qualitative benchmark table: EasyChip vs. open-source alternative vs.
  * commercial incumbent. The EasyChip column carries a cyan glow rail.
- * Capability comparison — no invented figures.
+ * Capability comparison - no invented figures.
  */
 export default function ComparisonTable({
   comparison,

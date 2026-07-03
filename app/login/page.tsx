@@ -181,7 +181,7 @@ function LoginContent() {
         position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex',
         fontFamily: 'var(--font-sans)', color: '#F5F7FA', paddingTop: 60,
       }}>
-        {/* Left — visual side */}
+        {/* Left - visual side */}
         <div style={{
           flex: '0 0 55%', display: 'flex', flexDirection: 'column',
           justifyContent: 'center', padding: '64px',
@@ -204,7 +204,7 @@ function LoginContent() {
           </div>
         </div>
 
-        {/* Right — auth card */}
+        {/* Right - auth card */}
         <div style={{
           flex: '1 1 45%', display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center', padding: '32px 24px',
@@ -346,11 +346,11 @@ function LoginContent() {
             color: '#6B7590', fontFamily: 'var(--font-sans)',
           }}>
             EasyChip is building an AI-native EDA platform. The AI model is not yet
-            live — we&apos;re training and validating now. Beta access begins Q3 2026.
+            live - we&apos;re training and validating now. Beta access begins Q3 2026.
           </div>
 
           <p style={{ marginTop: 20, fontSize: 12, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>
-            © 2026 EasyChip — BITS Pilani
+            © 2026 EasyChip - BITS Pilani
           </p>
         </div>
       </div>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const reasons = [
   {
     title: 'A genuinely hard problem',
-    body: 'EDA meets AI meets systems engineering — the kind of technical depth most startups only claim.',
+    body: 'EDA meets AI meets systems engineering - the kind of technical depth most startups only claim.',
   },
   {
     title: 'Real users, real silicon',
@@ -20,7 +20,7 @@ const reasons = [
   },
   {
     title: 'Early enough to matter',
-    body: 'Small team, big surface area. What you build becomes load-bearing — and so do you.',
+    body: 'Small team, big surface area. What you build becomes load-bearing - and so do you.',
   },
 ]
 
@@ -53,7 +53,7 @@ export default function CareersPage() {
 
       <Section eyebrow="Open roles" title="Postings are being finalized" className="border-t border-hair bg-base">
         <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
-          Specific role listings land here soon. Impatient? Good — that&apos;s a signal.{' '}
+          Specific role listings land here soon. Impatient? Good - that&apos;s a signal.{' '}
           <Link href="/contact" className="text-brand-cyan hover:underline underline-offset-4">
             Write to us
           </Link>{' '}

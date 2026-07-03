@@ -21,7 +21,7 @@ export default function PrivacyPage() {
         <ul className="list-disc space-y-3 pl-6">
           <li>
             <span className="text-ink">What we collect:</span> only what you submit through our
-            forms — name, work email, company, role, team size, interest, and how you heard about
+            forms - name, work email, company, role, team size, interest, and how you heard about
             us.
           </li>
           <li>

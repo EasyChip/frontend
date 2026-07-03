@@ -281,7 +281,7 @@ function ProfileRow({ label, value }: { label: string; value: string | null | un
     <div>
       <span style={{ fontSize: 12, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>{label}</span>
       <p style={{ fontSize: 14, color: value ? '#F5F7FA' : '#6B7590', margin: '2px 0 0' }}>
-        {value || '—'}
+        {value || '-'}
       </p>
     </div>
   )

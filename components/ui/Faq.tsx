@@ -8,7 +8,7 @@ export interface FaqItem {
   a: string
 }
 
-/** Objection-handling accordion — smooth height, accessible, one open at a time. */
+/** Objection-handling accordion - smooth height, accessible, one open at a time. */
 export default function Faq({ items }: { items: FaqItem[] }) {
   const [open, setOpen] = useState<number | null>(null)
   const baseId = useId()

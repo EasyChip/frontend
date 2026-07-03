@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   EasyChip Design System — deep-space dark + prism gradient
+   EasyChip Design System - deep-space dark + prism gradient
    Source of truth: internal/DESIGN.md (never deployed)
    ============================================================ */
 
@@ -71,7 +71,7 @@
 }
 
 :root {
-  /* Prism gradient — canonical stops (§3.1), 135° */
+  /* Prism gradient - canonical stops (§3.1), 135° */
   --gradient-brand: linear-gradient(135deg, #00E5EE 0%, #0196E8 28%, #4E55FC 54%, #7C08F5 78%, #C400FE 100%);
   --gradient-text: linear-gradient(90deg, #00E5EE 0%, #7C08F5 100%);
   --gradient-text-full: linear-gradient(90deg, #00E5EE 0%, #7C08F5 70%, #C400FE 100%);
@@ -127,7 +127,7 @@
 
 /* ============ Brand utilities ============ */
 
-/* Gradient text — hero H1 word/line only. Solid cyan fallback (§3.5). */
+/* Gradient text - hero H1 word/line only. Solid cyan fallback (§3.5). */
 @utility text-gradient {
   color: var(--color-brand-cyan);
   background: var(--gradient-text);
@@ -160,7 +160,7 @@
   }
 }
 
-/* Prism gradient fill — "rule of one": once per view */
+/* Prism gradient fill - "rule of one": once per view */
 @utility bg-prism {
   background-image: var(--gradient-brand);
 }
@@ -195,7 +195,7 @@
 
 /* ============ Motion & atmosphere (design revamp) ============ */
 
-/* Branded scrollbar — hairline on void */
+/* Branded scrollbar - hairline on void */
 @layer base {
   html {
     scrollbar-width: thin;
@@ -217,7 +217,7 @@
   }
 }
 
-/* Film grain — 2% materiality layer that kills OLED banding */
+/* Film grain - 2% materiality layer that kills OLED banding */
 @utility film-grain {
   position: fixed;
   inset: 0;
@@ -227,7 +227,7 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Specular sheen sweep — primary buttons ("probe" hover) */
+/* Specular sheen sweep - primary buttons ("probe" hover) */
 @utility sheen {
   position: relative;
   overflow: hidden;
@@ -255,7 +255,7 @@
   }
 }
 
-/* Breathing LED — Live status dots, power-on vias */
+/* Breathing LED - Live status dots, power-on vias */
 @keyframes led-breathe {
   0%, 100% { opacity: 1; box-shadow: 0 0 6px 1px rgba(0, 229, 238, 0.7); }
   50% { opacity: 0.55; box-shadow: 0 0 2px 0 rgba(0, 229, 238, 0.35); }
@@ -318,7 +318,7 @@
   );
 }
 
-/* Drifting chevron light streak — CTA band ambiance */
+/* Drifting chevron light streak - CTA band ambiance */
 @keyframes streak-drift {
   0% { transform: translateX(-30%) skewX(-18deg); }
   100% { transform: translateX(130%) skewX(-18deg); }

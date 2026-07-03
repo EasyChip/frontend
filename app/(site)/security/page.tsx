@@ -22,7 +22,7 @@ export default function SecurityPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             The short version: with Escanor, your designs never leave your infrastructure. The full
-            trust center — data-handling model, subprocessors, and compliance posture — is being
+            trust center - data-handling model, subprocessors, and compliance posture - is being
             finalized and will live on this page.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function SecurityPage() {
             <h2 className="font-display text-lg font-semibold text-ink">Local-first by design</h2>
             <p className="mt-2 leading-relaxed text-ink-2">
               Every EasyChip tool is built to run on your infrastructure. With Escanor, zero
-              design-data exfiltration is a hard invariant — your RTL, constraints, and PDKs are
+              design-data exfiltration is a hard invariant - your RTL, constraints, and PDKs are
               processed on machines you control.
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function SecurityPage() {
             <h2 className="font-display text-lg font-semibold text-ink">Honest compliance posture</h2>
             <p className="mt-2 leading-relaxed text-ink-2">
               We don&apos;t claim certifications we don&apos;t hold. As formal audits and
-              certifications progress, their real status will be published here — not before.
+              certifications progress, their real status will be published here - not before.
             </p>
           </div>
           <div className="rounded-lg border border-hair bg-surface-1 p-7">
@@ -52,7 +52,7 @@ export default function SecurityPage() {
               <Link href="/contact" className="text-brand-cyan hover:underline underline-offset-4">
                 Talk to us
               </Link>{' '}
-              — we&apos;ll walk your security team through the model in detail.
+              - we&apos;ll walk your security team through the model in detail.
             </p>
           </div>
         </div>
