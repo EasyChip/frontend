@@ -83,7 +83,15 @@ export default function PlatformPage() {
               </p>
             </div>
 
-            <div aria-hidden className="mx-auto h-8 w-px bg-gradient-to-b from-brand-violet/60 to-brand-cyan/40" />
+            <svg aria-hidden className="mx-auto block h-8 w-1 overflow-visible" viewBox="0 0 2 32">
+              <line x1="1" y1="0" x2="1" y2="32" stroke="rgba(0,229,238,0.35)" strokeWidth="2" />
+              <line
+                x1="1" y1="0" x2="1" y2="32"
+                stroke="#00E5EE" strokeWidth="2" strokeLinecap="round"
+                strokeDasharray="3 21"
+                style={{ animation: 'trace-pulse 1.4s linear infinite' }}
+              />
+            </svg>
 
             {/* Layer 2 — five stage facets */}
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -107,7 +115,15 @@ export default function PlatformPage() {
               })}
             </div>
 
-            <div aria-hidden className="mx-auto h-8 w-px bg-gradient-to-b from-brand-cyan/40 to-hair" />
+            <svg aria-hidden className="mx-auto block h-8 w-1 overflow-visible" viewBox="0 0 2 32">
+              <line x1="1" y1="0" x2="1" y2="32" stroke="rgba(0,229,238,0.2)" strokeWidth="2" />
+              <line
+                x1="1" y1="0" x2="1" y2="32"
+                stroke="#7C08F5" strokeWidth="2" strokeLinecap="round"
+                strokeDasharray="3 21"
+                style={{ animation: 'trace-pulse 1.4s linear infinite', animationDelay: '0.7s' }}
+              />
+            </svg>
 
             {/* Layer 3 — the engines */}
             <div className="rounded-lg border border-hair bg-base p-5 text-center">

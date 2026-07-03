@@ -20,8 +20,17 @@ export default function CtaBand({
   secondaryHref = CTA.secondary.href,
 }: CtaBandProps) {
   return (
-    <section className="border-t border-hair bg-base">
-      <div className="mx-auto max-w-6xl px-6 py-20 text-center md:py-24">
+    <section className="relative overflow-hidden border-t border-hair bg-base">
+      {/* drifting chevron light streak — ambient, one per view */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 w-40 opacity-[0.06]"
+        style={{
+          backgroundImage: 'var(--gradient-brand)',
+          animation: 'streak-drift 14s linear infinite',
+        }}
+      />
+      <div className="relative mx-auto max-w-6xl px-6 py-20 text-center md:py-24">
         <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold md:text-4xl">
           {headline}
         </h2>

@@ -87,11 +87,18 @@ export default function Navbar() {
                 key={item.label}
                 href={item.href!}
                 className={cn(
-                  'rounded-md px-3 py-2 text-sm transition-colors hover:text-ink',
+                  'relative rounded-md px-3 py-2 text-sm transition-colors hover:text-ink',
                   pathname === item.href ? 'text-ink' : 'text-ink-2'
                 )}
               >
                 {item.label}
+                {pathname === item.href && (
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-3 -bottom-px h-0.5 rounded-full"
+                    style={{ backgroundImage: 'var(--gradient-text)' }}
+                  />
+                )}
               </Link>
             )
           )}

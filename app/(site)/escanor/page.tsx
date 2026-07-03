@@ -8,6 +8,7 @@ import Faq from '@/components/ui/Faq'
 import CtaBand from '@/components/ui/CtaBand'
 import Reveal from '@/components/ui/Reveal'
 import StatusPill from '@/components/ui/StatusPill'
+import Terminal from '@/components/escanor/Terminal'
 import { ShieldCheck, HardDrive, Plug, WifiOff } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -53,26 +54,29 @@ export default function EscanorPage() {
               'radial-gradient(ellipse 55% 45% at 50% 0%, rgba(124,8,245,0.5) 0%, rgba(196,0,254,0.25) 50%, transparent 78%)',
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-24 md:pt-28">
-          <div className="flex items-center justify-center gap-3">
-            <p className="eyebrow text-[#C79BFF]">Local-first</p>
-            <StatusPill status="in-development" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-[1fr_0.9fr]">
+          <div>
+            <div className="flex items-center gap-3">
+              <p className="eyebrow text-[#C79BFF]">Local-first</p>
+              <StatusPill status="in-development" />
+            </div>
+            <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold md:text-display-l">
+              Your IP <span className="text-gradient">never leaves</span> your infrastructure.
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+              Escanor runs EasyChip entirely on your own hardware — a local-first orchestrator for
+              teams whose RTL and PDKs can&apos;t go to the cloud. Early access is opening.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Button href={CTA.secondary.href} size="lg">
+                Request early access
+              </Button>
+              <Button href={CTA.primary.href} variant="secondary" size="lg">
+                {CTA.primary.label}
+              </Button>
+            </div>
           </div>
-          <h1 className="mx-auto mt-4 max-w-3xl font-display text-4xl font-bold md:text-display-l">
-            Your IP <span className="text-gradient">never leaves</span> your infrastructure.
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Escanor runs EasyChip entirely on your own hardware — a local-first orchestrator for
-            teams whose RTL and PDKs can&apos;t go to the cloud. Early access is opening.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Button href={CTA.secondary.href} size="lg">
-              Request early access
-            </Button>
-            <Button href={CTA.primary.href} variant="secondary" size="lg">
-              {CTA.primary.label}
-            </Button>
-          </div>
+          <Terminal />
         </div>
       </section>
 

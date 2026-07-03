@@ -6,8 +6,26 @@ import ObfuscatedEmail from '@/components/layout/ObfuscatedEmail'
 /** Deep footer (build spec C5). */
 export default function Footer() {
   return (
-    <footer className="border-t border-hair bg-void">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+    <footer className="relative overflow-hidden border-t border-hair bg-void">
+      {/* top bus trace with vias at column positions */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0">
+        <div className="mx-auto flex max-w-7xl justify-between px-6">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <span
+              key={i}
+              className="-mt-[3px] h-[7px] w-[7px] rounded-full border border-line bg-void"
+            />
+          ))}
+        </div>
+      </div>
+      {/* ghost wordmark watermark */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[11rem] font-bold leading-none tracking-tight text-white/[0.02]"
+      >
+        EASYCHIP
+      </span>
+      <div className="relative mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* Brand block */}
           <div>

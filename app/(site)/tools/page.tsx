@@ -99,8 +99,13 @@ export default function ToolsPage() {
               <Reveal>
                 <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                   <div className="max-w-2xl">
-                    <p className="eyebrow text-ink-3">
-                      <span className="mr-3 font-semibold text-brand-cyan">
+                    <p className="eyebrow flex items-center gap-3 text-ink-3">
+                      {live.length > 0 ? (
+                        <span aria-hidden className="led-dot" />
+                      ) : (
+                        <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
+                      )}
+                      <span className="font-semibold text-brand-cyan">
                         {String(bucket.order).padStart(2, '0')}
                       </span>
                       {bucket.tagline}

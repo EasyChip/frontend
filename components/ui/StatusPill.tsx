@@ -19,11 +19,12 @@ export default function StatusPill({ status, className }: { status: PillStatus; 
   return (
     <span
       className={cn(
-        'eyebrow inline-flex items-center rounded-full px-2.5 py-1 text-[0.65rem]',
+        'eyebrow inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.65rem]',
         styles[status],
         className
       )}
     >
+      {status === 'live' && <span aria-hidden className="led-dot" />}
       {labels[status]}
     </span>
   )
