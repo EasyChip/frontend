@@ -7,6 +7,9 @@ import { SITE, CTA } from '@/lib/site'
 import Button from '@/components/ui/Button'
 import CockpitLaptop from '@/components/home/CockpitLaptop'
 
+/** Prism ramp distributed across the five flow stages (§3.1 stops). */
+const STAGE_HUES = ['#00E5EE', '#0196E8', '#4E55FC', '#7C08F5', '#C400FE'] as const
+
 /** Headline words - last two carry the gradient. */
 const WORDS: { text: string; gradient: boolean }[] = [
   { text: 'Chip', gradient: false },
@@ -95,32 +98,80 @@ export default function HomeHero() {
         </motion.div>
       </div>
 
-      {/* Pipeline strip - the journey as a powered bus */}
-      <div className="relative mx-auto max-w-7xl px-6 pb-20 md:pb-24">
+      {/* The flow - five stages on one bus. Minimal layout, crafted detail:
+          each stage carries its own hue from the prism ramp, live stages are
+          powered on, one signal travels the trace. This is the moat, drawn. */}
+      <div className="relative mx-auto max-w-7xl px-6 pb-20 md:pb-28">
+        <p className="eyebrow mb-10 text-center text-ink-3">
+          One flow · <span className="text-ink-2">spec to 3D-IC</span>
+        </p>
         <div className="relative">
-          <div aria-hidden className="absolute inset-x-8 top-1/2 hidden -translate-y-1/2 lg:block">
-            <div className="h-px w-full bg-hair" />
+          {/* prism trace behind the nodes + traveling signal (desktop) */}
+          <div aria-hidden className="absolute inset-x-12 top-[1.125rem] hidden lg:block">
+            <div
+              className="h-px w-full"
+              style={{
+                background:
+                  'linear-gradient(90deg, transparent 0%, rgba(0,229,238,0.35) 10%, rgba(1,150,232,0.35) 30%, rgba(78,85,252,0.35) 50%, rgba(124,8,245,0.35) 72%, rgba(196,0,254,0.35) 90%, transparent 100%)',
+              }}
+            />
             <span
-              className="absolute top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-brand-cyan shadow-[0_0_10px_2px_rgba(0,229,238,0.6)]"
-              style={{ animation: 'signal-x 7s linear infinite' }}
+              className="absolute top-1/2 h-px w-14 -translate-y-1/2 rounded-full"
+              style={{
+                background: 'linear-gradient(90deg, transparent, #00E5EE)',
+                boxShadow: '0 0 14px 1px rgba(0,229,238,0.45)',
+                animation: 'signal-x 9s linear infinite',
+              }}
             />
           </div>
-          <div className="relative flex flex-wrap items-center justify-center gap-x-8 gap-y-3 lg:justify-between">
-            {BUCKETS.map((bucket) => {
+
+          <div className="relative grid grid-cols-2 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+            {BUCKETS.map((bucket, i) => {
               const live = toolsByBucket(bucket.id).filter((t) => t.status === 'live').length
+              const hue = STAGE_HUES[i % STAGE_HUES.length]
               return (
                 <Link
                   key={bucket.id}
                   href={`/tools#bucket-${bucket.id}`}
-                  className="group flex items-center gap-2.5 bg-void px-3 py-1.5 transition-colors duration-200"
+                  className="group relative flex flex-col items-center gap-3"
+                  style={{ '--hue': hue } as React.CSSProperties}
                 >
-                  {live > 0 ? (
-                    <span aria-hidden className="led-dot" />
-                  ) : (
-                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
-                  )}
-                  <span className="text-sm font-light text-ink-2 transition-colors group-hover:text-ink">
-                    {bucket.name}
+                  {/* via node - ring in the stage hue, LED core when live */}
+                  <span
+                    aria-hidden
+                    className="relative flex h-9 w-9 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--hue)_30%,transparent)] bg-void transition-all duration-300 group-hover:border-[color:var(--hue)] group-hover:shadow-[0_0_20px_-4px_var(--hue)]"
+                  >
+                    {live > 0 ? (
+                      <span
+                        className="h-2 w-2 rounded-full"
+                        style={{ background: hue, boxShadow: `0 0 10px 2px ${hue}55` }}
+                      />
+                    ) : (
+                      <span
+                        className="h-2 w-2 rounded-full border opacity-70"
+                        style={{ borderColor: hue }}
+                      />
+                    )}
+                  </span>
+
+                  <span className="flex items-baseline gap-2">
+                    <span className="font-mono text-[0.6rem] text-ink-3">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-sm font-light text-ink-2 transition-colors group-hover:text-ink">
+                      {bucket.name}
+                    </span>
+                  </span>
+
+                  <span
+                    className="font-mono text-[0.58rem] uppercase tracking-[0.14em]"
+                    style={live > 0 ? { color: hue, opacity: 0.85 } : undefined}
+                  >
+                    {live > 0 ? (
+                      `${live} live`
+                    ) : (
+                      <span className="text-ink-3">in development</span>
+                    )}
                   </span>
                 </Link>
               )
