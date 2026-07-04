@@ -48,7 +48,7 @@ export default function AboutPage() {
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
           <p className="eyebrow mb-5 text-brand-cyan">About</p>
-          <h1 className="max-w-3xl font-display text-4xl font-bold md:text-display-l">
+          <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             The cockpit for chip design, <span className="text-gradient">built by chip designers.</span>
           </h1>
         </div>

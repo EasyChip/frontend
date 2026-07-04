@@ -60,7 +60,7 @@ export default function EscanorPage() {
               <p className="eyebrow text-[#C79BFF]">Local-first</p>
               <StatusPill status="in-development" />
             </div>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold md:text-display-l">
+            <h1 className="mt-4 max-w-3xl editorial text-5xl md:text-display-l">
               Your IP <span className="text-gradient">never leaves</span> your infrastructure.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">

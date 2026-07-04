@@ -19,12 +19,12 @@ function StaggeredHeadline({ reduce }: { reduce: boolean }) {
   return (
     <h1
       aria-label="Chip Design Made Simpler"
-      className="mx-auto max-w-4xl font-display text-5xl font-bold leading-[1.02] tracking-tight md:text-display-xl lg:mx-0"
+      className="editorial mx-auto max-w-4xl text-6xl md:text-[5.5rem] lg:mx-0"
     >
       {WORDS.map((word, i) => (
-        <span key={word.text} aria-hidden className="inline-block overflow-hidden pb-1 align-bottom">
+        <span key={word.text} aria-hidden className="inline-block overflow-hidden pb-1.5 align-bottom">
           <motion.span
-            className={`inline-block ${word.gradient ? 'text-gradient-full' : ''} ${i > 0 ? 'ml-[0.28em]' : ''}`}
+            className={`inline-block ${word.gradient ? 'text-gradient-full italic pr-[0.06em]' : ''} ${i > 0 ? 'ml-[0.24em]' : ''}`}
             initial={reduce ? false : { y: '110%' }}
             animate={{ y: 0 }}
             transition={{ duration: 0.75, delay: 0.12 + i * 0.09, ease: [0.16, 1, 0.3, 1] }}

@@ -12,6 +12,9 @@ import MetricBand from '@/components/ui/MetricBand'
 import { LiveToolCard } from '@/components/ui/ToolCard'
 import HomeHero from '@/components/home/HomeHero'
 import EnginesMarquee from '@/components/home/EnginesMarquee'
+import NarrativeStatement from '@/components/home/NarrativeStatement'
+import PillarShowcase from '@/components/home/PillarShowcase'
+import TheLatest from '@/components/home/TheLatest'
 
 export const metadata: Metadata = {
   title: 'EasyChip - AI-native EDA platform',
@@ -40,43 +43,11 @@ export default function Home() {
       {/* ---------- 1b. Engines credibility strip ---------- */}
       <EnginesMarquee />
 
-      {/* ---------- 2. The problem ---------- */}
-      <Section
-        eyebrow="The problem"
-        title="The work between the engines is where teams lose weeks"
-        className="border-t border-hair bg-base"
-      >
-        <div className="grid gap-10 md:grid-cols-2">
-          <Reveal>
-            <p className="text-lg leading-relaxed text-ink-2">
-              A modern chip team runs forty-plus tools from a handful of vendors just to get to
-              signoff - linting here, CDC there, register maps in a spreadsheet, PDKs wrangled by
-              hand. Every tool is its own island, its own licence, its own context.
-            </p>
-            <p className="mt-5 text-lg leading-relaxed text-ink">
-              The signoff engines aren&apos;t the bottleneck. Everything <em>around</em> them is.
-            </p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-hair bg-hair">
-              <div className="bg-surface-1 p-6">
-                <p className="eyebrow text-ink-3">Today</p>
-                <p className="mt-2 font-display text-2xl font-bold text-ink">A tool sprawl</p>
-                <p className="mt-2 text-sm text-ink-2">
-                  Dozens of point tools, disconnected contexts, licences everywhere.
-                </p>
-              </div>
-              <div className="bg-surface-1 p-6">
-                <p className="eyebrow text-brand-cyan">With EasyChip</p>
-                <p className="mt-2 font-display text-2xl font-bold text-gradient">One cockpit</p>
-                <p className="mt-2 text-sm text-ink-2">
-                  One platform, one shared design context, engines orchestrated underneath.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </Section>
+      {/* ---------- 2. Narrative statement ---------- */}
+      <NarrativeStatement />
+
+      {/* ---------- 2b. Product pillars, illustrated ---------- */}
+      <PillarShowcase />
 
       {/* ---------- 3. The platform in one view ---------- */}
       <Section
@@ -149,8 +120,8 @@ export default function Home() {
           <Reveal>
             <div className="rounded-xl border border-brand-violet/30 bg-gradient-to-br from-brand-violet/15 via-surface-1 to-void p-10 md:p-14">
               <p className="eyebrow text-[#C79BFF]">Escanor - local-first</p>
-              <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold md:text-4xl">
-                Your IP never leaves your infrastructure.
+              <h2 className="editorial mt-4 max-w-2xl text-4xl md:text-5xl">
+                Secure by design. <em className="text-gradient">Local by default.</em>
               </h2>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-2">
                 Escanor runs EasyChip entirely on your own hardware - no data egress, no cloud
@@ -178,26 +149,6 @@ export default function Home() {
         />
       </div>
 
-      {/* ---------- 7. How it works ---------- */}
-      <Section eyebrow="How it works" title="Four steps, no rip-and-replace" center>
-        <ol className="mx-auto grid max-w-5xl gap-5 md:grid-cols-4">
-          {[
-            { step: '01', title: 'Connect', body: 'Point EasyChip at your existing flow - it wraps what you already run.' },
-            { step: '02', title: 'Run', body: 'Linting, constraints, power intent, registers, timing and more - one place.' },
-            { step: '03', title: 'Trust', body: 'Every result is checked by deterministic engines before you rely on it.' },
-            { step: '04', title: 'Stay local', body: 'Deploy with Escanor if your IP can’t leave. Nothing ever egresses.' },
-          ].map((item, i) => (
-            <Reveal key={item.step} delay={i * 0.06}>
-              <li className="h-full rounded-lg border border-hair bg-surface-1 p-6 text-left">
-                <span className="eyebrow text-brand-cyan">{item.step}</span>
-                <h3 className="mt-3 font-display text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">{item.body}</p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-      </Section>
-
       {/* ---------- 8. Vision teaser ---------- */}
       <section className="border-t border-hair bg-base">
         <div className="mx-auto max-w-6xl px-6 py-20 text-center md:py-24">
@@ -216,6 +167,9 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* ---------- The Latest ---------- */}
+      <TheLatest />
 
       {/* ---------- 9. FAQ ---------- */}
       <Section eyebrow="Fair questions" title="Before you ask">

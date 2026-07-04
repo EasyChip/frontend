@@ -68,7 +68,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
             <p className="eyebrow text-brand-cyan">{tool.category}</p>
             <StatusPill status="live" />
           </div>
-          <h1 className="mt-4 font-display text-5xl font-bold md:text-display-l">{tool.name}</h1>
+          <h1 className="mt-4 editorial text-5xl md:text-display-l">{tool.name}</h1>
           <p className="mt-5 max-w-2xl text-xl leading-relaxed text-ink-2">{tool.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             {tool.openSource ? (

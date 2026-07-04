@@ -31,7 +31,7 @@ export default function PlatformPage() {
         />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-24 md:pt-28">
           <p className="eyebrow mb-5 text-brand-cyan">The Suite</p>
-          <h1 className="mx-auto max-w-3xl font-display text-4xl font-bold md:text-display-l">
+          <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Everything around signoff, <span className="text-gradient">in one platform.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">

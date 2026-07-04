@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Sora, Inter, JetBrains_Mono } from 'next/font/google'
+import { Sora, Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google'
 import './globals.css'
 
 const sora = Sora({
@@ -20,6 +20,14 @@ const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-jetbrains',
+  display: 'swap',
+})
+
+const instrument = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument',
   display: 'swap',
 })
 
@@ -65,7 +73,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sora.variable} ${inter.variable} ${jetbrains.variable}`}
+      className={`${sora.variable} ${inter.variable} ${jetbrains.variable} ${instrument.variable}`}
     >
       <body className="min-h-dvh bg-void text-ink antialiased">
         {children}

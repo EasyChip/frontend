@@ -18,7 +18,7 @@ export default function ContactPage() {
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-12 pt-20 text-center md:pt-28">
           <p className="eyebrow mb-5 text-brand-cyan">Contact</p>
-          <h1 className="mx-auto max-w-2xl font-display text-4xl font-bold md:text-display-l">
+          <h1 className="mx-auto max-w-2xl editorial text-5xl md:text-display-l">
             Talk to <span className="text-gradient">the team.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg text-ink-2">

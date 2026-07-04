@@ -8,6 +8,7 @@
 @theme {
   /* ---- Type ---- */
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-editorial: var(--font-instrument), Georgia, 'Times New Roman', serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, 'JetBrains Mono', monospace;
 
@@ -163,6 +164,21 @@
 /* Prism gradient fill - "rule of one": once per view */
 @utility bg-prism {
   background-image: var(--gradient-brand);
+}
+
+/* Editorial display voice - serif headlines, weight 400, calm authority.
+   The italic form carries the gradient accent word. */
+@utility editorial {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.06;
+
+  & em,
+  & i {
+    font-style: italic;
+    letter-spacing: 0;
+  }
 }
 
 /* Mono uppercase eyebrow (§4.2) */

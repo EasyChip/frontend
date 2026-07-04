@@ -65,7 +65,7 @@ export default function PricingPage() {
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 text-center md:pt-28">
           <p className="eyebrow mb-5 text-brand-cyan">Pricing</p>
-          <h1 className="mx-auto max-w-3xl font-display text-4xl font-bold md:text-display-l">
+          <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Plans for every kind of <span className="text-gradient">chip team.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
