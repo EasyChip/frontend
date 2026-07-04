@@ -15,16 +15,19 @@ const team = [
     name: 'Rakshit Mishra',
     role: 'Co-founder & CEO',
     initials: 'RM',
+    linkedin: 'https://www.linkedin.com/in/rakshitmishra9695/',
   },
   {
     name: 'Parth Parekh',
     role: 'Co-founder & CTO',
     initials: 'PP',
+    linkedin: 'https://www.linkedin.com/in/parth-parekh-131820357/',
   },
   {
     name: 'Sohil Khan',
     role: 'Co-founder & COO · Head of AI Research',
     initials: 'SK',
+    linkedin: 'https://www.linkedin.com/in/sohil-khan/',
   },
 ]
 
@@ -92,6 +95,15 @@ export default function AboutPage() {
                 </div>
                 <h3 className="mt-5 font-display text-xl font-medium text-ink">{person.name}</h3>
                 <p className="mt-1 text-sm text-ink-2">{person.role}</p>
+                <a
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block text-sm font-medium text-ink-3 transition-colors hover:text-brand-cyan"
+                  aria-label={`${person.name} on LinkedIn`}
+                >
+                  LinkedIn →
+                </a>
               </div>
             </Reveal>
           ))}
