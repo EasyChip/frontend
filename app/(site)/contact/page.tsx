@@ -34,12 +34,21 @@ export default function ContactPage() {
           <aside className="space-y-8">
             <div className="rounded-lg border border-hair bg-surface-1 p-7">
               <p className="eyebrow text-ink-3">Direct line</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink-2">
-                Prefer email? Write to us and we&apos;ll route it to the right person.
-              </p>
-              <p className="mt-3 text-sm">
-                <ObfuscatedEmail user={CONTACT_EMAIL.user} domain={CONTACT_EMAIL.domain} />
-              </p>
+              <p className="mt-4 font-display text-base font-medium text-ink">Rakshit Mishra</p>
+              <p className="mt-0.5 text-sm text-ink-2">Founder & CEO</p>
+              <div className="mt-4 space-y-1.5 text-sm">
+                <p>
+                  <ObfuscatedEmail user="rakshit" domain={CONTACT_EMAIL.domain} />
+                </p>
+                <p>
+                  <a
+                    href="tel:+918928263049"
+                    className="text-ink-2 transition-colors hover:text-brand-cyan"
+                  >
+                    +91 8928263049
+                  </a>
+                </p>
+              </div>
             </div>
             <div id="early-access" className="scroll-mt-28 rounded-lg border border-hair bg-surface-1 p-7">
               <p className="eyebrow text-ink-3">Get early access</p>
