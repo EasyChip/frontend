@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { BUCKETS, toolsByBucket } from '@/lib/tools'
 import { SITE, CTA } from '@/lib/site'
 import Button from '@/components/ui/Button'
-import HeroVisual from '@/components/three/HeroVisual'
+import CockpitLaptop from '@/components/home/CockpitLaptop'
 
 /** Headline words - last two carry the gradient. */
 const WORDS: { text: string; gradient: boolean }[] = [
@@ -89,9 +89,9 @@ export default function HomeHero() {
           </motion.div>
         </motion.div>
 
-        {/* The signature: faceted crystal above the die grid */}
-        <motion.div style={visualStyle} className="relative h-72 md:h-96 lg:h-[540px]">
-          <HeroVisual />
+        {/* The laptop: the cockpit, shown as a product surface */}
+        <motion.div style={visualStyle} className="relative flex items-center justify-center">
+          <CockpitLaptop />
         </motion.div>
       </div>
 
