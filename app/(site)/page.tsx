@@ -15,7 +15,7 @@ import PillarShowcase from '@/components/home/PillarShowcase'
 import TheLatest from '@/components/home/TheLatest'
 
 export const metadata: Metadata = {
-  title: 'EasyChip - AI-native EDA platform',
+  title: { absolute: 'EasyChip - AI-native EDA platform' },
   description: SITE.description,
   alternates: { canonical: '/' },
 }
