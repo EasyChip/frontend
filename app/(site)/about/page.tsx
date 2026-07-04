@@ -47,7 +47,7 @@ export default function AboutPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">About</p>
+          <p className="eyebrow mb-5 text-ink-3">About</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             The cockpit for chip design, <span className="text-gradient">built by chip designers.</span>
           </h1>
@@ -82,10 +82,10 @@ export default function AboutPage() {
           {team.map((person, i) => (
             <Reveal key={person.name} delay={i * 0.06}>
               <div className="rounded-lg border border-hair bg-surface-1 p-7">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-prism font-display text-lg font-bold text-white">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-prism font-display text-lg font-medium text-white">
                   {person.initials}
                 </div>
-                <h3 className="mt-5 font-display text-xl font-semibold text-ink">{person.name}</h3>
+                <h3 className="mt-5 font-display text-xl font-medium text-ink">{person.name}</h3>
                 <p className="mt-1 text-sm text-ink-2">{person.role}</p>
               </div>
             </Reveal>
@@ -102,7 +102,7 @@ export default function AboutPage() {
           {values.map((value, i) => (
             <Reveal key={value.title} delay={i * 0.05}>
               <div className="h-full rounded-lg border border-hair bg-surface-1 p-7">
-                <h3 className="font-display text-lg font-semibold text-ink">{value.title}</h3>
+                <h3 className="font-display text-lg font-medium text-ink">{value.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink-2">{value.body}</p>
               </div>
             </Reveal>

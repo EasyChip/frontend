@@ -37,7 +37,7 @@ export default function ToolsPage() {
           }}
         />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">The Toolset</p>
+          <p className="eyebrow mb-5 text-ink-3">The Toolset</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Every stage of silicon. <span className="text-gradient">One platform.</span>
           </h1>
@@ -105,12 +105,12 @@ export default function ToolsPage() {
                       ) : (
                         <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
                       )}
-                      <span className="font-semibold text-brand-cyan">
+                      <span className="font-medium text-brand-cyan">
                         {String(bucket.order).padStart(2, '0')}
                       </span>
                       {bucket.tagline}
                     </p>
-                    <h2 className="gradient-underline mt-3 w-fit font-display text-3xl font-bold md:text-4xl">
+                    <h2 className="editorial mt-3 w-fit text-3xl md:text-4xl">
                       {bucket.name}
                     </h2>
                     <p className="mt-6 text-lg leading-relaxed text-ink-2">{bucket.description}</p>
@@ -166,7 +166,7 @@ export default function ToolsPage() {
           <Reveal>
             <div className="max-w-2xl">
               <p className="eyebrow text-[#C79BFF]">✦ The layer above the stages</p>
-              <h2 className="gradient-underline mt-3 w-fit font-display text-3xl font-bold md:text-4xl">
+              <h2 className="editorial mt-3 w-fit text-3xl md:text-4xl">
                 The Cockpit
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-ink-2">
@@ -185,7 +185,7 @@ export default function ToolsPage() {
             >
               <div>
                 <div className="flex items-center gap-3">
-                  <h3 className="font-display text-2xl font-bold text-ink">Escanor</h3>
+                  <h3 className="font-display text-2xl font-medium text-ink">Escanor</h3>
                   <StatusPill status="in-development" />
                 </div>
                 <p className="mt-2 max-w-xl text-ink-2">

@@ -24,7 +24,7 @@ function StaggeredHeadline({ reduce }: { reduce: boolean }) {
       {WORDS.map((word, i) => (
         <span key={word.text} aria-hidden className="inline-block overflow-hidden pb-1.5 align-bottom">
           <motion.span
-            className={`inline-block ${word.gradient ? 'text-gradient-full italic pr-[0.06em]' : ''} ${i > 0 ? 'ml-[0.24em]' : ''}`}
+            className={`inline-block ${word.gradient ? 'text-gradient-full' : ''} ${i > 0 ? 'ml-[0.24em]' : ''}`}
             initial={reduce ? false : { y: '110%' }}
             animate={{ y: 0 }}
             transition={{ duration: 0.75, delay: 0.12 + i * 0.09, ease: [0.16, 1, 0.3, 1] }}
@@ -58,7 +58,7 @@ export default function HomeHero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 pb-16 pt-16 md:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4 lg:pb-24">
         <motion.div style={contentStyle} className="relative z-10 text-center lg:text-left">
           <motion.p
-            className="eyebrow mb-6 text-brand-cyan"
+            className="eyebrow mb-6 text-ink-3"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -73,9 +73,9 @@ export default function HomeHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 md:text-xl lg:mx-0">
-              EasyChip consolidates the dozens of secondary EDA tools chip teams juggle into one
-              platform - the cockpit above your signoff engines, not a replacement for them.
+            <p className="mx-auto mt-7 max-w-xl text-lg font-light leading-relaxed text-ink-2 md:text-xl lg:mx-0">
+              One platform for everything around signoff - the cockpit above the engines you
+              trust, not a replacement for them.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <Button href={CTA.primary.href} size="lg">
@@ -105,25 +105,22 @@ export default function HomeHero() {
               style={{ animation: 'signal-x 7s linear infinite' }}
             />
           </div>
-          <div className="relative flex flex-wrap items-center justify-center gap-2 lg:justify-between">
+          <div className="relative flex flex-wrap items-center justify-center gap-x-8 gap-y-3 lg:justify-between">
             {BUCKETS.map((bucket) => {
               const live = toolsByBucket(bucket.id).filter((t) => t.status === 'live').length
               return (
                 <Link
                   key={bucket.id}
                   href={`/tools#bucket-${bucket.id}`}
-                  className="group relative rounded-md border border-hair bg-surface-1/90 px-5 py-3 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-line hover:bg-surface-2"
+                  className="group flex items-center gap-2.5 bg-void px-3 py-1.5 transition-colors duration-200"
                 >
-                  <span className="flex items-center gap-2">
-                    {live > 0 ? (
-                      <span aria-hidden className="led-dot" />
-                    ) : (
-                      <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
-                    )}
-                    <span className="font-display text-sm font-semibold text-ink">{bucket.name}</span>
-                  </span>
-                  <span className="eyebrow mt-1 block text-[0.55rem] text-ink-3">
-                    {live > 0 ? `${live} live` : 'in development'}
+                  {live > 0 ? (
+                    <span aria-hidden className="led-dot" />
+                  ) : (
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
+                  )}
+                  <span className="text-sm font-light text-ink-2 transition-colors group-hover:text-ink">
+                    {bucket.name}
                   </span>
                 </Link>
               )

@@ -21,7 +21,7 @@ export default function Footer() {
       {/* ghost wordmark watermark */}
       <span
         aria-hidden
-        className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[11rem] font-bold leading-none tracking-tight text-white/[0.02]"
+        className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[11rem] font-medium leading-none tracking-tight text-white/[0.02]"
       >
         EASYCHIP
       </span>
@@ -31,7 +31,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
               <Image src="/brand/logo.png" alt="" width={32} height={22} className="h-6 w-auto" />
-              <span className="font-display text-lg font-bold text-ink">EasyChip</span>
+              <span className="font-display text-lg font-medium text-ink">EasyChip</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-2">{SITE.positioning}</p>
             <p className="eyebrow mt-6 text-ink-3">{SITE.tagline}</p>

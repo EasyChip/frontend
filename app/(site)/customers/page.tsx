@@ -14,7 +14,7 @@ export default function CustomersPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Customers</p>
+          <p className="eyebrow mb-5 text-ink-3">Customers</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Real teams, real flows - <span className="text-gradient">stories coming.</span>
           </h1>

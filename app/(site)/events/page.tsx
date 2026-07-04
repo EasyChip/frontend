@@ -13,7 +13,7 @@ export default function EventsPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Events</p>
+          <p className="eyebrow mb-5 text-ink-3">Events</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Meet <span className="text-gradient">EasyChip.</span>
           </h1>

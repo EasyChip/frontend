@@ -30,11 +30,11 @@ export default function CtaBand({
           animation: 'streak-drift 14s linear infinite',
         }}
       />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 text-center md:py-24">
-        <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold md:text-4xl">
+      <div className="relative mx-auto max-w-6xl px-6 py-24 text-center md:py-32">
+        <h2 className="editorial mx-auto max-w-2xl text-4xl md:text-5xl">
           {headline}
         </h2>
-        {sub && <p className="mx-auto mt-4 max-w-xl text-lg text-ink-2">{sub}</p>}
+        {sub && <p className="mx-auto mt-5 max-w-xl text-lg font-light text-ink-2">{sub}</p>}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Button href={primaryHref} size="lg">
             {primaryLabel}

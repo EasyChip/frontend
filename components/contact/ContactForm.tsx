@@ -34,7 +34,7 @@ export default function ContactForm() {
   if (status === 'sent') {
     return (
       <div className="rounded-lg border border-brand-cyan/30 bg-surface-1 p-8 text-center">
-        <p className="font-display text-xl font-semibold text-ink">Thanks - we&apos;ll be in touch.</p>
+        <p className="font-display text-xl font-medium text-ink">Thanks - we&apos;ll be in touch.</p>
         <p className="mt-2 text-ink-2">
           Want to skip the queue? Book a time directly below.
         </p>

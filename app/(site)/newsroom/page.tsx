@@ -24,7 +24,7 @@ export default function NewsroomPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Newsroom</p>
+          <p className="eyebrow mb-5 text-ink-3">Newsroom</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Milestones, <span className="text-gradient">as they happen.</span>
           </h1>
@@ -40,7 +40,7 @@ export default function NewsroomPage() {
           {items.map((item) => (
             <article key={item.title} className="rounded-lg border border-hair bg-surface-1 p-7">
               <p className="eyebrow text-ink-3">{item.date}</p>
-              <h2 className="mt-2 font-display text-xl font-semibold text-ink">{item.title}</h2>
+              <h2 className="mt-2 font-display text-xl font-medium text-ink">{item.title}</h2>
               <p className="mt-3 max-w-3xl leading-relaxed text-ink-2">{item.body}</p>
               <Link
                 href={item.href}

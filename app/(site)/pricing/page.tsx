@@ -64,7 +64,7 @@ export default function PricingPage() {
       {/* ---------- Hero ---------- */}
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 text-center md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Pricing</p>
+          <p className="eyebrow mb-5 text-ink-3">Pricing</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Plans for every kind of <span className="text-gradient">chip team.</span>
           </h1>
@@ -93,7 +93,7 @@ export default function PricingPage() {
                     Most teams start here
                   </span>
                 )}
-                <h2 className="font-display text-xl font-bold text-ink">{tier.name}</h2>
+                <h2 className="font-display text-xl font-medium text-ink">{tier.name}</h2>
                 <p className="mt-1 text-sm text-ink-3">Ideal for: {tier.idealFor}</p>
                 <p className="eyebrow mt-5 text-ink-3">Deployment</p>
                 <p className="mt-1 text-sm font-medium text-ink-2">{tier.deployment}</p>
@@ -143,7 +143,7 @@ export default function PricingPage() {
                   <th className="eyebrow px-6 py-4 text-ink-3">Included</th>
                   <th className="px-6 py-4 font-medium text-ink-2">Individual / Academic</th>
                   <th className="px-6 py-4">
-                    <span className="font-display font-semibold text-gradient">Team / Startup</span>
+                    <span className="font-display font-medium text-gradient">Team / Startup</span>
                   </th>
                   <th className="px-6 py-4 font-medium text-ink-2">Enterprise (Escanor)</th>
                 </tr>

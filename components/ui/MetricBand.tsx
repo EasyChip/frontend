@@ -24,7 +24,7 @@ export default function MetricBand({ metrics, caveat }: { metrics: Metric[]; cav
                   'repeating-linear-gradient(90deg, var(--color-line) 0 1px, transparent 1px 10px)',
               }}
             />
-            <div className="font-display text-4xl font-bold md:text-5xl">
+            <div className="font-display text-4xl font-light tracking-tight md:text-5xl">
               <CountUp value={m.value} className="text-gradient tabular-nums" />
             </div>
             <div className="eyebrow mt-3 text-ink-3">{m.label}</div>

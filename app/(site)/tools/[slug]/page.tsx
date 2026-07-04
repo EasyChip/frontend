@@ -65,7 +65,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
         />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 md:pt-24">
           <div className="flex items-center gap-3">
-            <p className="eyebrow text-brand-cyan">{tool.category}</p>
+            <p className="eyebrow text-ink-3">{tool.category}</p>
             <StatusPill status="live" />
           </div>
           <h1 className="mt-4 editorial text-5xl md:text-display-l">{tool.name}</h1>
@@ -107,7 +107,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
           {tool.capabilities?.map((cap, i) => (
             <Reveal key={cap.title} delay={i * 0.05}>
               <div className="h-full rounded-lg border border-hair bg-surface-1 p-7">
-                <h3 className="font-display text-lg font-semibold text-ink">{cap.title}</h3>
+                <h3 className="font-display text-lg font-medium text-ink">{cap.title}</h3>
                 <p className="mt-3 leading-relaxed text-ink-2">{cap.body}</p>
               </div>
             </Reveal>

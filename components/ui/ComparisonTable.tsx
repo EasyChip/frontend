@@ -26,7 +26,7 @@ export default function ComparisonTable({
                 className="absolute inset-x-0 top-0 h-0.5"
                 style={{ backgroundImage: 'var(--gradient-text)' }}
               />
-              <span className="font-display text-base font-semibold text-gradient">{toolName}</span>
+              <span className="font-display text-base font-medium text-gradient">{toolName}</span>
             </th>
             <th className="px-5 py-4 font-medium text-ink-2">{comparison.ossName}</th>
             <th className="px-5 py-4 font-medium text-ink-2">{comparison.commercialName}</th>

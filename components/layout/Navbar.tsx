@@ -54,7 +54,7 @@ export default function Navbar() {
         {/* Mark + name */}
         <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${SITE.name} home`}>
           <Image src="/brand/logo.png" alt="" width={32} height={22} className="h-6 w-auto" priority />
-          <span className="font-display text-lg font-bold tracking-tight text-ink">EasyChip</span>
+          <span className="font-display text-lg font-medium tracking-tight text-ink">EasyChip</span>
         </Link>
 
         {/* Desktop links */}
@@ -115,7 +115,7 @@ export default function Navbar() {
           </Link>
           <Link
             href={CTA.primary.href}
-            className="inline-flex h-9 items-center rounded-md bg-brand-violet px-4 text-sm font-medium text-white transition-all hover:shadow-glow-violet-sm hover:brightness-110"
+            className="inline-flex h-9 items-center rounded-full bg-brand-violet px-5 text-sm font-medium text-white transition-all hover:shadow-glow-violet-sm hover:brightness-110"
           >
             {CTA.primary.label}
           </Link>
@@ -180,7 +180,7 @@ export default function Navbar() {
           <div className="sticky bottom-0 border-t border-hair bg-void/95 p-6">
             <Link
               href={CTA.primary.href}
-              className="flex h-12 w-full items-center justify-center rounded-md bg-brand-violet text-base font-medium text-white"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-brand-violet text-base font-medium text-white"
             >
               {CTA.primary.label}
             </Link>

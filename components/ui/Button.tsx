@@ -5,7 +5,7 @@ type Variant = 'primary' | 'secondary' | 'ghost'
 type Size = 'md' | 'lg'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-md font-medium transition-all duration-200 whitespace-nowrap'
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 whitespace-nowrap'
 
 const variants: Record<Variant, string> = {
   // DESIGN §6 - solid violet primary, white text, glow + specular sheen on hover. One per view.
@@ -18,8 +18,8 @@ const variants: Record<Variant, string> = {
 }
 
 const sizes: Record<Size, string> = {
-  md: 'h-10 px-5 text-sm',
-  lg: 'h-12 px-7 text-base',
+  md: 'h-10 px-6 text-sm',
+  lg: 'h-12 px-8 text-[15px]',
 }
 
 interface ButtonProps {

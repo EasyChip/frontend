@@ -30,7 +30,7 @@ export default function PlatformPage() {
           }}
         />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-24 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">The Suite</p>
+          <p className="eyebrow mb-5 text-ink-3">The Suite</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Everything around signoff, <span className="text-gradient">in one platform.</span>
           </h1>
@@ -67,7 +67,7 @@ export default function PlatformPage() {
             {/* Layer 1 - the cockpit */}
             <div className="rounded-lg border border-brand-violet/40 bg-gradient-to-r from-brand-violet/15 via-surface-1 to-brand-cyan/10 p-5 text-center">
               <p className="eyebrow text-[#C79BFF]">The Cockpit - cross-cutting platform</p>
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 font-display text-lg font-semibold">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 font-display text-lg font-medium">
                 <Link href="/escanor" className="text-ink transition-colors hover:text-brand-cyan">
                   Escanor
                 </Link>
@@ -105,7 +105,7 @@ export default function PlatformPage() {
                     className="group rounded-lg border border-hair bg-surface-1 p-4 text-center transition-all hover:-translate-y-0.5 hover:border-line hover:bg-surface-2"
                   >
                     <p className="eyebrow text-brand-cyan">{String(bucket.order).padStart(2, '0')}</p>
-                    <p className="mt-1.5 font-display text-lg font-semibold text-ink">{bucket.name}</p>
+                    <p className="mt-1.5 font-display text-lg font-medium text-ink">{bucket.name}</p>
                     <p className="mt-1.5 text-xs leading-relaxed text-ink-3">{bucket.tagline}</p>
                     <p className="eyebrow mt-3 text-[0.6rem] text-ink-3">
                       {tools.length} tools{liveCount > 0 ? ` · ${liveCount} live` : ''}
@@ -167,7 +167,7 @@ export default function PlatformPage() {
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.06}>
               <div className="h-full rounded-lg border border-hair bg-surface-1 p-7">
-                <h3 className="font-display text-lg font-semibold text-ink">{item.title}</h3>
+                <h3 className="font-display text-lg font-medium text-ink">{item.title}</h3>
                 <p className="mt-3 leading-relaxed text-ink-2">{item.body}</p>
               </div>
             </Reveal>
@@ -185,7 +185,7 @@ export default function PlatformPage() {
             >
               <div>
                 <div className="flex items-center gap-3">
-                  <h3 className="font-display text-2xl font-bold text-ink">
+                  <h3 className="font-display text-2xl font-medium text-ink">
                     Need it on your own infrastructure?
                   </h3>
                   <StatusPill status="in-development" />

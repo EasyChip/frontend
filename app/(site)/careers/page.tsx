@@ -29,7 +29,7 @@ export default function CareersPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Careers</p>
+          <p className="eyebrow mb-5 text-ink-3">Careers</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Build the platform that <span className="text-gradient">consolidates chip design.</span>
           </h1>
@@ -44,7 +44,7 @@ export default function CareersPage() {
         <div className="grid gap-5 md:grid-cols-3">
           {reasons.map((reason) => (
             <div key={reason.title} className="h-full rounded-lg border border-hair bg-surface-1 p-7">
-              <h2 className="font-display text-lg font-semibold text-ink">{reason.title}</h2>
+              <h2 className="font-display text-lg font-medium text-ink">{reason.title}</h2>
               <p className="mt-2 leading-relaxed text-ink-2">{reason.body}</p>
             </div>
           ))}

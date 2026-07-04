@@ -32,7 +32,7 @@ export default function BlogPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Blog</p>
+          <p className="eyebrow mb-5 text-ink-3">Blog</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Writing that <span className="text-gradient">earns its keep.</span>
           </h1>
@@ -48,12 +48,12 @@ export default function BlogPage() {
           {upcoming.map((post) => (
             <div key={post.title} className="rounded-lg border border-dashed border-hair bg-surface-1/60 p-7">
               <span className="eyebrow text-ink-3">{post.tag} · Coming soon</span>
-              <h2 className="mt-3 font-display text-lg font-semibold text-ink-2">{post.title}</h2>
+              <h2 className="mt-3 font-display text-lg font-medium text-ink-2">{post.title}</h2>
             </div>
           ))}
         </div>
         <div className="mt-12 max-w-xl">
-          <p className="eyebrow mb-4 text-brand-cyan">Don&apos;t refresh - subscribe</p>
+          <p className="eyebrow mb-4 text-ink-3">Don&apos;t refresh - subscribe</p>
           <WaitlistForm />
         </div>
       </Section>

@@ -17,7 +17,7 @@ export function LiveToolCard({ tool }: { tool: Tool }) {
           <span className="eyebrow text-ink-3">{tool.category}</span>
           <StatusPill status="live" />
         </div>
-        <h3 className="gradient-underline mt-4 w-fit font-display text-xl font-semibold text-ink">
+        <h3 className="mt-4 w-fit font-display text-xl font-medium tracking-tight text-ink">
           <Link href={`/tools/${tool.slug}`} className="after:absolute after:inset-0">
             {tool.name}
           </Link>
@@ -36,7 +36,7 @@ export function DevToolTile({ tool }: { tool: Tool }) {
   return (
     <div className="group flex items-center justify-between gap-3 rounded-md border border-hair bg-surface-1/60 px-4 py-3 transition-colors duration-200 hover:border-line hover:bg-surface-1">
       <div className="min-w-0">
-        <span className="block truncate font-display text-sm font-semibold text-ink-2 transition-colors group-hover:text-ink">
+        <span className="block truncate font-display text-sm font-medium text-ink-2 transition-colors group-hover:text-ink">
           {tool.name}
         </span>
         <span className="eyebrow text-[0.6rem] text-ink-3">{tool.category}</span>
@@ -50,7 +50,7 @@ export function DevToolTile({ tool }: { tool: Tool }) {
 export function FutureTrackTile({ name }: { name: string }) {
   return (
     <div className="flex items-center justify-between gap-3 rounded-md border border-dashed border-hair bg-transparent px-4 py-3">
-      <span className="font-display text-sm font-semibold text-ink-3">{name}</span>
+      <span className="font-display text-sm font-medium text-ink-3">{name}</span>
       <StatusPill status="roadmap" />
     </div>
   )

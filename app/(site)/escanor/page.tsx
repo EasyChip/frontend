@@ -108,7 +108,7 @@ export default function EscanorPage() {
               <div className="flex h-full gap-5 rounded-lg border border-hair bg-surface-1 p-7">
                 <g.icon size={22} className="mt-1 shrink-0 text-brand-cyan" aria-hidden />
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-ink">{g.title}</h3>
+                  <h3 className="font-display text-lg font-medium text-ink">{g.title}</h3>
                   <p className="mt-2 leading-relaxed text-ink-2">{g.body}</p>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function EscanorPage() {
                 <tr className="border-b border-line">
                   <th className="eyebrow px-5 py-4 text-ink-3">Dimension</th>
                   <th className="px-5 py-4">
-                    <span className="font-display text-base font-semibold text-gradient">
+                    <span className="font-display text-base font-medium text-gradient">
                       Escanor (local-first)
                     </span>
                   </th>
@@ -170,7 +170,7 @@ export default function EscanorPage() {
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.06}>
               <div className="h-full rounded-lg border border-hair bg-surface-1 p-7">
-                <h3 className="font-display text-lg font-semibold text-ink">{item.title}</h3>
+                <h3 className="font-display text-lg font-medium text-ink">{item.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink-2">{item.body}</p>
               </div>
             </Reveal>

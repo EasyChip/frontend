@@ -13,7 +13,7 @@ export default function Error({
   return (
     <div className="flex min-h-[60dvh] flex-col items-center justify-center px-6 text-center">
       <p className="eyebrow text-error">Signal integrity fault</p>
-      <h1 className="mt-4 font-display text-3xl font-bold md:text-4xl">
+      <h1 className="mt-4 font-display text-3xl font-medium md:text-4xl">
         This page hit an <span className="text-gradient">unexpected state.</span>
       </h1>
       <p className="mt-4 max-w-md text-ink-2">

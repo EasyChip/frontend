@@ -1,18 +1,17 @@
 import type { Metadata, Viewport } from 'next'
-import { Sora, Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google'
+import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const sora = Sora({
+// Variable fonts - the full weight axis is loaded so light display weights work.
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['600', '700'],
-  variable: '--font-sora',
+  variable: '--font-inter',
   display: 'swap',
 })
 
-const inter = Inter({
+const interTight = Inter_Tight({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-inter',
+  variable: '--font-inter-tight',
   display: 'swap',
 })
 
@@ -20,14 +19,6 @@ const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-jetbrains',
-  display: 'swap',
-})
-
-const instrument = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument',
   display: 'swap',
 })
 
@@ -73,7 +64,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sora.variable} ${inter.variable} ${jetbrains.variable} ${instrument.variable}`}
+      className={`${inter.variable} ${interTight.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-dvh bg-void text-ink antialiased">
         {children}

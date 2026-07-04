@@ -53,7 +53,7 @@ export default function VisionPage() {
           }}
         />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-24 md:pt-28">
-          <p className="eyebrow mb-5 text-brand-cyan">Where this is going</p>
+          <p className="eyebrow mb-5 text-ink-3">Where this is going</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Silicon should be as easy to create <span className="text-gradient">as software.</span>
           </h1>
@@ -83,7 +83,7 @@ export default function VisionPage() {
         <div className="mx-auto max-w-6xl px-6 py-16 text-center">
           <Reveal>
             <p className="eyebrow text-[#C79BFF]">The demo</p>
-            <h2 className="mx-auto mt-4 max-w-2xl font-display text-2xl font-semibold md:text-3xl">
+            <h2 className="editorial mx-auto mt-4 max-w-2xl text-3xl md:text-4xl">
               We run this live in demos - not on the public internet.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-ink-2">
@@ -122,7 +122,7 @@ export default function VisionPage() {
                     </span>
                   )}
                 </div>
-                <h3 className="mt-4 font-display text-lg font-semibold text-ink">{item.title}</h3>
+                <h3 className="mt-4 font-display text-lg font-medium text-ink">{item.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-2">{item.body}</p>
               </li>
             </Reveal>

@@ -167,12 +167,12 @@ export default function PillarShowcase() {
             )}
           >
             <Reveal>
-              <p className="eyebrow text-brand-cyan">
-                <span className="mr-3 text-ink-3">{pillar.marker}</span>
+              <p className="eyebrow text-ink-3">
+                <span className="mr-3 text-brand-cyan">{pillar.marker}</span>
                 {pillar.eyebrow}
               </p>
               <h3 className="editorial mt-4 text-3xl md:text-5xl">{pillar.title}</h3>
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink-2">{pillar.body}</p>
+              <p className="mt-5 max-w-lg text-lg font-light leading-relaxed text-ink-2">{pillar.body}</p>
               <Link
                 href={pillar.link.href}
                 className="mt-6 inline-block text-sm font-medium text-brand-cyan hover:underline underline-offset-4"

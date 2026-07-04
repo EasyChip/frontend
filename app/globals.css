@@ -6,19 +6,21 @@
    ============================================================ */
 
 @theme {
-  /* ---- Type ---- */
-  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
-  --font-editorial: var(--font-instrument), Georgia, 'Times New Roman', serif;
+  /* ---- Type ----
+     One family, weight contrast only: Inter Tight for display (light,
+     tight-tracked), Inter for body, JetBrains Mono for code. */
+  --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-editorial: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, 'JetBrains Mono', monospace;
 
   /* Type scale (DESIGN §4.1) */
   --text-display-xl: 4.5rem;
-  --text-display-xl--line-height: 1.02;
-  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-xl--line-height: 1.04;
+  --text-display-xl--letter-spacing: -0.03em;
   --text-display-l: 3.5rem;
-  --text-display-l--line-height: 1.05;
-  --text-display-l--letter-spacing: -0.02em;
+  --text-display-l--line-height: 1.06;
+  --text-display-l--letter-spacing: -0.03em;
 
   /* ---- Brand solids (§3.2) ---- */
   --color-brand-cyan: #00E5EE;
@@ -99,8 +101,8 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     color: var(--color-ink);
   }
 
@@ -166,28 +168,29 @@
   background-image: var(--gradient-brand);
 }
 
-/* Editorial display voice - serif headlines, weight 400, calm authority.
-   The italic form carries the gradient accent word. */
+/* Display voice - thin, tight-tracked sans headlines. Calm, lots of air.
+   em/i inside carry the gradient accent, upright and same weight. */
 @utility editorial {
   font-family: var(--font-editorial);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.06;
+  font-weight: 300;
+  letter-spacing: -0.028em;
+  line-height: 1.08;
 
   & em,
   & i {
-    font-style: italic;
-    letter-spacing: 0;
+    font-style: normal;
+    font-weight: inherit;
+    letter-spacing: inherit;
   }
 }
 
-/* Mono uppercase eyebrow (§4.2) */
+/* Mono uppercase eyebrow (§4.2) - quiet overline, not a shout */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   line-height: 1.4;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 

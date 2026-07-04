@@ -21,7 +21,7 @@ export default function NotFound() {
         </g>
       </svg>
       <p className="eyebrow text-brand-cyan">404 · Open net</p>
-      <h1 className="mt-4 font-display text-4xl font-bold md:text-5xl">
+      <h1 className="mt-4 font-display text-4xl font-medium md:text-5xl">
         This trace <span className="text-gradient">doesn&apos;t route.</span>
       </h1>
       <p className="mt-4 max-w-md text-lg text-ink-2">
