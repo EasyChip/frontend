@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Search } from 'lucide-react'
 import type { Tool } from '@/lib/tools'
@@ -9,9 +9,28 @@ import StatusPill from '@/components/ui/StatusPill'
 /**
  * Client-side quick finder over the full registry. The bucket sections
  * below remain server-rendered HTML - this only enhances navigation.
+ * Keyboard: "/" or Ctrl/Cmd+K focuses the field.
  */
 export default function ToolFinder({ tools }: { tools: Tool[] }) {
   const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null
+      const typing = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')
+      if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
+        e.preventDefault()
+        inputRef.current?.focus()
+      }
+      if (e.key === 'Escape') {
+        setQuery('')
+        inputRef.current?.blur()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -31,6 +50,7 @@ export default function ToolFinder({ tools }: { tools: Tool[] }) {
       <div className="flex items-center gap-3 rounded-md border border-line bg-surface-1 px-4 focus-within:border-brand-cyan">
         <Search size={16} className="shrink-0 text-ink-3" aria-hidden />
         <input
+          ref={inputRef}
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -38,6 +58,12 @@ export default function ToolFinder({ tools }: { tools: Tool[] }) {
           aria-label="Search tools"
           className="h-12 w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
         />
+        <kbd
+          aria-hidden
+          className="eyebrow hidden shrink-0 rounded border border-hair bg-surface-2 px-2 py-1 text-[0.6rem] text-ink-3 md:block"
+        >
+          /
+        </kbd>
       </div>
 
       {query.trim().length >= 2 && (

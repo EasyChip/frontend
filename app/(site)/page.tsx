@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { SITE, CTA } from '@/lib/site'
-import { BUCKETS, LIVE, TOOL_COUNTS, toolsByBucket } from '@/lib/tools'
+import { SITE } from '@/lib/site'
+import { BUCKETS, LIVE, TOOL_COUNTS } from '@/lib/tools'
 import { HOME_FAQ } from '@/lib/faq'
 import { WRAPPED_ENGINES } from '@/lib/faq'
 import Button from '@/components/ui/Button'
@@ -11,7 +10,8 @@ import Faq from '@/components/ui/Faq'
 import CtaBand from '@/components/ui/CtaBand'
 import MetricBand from '@/components/ui/MetricBand'
 import { LiveToolCard } from '@/components/ui/ToolCard'
-import HeroVisual from '@/components/three/HeroVisual'
+import HomeHero from '@/components/home/HomeHero'
+import EnginesMarquee from '@/components/home/EnginesMarquee'
 
 export const metadata: Metadata = {
   title: 'EasyChip - AI-native EDA platform',
@@ -34,75 +34,11 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ---------- 1. Hero - the Prism Die ---------- */}
-      <section className="relative overflow-hidden">
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 pb-16 pt-16 md:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4 lg:pb-24">
-          <div className="relative z-10 text-center lg:text-left">
-            <p className="eyebrow mb-6 text-brand-cyan">AI-native EDA platform</p>
-            <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold leading-[1.02] tracking-tight md:text-display-xl lg:mx-0">
-              Chip Design <span className="text-gradient-full">Made Simpler</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 md:text-xl lg:mx-0">
-              EasyChip consolidates the dozens of secondary EDA tools chip teams juggle into one
-              platform - the cockpit above your signoff engines, not a replacement for them.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-              <Button href={CTA.primary.href} size="lg">
-                {CTA.primary.label}
-              </Button>
-              <Button href={CTA.secondary.href} variant="secondary" size="lg">
-                {CTA.secondary.label}
-              </Button>
-            </div>
-            <p className="eyebrow mt-10 text-ink-3">{SITE.tagline}</p>
-          </div>
+      {/* ---------- 1. Hero - the Prism Die (orchestrated client hero) ---------- */}
+      <HomeHero />
 
-          {/* The signature: faceted crystal above the die grid */}
-          <div className="relative h-72 md:h-96 lg:h-[540px]">
-            <HeroVisual />
-          </div>
-        </div>
-
-        {/* Pipeline strip - the journey as a powered bus */}
-        <div className="relative mx-auto max-w-7xl px-6 pb-20 md:pb-24">
-          <div className="relative">
-            {/* bus track + traveling signal (desktop) */}
-            <div aria-hidden className="absolute inset-x-8 top-1/2 hidden -translate-y-1/2 lg:block">
-              <div className="h-px w-full bg-hair" />
-              <span
-                className="absolute top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-brand-cyan shadow-[0_0_10px_2px_rgba(0,229,238,0.6)]"
-                style={{ animation: 'signal-x 7s linear infinite' }}
-              />
-            </div>
-            <div className="relative flex flex-wrap items-center justify-center gap-2 lg:justify-between">
-              {BUCKETS.map((bucket) => {
-                const live = toolsByBucket(bucket.id).filter((t) => t.status === 'live').length
-                return (
-                  <Link
-                    key={bucket.id}
-                    href={`/tools#bucket-${bucket.id}`}
-                    className="group relative rounded-md border border-hair bg-surface-1/90 px-5 py-3 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-line hover:bg-surface-2"
-                  >
-                    <span className="flex items-center gap-2">
-                      {live > 0 ? (
-                        <span aria-hidden className="led-dot" />
-                      ) : (
-                        <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
-                      )}
-                      <span className="font-display text-sm font-semibold text-ink">
-                        {bucket.name}
-                      </span>
-                    </span>
-                    <span className="eyebrow mt-1 block text-[0.55rem] text-ink-3">
-                      {live > 0 ? `${live} live` : 'in development'}
-                    </span>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ---------- 1b. Engines credibility strip ---------- */}
+      <EnginesMarquee />
 
       {/* ---------- 2. The problem ---------- */}
       <Section

@@ -127,6 +127,47 @@ export default function PricingPage() {
           </Link>
           , no tier required.
         </p>
+
+        {/* Compare what's included - qualitative, no dollar figures */}
+        <details className="group mt-12 rounded-lg border border-hair bg-surface-1">
+          <summary className="flex cursor-pointer list-none items-center justify-between px-6 py-5 font-medium text-ink [&::-webkit-details-marker]:hidden">
+            Compare what&apos;s included
+            <span aria-hidden className="text-ink-3 transition-transform duration-200 group-open:rotate-45">
+              +
+            </span>
+          </summary>
+          <div className="overflow-x-auto border-t border-hair">
+            <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-line">
+                  <th className="eyebrow px-6 py-4 text-ink-3">Included</th>
+                  <th className="px-6 py-4 font-medium text-ink-2">Individual / Academic</th>
+                  <th className="px-6 py-4">
+                    <span className="font-display font-semibold text-gradient">Team / Startup</span>
+                  </th>
+                  <th className="px-6 py-4 font-medium text-ink-2">Enterprise (Escanor)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['VisUPF (open source)', 'Included', 'Included', 'Included'],
+                  ['Live tool suite', 'Early access', 'Full team access', 'Full platform'],
+                  ['FlowBit orchestration + Silicrate PDK', '-', 'Included', 'Included'],
+                  ['Escanor local deployment', '-', '-', 'Included - the point'],
+                  ['Data leaves your infrastructure', 'Never (local tools)', 'Never (local tools)', 'Never - hard invariant'],
+                  ['Support', 'Community', 'Direct line to founders', 'Deployment + priority engineering'],
+                ].map(([row, a, b, c]) => (
+                  <tr key={row} className="border-b border-hair last:border-0 hover:bg-surface-2/40">
+                    <td className="px-6 py-3.5 font-medium text-ink">{row}</td>
+                    <td className="px-6 py-3.5 text-ink-2">{a}</td>
+                    <td className="border-x border-brand-violet/15 bg-brand-violet/[0.05] px-6 py-3.5 text-ink">{b}</td>
+                    <td className="px-6 py-3.5 text-ink-2">{c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
       </Section>
 
       {/* ---------- FAQ ---------- */}

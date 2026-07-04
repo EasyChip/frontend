@@ -17,6 +17,10 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
+  // Parent-aware active matching: /tools/lintbit keeps "Tools" lit
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll()
@@ -88,11 +92,11 @@ export default function Navbar() {
                 href={item.href!}
                 className={cn(
                   'relative rounded-md px-3 py-2 text-sm transition-colors hover:text-ink',
-                  pathname === item.href ? 'text-ink' : 'text-ink-2'
+                  isActive(item.href!) ? 'text-ink' : 'text-ink-2'
                 )}
               >
                 {item.label}
-                {pathname === item.href && (
+                {isActive(item.href!) && (
                   <span
                     aria-hidden
                     className="absolute inset-x-3 -bottom-px h-0.5 rounded-full"
@@ -133,16 +137,21 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-void/95 backdrop-blur-xl lg:hidden">
           <div className="flex-1 space-y-6 px-6 py-8">
-            {NAV.map((item) =>
+            {NAV.map((item, gi) =>
               item.children ? (
-                <div key={item.label}>
+                <div
+                  key={item.label}
+                  className="animate-fade-up"
+                  style={{ animationDelay: `${gi * 70}ms` }}
+                >
                   <p className="eyebrow mb-3 text-ink-3">{item.label}</p>
                   <div className="space-y-1">
-                    {item.children.map((child) => (
+                    {item.children.map((child, ci) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block rounded-md px-3 py-2.5 text-lg font-medium text-ink hover:bg-surface-1"
+                        className="animate-fade-up block rounded-md px-3 py-2.5 text-lg font-medium text-ink hover:bg-surface-1"
+                        style={{ animationDelay: `${gi * 70 + ci * 40}ms` }}
                       >
                         {child.label}
                       </Link>
@@ -153,13 +162,18 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href!}
-                  className="block rounded-md px-3 py-2.5 text-lg font-medium text-ink hover:bg-surface-1"
+                  className="animate-fade-up block rounded-md px-3 py-2.5 text-lg font-medium text-ink hover:bg-surface-1"
+                  style={{ animationDelay: `${gi * 70}ms` }}
                 >
                   {item.label}
                 </Link>
               )
             )}
-            <Link href="/login" className="block rounded-md px-3 py-2.5 text-lg font-medium text-ink-2 hover:bg-surface-1">
+            <Link
+              href="/login"
+              className="animate-fade-up block rounded-md px-3 py-2.5 text-lg font-medium text-ink-2 hover:bg-surface-1"
+              style={{ animationDelay: `${NAV.length * 70}ms` }}
+            >
               Log In
             </Link>
           </div>

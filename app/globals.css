@@ -361,4 +361,34 @@
   }
 }
 
+/* Skeleton shimmer - route loading states */
+@keyframes shimmer-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(167, 176, 198, 0.09), transparent);
+    animation: shimmer-sweep 1.5s ease-in-out infinite;
+  }
+}
+
+/* Engines marquee - pauses on hover */
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 30s linear infinite;
+}
+.group\/marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 /* Everything above honors the global reduced-motion kill-switch in @layer base. */
