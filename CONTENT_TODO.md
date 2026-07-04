@@ -8,7 +8,7 @@ exactly where it lands in code. Fill a fact → make the one edit → done.
 | # | Fact needed (Q#) | Where it lands |
 |---|------------------|----------------|
 | 1 | **VisUPF tarball** — drop the `.tar.gz` into `public/downloads/`, then set `VISUPF_DOWNLOAD` in `lib/site.ts` + add license string in `lib/tools.ts` (VisUPF `openSource.license`) | VisUPF page download block + announcement bar |
-| 2 | **Live `@easychip.org` aliases** (Q13) — currently only `hello@` is published (obfuscated) | `lib/site.ts` `CONTACT_EMAIL`; contact page direct-lines block (sales@/press@/careers@/security@ withheld until confirmed) |
+| 2 | **Live `@easychip.org` aliases** (Q13) — currently only `founder@` is published (obfuscated) | `lib/site.ts` `CONTACT_EMAIL`; contact page direct-lines block (sales@/press@/careers@/security@ withheld until confirmed) |
 | 3 | **Privacy/Terms binding text** (Q51–Q53) — interim honest notices are live | `app/(site)/privacy/page.tsx`, `terms/page.tsx` |
 | 4 | **Security page facts** (Q42–Q45): compliance posture, data-handling model, disclosure contact | `app/(site)/security/page.tsx` — page is live but `noindex` + out of nav |
 

@@ -115,7 +115,7 @@ export const SOCIALS = {
 } as const
 
 /** Obfuscated at render time - never a plain mailto in the HTML. */
-export const CONTACT_EMAIL = { user: 'hello', domain: 'easychip.org' } as const
+export const CONTACT_EMAIL = { user: 'founder', domain: 'easychip.org' } as const
 
 /** Cal.com booking (env-driven, personal link as fallback until team link exists). */
 export const CALCOM_URL =
