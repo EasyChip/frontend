@@ -23,12 +23,6 @@ const team = [
     initials: 'PP',
     linkedin: 'https://www.linkedin.com/in/parth-parekh-131820357/',
   },
-  {
-    name: 'Sohil Khan',
-    role: 'Co-founder & COO · Head of AI Research',
-    initials: 'SK',
-    linkedin: 'https://www.linkedin.com/in/sohil-khan/',
-  },
 ]
 
 const values = [
@@ -86,7 +80,7 @@ export default function AboutPage() {
       </Section>
 
       <Section eyebrow="The team" title="Founders" className="border-t border-hair bg-base">
-        <div className="grid gap-5 sm:grid-cols-2 lg:max-w-4xl lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:max-w-2xl">
           {team.map((person, i) => (
             <Reveal key={person.name} delay={i * 0.06}>
               <div className="rounded-lg border border-hair bg-surface-1 p-7">

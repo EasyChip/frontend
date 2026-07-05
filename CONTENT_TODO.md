@@ -19,7 +19,7 @@ exactly where it lands in code. Fill a fact → make the one edit → done.
 | 5 | **Cleared logos + permitted wording** (Q14: NVIDIA Inception, BITS; YC wording caution) | Home logo-wall module (currently replaced by metric band per fallback rule) |
 | 6 | **Grants/awards WON vs pending** (Q15) | `/newsroom` entries + announcement-bar rotation |
 | 7 | **Design partners / quote** (Q16, Q19, Q46) | Home proof module (omitted), `/customers` (out of nav, noindex) |
-| 8 | **Sohil Khan decision** (Q20: show? name ARM?) + bios/photos/LinkedIn (Q21–Q23) | `app/(site)/about/page.tsx` `team` array (currently Rakshit + Parth, initials avatars) |
+| 8 | **Sohil Khan decision** (Q20): DECIDED 2026-07-05 — not shown publicly (was briefly listed, removed on request). Bios/photos (Q21–Q23) still pending | `app/(site)/about/page.tsx` `team` array (Rakshit + Parth, initials avatars) |
 | 9 | **Company LinkedIn page + X handle** (Q10, Q12) | `lib/site.ts` `SOCIALS` + footer Connect column |
 | 10 | **Branded/team Cal.com link** (Q49) | `NEXT_PUBLIC_CALCOM_BOOKING_URL` env (falls back to personal link) |
 | 11 | **Escanor access mechanics** (Q33: download vs request) + platforms (Q34) | `/escanor` CTA block |
