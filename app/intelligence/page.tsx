@@ -96,7 +96,7 @@ export default function IntelligencePage() {
       >
         <SectionBody>
           <Body className="max-w-[62ch] text-base">
-            Ours sits on top of {COUNTS.suite} engines that already produce structured,
+            Ours sits on top of {COUNTS.suite} tools that already produce structured,
             machine-readable context about the design - netlists, clock domains, constraints, power
             intent, timing outcomes. The models act on that context rather than on raw text.
           </Body>

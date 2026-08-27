@@ -27,20 +27,20 @@ Success for this site: an investor finishes it understanding that fifty producti
 
 ## Positioning
 
-**The cockpit, not the engine.** EasyChip does not attempt to displace the core signoff engines from Cadence, Synopsys or Siemens. It takes the forty tools around them — the ones nobody consolidated, nobody modernised and nobody made AI-native — and makes them one product.
+**We rebuild the secondary tier, not the signoff core.** EasyChip does not attempt to displace the core signoff engines from Cadence, Synopsys or Siemens. (Retired 2026-08-27: the shorthand "the cockpit, not the engine" is no longer used anywhere. The site groups its own suite into nine *engines*, so the line told a reader the company does not build the thing every page says it built nine of.) It takes the forty tools around them — the ones nobody consolidated, nobody modernised and nobody made AI-native — and makes them one product.
 
 Four differentiators, in the order the product earns them:
 
-1. **We own the engines.** Fifty tools built in-house across all nine stages, not wrappers over someone else's software. Competitors building agent layers over incumbent software are shipping a feature the incumbent can ship next quarter; owning the engines underneath is not.
+1. **We own the engines.** Fifty tools built in-house across all nine engines, not wrappers over someone else's software. Competitors building agent layers over incumbent software are shipping a feature the incumbent can ship next quarter; owning the engines underneath is not.
 2. **Deterministic by default.** The same input produces a bit-identical result, every run, on every machine. Offline signed licences, no licence daemon.
 3. **Local-first, and the IP never leaves.** Escanor drives the whole flow from the customer's own machine. Air-gapped teams fully supported. No telemetry.
 4. **AI across every stage.** Proprietary models read the structured context fifty engines already emit, so the assistant understands the design rather than the file in front of it.
 
 ## Operating Context
 
-**Nine stages, one shared context.** The flow the product maps to, and the L1 orchestration layer above it:
+**Nine engines, one shared context.** The flow the product maps to, and the L1 orchestration layer above it. *Vocabulary settled 2026-08-27: these nine groups are called **engines**, not stages, on the site and here. Do not reintroduce "stage".*
 
-| | Stage | Tools |
+| | Engine | Tools |
 |---|---|---|
 | L1 | Orchestration | Escanor (local-first CLI) · FlowBit (flow management) · Silicrate (PDK & IP management) |
 | 01 | Spec & Architecture | EasyDesign |
@@ -63,7 +63,7 @@ This taxonomy is product truth. Future work must not re-cut it for visual conven
 
 ## Capabilities and Constraints
 
-**Built and running.** Fifty tools written in-house. All nine stages are complete end to end. The DevOps and ML layers on top are what is being built now.
+**Built and running.** Fifty tools written in-house. All nine engines are complete end to end. The DevOps and ML layers on top are what is being built now.
 
 **Live today** — public and demo-able: **Escanor, FlowBit, LintBit, RegMap (RegBit) and VisUPF.** VisUPF is free and open source.
 
@@ -88,8 +88,8 @@ This taxonomy is product truth. Future work must not re-cut it for visual conven
 ## Brand Commitments
 
 - **Name:** EasyChip. Legal entity **EasyChip Private Limited**, Bengaluru. Canonical domain `https://www.easychip.org` — the Vercel mirror must never be canonical.
-- **Tagline lockup:** "Prompt In. Silicon Out." — a lockup under the logo, never the H1.
-- **Positioning line:** "The cockpit, not the engine."
+- **Tagline:** "Prompt In · Silicon Out", with no terminal periods. It is the home page H1, set as a two-line statement, and the one-line mono lockup in the footer. *Changed 2026-08-27 by explicit direction; it previously read "Prompt In. Silicon Out." and was barred from the H1. It ships in one form only — do not reintroduce the periods in one place and not the other.*
+- **Positioning line:** "Fifty tools. Nine engines. One shared context."
 - **Closing line:** "Any engineer should be able to go from idea to silicon without a $500,000 licence standing in the way."
 - **Voice:** direct, technical, credible to a working EDA engineer. Short sentences, active voice, specific and labelled claims. No superlatives, no exclamation marks, no emoji. Emphasis is written into the sentence, never typographically shouted. We explain; we do not sell.
 - **Identity:** replaced 2026-08-27. The mark is a **line-drawn square die with twelve pin stubs**, strictly monochrome, in `public/brand/`. The faceted EC monogram and the cyan→violet→magenta prism gradient are **retired** and must not reappear.

@@ -9,8 +9,22 @@ export const SITE = {
   location: 'Bengaluru, India',
   url: 'https://www.easychip.org',
   descriptor: 'AI-native EDA',
-  tagline: 'Prompt In. Silicon Out.',
-  positioning: 'The cockpit, not the engine.',
+  /**
+   * No terminal periods: the hero sets this as its two-line statement and the
+   * footer sets it as a one-line mono lockup, and shipping "Prompt In / Silicon
+   * Out" in one place and "PROMPT IN. SILICON OUT." in the other made one
+   * tagline read as two. The middot is the system's own separator, the same one
+   * the orchestration row uses.
+   */
+  tagline: 'Prompt In · Silicon Out',
+  /**
+   * Replaces "The cockpit, not the engine." That line was removed from the home
+   * page as unnecessary but survived here, where it sat in the footer of every
+   * page directly contradicting /platform's own H1, "Nine engines, one shared
+   * context" - telling a CAD lead the company does not build the thing the page
+   * above says it built nine of.
+   */
+  positioning: 'Fifty tools. Nine engines. One shared context.',
   description:
     'Fifty EDA tools built in-house across all nine engines of chip design, orchestrated from one place and running on your own machines. Deterministic by default.',
   closingLine:

@@ -6,7 +6,7 @@ import Button from '@/components/core/Button'
 import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { StatCard } from '@/components/lists/Cards'
 import { CTA } from '@/lib/site'
-import { ENGINES, ORCHESTRATION, COUNTS } from '@/lib/tools'
+import { ENGINES, ORCHESTRATION, COUNTS, NAMED_TOOLS } from '@/lib/tools'
 
 export const metadata: Metadata = {
   title: 'The platform',
@@ -100,18 +100,38 @@ export default function PlatformPage() {
                   <h3 className="display-3 text-off-white">{engine.name}</h3>
                   <p className="mt-2 max-w-[56ch] text-xs text-gray-2">{engine.summary}</p>
 
+                  {/* Status is carried by brightness, not by fill. A live tool
+                      lifts to off-white on a brighter hairline; a built one
+                      stays at grey-2. The white-filled variant this replaced
+                      was too loud beside the engine name, but dropping it
+                      outright also dropped the one fact a chip lead is looking
+                      for - which of these can they run today. Brightness is the
+                      system's own emphasis mechanism, so it costs nothing.
+
+                      4px, not a pill: DESIGN.md reserves the pill for controls
+                      that get pressed, and these are inert markings. */}
                   <ul className="mt-5 flex flex-wrap gap-2">
                     {engine.tools.map((tool) => (
                       <li key={tool.name}>
-                        <span
-                          className="label inline-flex items-center rounded-full border border-[color:var(--hairline)] px-4 py-2 text-gray-2"
-                          title={tool.note}
-                        >
+                        <span className="label inline-flex items-center rounded-sm border border-[color:var(--hairline)] px-3.5 py-2 text-gray-2">
                           {tool.name}
                         </span>
                       </li>
                     ))}
                   </ul>
+
+                  {/* Notes sit under the row, not inside it. They were title
+                      attributes - unreachable on touch, undiscoverable with a
+                      mouse - but putting each one inside its own flex item
+                      sized that item to the note and left the pills ragged. */}
+                  {engine.tools.some((t) => t.note) && (
+                    <p className="mt-3.5 max-w-[62ch] text-xs leading-relaxed text-gray-2">
+                      {engine.tools
+                        .filter((t) => t.note)
+                        .map((t) => `${t.name} - ${t.note}`)
+                        .join(' · ')}
+                    </p>
+                  )}
                 </div>
               </li>
             ))}
@@ -119,8 +139,7 @@ export default function PlatformPage() {
           <RowEnd />
 
           <p className="mt-8 max-w-[62ch] text-xs text-gray-2">
-            Every tool listed is written and functional. Five are public and demo-able on your own
-            machine today; the rest release with the design-partner beta.
+            {`The ${NAMED_TOOLS.length} tools named above are the ones we describe publicly; the ${COUNTS.suite} counted at the top of this page include the supporting binaries each engine ships with. Every one is written and functional. ${COUNTS.live} are public and demo-able on your own machine today; the rest release with the design-partner beta.`}
           </p>
         </SectionBody>
       </Section>
