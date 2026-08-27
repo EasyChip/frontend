@@ -3,7 +3,7 @@ import NavBar from '@/components/chrome/NavBar'
 import Hero from '@/components/media/Hero'
 import Section, { SectionBody } from '@/components/core/Section'
 import Button from '@/components/core/Button'
-import { Eyebrow, Headline, Accent, Body, DefinitionRow } from '@/components/core/Type'
+import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { CTA } from '@/lib/site'
 import { COUNTS } from '@/lib/tools'
 
@@ -50,23 +50,29 @@ export default function IntelligencePage() {
         </Headline>
       </Hero>
 
-      {/* ---------- The guarantee ---------- */}
+      {/* ---------- The guarantee ----------
+          The second of the site's two light sections. The rule is semantic,
+          not positional: the inverted band carries the page's central claim.
+          On /platform that is determinism; here it is the guarantee, which is
+          the one sentence a competitor cannot copy. Two instances make value
+          inversion a property of the system rather than of one route. */}
       <Section
+        light
         label="The guarantee"
         title={
-          <span className="text-gray-2">
-            <Accent>No third-party frontier model ever sees your design.</Accent> The models that
-            touch IP are ours, and they run on your hardware.
+          <span className="text-black/60">
+            <Accent inverse>No third-party frontier model ever sees your design.</Accent> The
+            models that touch IP are ours, and they run on your hardware.
           </span>
         }
       >
         <SectionBody>
-          <Body className="max-w-[62ch] text-base">
+          <Body light className="max-w-[62ch] text-base">
             IP-sensitive teams will not send RTL to a cloud service, whatever the model behind it.
             That is not a preference we accommodate — it is the precondition the whole architecture
             was built around.
           </Body>
-          <Body className="mt-6 max-w-[62ch] text-base">
+          <Body light className="mt-6 max-w-[62ch] text-base">
             Frontier models are used where they are safe to use: at the interface, for
             natural-language intent and explanation. They never receive the design. Everything
             that reads your RTL, constraints, power intent or netlists is proprietary and local.
@@ -74,11 +80,11 @@ export default function IntelligencePage() {
 
           <div className="mt-12">
             {PRINCIPLES.map((p) => (
-              <DefinitionRow key={p.index} index={p.index} term={p.label}>
+              <DefinitionRow key={p.index} light index={p.index} term={p.label}>
                 {p.body}
               </DefinitionRow>
             ))}
-            <div className="border-t border-[color:var(--hairline)]" />
+            <RowEnd light />
           </div>
         </SectionBody>
       </Section>
@@ -117,7 +123,7 @@ export default function IntelligencePage() {
               The models and the shared context they run on, across the suite. This is the layer
               currently being built.
             </DefinitionRow>
-            <div className="border-t border-[color:var(--hairline)]" />
+            <RowEnd />
           </div>
           <Body className="mt-10 max-w-[62ch] text-xs">
             We would rather ship a deterministic tool an engineer can trust than an AI feature they

@@ -4,7 +4,7 @@ import NewsBar from '@/components/chrome/NewsBar'
 import Hero from '@/components/media/Hero'
 import Section, { SectionBody } from '@/components/core/Section'
 import Button from '@/components/core/Button'
-import { Eyebrow, Headline, Accent, Body, DefinitionRow } from '@/components/core/Type'
+import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { StatCard, CompareRow } from '@/components/lists/Cards'
 import { SITE, CTA, NEWS } from '@/lib/site'
 import { COUNTS, STAGES } from '@/lib/tools'
@@ -126,7 +126,7 @@ export default function HomePage() {
                 {item.body}
               </DefinitionRow>
             ))}
-            <div className="border-t border-[color:var(--hairline)]" />
+            <RowEnd />
           </div>
 
           <p className="mt-10 text-xs text-gray-2">
@@ -164,7 +164,7 @@ export default function HomePage() {
               Proprietary models read the structured context the tools emit, so the assistant
               understands the design, not just the file in front of it.
             </DefinitionRow>
-            <div className="border-t border-[color:var(--hairline)]" />
+            <RowEnd />
           </div>
 
           <div className="mt-14 border-t border-[color:var(--hairline)] pt-10">
@@ -199,7 +199,7 @@ export default function HomePage() {
               withEasyChip={row.with}
             />
           ))}
-          <div className="border-t border-[color:var(--hairline)]" />
+          <RowEnd />
           <p className="mt-10 max-w-[62ch] text-xs text-gray-2">
             None of this is a faster simulator. It is the removal of everything between one design
             decision and the next.

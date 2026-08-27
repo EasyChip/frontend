@@ -103,17 +103,41 @@ export function Headline({
   )
 }
 
-/** Plain body copy. Engineering-plain, third person for the company. */
+/**
+ * Plain body copy. Engineering-plain, third person for the company.
+ *
+ * `light` is the inverse-ground branch, at black/70 rather than solid black:
+ * body prose on #F2F2F2 wants the same one step down from the headline that
+ * grey-2 gives it on the dark ground, so the brightness hierarchy survives
+ * the inversion instead of flattening to two levels.
+ */
 export function Body({
   children,
   className,
   tone = 'secondary',
+  light = false,
 }: {
   children: React.ReactNode
   className?: string
   tone?: Tone
+  light?: boolean
 }) {
-  return <p className={cn('max-w-[46ch] leading-relaxed', TONE[tone], className)}>{children}</p>
+  return (
+    <p
+      className={cn(
+        'max-w-[46ch] leading-relaxed',
+        light ? 'text-black/70' : TONE[tone],
+        className
+      )}
+    >
+      {children}
+    </p>
+  )
+}
+
+/** Hairline rule that closes a run of DefinitionRows, on either ground. */
+export function RowEnd({ light = false }: { light?: boolean }) {
+  return <div className={light ? 'border-t border-black/12' : 'border-t border-[color:var(--hairline)]'} />
 }
 
 /**

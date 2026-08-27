@@ -3,7 +3,7 @@ import NavBar from '@/components/chrome/NavBar'
 import Hero from '@/components/media/Hero'
 import Section, { SectionBody } from '@/components/core/Section'
 import Button from '@/components/core/Button'
-import { Eyebrow, Headline, Accent, Body, DefinitionRow } from '@/components/core/Type'
+import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { StatCard } from '@/components/lists/Cards'
 import { CTA } from '@/lib/site'
 import { STAGES, ORCHESTRATION, COUNTS, WEDGE } from '@/lib/tools'
@@ -60,7 +60,7 @@ export default function PlatformPage() {
                 {tool.note}
               </DefinitionRow>
             ))}
-            <div className="border-t border-[color:var(--hairline)]" />
+            <RowEnd />
           </div>
           <Body className="mt-10 max-w-[62ch] text-xs">
             Escanor runs the flow on the customer&rsquo;s own hardware. It is not a cloud service
@@ -124,7 +124,7 @@ export default function PlatformPage() {
               </li>
             ))}
           </ol>
-          <div className="border-t border-[color:var(--hairline)]" />
+          <RowEnd />
 
           <p className="mt-8 max-w-[62ch] text-xs text-gray-2">
             Filled marks are live today — public and demo-able on your own machine. The rest are
@@ -144,11 +144,11 @@ export default function PlatformPage() {
         title="If a rerun is not bit-identical, the result cannot be trusted at signoff"
       >
         <SectionBody>
-          <p className="max-w-[62ch] leading-relaxed text-black/70">
+          <Body light className="max-w-[62ch] text-base">
             This came back from engineers more often than any feature request. A team that cannot
             reproduce a result re-verifies work it has already done, and pays for the same run
             twice.
-          </p>
+          </Body>
           <div className="mt-12">
             {DETERMINISM.map((item, i) => (
               <DefinitionRow
@@ -160,7 +160,7 @@ export default function PlatformPage() {
                 {item.body}
               </DefinitionRow>
             ))}
-            <div className="border-t border-black/12" />
+            <RowEnd light />
           </div>
         </SectionBody>
       </Section>
