@@ -1,16 +1,15 @@
 import type { Metadata } from 'next'
 import NavBar from '@/components/chrome/NavBar'
-import NewsBar from '@/components/chrome/NewsBar'
 import Hero from '@/components/media/Hero'
 import Section, { SectionBody } from '@/components/core/Section'
 import Button from '@/components/core/Button'
 import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
-import { StatCard, CompareRow } from '@/components/lists/Cards'
-import { SITE, CTA, NEWS } from '@/lib/site'
-import { COUNTS, STAGES } from '@/lib/tools'
+import { StatCard } from '@/components/lists/Cards'
+import { SITE, CTA } from '@/lib/site'
+import { COUNTS, ENGINES } from '@/lib/tools'
 
 export const metadata: Metadata = {
-  title: `${SITE.name} — ${SITE.descriptor}`,
+  title: `${SITE.name} - ${SITE.descriptor}`,
   description: SITE.description,
   alternates: { canonical: '/' },
 }
@@ -20,7 +19,7 @@ const HANDOFF_LOSS = [
   {
     index: '01',
     label: 'Context is rebuilt, not carried',
-    body: 'Constraints, clock intent and waivers are re-authored by hand at each stage, because nothing downstream can read what the last tool knew.',
+    body: 'Constraints, clock intent and waivers are re-authored by hand at each engine, because nothing downstream can read what the last tool knew.',
   },
   {
     index: '02',
@@ -34,36 +33,53 @@ const HANDOFF_LOSS = [
   },
 ]
 
+/**
+ * The section's argument is reduction, so the data carries the transition
+ * itself - a short "from" and "to" that can be set at display scale - with
+ * the prose demoted to support underneath. Written as a paragraph pair, the
+ * quantities that make the argument were buried at 12px.
+ */
 const CHANGES = [
   {
     dimension: 'Vendors',
-    today: 'Six to ten for the secondary tier, each with its own contract, format and support path.',
-    with: 'One.',
+    from: 'Six to ten',
+    fromNote: 'Each with its own contract, format and support path.',
+    to: 'One',
+    toNote: 'One contract, one format, one support path.',
   },
   {
     dimension: 'Tools maintained',
-    today: 'Around forty.',
-    with: 'Around fifteen.',
+    from: 'Around forty',
+    to: 'Around fifteen',
+    toNote: 'The rest arrive in the same binary.',
   },
   {
     dimension: 'Licensing',
-    today: 'Licence servers, seat contention, daemons that fail at 2 a.m.',
-    with: 'Offline signed licences. No daemon.',
+    from: 'Licence servers',
+    fromNote: 'Seat contention, and daemons that fail at 2 a.m.',
+    to: 'Offline signed',
+    toNote: 'No daemon, no checkout wait.',
   },
   {
     dimension: 'Handoffs',
-    today: 'Manual. Constraints and intent re-authored at each boundary.',
-    with: 'Orchestrated. Context carried across all nine stages.',
+    from: 'Manual',
+    fromNote: 'Constraints and intent re-authored at every boundary.',
+    to: 'Orchestrated',
+    toNote: 'Context carried across all nine engines.',
   },
   {
     dimension: 'Reproducibility',
-    today: 'Machine-dependent. Teams re-verify work already done.',
-    with: 'Bit-identical, run to run.',
+    from: 'Machine-dependent',
+    fromNote: 'Teams re-verify work they have already done.',
+    to: 'Bit-identical',
+    toNote: 'Run to run, machine to machine.',
   },
   {
     dimension: 'Where the design lives',
-    today: 'Increasingly, someone else’s cloud.',
-    with: 'The customer’s own machine. Air-gap supported.',
+    from: 'Someone else’s cloud',
+    fromNote: 'Azure / AWS / custom servers.',
+    to: 'Your own machine',
+    toNote: 'Air-gapped teams fully supported.',
   },
 ]
 
@@ -73,14 +89,16 @@ export default function HomePage() {
       <Hero
         media="/media/chip-macro-2000.webp"
         priority
-        top={
-          <>
-            <NavBar />
-            <NewsBar href={NEWS.href}>{NEWS.message}</NewsBar>
-          </>
+        top={<NavBar />}
+        sub={
+          <span className="label text-gray-3">9 Engines, 50 Tools, 1 Orchestrator</span>
         }
-        sub="Fifty tools across all nine stages of chip design, built in-house and run from one place."
-        chapter={<Eyebrow bracket tone="muted">Chapter — 01</Eyebrow>}
+        jump={
+          <Button href="/platform#suite" arrow>
+            See the full suite
+          </Button>
+        }
+        chapter={<Eyebrow bracket tone="muted">Chapter - 01</Eyebrow>}
         actions={
           <>
             <Button href={CTA.primary.href} variant="solid">
@@ -93,9 +111,9 @@ export default function HomePage() {
         }
       >
         <Headline level={1}>
-          The tools chip design
+          Prompt In
           <br />
-          actually runs on
+          Silicon Out
         </Headline>
       </Hero>
 
@@ -112,7 +130,7 @@ export default function HomePage() {
         <SectionBody>
           <Body className="max-w-[62ch] text-base">
             Engineering time goes into moving data between tools that were never built to talk to
-            each other, rebuilding context the last stage already had, and waiting on licence
+            each other, rebuilding context the previous engine already had, and waiting on licence
             servers. A single team runs dozens of point tools from six to ten vendors, each with
             its own formats, scripts and failure modes.
           </Body>
@@ -121,12 +139,18 @@ export default function HomePage() {
           </p>
 
           <div className="mt-14">
-            {HANDOFF_LOSS.map((item) => (
-              <DefinitionRow key={item.index} index={item.index} term={item.label}>
-                {item.body}
-              </DefinitionRow>
-            ))}
-            <RowEnd />
+            {/* Names the list below, so it is a label rather than a kicker
+                above a heading. The utility uppercases it. */}
+            <Eyebrow tone="muted">Problems faced by engineers daily</Eyebrow>
+
+            <div className="mt-7">
+              {HANDOFF_LOSS.map((item) => (
+                <DefinitionRow key={item.index} index={item.index} term={item.label}>
+                  {item.body}
+                </DefinitionRow>
+              ))}
+              <RowEnd />
+            </div>
           </div>
 
           <p className="mt-10 text-xs text-gray-2">
@@ -146,64 +170,47 @@ export default function HomePage() {
       >
         <SectionBody>
           <Body className="max-w-[62ch] text-base">
-            EasyChip replaces the secondary tier of chip design — every tool that is not a core
-            signoff engine — with a single suite written end to end, orchestrated from one place,
-            with proprietary models attached to every stage of it.
+            EasyChip replaces the secondary tier of chip design - every tool that is not a core
+            signoff engine - with a single suite written end to end, orchestrated from one place,
+            with proprietary models attached to every engine of it.
           </Body>
 
           <div className="mt-14">
             <DefinitionRow index="01" term="We own the engines">
-              {COUNTS.suite} tools built in-house across all {COUNTS.stages} stages, not wrappers
-              over someone else&rsquo;s software. Deterministic by default.
+              {/* Template literal, not JSX text: a text node that wraps to the
+                  next line loses its leading space, which ran "9" into
+                  "engines". Interpolation keeps the spacing explicit. */}
+              {`${COUNTS.suite} tools built in-house across all ${COUNTS.engines} engines, not wrappers over someone else’s software. Deterministic by default.`}
             </DefinitionRow>
             <DefinitionRow index="02" term="One orchestration layer">
               Escanor drives the whole flow from the customer&rsquo;s own machine. FlowBit manages
               the flow graph, Silicrate manages PDKs and IP.
             </DefinitionRow>
-            <DefinitionRow index="03" term="AI across every stage">
+            <DefinitionRow index="03" term="AI across every engine">
               Proprietary models read the structured context the tools emit, so the assistant
               understands the design, not just the file in front of it.
             </DefinitionRow>
             <RowEnd />
           </div>
-
-          <div className="mt-14 border-t border-[color:var(--hairline)] pt-10">
-            <p className="max-w-[52ch] display-2 text-off-white">{SITE.positioning}</p>
-            <Body className="mt-6 max-w-[62ch]">
-              We are not trying to displace the core signoff engines. We are taking the forty tools
-              around them — the ones nobody consolidated, nobody modernised and nobody put AI into
-              — and making them one product.
-            </Body>
-            <div className="mt-8">
-              <Button href="/platform" arrow>
-                See all nine stages
-              </Button>
-            </div>
-          </div>
         </SectionBody>
       </Section>
 
-      {/* ---------- What changes ---------- */}
+      {/* ---------- What changes ----------
+          One label column, not two. The nested 180px column pushed every row
+          to a 360px indent and left the right third empty; the row's own
+          dimension now sits in the section's column, and the from/to pair
+          takes the full measure. */}
       <Section label="What changes" title="The same design, without the tax around it">
         <SectionBody>
-          <div className="grid gap-4 pb-2 md:grid-cols-[180px_1fr_1fr] md:gap-8">
-            <span />
+          <div className="hidden gap-16 pb-3 md:grid md:grid-cols-2">
             <Eyebrow tone="muted">Today</Eyebrow>
             <Eyebrow tone="body">With EasyChip</Eyebrow>
           </div>
+
           {CHANGES.map((row) => (
-            <CompareRow
-              key={row.dimension}
-              dimension={row.dimension}
-              today={row.today}
-              withEasyChip={row.with}
-            />
+            <ChangeRow key={row.dimension} {...row} />
           ))}
           <RowEnd />
-          <p className="mt-10 max-w-[62ch] text-xs text-gray-2">
-            None of this is a faster simulator. It is the removal of everything between one design
-            decision and the next.
-          </p>
         </SectionBody>
       </Section>
 
@@ -218,8 +225,8 @@ export default function HomePage() {
       >
         <SectionBody>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <StatCard value={String(COUNTS.suite)} label="Tools built" body="Across nine stages." />
-            <StatCard value={String(COUNTS.stages)} label="Stages complete" body="End to end." />
+            <StatCard value={String(COUNTS.suite)} label="Tools built" body="Across nine engines." />
+            <StatCard value={String(COUNTS.engines)} label="Engines complete" body="End to end." />
             <StatCard value="41" label="Engineers surveyed" body="CAD/EDA and RTL design roles." />
             <StatCard
               value={String(COUNTS.live)}
@@ -239,8 +246,8 @@ export default function HomePage() {
             <div>
               <Eyebrow tone="muted">In build</Eyebrow>
               <Body className="mt-4 text-xs">
-                Packaging and distribution — Apptainer images, offline signed licences,
-                reproducible builds — and the ML layer across the suite.
+                Packaging and distribution - Apptainer images, offline signed licences,
+                reproducible builds - and the ML layer across the suite.
               </Body>
             </div>
             <div>
@@ -271,5 +278,50 @@ export default function HomePage() {
         </SectionBody>
       </Section>
     </>
+  )
+}
+
+/**
+ * One change, read as a transition rather than a table row.
+ *
+ * The "from" state sits at display scale in secondary, the "to" state at the
+ * same scale in white. That brightness step is the whole device - no arrow,
+ * no connector: a rule drawn between them only restated what the tonal shift
+ * already says, and read as decoration. Support prose sits underneath so the
+ * pair stays the thing you read first.
+ */
+function ChangeRow({
+  dimension,
+  from,
+  fromNote,
+  to,
+  toNote,
+}: {
+  dimension: string
+  from: string
+  fromNote?: string
+  to: string
+  toNote?: string
+}) {
+  return (
+    <div className="border-t border-[color:var(--hairline)] py-8">
+      <p className="label text-gray-2">{dimension}</p>
+
+      <div className="mt-5 grid gap-5 md:grid-cols-2 md:items-baseline md:gap-16">
+        <div>
+          <p className="display-3 text-gray-2">{from}</p>
+          {fromNote && (
+            <p className="mt-2 max-w-[38ch] text-xs leading-relaxed text-gray-2">{fromNote}</p>
+          )}
+        </div>
+
+        <div>
+          <p className="display-3 text-white">{to}</p>
+          {toNote && (
+            <p className="mt-2 max-w-[38ch] text-xs leading-relaxed text-gray-3">{toNote}</p>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }

@@ -41,7 +41,7 @@ export default function IntelligencePage() {
         minHeight="min-h-[460px] md:min-h-[520px]"
         top={<NavBar />}
         sub="Models that understand the design, not just the file in front of them."
-        chapter={<Eyebrow bracket tone="muted">Chapter — 03</Eyebrow>}
+        chapter={<Eyebrow bracket tone="muted">Chapter - 03</Eyebrow>}
       >
         <Headline level={1}>
           Intelligence that
@@ -69,7 +69,7 @@ export default function IntelligencePage() {
         <SectionBody>
           <Body light className="max-w-[62ch] text-base">
             IP-sensitive teams will not send RTL to a cloud service, whatever the model behind it.
-            That is not a preference we accommodate — it is the precondition the whole architecture
+            That is not a preference we accommodate - it is the precondition the whole architecture
             was built around.
           </Body>
           <Body light className="mt-6 max-w-[62ch] text-base">
@@ -97,7 +97,7 @@ export default function IntelligencePage() {
         <SectionBody>
           <Body className="max-w-[62ch] text-base">
             Ours sits on top of {COUNTS.suite} engines that already produce structured,
-            machine-readable context about the design — netlists, clock domains, constraints, power
+            machine-readable context about the design - netlists, clock domains, constraints, power
             intent, timing outcomes. The models act on that context rather than on raw text.
           </Body>
           <p className="mt-10 max-w-[52ch] display-2 text-off-white">
@@ -116,7 +116,7 @@ export default function IntelligencePage() {
         <SectionBody>
           <div>
             <DefinitionRow index="Now" term="The deterministic suite">
-              All nine stages, built and functional. The design-partner beta ships deterministic
+              All nine engines, built and functional. The design-partner beta ships deterministic
               only, with no AI in the initial release.
             </DefinitionRow>
             <DefinitionRow index="In build" term="The ML layer">

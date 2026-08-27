@@ -10,7 +10,7 @@ type Tone = 'body' | 'secondary' | 'muted' | 'inverse'
  *
  * `muted` deliberately resolves to #A3A3A3, not #6E6E6E. Grey-1 measures
  * 3.85:1 on the ground and under 3:1 on a card, which put the whole label
- * column — and the live/built status labels — below the readable floor. It is
+ * column - and the live/built status labels - below the readable floor. It is
  * now reserved for hairlines and rules. Three text levels remain, so the
  * brightness-emphasis system still has range: white for emphasis, off-white
  * for body, #A3A3A3 for anything secondary.
@@ -25,8 +25,8 @@ const TONE: Record<Tone, string> = {
 /**
  * Uppercase mono label. The system's only small-text register.
  *
- * This is a *label*, not a kicker: it names a column, a stage, a date or a
- * status — something the reader cannot infer from the heading beside it.
+ * This is a *label*, not a kicker: it names a column, an engine, a date or a
+ * status - something the reader cannot infer from the heading beside it.
  */
 export function Eyebrow({
   children,
@@ -52,7 +52,7 @@ export function Eyebrow({
 /**
  * Emphasis span. In a system with no accent colour, emphasis is brightness:
  * the surrounding line is dimmed and the phrase that matters lifts to the
- * extreme — white on the dark ground, black on a light section.
+ * extreme - white on the dark ground, black on a light section.
  */
 export function Accent({
   children,
@@ -143,8 +143,8 @@ export function RowEnd({ light = false }: { light?: boolean }) {
 /**
  * A definition row: mono term in the label column, plain statement beside it.
  *
- * This is the structure the nine-stage list uses, generalised. It exists so a
- * set of three related facts does not default to three equal cards — the
+ * This is the structure the nine-engine list uses, generalised. It exists so a
+ * set of three related facts does not default to three equal cards - the
  * system reads as one instrument when its content sits on shared rules rather
  * than in separate boxes.
  */
@@ -168,7 +168,7 @@ export function DefinitionRow({
     >
       <div className="flex items-baseline gap-3">
         {index && (
-          // black/65 on #F2F2F2 measures ~10.3:1. black/50 was 3.58:1 — the
+          // black/65 on #F2F2F2 measures ~10.3:1. black/50 was 3.58:1 - the
           // inverse branch has to clear the floor too, not just the dark one.
           <span className={cn('label', light ? 'text-black/65' : 'text-gray-2')}>{index}</span>
         )}

@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 
 /**
  * Transparent top bar. It sits *inside* the hero frame rather than pinned to
- * the viewport — the page scrolls out from under it, which is what keeps the
+ * the viewport - the page scrolls out from under it, which is what keeps the
  * full-bleed opening cinematic instead of chromed.
  *
  * The lockup stays small: 16px here, never enlarged as a graphic.
@@ -20,7 +20,7 @@ export default function NavBar({ light = false }: { light?: boolean }) {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
   // #D4D4D4, not #A3A3A3: nav sits over photography, and grey-2 was validated
-  // against flat ground only — it dropped to 3.46:1 over the wafer's bright field.
+  // against flat ground only - it dropped to 3.46:1 over the wafer's bright field.
   const idle = light ? 'text-black/55' : 'text-gray-3'
   const strong = light ? 'text-black' : 'text-white'
 
@@ -31,9 +31,9 @@ export default function NavBar({ light = false }: { light?: boolean }) {
           <Image
             src={light ? '/brand/logo-black.svg' : '/brand/logo.svg'}
             alt={SITE.name}
-            width={64}
-            height={16}
-            className="h-4 w-auto"
+            width={112}
+            height={28}
+            className="h-7 w-auto"
             priority
           />
         </Link>

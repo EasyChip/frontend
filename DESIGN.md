@@ -70,7 +70,6 @@ typography:
 rounded:
   sm: "4px"
   md: "10px"
-  lg: "20px"
   pill: "9999px"
 spacing:
   xs: "8px"
@@ -134,16 +133,16 @@ components:
     textColor: "{colors.off-white}"
     typography: "{typography.body}"
     padding: "20px 0"
-  news-bar:
-    backgroundColor: "{colors.signal-white}"
-    textColor: "{colors.instrument-black}"
-    rounded: "{rounded.sm}"
-    padding: "12px 16px"
   hero-frame:
     backgroundColor: "{colors.panel-black}"
     textColor: "{colors.off-white}"
-    rounded: "{rounded.lg}"
+    rounded: "0"
     height: "680px"
+  hero-frame-light:
+    backgroundColor: "{colors.off-white}"
+    textColor: "{colors.instrument-black}"
+    rounded: "0"
+    height: "460px"
   nav-link:
     backgroundColor: "transparent"
     textColor: "{colors.secondary-grey}"
@@ -167,7 +166,9 @@ This is a measuring instrument, not a brochure. The ground is near-black, the pa
 
 The system is strictly monochrome, and that is the load-bearing decision. There is no accent hue anywhere — not in links, not in status, not in charts, not in focus rings. Emphasis is produced entirely by brightness: a full line drops to secondary grey and the phrase that carries the argument lifts to pure white. Because white is the only escalation available, it stays scarce, and scarcity is what makes it read as emphasis rather than decoration.
 
-Composition is a two-column margin note. Every section places a 180px uppercase mono label beside its content column, so a page scans as the index of a document rather than a stack of marketing bands. Full-bleed desaturated macro hardware photography opens a page inside a 20px-cornered frame with the chrome living inside the frame; everything below is flat panels and hairline rules on the black ground, with the light ground used only as an occasional hard cut in the scroll.
+Composition is a two-column margin note. Every section places a 180px uppercase mono label beside its content column, so a page scans as the index of a document rather than a stack of marketing bands. Full-bleed desaturated macro hardware photography opens a page edge to edge with the chrome living inside the frame; everything below is flat panels and hairline rules on the black ground.
+
+The light ground is the system's one hard cut. A route either opens on a photograph (home, platform, intelligence) or opens on the light plate (company, contact) — there is no third opening, and no route does both. Where a photograph is not available the plate carries the same frame, chrome and anchoring at #F2F2F2, and the cut into the black section below is the boundary, so no hairline is drawn under it. Inverting a plate inverts everything that reads the ground with it: the lockup swaps to the black mark, nav idle goes to 55% black, the statement and chapter marker go black, and a solid pill swaps both fill and label. Half an inversion is a bug, not a variant.
 
 **Key Characteristics:**
 - Strictly monochrome — no hue is permitted anywhere in the interface
@@ -175,7 +176,7 @@ Composition is a two-column margin note. Every section places a 180px uppercase 
 - A 180px mono label column beside content on every section
 - Hairline rules (1px, 14% white) instead of shadows
 - Two type registers only: Archivo 300 statements and uppercase IBM Plex Mono labels
-- Flat by default — exactly one shadow exists in the whole system
+- Flat throughout — the system has no shadows at all
 - Photography desaturated to near-monochrome before it may ship
 
 ## Colors
@@ -188,7 +189,7 @@ A single achromatic ramp from near-black to pure white, with nothing between the
 
 ### Neutral
 - **Instrument Black** (#0B0B0B): The page ground, everywhere. Also the text colour on inverted light sections and inside white pills.
-- **Panel Black** (#141414): Raised panels — cards, the embedded scheduler frame, the hero frame's fallback fill. One step above the ground, never more.
+- **Panel Black** (#141414): Raised panels — cards, the embedded scheduler frame, and the fill behind a hero that carries a photograph. One step above the ground, never more.
 - **Well Grey** (#1E1E1E): Recessed surfaces — form fields, hover fills on outline controls, the scrollbar thumb.
 - **Bright Grey** (#D4D4D4): The hover state of a white pill. It is a dimming, not a tint.
 - **Secondary Grey** (#A3A3A3): Secondary text on dark — body copy under a headline, idle navigation items, and the dimmed carrier line an emphasised phrase sits inside.
@@ -202,7 +203,7 @@ A single achromatic ramp from near-black to pure white, with nothing between the
 
 **The Brightness Emphasis Rule.** Emphasis is produced by dimming the surroundings, not by brightening in place. Drop the carrier line to Secondary Grey (#A3A3A3), then lift only the load-bearing phrase to Signal White. Never bold, never underline, never enlarge for emphasis.
 
-**The Scarce White Rule.** Pure white is reserved for primary actions, emphasised phrases, the focus ring and the news bar. Body text is Off White. If more than a couple of things on a screen are pure white, the emphasis has stopped working.
+**The Scarce White Rule.** Pure white is reserved for primary actions, emphasised phrases and the focus ring. Body text is Off White. If more than a couple of things on a screen are pure white, the emphasis has stopped working.
 
 ## Typography
 
@@ -235,7 +236,7 @@ A single achromatic ramp from near-black to pure white, with nothing between the
 
 The spatial model is a document with a margin. Every section is a two-track grid: a 180px track for the uppercase mono label and a `minmax(0, 1fr)` track for content, with a 32px gutter. Below 900px the grid collapses to one column and the label sits above its content, because a 180px margin has nowhere to go on a phone. Content below a label/title block re-enters the same grid with an empty first track, so body copy stays aligned to the content column rather than to the page edge.
 
-Page margin is `clamp(16px, 3vw, 40px)`, applied to every section, the chrome and the hero frame alike, so a single vertical edge runs the whole length of the page. Content centres inside a 1440px maximum width. Vertical rhythm is 120px between sections on desktop and 96px below the `md` breakpoint, with 48px between a section's title block and its body. The footer runs at 64px vertical padding, the top bar at 22px.
+Page margin is `clamp(16px, 3vw, 40px)`, applied to every section and to the chrome and hero content alike, so a single vertical edge runs the whole length of the page. Content centres inside a 1440px maximum width. Vertical rhythm is 120px between sections on desktop and 96px below the `md` breakpoint, with 48px between a section's title block and its body. The footer runs at 64px vertical padding, the top bar at 22px.
 
 Measure is enforced rather than suggested: 46ch body copy, 62ch section lead, 34ch footer positioning line, 820px section title. Any grid track that contains a scrollable table carries `min-w-0`, because a grid track otherwise sizes to its widest child and widens the whole page instead of scrolling inside itself.
 
@@ -251,14 +252,14 @@ Responsive behaviour is layout-only: the label column collapses at 900px, naviga
 
 This system is flat. Depth comes entirely from tonal layering and hairlines: the #0B0B0B ground, the #141414 panel one step above it, the #1E1E1E well one step below it, and a 1px 14%-white rule wherever two surfaces meet. Nothing is lifted, nothing is blurred behind, and no surface casts a shadow onto another.
 
-There is exactly one shadow in the entire system, and it exists for a contrast reason rather than a depth one.
+There are no shadows in this system at all.
 
 ### Shadow Vocabulary
-- **Bar Lift** (`box-shadow: 0 2px 24px rgba(0,0,0,0.35)`): Applied only to the white news bar floating over hero photography. A pure-white bar on a photograph has no edge of its own; this soft dark spread gives it one. It is not available to any other element.
+A single exception once existed — a soft lift under a white announcement bar floating on hero photography, which had no edge of its own. That bar was removed, and the exception went with it. Depth is now carried entirely by the tonal ramp and hairlines.
 
 ### Named Rules
 
-**The One Shadow Rule.** Bar Lift is the only shadow in the system and it belongs to the news bar alone. Cards, panels, buttons, dialogs and hover states are flat. If something needs to separate from its background, it gets a hairline or a tonal step, not a shadow.
+**The No Shadow Rule.** Nothing in this system casts a shadow. Cards, panels, buttons, dialogs and hover states are flat. If something needs to separate from its background, it gets a hairline or a step on the tonal ramp — never a shadow.
 
 **The Hairline Rule.** Separation is one pixel of 14% white on dark (12% black on light) and never more. There is no 2px rule, no double rule, and no heavier divider for emphasis.
 
@@ -270,17 +271,17 @@ All transitions run 120–240ms on `cubic-bezier(.2, .7, .2, 1)` and touch colou
 
 ## Shapes
 
-Four corner values, each tied to a class of object, and nothing else in the system is rounded. Media and bars take 4px — a corner just soft enough to read as a screen element rather than a bleed. Cards and panels take 10px. Full-bleed frames, the hero above all, take 20px, the largest corner in the system, which is what signals "this is a frame, not a section". Controls that get pressed take a full pill.
+Three corner values, each tied to a class of object, and nothing else in the system is rounded. Media and bars take 4px — a corner just soft enough to read as a screen element rather than a bleed. Cards and panels take 10px. Controls that get pressed take a full pill. The hero is the deliberate absence of a fourth value: it runs edge to edge with square corners, because a framed picture sitting on the ground reads as an illustration of the page while a full-bleed one reads as the page itself.
 
 Everything else is square. Borders are always a single hairline, never a colour and never a heavier weight. The small square dot in a mono label and the square die of the chip mark are the recurring geometry: right angles at small scale, one soft frame at large scale.
 
 Photography is desaturated, high-contrast macro hardware — wafers, dies, signal fields — near-monochrome by the time it ships, exported as WebP at 1200 and 2000 wide in `public/media/`, each with an inlined low-res placeholder so the frame is never empty. Source images are desaturated with ffmpeg before use, so no residual hue can enter the system through an image.
 
-Over photography the scrim is two ramps, not one. A short strong top band (80% at 0%, 45% at 14%, 8% at 28%, transparent at 38%) guarantees the nav and news bar clear their ground whatever the photograph does; the base ramp (15% at the top to 85% at the bottom) carries the low-anchored statement. The base ramp alone assumed dark-topped photography and left nav items at roughly 1.2:1 over a bright wafer, which is exactly why the top band exists.
+Over photography the scrim is two ramps, not one. A short top band (68% at 0%, 30% at 11%, 6% at 20%, transparent at 28%) helps the chrome clear its ground whatever the photograph does, alongside the nav's own #D4D4D4 idle tone; the base ramp (15% at the top to 85% at the bottom) carries the low-anchored statement. The base ramp alone assumed dark-topped photography and left nav items at roughly 1.2:1 over a bright wafer, which is exactly why the top band exists.
 
 ### Named Rules
 
-**The Four Corners Rule.** 4px media and bars, 10px cards, 20px full-bleed frames, pill on controls. Nothing else is rounded and no fifth radius is introduced.
+**The Three Corners Rule.** 4px media and bars, 10px cards, pill on controls. Nothing else is rounded, the hero included, and no fourth radius is introduced.
 
 **The Two-Ramp Scrim Rule.** Any full-bleed photograph carrying chrome uses both ramps. A single top-to-bottom ramp is only safe if the image is already dark where the chrome sits, and the system does not get to assume that.
 
@@ -318,17 +319,13 @@ Over photography the scrim is two ramps, not one. A short strong top band (80% a
 - **States:** Idle Secondary Grey; current page and hover Signal White; 120ms colour transition. The primary CTA is a small white pill (10px/18px).
 - **Light variant:** Idle 55% black, active pure black, CTA inverts to a black pill.
 - **Mobile:** A mono Menu/Close text toggle below `md` opens a hairline-topped stack of Display 3 links with the CTA pill beneath.
-- **Lockup:** 16px tall in the nav, 18px in the footer, drawn from `public/brand/`.
+- **Lockup:** 28px tall in the nav, 18px in the footer, drawn from `public/brand/`.
 
 ### List Rows
 - **Character:** A ruled index, not a stack of cards.
 - **Style:** A hairline top rule, 20px vertical padding, and a 180px / 1fr / auto grid that echoes the section label column — mono meta, then title in Archivo 500, then a mono action with a trailing ↗.
 - **Hover:** The row tints 3% white (3% black on light) at 120ms. This is the system's only row feedback; there is no lift and no border change.
 
-### News Bar (signature)
-- **Character:** The one true current message, floating white over the hero photograph.
-- **Style:** Pure white fill, Instrument Black text, 4px radius, 12px/16px padding, carrying Bar Lift — the only shadow in the system.
-- **Anatomy:** a mono label behind an 11px hairline-ringed circle, a truncating 12px message link, a mono action word, and a mono × dismiss that lifts from 60% black to full black on hover.
 
 ### Comparison Row (signature)
 - **Character:** The argument made structurally. A 180px mono dimension label, the current state in Muted Grey, the EasyChip state in Signal White — emphasis by brightness applied to an entire column rather than a phrase.
@@ -344,17 +341,17 @@ The chip mark — a line-drawn square die with twelve pin stubs, in `public/bran
 - **Do** keep new size utilities outside the `text-*` namespace, as `display-1` / `display-2` / `display-3` already are — tailwind-merge drops a `text-*` size the moment it meets a `text-*` colour.
 - **Do** set every small piece of text in uppercase IBM Plex Mono at 10–12px with 0.12em tracking.
 - **Do** separate surfaces with a 1px hairline (14% white on dark, 12% black on light) or a tonal step between #0B0B0B, #141414 and #1E1E1E.
-- **Do** hold to the four corner values: 4px media and bars, 10px cards, 20px full-bleed frames, pill on controls.
+- **Do** hold to the three corner values: 4px media and bars, 10px cards, pill on controls. The hero is square and edge to edge.
 - **Do** keep transitions at 120–240ms on `cubic-bezier(.2, .7, .2, 1)` and restrict them to colour, background and opacity.
 - **Do** run both scrim ramps under any full-bleed photograph that carries chrome.
 - **Do** desaturate photography to near-monochrome before it ships, and export at 1200 and 2000 wide as WebP with a placeholder.
-- **Do** keep the lockup small — 16px in the nav, 18px in the footer, never above roughly 28px.
+- **Do** keep the lockup small — 28px in the nav (the ceiling), 18px in the footer. Never larger.
 - **Do** cap measure: 46ch body, 62ch section lead, 820px section title.
 
 ### Don't:
 - **Don't** introduce an accent hue anywhere — not for links, status, validation, focus rings or data. There is no hue in this system.
 - **Don't** reintroduce the retired identity: the cyan→violet→magenta prism gradient, the faceted EC monogram, or Sora / Inter / JetBrains Mono.
-- **Don't** add a shadow. Bar Lift belongs to the news bar and to nothing else.
+- **Don't** add a shadow to anything. Separation is a hairline or a tonal step.
 - **Don't** use a serif, or any third typeface beyond Archivo and IBM Plex Mono.
 - **Don't** create a fifth radius, a 2px rule, or a heavier divider for emphasis.
 - **Don't** animate on scroll, parallax a hero, reveal on entry, or scale and bounce a control on press.

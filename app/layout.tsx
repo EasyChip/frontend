@@ -23,8 +23,8 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.descriptor}`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name} - ${SITE.descriptor}`,
+    template: `%s - ${SITE.name}`,
   },
   description: SITE.description,
   applicationName: SITE.name,
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${archivo.variable} ${plexMono.variable}`}>
       <body className="min-h-dvh bg-black text-off-white antialiased">
         {/*
-          DIRECTION CONTRACT — EasyChip v3
+          DIRECTION CONTRACT - EasyChip v3
           THESIS: Fifty EDA tools, owned end to end, shown as one instrument rather than a
             catalogue. Refuses the AI-EDA category page: no accent hue, no gradient hero,
             no feature-card triptych.
@@ -72,7 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
-      </body>
+</body>
     </html>
   )
 }

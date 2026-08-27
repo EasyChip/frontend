@@ -6,8 +6,9 @@ import Button from '@/components/core/Button'
 import { Eyebrow, Headline, Body } from '@/components/core/Type'
 import LeadForm from '@/components/forms/LeadForm'
 import Calendly from '@/components/forms/Calendly'
+import OfficeMap from '@/components/media/OfficeMap'
 import ObfuscatedEmail from '@/components/chrome/ObfuscatedEmail'
-import { CONTACT_EMAIL, SITE } from '@/lib/site'
+import { CONTACT_EMAIL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -20,22 +21,26 @@ export default function ContactPage() {
   return (
     <>
       <Hero
+        light
         minHeight="min-h-[420px] md:min-h-[460px]"
-        top={<NavBar />}
-        sub="Nothing is uploaded. That is what makes the first meeting possible at all."
-        chapter={<Eyebrow bracket tone="muted">Chapter — 05</Eyebrow>}
+        top={<NavBar light />}
+        chapter={
+          <Eyebrow bracket tone="inverse" className="text-black/65">
+            Chapter - 05
+          </Eyebrow>
+        }
         actions={
           <>
-            <Button href="#book" variant="solid">
+            <Button href="#book" variant="solid" light>
               Book a time
             </Button>
-            <Button href="#write" variant="outline">
+            <Button href="#write" variant="outline" light>
               Leave your details
             </Button>
           </>
         }
       >
-        <Headline level={1} className="max-w-[900px]">
+        <Headline level={1} inverse className="max-w-[900px]">
           Demos run on your machine,
           <br />
           against your own RTL
@@ -55,7 +60,10 @@ export default function ContactPage() {
       {/* ---------- Write ---------- */}
       <Section id="write" label="Or write" title="Leave your details and we will come to you">
         <SectionBody>
-          <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
+          {/* Equal halves. The form used to take 1.3fr against the aside's 1fr,
+              which reads as a mistake rather than a hierarchy once the aside
+              carries a map heavy enough to hold its own side. */}
+          <div className="grid gap-12 lg:grid-cols-2">
             <LeadForm intent="demo" />
 
             <aside className="grid content-start gap-8">
@@ -73,14 +81,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="rounded-md border border-[color:var(--hairline)] p-7">
-                <Eyebrow tone="muted">Where we are</Eyebrow>
-                <p className="mt-4 text-xs leading-relaxed text-gray-2">
-                  {SITE.legalName}
-                  <br />
-                  {SITE.location}
-                </p>
-              </div>
+              <OfficeMap />
             </aside>
           </div>
         </SectionBody>

@@ -16,7 +16,7 @@ interface SectionProps {
  * The layout signature of the system: a 180px mono label column beside a
  * content column, on every section, with 120px of vertical rhythm.
  *
- * The label is a wayfinding column, not a kicker above the heading — it sits
+ * The label is a wayfinding column, not a kicker above the heading - it sits
  * *beside* the statement and names the section the way a margin note names a
  * paragraph. Below 900px the column collapses and the label sits above,
  * because a 180px column has nowhere to go on a phone.

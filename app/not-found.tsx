@@ -10,7 +10,7 @@ export default function NotFound() {
       <section className="px-[var(--page-margin)] py-[120px]">
         <div className="section-grid mx-auto w-full max-w-[var(--page-max)]">
           <div>
-            <Eyebrow tone="muted">404 — open net</Eyebrow>
+            <Eyebrow tone="muted">404 - open net</Eyebrow>
           </div>
           <div>
             <Headline level={1} className="max-w-[720px]">

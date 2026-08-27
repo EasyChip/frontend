@@ -11,7 +11,7 @@ import { CALENDLY_URL } from '@/lib/site'
  *
  * Two failure modes are handled, because both have bitten this site before:
  *
- * 1. No link configured. The embed is not rendered at all — a guessed Calendly
+ * 1. No link configured. The embed is not rendered at all - a guessed Calendly
  *    URL renders *their* 404 page, branding and cookie banner included, inside
  *    ours. An honest absence beats a foreign error page.
  * 2. The script is blocked, slow, or JavaScript is off. A visitor still gets a
@@ -20,8 +20,14 @@ import { CALENDLY_URL } from '@/lib/site'
  */
 export default function Calendly() {
   const [state, setState] = useState<'loading' | 'ready' | 'failed'>('loading')
+  // "Loading" is only ever true of a browser that is running our JavaScript.
+  // Rendered unconditionally it also reaches the visitor who has none, who
+  // then reads LOADING CALENDAR stacked above the <noscript> notice saying the
+  // calendar could not load - two contradictory answers to the same question.
+  const [scripting, setScripting] = useState(false)
 
   useEffect(() => {
+    setScripting(true)
     if (!CALENDLY_URL) return
     const timer = setTimeout(() => {
       setState((s) => (s === 'ready' ? s : 'failed'))
@@ -41,15 +47,23 @@ export default function Calendly() {
   if (state === 'failed') return <Fallback url={CALENDLY_URL} />
 
   return (
-    <div className="relative min-h-[640px] overflow-hidden rounded-md border border-[color:var(--hairline)] bg-near-black">
-      {state === 'loading' && (
+    // No border, radius or fill of our own. Calendly draws its own bordered
+    // card inside the iframe, so a hairline here would sit a hundred pixels
+    // outside a hairline of theirs.
+    <div className="relative min-h-[900px] w-full md:min-h-[700px]">
+      {scripting && state === 'loading' && (
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="label text-gray-2">Loading calendar</span>
         </div>
       )}
 
       <div
-        className="calendly-inline-widget h-[640px] w-full"
+        // Both heights are measured against the real widget, not chosen. Below
+        // md it lays out stacked and needs 900px: at 700 the timezone selector
+        // is cut off with no way to scroll to it, and at 1040 the widget drops
+        // the calendar pane altogether - its layout keys off container height
+        // as well as width, so more room is not safely better.
+        className="calendly-inline-widget h-[900px] w-full md:h-[700px]"
         data-url={`${CALENDLY_URL}?${params.toString()}`}
       />
 
@@ -76,7 +90,7 @@ function NotConfigured() {
         Self-serve booking opens here shortly.
       </p>
       <p className="mt-4 max-w-[46ch] text-xs text-gray-2">
-        Until then the form below is the fastest route — it reaches the founders directly, and we
+        Until then the form below is the fastest route - it reaches the founders directly, and we
         reply with times.
       </p>
     </div>

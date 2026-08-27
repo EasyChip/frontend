@@ -28,10 +28,11 @@
   --color-off-white: #F2F2F2;    /* primary text, light sections */
   --color-white: #FFFFFF;
 
-  /* ---- Radii — 4 media/bars, 10 cards, 20 full-bleed frames, pill controls ---- */
+  /* ---- Radii — 4 media/bars, 10 cards, pill controls.
+         The hero runs edge to edge with square corners, so there is no
+         full-bleed radius. ---- */
   --radius-sm: 4px;
   --radius-md: 10px;
-  --radius-lg: 20px;
 
   /* ---- Motion — quick, dry, no bounce ---- */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -48,7 +49,6 @@
   --scrim-strong: linear-gradient(180deg, rgba(11, 11, 11, 0.15) 0%, rgba(11, 11, 11, 0.85) 100%);
   --rule: 1px solid var(--hairline);
   --rule-light: 1px solid var(--hairline-dark);
-  --shadow-bar: 0 2px 24px rgba(0, 0, 0, 0.35);
 
   /* Layout */
   --page-margin: clamp(16px, 3vw, 40px);
@@ -138,6 +138,14 @@
   line-height: 1.08;
   font-weight: 300;
   letter-spacing: -0.02em;
+  /* Optical margin alignment. Archivo carries a side bearing before the ink
+     starts; at display scale that reads as an indent against the mono label
+     and the pill edges below, which have almost none. Pulling the box left by
+     the bearing aligns the glyph, which is what the eye actually measures.
+     In em so it tracks the clamp rather than being correct at one width.
+     Measured, not guessed: Archivo's cap left bearing is 5px at 66px type
+     against 0px for IBM Plex Mono, so the correction is 5/66 = 0.075em. */
+  margin-left: -0.075em;
 }
 
 @utility display-2 {

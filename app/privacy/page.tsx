@@ -40,7 +40,7 @@ export default function PrivacyPage() {
             <ul className="list-disc space-y-3 pl-5">
               <li>
                 <span className="text-off-white">What we collect:</span> only what you submit
-                through the contact form — name, work email, and optionally company, role and a
+                through the contact form - name, work email, and optionally company, role and a
                 note about what you are working on.
               </li>
               <li>

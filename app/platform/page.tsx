@@ -6,13 +6,12 @@ import Button from '@/components/core/Button'
 import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { StatCard } from '@/components/lists/Cards'
 import { CTA } from '@/lib/site'
-import { STAGES, ORCHESTRATION, COUNTS, WEDGE } from '@/lib/tools'
-import { cn } from '@/lib/utils'
+import { ENGINES, ORCHESTRATION, COUNTS } from '@/lib/tools'
 
 export const metadata: Metadata = {
   title: 'The platform',
   description:
-    'Fifty tools across nine stages, from spec and architecture through physical verification and signoff. Deterministic, local-first, orchestrated from one place.',
+    'Fifty tools across nine engines, from spec and architecture through physical verification and signoff. Deterministic, local-first, orchestrated from one place.',
   alternates: { canonical: '/platform' },
 }
 
@@ -31,10 +30,15 @@ export default function PlatformPage() {
         minHeight="min-h-[460px] md:min-h-[520px]"
         top={<NavBar />}
         sub="One suite from spec and architecture through physical verification and signoff."
-        chapter={<Eyebrow bracket tone="muted">Chapter — 02</Eyebrow>}
+        chapter={<Eyebrow bracket tone="muted">Chapter - 02</Eyebrow>}
+        actions={
+          <Button href={CTA.primary.href} variant="solid">
+            {CTA.primary.label}
+          </Button>
+        }
       >
         <Headline level={1}>
-          Nine stages,
+          Nine engines,
           <br />
           one shared context
         </Headline>
@@ -45,7 +49,7 @@ export default function PlatformPage() {
         label="Orchestration"
         title={
           <span className="text-gray-2">
-            The layer that <Accent>drives every stage below it</Accent>.
+            The layer that <Accent>drives every engine below it</Accent>.
           </span>
         }
       >
@@ -62,10 +66,6 @@ export default function PlatformPage() {
             ))}
             <RowEnd />
           </div>
-          <Body className="mt-10 max-w-[62ch] text-xs">
-            Escanor runs the flow on the customer&rsquo;s own hardware. It is not a cloud service
-            with a local option — local is the only mode there is.
-          </Body>
         </SectionBody>
       </Section>
 
@@ -75,7 +75,7 @@ export default function PlatformPage() {
         label="The suite"
         title={
           <span className="text-gray-2">
-            Every tool below is <Accent>written by us</Accent>. All nine stages are complete end to
+            Every tool below is <Accent>written by us</Accent>. All nine engines are complete end to
             end.
           </span>
         }
@@ -83,39 +83,31 @@ export default function PlatformPage() {
         <SectionBody>
           <div className="grid gap-3 sm:grid-cols-3">
             <StatCard value={String(COUNTS.suite)} label="Tools built" />
-            <StatCard value={String(COUNTS.stages)} label="Stages" />
+            <StatCard value={String(COUNTS.engines)} label="Engines" />
             <StatCard value={String(COUNTS.live)} label="Live today" />
           </div>
 
           <ol className="mt-14">
-            {STAGES.map((stage) => (
+            {ENGINES.map((engine) => (
               <li
-                key={stage.id}
+                key={engine.id}
                 className="grid gap-4 border-t border-[color:var(--hairline)] py-8 md:grid-cols-[180px_1fr] md:gap-8"
               >
                 <div>
-                  <Eyebrow tone="muted">Stage {stage.id}</Eyebrow>
+                  <Eyebrow tone="muted">Engine {engine.id}</Eyebrow>
                 </div>
                 <div>
-                  <h3 className="display-3 text-off-white">{stage.name}</h3>
-                  <p className="mt-2 max-w-[56ch] text-xs text-gray-2">{stage.summary}</p>
+                  <h3 className="display-3 text-off-white">{engine.name}</h3>
+                  <p className="mt-2 max-w-[56ch] text-xs text-gray-2">{engine.summary}</p>
 
                   <ul className="mt-5 flex flex-wrap gap-2">
-                    {stage.tools.map((tool) => (
+                    {engine.tools.map((tool) => (
                       <li key={tool.name}>
                         <span
-                          className={cn(
-                            'label inline-flex items-center gap-2 rounded-full border px-4 py-2',
-                            tool.status === 'live'
-                              ? 'border-transparent bg-white text-black'
-                              : 'border-[color:var(--hairline)] text-gray-2'
-                          )}
+                          className="label inline-flex items-center rounded-full border border-[color:var(--hairline)] px-4 py-2 text-gray-2"
                           title={tool.note}
                         >
                           {tool.name}
-                          {tool.status === 'live' && (
-                            <span className="normal-case tracking-normal">live</span>
-                          )}
                         </span>
                       </li>
                     ))}
@@ -127,15 +119,15 @@ export default function PlatformPage() {
           <RowEnd />
 
           <p className="mt-8 max-w-[62ch] text-xs text-gray-2">
-            Filled marks are live today — public and demo-able on your own machine. The rest are
-            written and functional, releasing with the design-partner beta.
+            Every tool listed is written and functional. Five are public and demo-able on your own
+            machine today; the rest release with the design-partner beta.
           </p>
         </SectionBody>
       </Section>
 
       {/* ---------- Determinism ---------- */}
       {/* The one light section on the site. In a system with no hue, value
-          inversion is the only large move available — spending it once, on the
+          inversion is the only large move available - spending it once, on the
           claim engineers cared about most, is what keeps the monochrome
           reading as a decision rather than a setting. */}
       <Section
@@ -161,43 +153,6 @@ export default function PlatformPage() {
               </DefinitionRow>
             ))}
             <RowEnd light />
-          </div>
-        </SectionBody>
-      </Section>
-
-      {/* ---------- The wedge ---------- */}
-      <Section label="Where teams start" title="One tool, then the tier">
-        <SectionBody>
-          <Body className="max-w-[62ch] text-base">
-            A chip team does not swap forty tools in one procurement cycle. It swaps one, discovers
-            the rest are already in the same binary, and consolidates from there.
-          </Body>
-
-          <div className="mt-12 grid gap-3 md:grid-cols-3">
-            <StatCard
-              index="Phase 01 · Wedge"
-              value="$40K"
-              label="Per team, per year"
-              body={`${WEDGE.tool} plus the Escanor CLI. ${WEDGE.note}`}
-            />
-            <StatCard
-              index="Phase 02 · Bundle"
-              value="$50–150K"
-              label="Per team, per year"
-              body="Fifteen to twenty tools in a single contract. The vendor count for the secondary tier drops from six-plus to one."
-            />
-            <StatCard
-              index="Phase 03 · Full suite"
-              value="$100K+"
-              label="Per full bundle"
-              body="All fifty tools plus the AI layer. Single procurement, single support path."
-            />
-          </div>
-
-          <div className="mt-10">
-            <Button href={CTA.primary.href} variant="solid">
-              {CTA.primary.label}
-            </Button>
           </div>
         </SectionBody>
       </Section>

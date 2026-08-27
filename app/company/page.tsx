@@ -71,22 +71,27 @@ export default function CompanyPage() {
   return (
     <>
       <Hero
+        light
         minHeight="min-h-[420px] md:min-h-[460px]"
-        top={<NavBar />}
+        top={<NavBar light />}
         sub="EasyChip Private Limited, Bengaluru. Pre-seed, and building."
-        chapter={<Eyebrow bracket tone="muted">Chapter — 04</Eyebrow>}
+        chapter={
+          <Eyebrow bracket tone="inverse" className="text-black/65">
+            Chapter - 04
+          </Eyebrow>
+        }
         actions={
           <>
-            <Button href={CTA.primary.href} variant="solid">
+            <Button href={CTA.primary.href} variant="solid" light>
               {CTA.primary.label}
             </Button>
-            <Button href="/platform" variant="outline">
+            <Button href="/platform" variant="outline" light>
               See the suite
             </Button>
           </>
         }
       >
-        <Headline level={1} className="max-w-[940px]">
+        <Headline level={1} inverse className="max-w-[940px]">
           Fifty production tools,
           <br />
           built by two people
@@ -137,7 +142,7 @@ export default function CompanyPage() {
           <div className="mt-12 grid gap-3 md:grid-cols-3">
             <StatCard
               label="Incubation"
-              body="BITS Pilani SMCC WILP — a two-year MoU for co-development and resource sharing toward MVP development. Workspace, stipend and mentors. No equity taken."
+              body="BITS Pilani SMCC WILP - a two-year MoU for co-development and resource sharing toward MVP development. Workspace, stipend and mentors. No equity taken."
             />
             <StatCard
               label="Capital raised"
@@ -176,7 +181,7 @@ export default function CompanyPage() {
           <div className="mt-10 rounded-md border border-[color:var(--hairline)] p-7">
             <Eyebrow tone="muted">What this does and does not prove</Eyebrow>
             <Body className="mt-4 max-w-[70ch] text-xs">
-              This validates the infrastructure thesis — determinism, licensing, locality,
+              This validates the infrastructure thesis - determinism, licensing, locality,
               consolidation. It does not yet validate our physical-design and reliability roadmap.
               That is precisely what the design-partner beta is scoped to test.
             </Body>
@@ -220,7 +225,7 @@ export default function CompanyPage() {
             <StatCard
               value="$12.1B"
               label="Serviceable market"
-              body="The secondary tool tier plus AI-accelerated design — the part we can sell into without displacing a core signoff engine."
+              body="The secondary tool tier plus AI-accelerated design - the part we can sell into without displacing a core signoff engine."
             />
             <StatCard
               value="500–800"
@@ -230,7 +235,7 @@ export default function CompanyPage() {
           </div>
 
           <Body className="mt-10 max-w-[70ch] text-xs">
-            Core signoff is a fortress — decades of foundry certification and customer trust sit
+            Core signoff is a fortress - decades of foundry certification and customer trust sit
             behind it. The tier next to it carries most of the tool count and a large share of the
             licence spend, with none of that certification lock-in. That is the part a new entrant
             can actually take, and the part nobody has made AI-native.

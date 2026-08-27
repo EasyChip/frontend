@@ -1,8 +1,8 @@
 /**
- * The EasyChip suite — the public-safe source of truth for every tool surface.
+ * The EasyChip suite - the public-safe source of truth for every tool surface.
  *
  * Rebuilt 2026-08-27 from the current architecture deck. Fifty tools are built
- * in-house across nine stages, all nine complete end to end; the DevOps and ML
+ * in-house across nine engines, all nine complete end to end; the DevOps and ML
  * layers on top are what is being built now.
  *
  * PUBLIC-SAFE ONLY. This file ships to the client. It must never carry model
@@ -11,8 +11,8 @@
  */
 
 /**
- * `live`  — public and demo-able today.
- * `built` — written and functional, not yet released for outside use.
+ * `live`  - public and demo-able today.
+ * `built` - written and functional, not yet released for outside use.
  */
 export type ToolStatus = 'live' | 'built'
 
@@ -23,24 +23,24 @@ export interface Tool {
   status: ToolStatus
 }
 
-export interface Stage {
+export interface Engine {
   /** Two-digit index; the sequence is the design flow and carries meaning. */
   id: string
   name: string
-  /** What the stage is for, in one plain sentence. */
+  /** What the engine is for, in one plain sentence. */
   summary: string
   tools: Tool[]
 }
 
-/** L1 — the orchestration layer that drives every stage below it. */
+/** L1 - the orchestration layer that drives every engine below it. */
 export const ORCHESTRATION: Tool[] = [
   { name: 'Escanor', note: 'Local-first CLI. Drives the whole flow from the customer’s own machine.', status: 'live' },
-  { name: 'FlowBit', note: 'Flow management. Owns the flow graph across all nine stages.', status: 'live' },
+  { name: 'FlowBit', note: 'Flow management. Owns the flow graph across all nine engines.', status: 'live' },
   { name: 'Silicrate', note: 'PDK and IP management.', status: 'built' },
 ]
 
-/** L2 — the nine stages, in flow order. */
-export const STAGES: Stage[] = [
+/** L2 - the nine engines, in flow order. */
+export const ENGINES: Engine[] = [
   {
     id: '01',
     name: 'Spec & Architecture',
@@ -128,19 +128,13 @@ export const STAGES: Stage[] = [
 /** Total tools written in-house across the suite. */
 export const SUITE_SIZE = 50
 
-export const NAMED_TOOLS = [...ORCHESTRATION, ...STAGES.flatMap((s) => s.tools)]
+export const NAMED_TOOLS = [...ORCHESTRATION, ...ENGINES.flatMap((s) => s.tools)]
 
 export const LIVE_TOOLS = NAMED_TOOLS.filter((t) => t.status === 'live')
 
 export const COUNTS = {
   suite: SUITE_SIZE,
-  stages: STAGES.length,
+  engines: ENGINES.length,
   named: NAMED_TOOLS.length,
   live: LIVE_TOOLS.length,
-} as const
-
-/** The commercial wedge. One check, priced against what incumbents charge for it. */
-export const WEDGE = {
-  tool: 'CDCBit',
-  note: 'No credible open-source CDC analyser exists, and incumbents charge $200K–$400K per team for this one check.',
 } as const

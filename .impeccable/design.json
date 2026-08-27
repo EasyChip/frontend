@@ -193,13 +193,7 @@
         "purpose": "12px mono, not uppercased by default. Dates, identifiers and tabular data in the meta column of a list row."
       }
     },
-    "shadows": [
-      {
-        "name": "bar-lift",
-        "value": "0 2px 24px rgba(0,0,0,0.35)",
-        "purpose": "The only shadow in the system. Gives the pure-white news bar an edge over hero photography. Not available to any other element."
-      }
-    ],
+    "shadows": [],
     "motion": [
       {
         "name": "ease-out",
@@ -218,11 +212,26 @@
       }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "label-col", "value": "900px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "page-max", "value": "1440px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "label-col",
+        "value": "900px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "page-max",
+        "value": "1440px"
+      }
     ]
   },
   "components": [
@@ -247,7 +256,7 @@
       "kind": "button",
       "refersTo": "button-text",
       "description": "The tertiary action. Mono verb, no chrome, trailing arrow when it leaves the page.",
-      "html": "<a class=\"ds-btn-text\" href=\"#\">Read the note <span aria-hidden=\"true\">↗</span></a>",
+      "html": "<a class=\"ds-btn-text\" href=\"#\">Read the note <span aria-hidden=\"true\">\u2197</span></a>",
       "css": ".ds-btn-text { display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #A3A3A3; text-underline-offset: 4px; transition: color 120ms cubic-bezier(0.2,0.7,0.2,1); } .ds-btn-text:hover { color: #FFFFFF; text-decoration: underline; } .ds-btn-text:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }"
     },
     {
@@ -275,19 +284,11 @@
       "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 22px 24px; background: #0B0B0B; border-radius: 10px; } .ds-nav-mark { display: inline-flex; color: #F2F2F2; } .ds-nav-links { display: flex; align-items: center; gap: 30px; } .ds-nav-link { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #A3A3A3; transition: color 120ms cubic-bezier(0.2,0.7,0.2,1); } .ds-nav-link:hover, .ds-nav-link.is-current { color: #FFFFFF; } .ds-nav-link:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; } .ds-nav-cta { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; background: #FFFFFF; color: #0B0B0B; padding: 10px 18px; border-radius: 9999px; transition: background-color 120ms cubic-bezier(0.2,0.7,0.2,1); } .ds-nav-cta:hover { background: #D4D4D4; }"
     },
     {
-      "name": "News Bar",
-      "kind": "custom",
-      "refersTo": "news-bar",
-      "description": "The one true current message, floating white over hero photography. The only element in the system that carries a shadow.",
-      "html": "<div class=\"ds-newsbar\"><span class=\"ds-newsbar-label\"><span class=\"ds-newsbar-dot\"></span>Latest</span><a class=\"ds-newsbar-msg\" href=\"#\">VisUPF is free and open source</a><a class=\"ds-newsbar-action\" href=\"#\">Read</a><button class=\"ds-newsbar-x\" aria-label=\"Dismiss announcement\">×</button></div>",
-      "css": ".ds-newsbar { display: flex; align-items: center; gap: 20px; background: #FFFFFF; color: #0B0B0B; padding: 12px 16px; border-radius: 4px; box-shadow: 0 2px 24px rgba(0,0,0,0.35); } .ds-newsbar-label { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; } .ds-newsbar-dot { display: inline-block; width: 11px; height: 11px; border: 1px solid #0B0B0B; border-radius: 9999px; } .ds-newsbar-msg { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #0B0B0B; text-decoration: none; } .ds-newsbar-msg:hover { text-decoration: underline; } .ds-newsbar-action { flex-shrink: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #0B0B0B; text-decoration: underline; text-underline-offset: 3px; } .ds-newsbar-x { flex-shrink: 0; background: none; border: none; line-height: 1; font-size: 16px; color: rgba(11,11,11,0.6); cursor: pointer; transition: color 120ms cubic-bezier(0.2,0.7,0.2,1); } .ds-newsbar-x:hover { color: #0B0B0B; }"
-    },
-    {
       "name": "List Row",
       "kind": "custom",
       "refersTo": "list-row",
       "description": "A hairline-ruled index row on a 180px / 1fr / auto grid that echoes the section label column. Tints 3% white on hover.",
-      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-meta\">2026 — 08</span><span class=\"ds-row-title\">CDCBit enters design-partner beta</span><span class=\"ds-row-action\">Read ↗</span></a>",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-meta\">2026 \u2014 08</span><span class=\"ds-row-title\">CDCBit enters design-partner beta</span><span class=\"ds-row-action\">Read \u2197</span></a>",
       "css": ".ds-row { display: grid; grid-template-columns: 180px 1fr auto; align-items: baseline; gap: 24px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.14); text-decoration: none; transition: background-color 120ms cubic-bezier(0.2,0.7,0.2,1); } .ds-row:hover { background: rgba(255,255,255,0.03); } .ds-row-meta { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; color: #6E6E6E; } .ds-row-title { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 500; color: #F2F2F2; } .ds-row-action { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; color: #6E6E6E; transition: color 120ms cubic-bezier(0.2,0.7,0.2,1); } .ds-row:hover .ds-row-action { color: #FFFFFF; } .ds-row:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }"
     },
     {
@@ -309,14 +310,14 @@
   ],
   "narrative": {
     "northStar": "The Instrument Panel",
-    "overview": "This is a measuring instrument, not a brochure. The ground is near-black, the panels sit one step above it, the rules are a single hairline wide, and every small piece of text is set in uppercase mono like a channel name silk-screened onto a bench tool. The system reads as calibrated rather than styled: nothing glows, nothing floats, nothing animates on arrival. Its credibility comes from a restraint that a working engineer recognises as competence.\n\nThe system is strictly monochrome, and that is the load-bearing decision. There is no accent hue anywhere — not in links, not in status, not in charts, not in focus rings. Emphasis is produced entirely by brightness: a full line drops to secondary grey and the phrase that carries the argument lifts to pure white. Because white is the only escalation available, it stays scarce, and scarcity is what makes it read as emphasis rather than decoration.\n\nComposition is a two-column margin note. Every section places a 180px uppercase mono label beside its content column, so a page scans as the index of a document rather than a stack of marketing bands. Full-bleed desaturated macro hardware photography opens a page inside a 20px-cornered frame with the chrome living inside the frame; everything below is flat panels and hairline rules on the black ground, with the light ground used only as an occasional hard cut in the scroll.",
+    "overview": "This is a measuring instrument, not a brochure. The ground is near-black, the panels sit one step above it, the rules are a single hairline wide, and every small piece of text is set in uppercase mono like a channel name silk-screened onto a bench tool. The system reads as calibrated rather than styled: nothing glows, nothing floats, nothing animates on arrival. Its credibility comes from a restraint that a working engineer recognises as competence.\n\nThe system is strictly monochrome, and that is the load-bearing decision. There is no accent hue anywhere \u2014 not in links, not in status, not in charts, not in focus rings. Emphasis is produced entirely by brightness: a full line drops to secondary grey and the phrase that carries the argument lifts to pure white. Because white is the only escalation available, it stays scarce, and scarcity is what makes it read as emphasis rather than decoration.\n\nComposition is a two-column margin note. Every section places a 180px uppercase mono label beside its content column, so a page scans as the index of a document rather than a stack of marketing bands. Full-bleed desaturated macro hardware photography opens a page inside a 20px-cornered frame with the chrome living inside the frame; everything below is flat panels and hairline rules on the black ground, with the light ground used only as an occasional hard cut in the scroll.",
     "keyCharacteristics": [
-      "Strictly monochrome — no hue is permitted anywhere in the interface",
+      "Strictly monochrome \u2014 no hue is permitted anywhere in the interface",
       "Emphasis by brightness: dim the line, lift the phrase to pure white",
       "A 180px mono label column beside content on every section",
       "Hairline rules (1px, 14% white) instead of shadows",
       "Two type registers only: Archivo 300 statements and uppercase IBM Plex Mono labels",
-      "Flat by default — exactly one shadow exists in the whole system",
+      "Flat by default \u2014 exactly one shadow exists in the whole system",
       "Photography desaturated to near-monochrome before it may ship"
     ],
     "rules": [
@@ -342,17 +343,17 @@
       },
       {
         "name": "The Display Namespace Rule",
-        "body": "The display utilities are named display-1 / display-2 / display-3 and are deliberately outside the text-* namespace. tailwind-merge collapses every text-* class into a single conflict group, so a utility named text-display-1 is silently dropped the moment it meets text-off-white on the same element — the colour survives, the font size disappears, and nothing errors. Any future size utility must stay outside text-* for the same reason.",
+        "body": "The display utilities are named display-1 / display-2 / display-3 and are deliberately outside the text-* namespace. tailwind-merge collapses every text-* class into a single conflict group, so a utility named text-display-1 is silently dropped the moment it meets text-off-white on the same element \u2014 the colour survives, the font size disappears, and nothing errors. Any future size utility must stay outside text-* for the same reason.",
         "section": "typography"
       },
       {
         "name": "The Mono Marking Rule",
-        "body": "Uppercase mono is a marking, not a headline garnish. It names a column, a stage, a date, an index or a status — something the reader could not infer from the statement beside it. It never restates the heading it accompanies.",
+        "body": "Uppercase mono is a marking, not a headline garnish. It names a column, a stage, a date, an index or a status \u2014 something the reader could not infer from the statement beside it. It never restates the heading it accompanies.",
         "section": "typography"
       },
       {
         "name": "The Label Column Rule",
-        "body": "Every section carries a mono label in the 180px column beside its statement. The label is wayfinding — it names the section the way a margin note names a paragraph — and it sits beside the statement, never stacked above it as a kicker.",
+        "body": "Every section carries a mono label in the 180px column beside its statement. The label is wayfinding \u2014 it names the section the way a margin note names a paragraph \u2014 and it sits beside the statement, never stacked above it as a kicker.",
         "section": "layout"
       },
       {
@@ -361,8 +362,8 @@
         "section": "layout"
       },
       {
-        "name": "The One Shadow Rule",
-        "body": "Bar Lift is the only shadow in the system and it belongs to the news bar alone. Cards, panels, buttons, dialogs and hover states are flat. If something needs to separate from its background, it gets a hairline or a tonal step, not a shadow.",
+        "name": "The No Shadow Rule",
+        "body": "Nothing in this system casts a shadow. Cards, panels, buttons, dialogs and hover states are flat. If something needs to separate from its background, it gets a hairline or a step on the tonal ramp.",
         "section": "elevation"
       },
       {
@@ -394,26 +395,25 @@
     "dos": [
       "Do produce emphasis by dimming the carrier line to Secondary Grey (#A3A3A3) and lifting only the load-bearing phrase to Signal White.",
       "Do give every section a mono label in the 180px column beside its statement, and let it collapse above the content below 900px.",
-      "Do keep new size utilities outside the text-* namespace, as display-1 / display-2 / display-3 already are — tailwind-merge drops a text-* size the moment it meets a text-* colour.",
-      "Do set every small piece of text in uppercase IBM Plex Mono at 10–12px with 0.12em tracking.",
+      "Do keep new size utilities outside the text-* namespace, as display-1 / display-2 / display-3 already are \u2014 tailwind-merge drops a text-* size the moment it meets a text-* colour.",
+      "Do set every small piece of text in uppercase IBM Plex Mono at 10\u201312px with 0.12em tracking.",
       "Do separate surfaces with a 1px hairline (14% white on dark, 12% black on light) or a tonal step between #0B0B0B, #141414 and #1E1E1E.",
       "Do hold to the four corner values: 4px media and bars, 10px cards, 20px full-bleed frames, pill on controls.",
-      "Do keep transitions at 120–240ms on cubic-bezier(.2, .7, .2, 1) and restrict them to colour, background and opacity.",
+      "Do keep transitions at 120\u2013240ms on cubic-bezier(.2, .7, .2, 1) and restrict them to colour, background and opacity.",
       "Do run both scrim ramps under any full-bleed photograph that carries chrome.",
       "Do desaturate photography to near-monochrome before it ships, and export at 1200 and 2000 wide as WebP with a placeholder.",
-      "Do keep the lockup small — 16px in the nav, 18px in the footer, never above roughly 28px.",
+      "Do keep the lockup small \u2014 16px in the nav, 18px in the footer, never above roughly 28px.",
       "Do cap measure: 46ch body, 62ch section lead, 820px section title."
     ],
     "donts": [
-      "Don't introduce an accent hue anywhere — not for links, status, validation, focus rings or data. There is no hue in this system.",
-      "Don't reintroduce the retired identity: the cyan→violet→magenta prism gradient, the faceted EC monogram, or Sora / Inter / JetBrains Mono.",
-      "Don't add a shadow. Bar Lift belongs to the news bar and to nothing else.",
+      "Don't introduce an accent hue anywhere \u2014 not for links, status, validation, focus rings or data. There is no hue in this system.",
+      "Don't reintroduce the retired identity: the cyan\u2192violet\u2192magenta prism gradient, the faceted EC monogram, or Sora / Inter / JetBrains Mono.",
       "Don't use a serif, or any third typeface beyond Archivo and IBM Plex Mono.",
       "Don't create a fifth radius, a 2px rule, or a heavier divider for emphasis.",
       "Don't animate on scroll, parallax a hero, reveal on entry, or scale and bounce a control on press.",
-      "Don't set body copy in Muted Grey (#6E6E6E) — it is for labels, indices and structural text only.",
+      "Don't set body copy in Muted Grey (#6E6E6E) \u2014 it is for labels, indices and structural text only.",
       "Don't stack a mono label above a heading as a kicker; the label belongs in the column beside the statement.",
-      "Don't ship an icon font, an icon library, or an emoji — the chip mark is the only drawn graphic and every other symbol is a mono glyph.",
+      "Don't ship an icon font, an icon library, or an emoji \u2014 the chip mark is the only drawn graphic and every other symbol is a mono glyph.",
       "Don't enlarge the lockup into a background graphic or a watermark.",
       "Don't bold, underline or upsize a word for emphasis; brightness is the only emphasis mechanism."
     ]

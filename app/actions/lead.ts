@@ -14,7 +14,7 @@ const MAX = { name: 120, email: 200, company: 160, role: 120, note: 2000 }
  * Store an inbound lead.
  *
  * This is the only thing the database does on this site. There is no
- * authenticated area, no session and no user record — a lead is a row someone
+ * authenticated area, no session and no user record - a lead is a row someone
  * chose to leave, and the team reaches out from there.
  */
 export async function submitLead(formData: FormData): Promise<LeadResult> {

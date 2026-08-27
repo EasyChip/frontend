@@ -10,7 +10,7 @@ const field =
 
 /**
  * The one form on the site. It takes enough to have a useful first
- * conversation and nothing more — no qualification quiz, no team-size
+ * conversation and nothing more - no qualification quiz, no team-size
  * dropdown nobody reads.
  */
 export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'contact' }) {
@@ -47,8 +47,11 @@ export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'conta
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-5">
-      {/* Honeypot — hidden from people, tempting to bots. */}
+    // content-start: the form shares a stretched grid row with the aside, so
+    // without it the rows distribute over the full column height and park the
+    // submit button a couple of hundred pixels below the last field.
+    <form onSubmit={onSubmit} className="grid content-start gap-5">
+      {/* Honeypot - hidden from people, tempting to bots. */}
       <div aria-hidden className="absolute h-0 w-0 overflow-hidden">
         <label htmlFor="lf-website">Website</label>
         <input id="lf-website" name="website" tabIndex={-1} autoComplete="off" />
@@ -84,9 +87,6 @@ export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'conta
         <Button type="submit" variant="solid" disabled={status === 'sending'}>
           {status === 'sending' ? 'Sending' : 'Send'}
         </Button>
-        <span className="text-xs text-gray-2">
-          Goes straight to the founders. No sequence, no CRM drip.
-        </span>
       </div>
     </form>
   )
