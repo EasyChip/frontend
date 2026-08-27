@@ -1,369 +1,365 @@
 ---
 name: EasyChip
-description: Deep-space dark, one prism gradient, spent once per view.
+description: A strictly monochrome instrument system where emphasis is brightness, never colour.
 colors:
-  brand-cyan: "#00E5EE"
-  brand-blue: "#0196E8"
-  brand-indigo: "#4E55FC"
-  brand-violet: "#7C08F5"
-  brand-magenta: "#C400FE"
-  void: "#04060F"
-  base: "#080B16"
-  surface-1: "#0D1120"
-  surface-2: "#141A2E"
-  hair: "#1E2740"
-  line: "#2A3557"
-  ink: "#F5F7FA"
-  ink-2: "#A7B0C6"
-  ink-3: "#6B7590"
-  on-accent: "#04060F"
-  success: "#00D68F"
-  warning: "#F5A623"
-  error: "#FF4D6D"
+  instrument-black: "#0B0B0B"
+  panel-black: "#141414"
+  well-grey: "#1E1E1E"
+  muted-grey: "#6E6E6E"
+  secondary-grey: "#A3A3A3"
+  bright-grey: "#D4D4D4"
+  off-white: "#F2F2F2"
+  signal-white: "#FFFFFF"
+  hairline: "rgba(255,255,255,0.14)"
+  hairline-dark: "rgba(11,11,11,0.12)"
 typography:
-  display:
-    fontFamily: "Sora, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "4.5rem"
-    fontWeight: 700
-    lineHeight: 1.02
+  display-1:
+    fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "clamp(40px, 4.6vw, 68px)"
+    fontWeight: 300
+    lineHeight: 1.08
     letterSpacing: "-0.02em"
-  headline:
-    fontFamily: "Sora, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "3.5rem"
-    fontWeight: 700
-    lineHeight: 1.05
+  display-2:
+    fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "clamp(28px, 2.8vw, 42px)"
+    fontWeight: 300
+    lineHeight: 1.14
     letterSpacing: "-0.02em"
-  title:
-    fontFamily: "Sora, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "2rem"
-    fontWeight: 600
-    lineHeight: 1.15
+  display-3:
+    fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "clamp(19px, 1.5vw, 24px)"
+    fontWeight: 400
+    lineHeight: 1.35
     letterSpacing: "-0.01em"
   body:
-    fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1rem"
+    fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
+  body-lg:
+    fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.625
+    letterSpacing: "normal"
+  body-sm:
+    fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.625
+    letterSpacing: "normal"
   label:
-    fontFamily: "JetBrains Mono, ui-monospace, monospace"
-    fontSize: "0.75rem"
+    fontFamily: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+    fontSize: "11px"
     fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: "0.08em"
+    lineHeight: 1.5
+    letterSpacing: "0.12em"
+  label-sm:
+    fontFamily: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+    fontSize: "10px"
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: "0.12em"
+  meta:
+    fontFamily: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.7
+    letterSpacing: "0.12em"
 rounded:
-  sm: "8px"
-  md: "12px"
-  lg: "16px"
-  xl: "24px"
-  full: "999px"
+  sm: "4px"
+  md: "10px"
+  lg: "20px"
+  pill: "9999px"
 spacing:
-  gutter: "24px"
-  card: "24px"
-  header-gap: "40px"
-  header-gap-lg: "56px"
-  section-y: "96px"
-  section-y-lg: "128px"
+  xs: "8px"
+  sm: "12px"
+  md: "20px"
+  lg: "32px"
+  section-gap: "48px"
+  section-y: "120px"
+  section-y-compact: "96px"
+  page-margin: "clamp(16px, 3vw, 40px)"
+  page-max: "1440px"
+  label-col: "180px"
 components:
-  button-primary:
-    backgroundColor: "{colors.brand-violet}"
-    textColor: "#FFFFFF"
-    rounded: "{rounded.full}"
-    padding: "0 24px"
-    height: "40px"
-  button-primary-lg:
-    backgroundColor: "{colors.brand-violet}"
-    textColor: "#FFFFFF"
-    rounded: "{rounded.full}"
-    padding: "0 32px"
-    height: "48px"
-  button-secondary:
+  button-solid:
+    backgroundColor: "{colors.signal-white}"
+    textColor: "{colors.instrument-black}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "12px 22px"
+  button-solid-hover:
+    backgroundColor: "{colors.bright-grey}"
+    textColor: "{colors.instrument-black}"
+  button-outline:
     backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
-    padding: "0 24px"
-    height: "40px"
-  button-ghost:
+    textColor: "{colors.off-white}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "11px 21px"
+  button-outline-hover:
+    backgroundColor: "{colors.well-grey}"
+    textColor: "{colors.off-white}"
+  button-text:
     backgroundColor: "transparent"
-    textColor: "{colors.brand-cyan}"
-    rounded: "{rounded.full}"
+    textColor: "{colors.secondary-grey}"
+    typography: "{typography.label}"
     padding: "0"
-    height: "40px"
-  card-tool:
-    backgroundColor: "{colors.surface-1}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "24px"
-  input-field:
-    backgroundColor: "{colors.surface-1}"
-    textColor: "{colors.ink}"
+  button-text-hover:
+    backgroundColor: "transparent"
+    textColor: "{colors.signal-white}"
+  card:
+    backgroundColor: "{colors.panel-black}"
+    textColor: "{colors.off-white}"
     rounded: "{rounded.md}"
-    padding: "0 16px"
-    height: "48px"
-  status-pill-live:
-    backgroundColor: "rgba(0, 229, 238, 0.15)"
-    textColor: "{colors.brand-cyan}"
+    padding: "24px 22px 26px"
+  card-light:
+    backgroundColor: "transparent"
+    textColor: "{colors.instrument-black}"
+    rounded: "{rounded.md}"
+    padding: "24px 22px 26px"
+  input:
+    backgroundColor: "{colors.well-grey}"
+    textColor: "{colors.off-white}"
+    rounded: "{rounded.sm}"
+    padding: "12px 16px"
+    width: "100%"
+  input-focus:
+    backgroundColor: "{colors.well-grey}"
+    textColor: "{colors.off-white}"
+  list-row:
+    backgroundColor: "transparent"
+    textColor: "{colors.off-white}"
+    typography: "{typography.body}"
+    padding: "20px 0"
+  news-bar:
+    backgroundColor: "{colors.signal-white}"
+    textColor: "{colors.instrument-black}"
+    rounded: "{rounded.sm}"
+    padding: "12px 16px"
+  hero-frame:
+    backgroundColor: "{colors.panel-black}"
+    textColor: "{colors.off-white}"
+    rounded: "{rounded.lg}"
+    height: "680px"
+  nav-link:
+    backgroundColor: "transparent"
+    textColor: "{colors.secondary-grey}"
     typography: "{typography.label}"
-    rounded: "{rounded.full}"
-    padding: "4px 10px"
-  status-pill-in-development:
-    backgroundColor: "rgba(124, 8, 245, 0.20)"
-    textColor: "#C79BFF"
+    padding: "0"
+  nav-cta:
+    backgroundColor: "{colors.signal-white}"
+    textColor: "{colors.instrument-black}"
     typography: "{typography.label}"
-    rounded: "{rounded.full}"
-    padding: "4px 10px"
+    rounded: "{rounded.pill}"
+    padding: "10px 18px"
 ---
 
 # Design System: EasyChip
 
-> **Canonical.** This file is the single source of truth for EasyChip's visual system: color, type, layout, depth, form, and components. `internal/DESIGN.md` is the brand-asset appendix — logo geometry, clear space, mark usage, and the asset production list — and holds no token values.
-
 ## Overview
 
-**Creative North Star: "The Quiet Instrument"**
+**Creative North Star: "The Instrument Panel"**
 
-EasyChip looks like a piece of test equipment powered on in a dark room. The default state is near-black, hairline-ruled, and silent — a calm instrument panel that asks nothing of the eye until you touch it. Structure is carried by tonal steps and 1px rules, not by boxes, fills, or shadows. Nothing glows at rest.
+This is a measuring instrument, not a brochure. The ground is near-black, the panels sit one step above it, the rules are a single hairline wide, and every small piece of text is set in uppercase mono like a channel name silk-screened onto a bench tool. The system reads as calibrated rather than styled: nothing glows, nothing floats, nothing animates on arrival. Its credibility comes from a restraint that a working engineer recognises as competence.
 
-Then the instrument responds. Light is the entire interaction language: a cursor-tracked spotlight sweeps the surface it hovers, a conic beam orbits a card's border, a live status dot breathes cyan, a specular sheen crosses a button once and is gone. Every one of these is a response to the user, never ambient decoration. The system emits light rather than casting shadow — depth here is a matter of what is powered on, not what is stacked.
+The system is strictly monochrome, and that is the load-bearing decision. There is no accent hue anywhere — not in links, not in status, not in charts, not in focus rings. Emphasis is produced entirely by brightness: a full line drops to secondary grey and the phrase that carries the argument lifts to pure white. Because white is the only escalation available, it stays scarce, and scarcity is what makes it read as emphasis rather than decoration.
 
-The one loud thing is the prism gradient — cyan through blue, indigo, violet, to magenta — and it is spent exactly once per view. That scarcity is not a stylistic preference; it is what makes the gradient read as the brand rather than as chrome. A page that uses it twice has already diluted it. Restraint everywhere, one blaze of color where it counts.
-
-The personality axes, in the order they resolve conflicts: **technical over playful**, **dark over light**, **prismatic over flat**, **calm surface over loud everywhere**. EasyChip is precision made vivid — a technical product for chip engineers, rendered with the clarity of cut crystal on deep space.
+Composition is a two-column margin note. Every section places a 180px uppercase mono label beside its content column, so a page scans as the index of a document rather than a stack of marketing bands. Full-bleed desaturated macro hardware photography opens a page inside a 20px-cornered frame with the chrome living inside the frame; everything below is flat panels and hairline rules on the black ground, with the light ground used only as an occasional hard cut in the scroll.
 
 **Key Characteristics:**
-
-- Near-black void base carrying ~95% of surface area; color is punctuation, never field
-- Hairline structure — 1px rules at two weights do the work borders and shadows would do elsewhere
-- Light as the interaction language: spotlight, beam, sheen, LED, all state-triggered
-- Monospace as a first-class brand voice, not code styling
-- One prism gradient, once per view
-- 2% film grain over everything, killing OLED banding and giving the void a material floor
+- Strictly monochrome — no hue is permitted anywhere in the interface
+- Emphasis by brightness: dim the line, lift the phrase to pure white
+- A 180px mono label column beside content on every section
+- Hairline rules (1px, 14% white) instead of shadows
+- Two type registers only: Archivo 300 statements and uppercase IBM Plex Mono labels
+- Flat by default — exactly one shadow exists in the whole system
+- Photography desaturated to near-monochrome before it may ship
 
 ## Colors
 
-A tuned blue-black ladder holds the surface; a five-stop prism holds the identity. The neutrals are never neutral-gray — every step carries blue, so the void reads as deep space rather than as switched-off screen.
+A single achromatic ramp from near-black to pure white, with nothing between them but grey. Contrast, not hue, is the entire vocabulary.
 
 ### Primary
-
-- **Bias Violet** (`#7C08F5`): The action color. Every primary button, the nav CTA, the mobile drawer's closing action. White text passes on it. It is the only brand solid used as a large fill.
-- **Probe Cyan** (`#00E5EE`): The instrument light. Live status, links on dark, focus rings, the corner via that lights on card hover, hover glows at low alpha. It is a *signal*, not a surface — cyan appears as text, stroke, dot, or halo, and only as a fill at ≤15% alpha.
-
-### Secondary
-
-- **Signal Blue** (`#0196E8`): Second gradient stop; standalone use is informational only.
-- **Trace Indigo** (`#4E55FC`): Mid-gradient stop; carries hover glows that need to sit between cyan and violet.
-- **Prism Magenta** (`#C400FE`): The gradient's tail and its highest-emphasis note. Standalone use is rare by design.
+- **Signal White** (#FFFFFF): The only escalation in the system. It fills primary action pills, carries the emphasised phrase inside a dimmed line, marks the EasyChip column of a comparison row, and draws the focus ring. It is the loudest thing available, so it lands on a few words per screen and never on a paragraph.
+- **Off White** (#F2F2F2): Default text on the dark ground, and the light-ground surface itself for inverted sections. Body copy and headings are set in this — never in one of the muted greys.
 
 ### Neutral
-
-- **Deep Void** (`#04060F`): The page base. The canvas the whole identity sits on, and the browser theme color.
-- **Substrate** (`#080B16`): Default section background — the one step up from void that separates a band from the page without drawing a box.
-- **Panel** (`#0D1120`): Cards, panels, dropdown surfaces, input fields.
-- **Raised Panel** (`#141A2E`): Hover and elevated states, popovers, skeleton bases.
-- **Hairline** (`#1E2740`): The default border on every card, divider, and section edge. This is the global `*` border color — it is the system's structural grammar.
-- **Rule** (`#2A3557`): The stronger stroke. Inputs, scrollbar thumb, and any separation that must survive next to a hairline.
-- **Instrument White** (`#F5F7FA`): Headings and body copy on dark. Never pure white.
-- **Cool Slate** (`#A7B0C6`): Supporting copy, ledes, secondary nav labels. The workhorse for anything that is read but not led with.
-- **Muted Slate** (`#6B7590`): Captions, eyebrows, meta, disabled, in-development tile names. Non-essential only.
-- **On-Accent Dark** (`#04060F`): Text on cyan or other light fills.
-
-### Semantic
-
-- **Success** (`#00D68F`) in-family mint · **Warning** (`#F5A623`) amber · **Error** (`#FF4D6D`) rose · **Info** = Probe Cyan.
-
-### The prism gradient
-
-Canonical stops, 135° top-left to bottom-right: `#00E5EE → #0196E8 28% → #4E55FC 54% → #7C08F5 78% → #C400FE`. Two-stop shorthand for text and thin accents: `#00E5EE → #7C08F5` at 90°, or the three-stop `#00E5EE → #7C08F5 70% → #C400FE` when the tail is wanted.
+- **Instrument Black** (#0B0B0B): The page ground, everywhere. Also the text colour on inverted light sections and inside white pills.
+- **Panel Black** (#141414): Raised panels — cards, the embedded scheduler frame, the hero frame's fallback fill. One step above the ground, never more.
+- **Well Grey** (#1E1E1E): Recessed surfaces — form fields, hover fills on outline controls, the scrollbar thumb.
+- **Bright Grey** (#D4D4D4): The hover state of a white pill. It is a dimming, not a tint.
+- **Secondary Grey** (#A3A3A3): Secondary text on dark — body copy under a headline, idle navigation items, and the dimmed carrier line an emphasised phrase sits inside.
+- **Muted Grey** (#6E6E6E): Inactive and structural text — section labels, card indices, footer column heads, row meta. Legible but explicitly subordinate.
+- **Hairline** (rgba(255,255,255,0.14)): Every border and divider on the dark ground.
+- **Hairline Dark** (rgba(11,11,11,0.12)): The same divider on the light ground.
 
 ### Named Rules
 
-**The Rule of One.** The prism gradient appears **once per view** — the hero H1, on a single non-wrapping word — plus hairline accents (a beam, a focus ring). It is never a fill for buttons, cards, or backgrounds, and **sitewide chrome never spends it**: the scroll-progress rail, the active-nav rail, and the comparison-table cap are all solid Probe Cyan, because chrome would otherwise burn the page's one gradient moment before any content rendered. Audit test: screenshot any page and count the gradient moments. More than one means the page is wrong, not bold.
+**The No-Hue Rule.** There is no accent colour in this system and there is no exception. Status, links, validation, focus and data all resolve to a step on the achromatic ramp. If a problem seems to need a hue, it needs a brightness step or a mono label instead.
 
-**The Dark-on-Cyan Rule.** Never white text on Probe Cyan. Cyan fills take On-Accent Dark (`#04060F`). White on Bias Violet passes and is correct.
+**The Brightness Emphasis Rule.** Emphasis is produced by dimming the surroundings, not by brightening in place. Drop the carrier line to Secondary Grey (#A3A3A3), then lift only the load-bearing phrase to Signal White. Never bold, never underline, never enlarge for emphasis.
 
-**The Void Is the Brand Rule.** No full-white page backgrounds, ever. If a light context is genuinely unavoidable (print, a third-party doc), use Instrument White with the mark on white — never the gradient as a large fill.
-
-**The Muted-Is-Meta Rule.** Instrument White and Cool Slate on Deep Void or Panel clear WCAG AA comfortably and carry everything a user must read. Muted Slate is for non-essential meta only — captions, eyebrows, disabled, timestamps. If a sentence matters, it is not Muted Slate.
-
-**The 15% Ceiling Rule.** A brand color used as a *fill* stops at 15% alpha (status pills at `/15` and `/20`, spotlight at `0.07`, streak at `0.06`). Above that it is text, stroke, or glow — never a surface.
+**The Scarce White Rule.** Pure white is reserved for primary actions, emphasised phrases, the focus ring and the news bar. Body text is Off White. If more than a couple of things on a screen are pure white, the emphasis has stopped working.
 
 ## Typography
 
-**Display Font:** Sora (with `ui-sans-serif, system-ui, sans-serif`)
-**Body Font:** Inter (with `ui-sans-serif, system-ui, sans-serif`)
-**Label / Mono Font:** JetBrains Mono (with `ui-monospace, monospace`)
+**Display Font:** Archivo, weight 300 (with Helvetica Neue, Arial fallback)
+**Body Font:** Archivo, weights 400/500/600 (same family, same stack)
+**Label/Mono Font:** IBM Plex Mono (with ui-monospace, SFMono-Regular, Menlo fallback)
 
-**Character:** A rounded-geometric display that echoes the faceted wordmark without imitating it, over a neutral workhorse body that stays out of its way, with an engineering monospace that is treated as a third voice rather than a code affordance. The pairing is deliberate, not defaults: characterful display, invisible body, mono as the tell that this is a tool for engineers.
+**Character:** One light-weight grotesque doing all the talking, one uppercase mono doing all the labelling. Archivo at 300 with -0.02em tracking makes a large statement feel drawn rather than shouted; IBM Plex Mono at 10–12px with 0.12em tracking makes every small piece of text read as an instrument marking. There is no third face and there is never a serif.
 
 ### Hierarchy
-
-- **Display** (Sora 700, 4.5rem, LH 1.02, −0.02em): Hero H1 only. Drops to 40–48px on mobile.
-- **Headline** (Sora 700, 3.5rem, LH 1.05, −0.02em): Page H1 below the hero, major section openers.
-- **Title** (Sora 600, 2rem → 1.5rem → 1.25rem, LH 1.15–1.3, −0.01em → 0): Section H2, card H3, sub-heads.
-- **Body** (Inter 400, 1rem/1.125rem, LH 1.6): All prose. Ledes run 1.125rem in Cool Slate; body max width stays inside `max-w-3xl` for comfortable measure.
-- **Small** (Inter 400, 0.875rem, LH 1.5): Card copy, captions, form help, footnotes. The floor for anything a user must actually read is 16px — small is for support, never for substance.
-- **Code / Data** (JetBrains Mono 400, 0.875–1rem, LH 1.5): CLI output, RTL snippets, spec values.
-- **Label** (JetBrains Mono 500, 0.75rem, +0.08em, UPPERCASE): Eyebrows, status pills, category chips, spec keys, data.
-
-Full step set behind the five roles: Display XL 4.5rem · Display L 3.5rem · H1 2.5rem/1.1 · H2 2rem/1.15 · H3 1.5rem/1.2 · H4 1.25rem/1.3 · Body L 1.125rem · Body 1rem · Small 0.875rem. Tracking tightens as size grows: −0.02em at display, −0.01em at H1–H2, 0 from H3 down.
+- **Display 1** (Archivo 300, clamp 40→68px, line-height 1.08, -0.02em): The single page statement inside a hero frame. One per page, two lines, no terminal period.
+- **Display 2** (Archivo 300, clamp 28→42px, line-height 1.14, -0.02em): Section titles beside the label column, and the large figure in a stat card.
+- **Display 3** (Archivo 400, clamp 19→24px, line-height 1.35, -0.01em): Sub-statements — the footer closing line, form success copy, mobile navigation items.
+- **Body Large** (Archivo 400, 16px, line-height 1.625): The lead paragraph that opens a section's content column.
+- **Body** (Archivo 400, 14px, line-height 1.6): The document default, set on `body`. Constrained to roughly 46ch, widened to 62ch only for a section lead.
+- **Body Small** (Archivo 400, 12px, line-height 1.625): Supporting copy — hero sub-lines, card bodies, footer links, comparison cells, form hints.
+- **Label** (IBM Plex Mono 500, 11px, 0.12em, uppercase): Every named marker in the system — section labels, button text, nav items, card labels, footer column heads.
+- **Label Small** (IBM Plex Mono 400, 10px, 0.12em, uppercase): Indices and enumerations inside a card, where the marking must sit quieter than the label it numbers.
+- **Meta** (IBM Plex Mono 400, 12px, 0.12em, not uppercased by default): Dates, identifiers and tabular data in the meta column of a list row.
 
 ### Named Rules
 
-**The One Word Rule.** Gradient text appears on the hero H1 only, on one word or one line — never a paragraph, never a metric, never body copy. Everything else is Instrument White or Cool Slate.
+**The Two Registers Rule.** Statements are Archivo 300; everything small is uppercase mono. There is no third register and no third family. If a piece of text is neither a statement nor a marking, it is body copy at 14px and it takes no special treatment.
 
-**The Solid Fallback Rule.** Every gradient-text element declares its solid color (Probe Cyan) *before* the clip, and goes transparent only inside `@supports (background-clip: text)`. A word that fails to clip must still be readable. Gradient is never the only signal for meaning.
+**The Display Namespace Rule.** The display utilities are named `display-1` / `display-2` / `display-3` and are deliberately outside the `text-*` namespace. tailwind-merge collapses every `text-*` class into a single conflict group, so a utility named `text-display-1` is silently dropped the moment it meets `text-off-white` on the same element — the colour survives, the font size disappears, and nothing errors. Any future size utility must stay outside `text-*` for the same reason.
 
-**The Mono Is a Voice Rule.** JetBrains Mono is brand voice, not code styling. It carries status, categories, specs, and data — short strings, uppercase, wide-tracked. It never sets a sentence.
-
-**The No-Kicker Rule.** A mono label directly above a heading is banned. The heading carries its own weight, and a kicker that restates the page or section name is a label for something already named. Mono labels something the reader cannot otherwise know — a status, a category, a stage code — and when that information belongs to a heading's section, it goes *below* the heading as a caption. `Section` has no eyebrow prop, so this cannot be reintroduced by accident.
-
-**Two display weights, two utilities.** `.editorial` is the display voice (Sora 700, −0.02em) and belongs to the hero H1 and page H1 only. `.editorial-title` is the section step (Sora 600, −0.01em) and carries every H2 and H3. One utility could not be both weights the ramp calls for, which is why the split exists.
+**The Mono Marking Rule.** Uppercase mono is a marking, not a headline garnish. It names a column, a stage, a date, an index or a status — something the reader could not infer from the statement beside it. It never restates the heading it accompanies.
 
 ## Layout
 
-A centered single-column spine, not a grid system. Content lives in one of two containers and the choice between them is the whole layout decision: `max-w-6xl` (1152px) for standard sections and prose, `max-w-7xl` (1280px) reserved for the nav bar and content grids that genuinely need the width. Gutter is a flat 24px at every breakpoint.
+The spatial model is a document with a margin. Every section is a two-track grid: a 180px track for the uppercase mono label and a `minmax(0, 1fr)` track for content, with a 32px gutter. Below 900px the grid collapses to one column and the label sits above its content, because a 180px margin has nowhere to go on a phone. Content below a label/title block re-enters the same grid with an empty first track, so body copy stays aligned to the content column rather than to the page edge.
 
-Vertical rhythm is section-scale, not element-scale: 96px of section padding on mobile rising to 128px at `md`, with a 40px → 56px gap between a section's header block and its content. That gap is deliberately smaller than the gap between sections, so a heading reads as attached to its own content rather than floating between two of them. Section headers cap at `max-w-3xl` even inside a wider container, so a lede never runs to the full measure. The result is a page that reads as a sequence of well-spaced statements rather than a dense document.
+Page margin is `clamp(16px, 3vw, 40px)`, applied to every section, the chrome and the hero frame alike, so a single vertical edge runs the whole length of the page. Content centres inside a 1440px maximum width. Vertical rhythm is 120px between sections on desktop and 96px below the `md` breakpoint, with 48px between a section's title block and its body. The footer runs at 64px vertical padding, the top bar at 22px.
 
-Responsive behavior is a collapse, not a rearrangement. Tool grids run 3-up → 2-up → 1-up, the nav collapses to a full-height drawer below `lg` (1024px), and display type steps down roughly a third. Nothing reflows into a different reading order.
+Measure is enforced rather than suggested: 46ch body copy, 62ch section lead, 34ch footer positioning line, 820px section title. Any grid track that contains a scrollable table carries `min-w-0`, because a grid track otherwise sizes to its widest child and widens the whole page instead of scrolling inside itself.
+
+Responsive behaviour is layout-only: the label column collapses at 900px, navigation swaps to a mono Menu/Close toggle at the `md` breakpoint, and card grids reflow. No type ramp step changes at a breakpoint; the display clamps handle scale continuously.
 
 ### Named Rules
 
-**The Two-Container Rule.** `max-w-6xl` by default; `max-w-7xl` only for the nav and true grids. A third container width is a bug, not a design decision.
+**The Label Column Rule.** Every section carries a mono label in the 180px column beside its statement. The label is wayfinding — it names the section the way a margin note names a paragraph — and it sits *beside* the statement, never stacked above it as a kicker.
 
-**The Breathing Room Rule.** Section padding never drops below 96px. If a page feels long, cut a section — do not compress the rhythm.
+**The Single Edge Rule.** Every full-width element uses the same `clamp(16px, 3vw, 40px)` page margin and the same 1440px maximum. Nothing gets its own container width.
 
 ## Elevation & Depth
 
-This system has essentially no drop shadows. Depth is built from three things: the tonal ramp (void → substrate → panel → raised panel), 1px hairlines, and emitted light. A card is "above" the page because it is one tonal step lighter and outlined by a hairline, not because it floats.
+This system is flat. Depth comes entirely from tonal layering and hairlines: the #0B0B0B ground, the #141414 panel one step above it, the #1E1E1E well one step below it, and a 1px 14%-white rule wherever two surfaces meet. Nothing is lifted, nothing is blurred behind, and no surface casts a shadow onto another.
 
-Light is the only elevation that moves. On hover a card gains a cursor-tracked radial spotlight (Probe Cyan at 0.07 alpha, 340px radius), a conic beam orbits its border on a 3.2s loop, its corner via switches from Rule to Probe Cyan, and the whole card lifts 2px. A primary button gains a violet glow and a single specular sheen crossing at 105°. Nothing is lit before it is touched.
-
-The one true shadow in the system is the nav dropdown (`shadow-xl shadow-black/40`) — an overlay leaving the document plane, which is the only case where a cast shadow is honest.
-
-Over all of it sits a fixed 2% film-grain layer. It is not texture for its own sake: it gives the near-black a material floor and eliminates the gradient banding that flat dark UIs show on OLED panels.
+There is exactly one shadow in the entire system, and it exists for a contrast reason rather than a depth one.
 
 ### Shadow Vocabulary
-
-- **Glow Cyan** (`0 0 40px rgba(0, 229, 238, 0.35)`): Reserved for the mark and hero-scale emitters.
-- **Glow Violet** (`0 0 40px rgba(124, 8, 245, 0.35)`): Large violet emitters.
-- **Glow Violet Small** (`0 0 24px rgba(124, 8, 245, 0.25)`): Primary button hover. The one glow most users actually see.
-- **Overlay Shadow** (`0 20px 25px -5px rgba(0,0,0,0.4)`): Nav dropdown only.
+- **Bar Lift** (`box-shadow: 0 2px 24px rgba(0,0,0,0.35)`): Applied only to the white news bar floating over hero photography. A pure-white bar on a photograph has no edge of its own; this soft dark spread gives it one. It is not available to any other element.
 
 ### Named Rules
 
-**The Flat-Until-Touched Rule.** Surfaces are flat and unlit at rest. Every glow, beam, spotlight, and sheen is a response to hover, focus, or live status. Ambient decorative glow is banned — it makes the instrument look like it is malfunctioning.
+**The One Shadow Rule.** Bar Lift is the only shadow in the system and it belongs to the news bar alone. Cards, panels, buttons, dialogs and hover states are flat. If something needs to separate from its background, it gets a hairline or a tonal step, not a shadow.
 
-**The Light-Not-Shadow Rule.** Depth is emitted, not cast. If a component needs to feel raised, move it up the tonal ramp and give it a hairline. Reach for `box-shadow` with a black value only for true overlays.
+**The Hairline Rule.** Separation is one pixel of 14% white on dark (12% black on light) and never more. There is no 2px rule, no double rule, and no heavier divider for emphasis.
+
+### Motion
+
+All transitions run 120–240ms on `cubic-bezier(.2, .7, .2, 1)` and touch colour, background and opacity only. 120ms is the default for hover and focus; 240ms is reserved for a state change large enough to need following. Nothing moves in space: no parallax, no scroll-triggered reveal, no entrance animation, no scale or bounce on press. `prefers-reduced-motion: reduce` collapses every duration to 0.01ms and disables smooth scrolling.
+
+**The Colour-Only Motion Rule.** Motion changes what a thing looks like, never where it is. If a transition needs `transform`, the interaction has been designed wrong for this system.
 
 ## Shapes
 
-Two form families, and the boundary between them is functional. **Interactive controls are pills** — every button, status pill, LED dot, scrollbar thumb, and gradient underline terminates in a full 999px radius. **Containers are panels** — cards at 16px, inputs and dropdown items at 12px, tiles and skeletons at 8px, large feature surfaces at 24px.
+Four corner values, each tied to a class of object, and nothing else in the system is rounded. Media and bars take 4px — a corner just soft enough to read as a screen element rather than a bleed. Cards and panels take 10px. Full-bleed frames, the hero above all, take 20px, the largest corner in the system, which is what signals "this is a frame, not a section". Controls that get pressed take a full pill.
 
-Borders are the primary structural device and come at exactly two weights: Hairline (`#1E2740`) as the global default on every element, and Rule (`#2A3557`) where an edge must assert itself against a hairline neighbor. A dashed hairline marks the honest-absence state — the future-track tiles for Analog and RF use `border-dashed` on a transparent background to read as *not yet built* without a label having to say so.
+Everything else is square. Borders are always a single hairline, never a colour and never a heavier weight. The small square dot in a mono label and the square die of the chip mark are the recurring geometry: right angles at small scale, one soft frame at large scale.
 
-### Motifs
+Photography is desaturated, high-contrast macro hardware — wafers, dies, signal fields — near-monochrome by the time it ships, exported as WebP at 1200 and 2000 wide in `public/media/`, each with an inlined low-res placeholder so the frame is never empty. Source images are desaturated with ffmpeg before use, so no residual hue can enter the system through an image.
 
-Four recurring geometries, drawn from the mark and banner. The first is the signature; the rest are supporting accents used sparingly.
-
-- **Faceted prism / low-poly crystal** *(signature)*: angular beveled planes catching light. The mark, hero graphics, and the platform consolidation diagram — the suite rendered as facets of one crystal sitting above the signoff engines.
-- **Circuit traces**: thin cyan/blue PCB-trace lines with small node dots as delicate corner and edge accents. Decorative only, low opacity, never behind text.
-- **Chevron light streaks**: diagonal shard forms implying forward motion. Behind heroes and section breaks, at low intensity — the CTA band's 6% drifting streak is the reference implementation.
-- **Glow / bloom**: gradient elements emitting a soft halo on the void. The mark, primary CTAs on hover, active states.
-
-3D and rendered imagery follows the same geometry: faceted low-poly in the prism gradient on the void, lit consistently top-left cool to bottom-right warm, matching the mark.
-
-The **consolidation map** is the flagship diagram — the suite drawn in the faceted prism language, sitting above the signoff engines. It is built to be the thing people screenshot, and it is the one place the geometry is allowed to carry an argument rather than decorate one.
+Over photography the scrim is two ramps, not one. A short strong top band (80% at 0%, 45% at 14%, 8% at 28%, transparent at 38%) guarantees the nav and news bar clear their ground whatever the photograph does; the base ramp (15% at the top to 85% at the bottom) carries the low-anchored statement. The base ramp alone assumed dark-topped photography and left nav items at roughly 1.2:1 over a bright wafer, which is exactly why the top band exists.
 
 ### Named Rules
 
-**The Pill-and-Panel Rule.** If it responds to a click, it is a pill. If it holds content, it is a panel. Nothing lands between the two — a 999px card or a square button is off-system.
+**The Four Corners Rule.** 4px media and bars, 10px cards, 20px full-bleed frames, pill on controls. Nothing else is rounded and no fifth radius is introduced.
 
-**The Dashed-Means-Absent Rule.** A dashed border means "does not exist yet." Never use it decoratively.
+**The Two-Ramp Scrim Rule.** Any full-bleed photograph carrying chrome uses both ramps. A single top-to-bottom ramp is only safe if the image is already dark where the chrome sits, and the system does not get to assume that.
 
-**The One Motif Rule.** One dominant motif per section. Traces plus chevrons plus glow plus gradient in the same band is noise, and it reads as a template rather than an instrument.
+**The Desaturation Gate Rule.** An image enters the system only after it is desaturated to near-monochrome. There is no colour-photography exception for "just the hero".
 
 ## Components
 
 ### Buttons
+- **Character:** Uppercase mono verbs on a pill. Actions read as commands on an instrument.
+- **Shape:** Full pill on solid and outline; the text variant has no shape at all.
+- **Solid (primary):** Pure white fill, Instrument Black text, 12px/22px padding. Hover deepens to Bright Grey. One per view.
+- **Outline (secondary):** Transparent with a hairline border, Off White text, 11px/21px padding so the border does not shift the baseline against a solid sibling. Hover fills Well Grey.
+- **Text (tertiary):** Secondary Grey mono, no chrome. Hover lifts to Signal White and adds an underline at 4px offset.
+- **Motion:** Colour transition at 120ms on the system easing. No scale, no lift, no bounce on press.
+- **Detail:** A trailing ↗ set in mono marks an action that leaves the page. Disabled drops to 50% opacity.
 
-- **Shape:** Full pill (999px), `h-10` at md and `h-12` at lg, with 24px / 32px horizontal padding.
-- **Primary:** Bias Violet fill, white text, medium weight. Carries the `sheen` utility — a white 105° specular band sweeps across once on hover over 550ms. Hover also adds Glow Violet Small and `brightness(1.1)`; active presses to `scale(0.98)` and `brightness(0.95)`.
-- **Secondary:** Transparent with a Rule border and Instrument White text. Hover fills to Raised Panel, brightens the border to Muted Slate, and adds a faint cyan wash (`0 0 20px rgba(0,229,238,0.08)`).
-- **Ghost:** Probe Cyan text, underline on hover at 4px offset. No box.
-- **Rule:** One primary button per view. A page with two primaries has no primary.
+### Cards / Containers
+- **Character:** A panel, not a tile. Fill, hairline, corner, nothing else.
+- **Corner Style:** 10px.
+- **Background:** Panel Black on dark; transparent with a 12% black hairline on the light ground.
+- **Shadow Strategy:** None. See Elevation & Depth.
+- **Border:** 1px hairline.
+- **Internal Padding:** 24px top, 22px sides, 26px bottom, with a 14px gap between elements.
+- **Anatomy:** mono index (Label Small, Muted Grey) → figure (Display 2) → mono label → 12px grey body. That is the whole card; there is no image slot and no footer.
 
-### Status Pills
-
-- **Style:** Mono label, uppercase, 0.65rem, full pill, 10px / 4px padding.
-- **Live:** Probe Cyan at 15% on cyan text, preceded by a 6px `led-dot` breathing on a 2.4s ease-in-out loop with a cyan halo that rises and falls. The breathing dot is the system's signature "powered on" signal.
-- **In Development:** Bias Violet at 20% with `#C79BFF` text. No dot — nothing is breathing yet.
-- **Roadmap:** Raised Panel with Muted Slate text. Deliberately the quietest thing on the page.
-
-### Cards
-
-- **Corner Style:** 16px (`rounded-lg`).
-- **Background:** Panel over the page; in-development tiles drop to `Panel/60` and lift to full Panel on hover.
-- **Border:** Hairline at rest, brightening to Rule on hover.
-- **Shadow Strategy:** None. See Elevation & Depth — spotlight, beam, and a 2px lift.
-- **Internal Padding:** 24px.
-- **Signature behavior — the probe surface:** `GlowCard` writes `--spot-x` / `--spot-y` from `pointermove` directly to the element's style, so the radial spotlight tracks the cursor with **zero React re-renders**. The `border-beam` conic highlight orbits via an `@property`-registered `--beam-angle`, so the animation runs on the compositor. This performance discipline is part of the component, not an implementation detail.
-
-### Tool Cards
-
-- **Live:** A probe surface. Mono category eyebrow top-left, Live pill top-right, a 1.5px corner **via** dot that switches from Rule to Probe Cyan on hover, tool name in display type, tagline in Cool Slate, and a cyan "Explore →" affordance that fades in and slides 2px on hover. The whole card is one click target via an `::after` inset overlay on the title link.
-- **In Development:** A compact tile — name, mono category, pill. Nothing more. The restraint is the honesty.
-- **Future Track:** Dashed hairline, transparent background, Muted Slate name, Roadmap pill.
-
-### Inputs
-
-- **Style:** Panel background, Rule border, 12px radius, 48px tall, 16px horizontal padding, Muted Slate placeholder.
-- **Focus:** Border shifts to Probe Cyan; the global `:focus-visible` ring (2px cyan, 2px offset) covers keyboard focus. No glow — inputs are the one place the instrument stays quiet.
-- **Error:** Message in Error rose beneath the field, announced via `aria-live`.
-- **Success:** The field is replaced by a confirmation panel with a cyan-30% border, not a toast.
+### Inputs / Fields
+- **Style:** Well Grey fill, hairline border, 4px radius, 12px/16px padding, Off White text, Muted Grey placeholder, full width.
+- **Label:** Uppercase mono at 11px in Muted Grey, 10px above the field. An optional field appends the word "optional" in normal case with tracking reset.
+- **Focus:** The border goes pure white at 120ms. Interactive elements additionally carry the global 2px white `:focus-visible` outline at 2px offset — the only ring in a system with no accent.
+- **Error:** Message text in pure white at 12px inside an `aria-live` region. There is no red.
 
 ### Navigation
+- **Style:** Transparent bar sitting *inside* the hero frame rather than pinned to the viewport, so the page scrolls out from under it and the opening stays cinematic.
+- **Typography:** Uppercase mono labels at 11px, 30px apart.
+- **States:** Idle Secondary Grey; current page and hover Signal White; 120ms colour transition. The primary CTA is a small white pill (10px/18px).
+- **Light variant:** Idle 55% black, active pure black, CTA inverts to a black pill.
+- **Mobile:** A mono Menu/Close text toggle below `md` opens a hairline-topped stack of Display 3 links with the CTA pill beneath.
+- **Lockup:** 16px tall in the nav, 18px in the footer, drawn from `public/brand/`.
 
-- **Style:** Transparent over the void at rest; on scroll it gains a backdrop blur and a Hairline bottom border. 64px tall, `max-w-7xl`, 24px gutter.
-- **Links:** Cool Slate at 14px, brightening to Instrument White on hover. The active route carries a 2px pill-radius gradient underline. Dropdown chevrons rotate 180° on group hover.
-- **Dropdowns:** 288px Panel card, Hairline border, 16px radius, with the one real drop shadow in the system. Items carry a title in Instrument White and a description in Muted Slate.
-- **CTA:** A single Bias Violet pill at 36px, right-aligned, with the violet hover glow.
-- **Mobile:** Below `lg`, a full-height drawer over `void/95` with backdrop blur, items staggering in on `fade-up`, and a sticky bottom bar holding the primary CTA at full width.
+### List Rows
+- **Character:** A ruled index, not a stack of cards.
+- **Style:** A hairline top rule, 20px vertical padding, and a 180px / 1fr / auto grid that echoes the section label column — mono meta, then title in Archivo 500, then a mono action with a trailing ↗.
+- **Hover:** The row tints 3% white (3% black on light) at 120ms. This is the system's only row feedback; there is no lift and no border change.
 
-### Section
+### News Bar (signature)
+- **Character:** The one true current message, floating white over the hero photograph.
+- **Style:** Pure white fill, Instrument Black text, 4px radius, 12px/16px padding, carrying Bar Lift — the only shadow in the system.
+- **Anatomy:** a mono label behind an 11px hairline-ringed circle, a truncating 12px message link, a mono action word, and a mono × dismiss that lifts from 60% black to full black on hover.
 
-The rhythm primitive every page is built from: optional mono eyebrow in Muted Slate, display-type title, Cool Slate lede at 1.125rem light, then content. Header block caps at `max-w-3xl`, or centers when the section is centered. This component is why the site has consistent rhythm — new sections compose it rather than re-specifying padding.
+### Comparison Row (signature)
+- **Character:** The argument made structurally. A 180px mono dimension label, the current state in Muted Grey, the EasyChip state in Signal White — emphasis by brightness applied to an entire column rather than a phrase.
 
-### CTA Band
-
-The closer on every page: a Substrate band above a Hairline top border, holding a centered display-type headline, a lede, and a primary + secondary pair. Behind it, a 160px-wide prism-gradient chevron streak at 6% opacity drifts across on a 14s loop — the one ambient motion in the system, and it is deliberately almost invisible.
-
-### Motion Vocabulary
-
-`fade-up` (12px rise + fade, 0.7s expo) for reveals · `sheen` (550ms) on primary buttons · `beam-orbit` (3.2s linear) on card hover · `led-breathe` (2.4s) on live status · `streak-drift` (14s) on CTA bands · `marquee-x` (30s, pauses on hover) on the engines row · `shimmer-sweep` (1.5s) on skeletons · `caret-blink`, `signal-x`, and `trace-pulse` for terminal, pipeline, and consolidation-map graphics. Standard easing is `cubic-bezier(0.16, 1, 0.3, 1)`; state transitions run 150–250ms.
+### Iconography
+The chip mark — a line-drawn square die with twelve pin stubs, in `public/brand/` — is the only drawn graphic in the system. Every other symbol is typographic, set in IBM Plex Mono at label size and inheriting the current colour: ↗ ↑↓ ✓ ↺ ■ × ▶. There is no icon font, no icon library and no emoji.
 
 ## Do's and Don'ts
 
 ### Do:
-
-- **Do** keep the void dark base as the default and spend the prism gradient once per view.
-- **Do** treat JetBrains Mono as a brand voice — eyebrows, labels, status, specs, data.
-- **Do** build depth from the tonal ramp and hairlines, and let light appear only in response to the user.
-- **Do** compose new sections from `Section` so vertical rhythm stays 96px → 128px sitewide.
-- **Do** drive cursor-reactive effects through CSS custom properties written straight to the element (the `GlowCard` pattern) so pointer motion never triggers a React render.
-- **Do** ship every gradient-text element with its solid Probe Cyan fallback declared first.
-- **Do** render product screenshots in this exact dark ramp so they read as native to the site.
-- **Do** give in-development things a name, a category, and a pill — and nothing else.
+- **Do** produce emphasis by dimming the carrier line to Secondary Grey (#A3A3A3) and lifting only the load-bearing phrase to Signal White.
+- **Do** give every section a mono label in the 180px column beside its statement, and let it collapse above the content below 900px.
+- **Do** keep new size utilities outside the `text-*` namespace, as `display-1` / `display-2` / `display-3` already are — tailwind-merge drops a `text-*` size the moment it meets a `text-*` colour.
+- **Do** set every small piece of text in uppercase IBM Plex Mono at 10–12px with 0.12em tracking.
+- **Do** separate surfaces with a 1px hairline (14% white on dark, 12% black on light) or a tonal step between #0B0B0B, #141414 and #1E1E1E.
+- **Do** hold to the four corner values: 4px media and bars, 10px cards, 20px full-bleed frames, pill on controls.
+- **Do** keep transitions at 120–240ms on `cubic-bezier(.2, .7, .2, 1)` and restrict them to colour, background and opacity.
+- **Do** run both scrim ramps under any full-bleed photograph that carries chrome.
+- **Do** desaturate photography to near-monochrome before it ships, and export at 1200 and 2000 wide as WebP with a placeholder.
+- **Do** keep the lockup small — 16px in the nav, 18px in the footer, never above roughly 28px.
+- **Do** cap measure: 46ch body, 62ch section lead, 820px section title.
 
 ### Don't:
-
-- **Don't** gradient-fill buttons, cards, or backgrounds. The gradient stops being special the moment it becomes a surface.
-- **Don't** put white text on Probe Cyan, or use a brand color as a fill above 15% alpha.
-- **Don't** use full-white page backgrounds, or the retired navy `#0F1B2D` / mint `#00C896` / amber palette.
-- **Don't** add ambient glow, glow at rest, or a second CTA-band streak. Unprompted light reads as malfunction.
-- **Don't** reach for `box-shadow` with a black value outside true overlays.
-- **Don't** introduce a third container width or a third border weight.
-- **Don't** stack motifs — traces, chevrons, glow, and gradient in one section is noise. One dominant motif per section.
-- **Don't** use stock photography or generic "glowing brain" AI imagery.
-- **Don't** re-typeset, recolor, rotate, or effect the logo, and never place the mark on mid-tones or on the gradient. See `internal/DESIGN.md` for mark geometry and clear space.
-- **Don't** animate anything that ignores the global `prefers-reduced-motion` kill-switch in `@layer base`.
+- **Don't** introduce an accent hue anywhere — not for links, status, validation, focus rings or data. There is no hue in this system.
+- **Don't** reintroduce the retired identity: the cyan→violet→magenta prism gradient, the faceted EC monogram, or Sora / Inter / JetBrains Mono.
+- **Don't** add a shadow. Bar Lift belongs to the news bar and to nothing else.
+- **Don't** use a serif, or any third typeface beyond Archivo and IBM Plex Mono.
+- **Don't** create a fifth radius, a 2px rule, or a heavier divider for emphasis.
+- **Don't** animate on scroll, parallax a hero, reveal on entry, or scale and bounce a control on press.
+- **Don't** set body copy in Muted Grey (#6E6E6E) — it is for labels, indices and structural text only.
+- **Don't** stack a mono label above a heading as a kicker; the label belongs in the column beside the statement.
+- **Don't** ship an icon font, an icon library, or an emoji — the chip mark is the only drawn graphic and every other symbol is a mono glyph.
+- **Don't** enlarge the lockup into a background graphic or a watermark.
+- **Don't** bold, underline or upsize a word for emphasis; brightness is the only emphasis mechanism.

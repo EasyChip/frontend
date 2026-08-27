@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-21.0 -21.0 142.0 142.0" width="142.0" height="142.0" role="img" aria-label="EasyChip mark">
+  <title>EasyChip mark</title>
+  <g fill="none" stroke="#000000" stroke-width="4.63" stroke-linecap="butt">
+    <rect x="0" y="0" width="100.0" height="100.0"></rect>
+    <line x1="-20.0" y1="28.0" x2="0" y2="28.0"></line>
+    <line x1="100.0" y1="28.0" x2="120.0" y2="28.0"></line>
+    <line x1="28.0" y1="-20.0" x2="28.0" y2="0"></line>
+    <line x1="28.0" y1="100.0" x2="28.0" y2="120.0"></line>
+    <line x1="-20.0" y1="72.0" x2="0" y2="72.0"></line>
+    <line x1="100.0" y1="72.0" x2="120.0" y2="72.0"></line>
+    <line x1="72.0" y1="-20.0" x2="72.0" y2="0"></line>
+    <line x1="72.0" y1="100.0" x2="72.0" y2="120.0"></line>
+  </g>
+  <rect x="29.0" y="29.0" width="42.0" height="42.0" fill="#000000"></rect>
+</svg>

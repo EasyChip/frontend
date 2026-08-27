@@ -45,3 +45,4 @@ next-env.d.ts
 # Impeccable local run artifacts (config + design record are tracked)
 .impeccable/live/
 .impeccable/critique/
+.impeccable/review/
