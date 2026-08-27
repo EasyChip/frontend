@@ -195,19 +195,37 @@
    Two ramps, not one. The kit's 15%→85% top-to-bottom ramp assumes an image
    that is already dark where the chrome sits; a bright subject at the top
    (the wafer) left nav items at roughly 1.2:1 against it. The first ramp is a
-   short, strong band that guarantees the nav and news bar always clear their
-   ground whatever the photograph does; the second is the kit's own ramp,
-   carrying the headline at the bottom. */
+   band that guarantees the nav always clears its ground whatever the
+   photograph does; the second is the kit's own ramp, carrying the headline at
+   the bottom.
+
+   The top band's stops are measured against the worst case in the library, not
+   chosen by eye. The wafer's rim highlight sits directly under the right-hand
+   nav items, and the earlier 0.5→0.22→0.05 band left #D4D4D4 links at
+   2.07:1 there - the ramp had already decayed to 22% by 9% of hero height,
+   which is exactly where the nav sits. It now holds ~60% through the nav band
+   and releases over a longer distance, so it reads as vignetting rather than
+   as the black bar a short, hard ramp produced. */
 @utility scrim {
   background-image:
     linear-gradient(
       180deg,
-      rgba(11, 11, 11, 0.5) 0%,
-      rgba(11, 11, 11, 0.22) 9%,
-      rgba(11, 11, 11, 0.05) 17%,
-      transparent 24%
+      rgba(11, 11, 11, 0.66) 0%,
+      rgba(11, 11, 11, 0.6) 9%,
+      rgba(11, 11, 11, 0.42) 17%,
+      rgba(11, 11, 11, 0.18) 26%,
+      transparent 36%
     ),
     var(--scrim-strong);
+}
+
+/* The mobile menu is a <details>; strip the native disclosure triangle so the
+   summary reads as the mono Menu/Close marking the system specifies. */
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::marker {
+  content: '';
 }
 
 /* Section shell: the 180px mono label column beside a content column.

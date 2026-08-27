@@ -1,9 +1,19 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
-import { submitLead } from '@/app/actions/lead'
+import { useActionState } from 'react'
+import { submitLead, type LeadResult } from '@/app/actions/lead'
 import Button from '@/components/core/Button'
 import { Eyebrow } from '@/components/core/Type'
+
+/**
+ * The state a freshly-rendered form starts in.
+ *
+ * Defined here, not beside the action: a `'use server'` module may only export
+ * async functions, so a plain `export const` in that file makes every POST to
+ * the route return 500. The `LeadResult` type is fine to import from there
+ * because types are erased before the rule applies.
+ */
+const IDLE: LeadResult = { ok: false }
 
 const field =
   'w-full rounded-sm border border-[color:var(--hairline)] bg-graphite px-4 py-3 text-off-white outline-none transition-colors duration-[120ms] ease-[var(--ease-out)] placeholder:text-gray-2 focus:border-white'
@@ -12,27 +22,19 @@ const field =
  * The one form on the site. It takes enough to have a useful first
  * conversation and nothing more - no qualification quiz, no team-size
  * dropdown nobody reads.
+ *
+ * Driven by `useActionState` rather than an `onSubmit` handler, and that is the
+ * load-bearing choice: `<form action={...}>` posts natively, so the form works
+ * with JavaScript blocked. It previously carried `onSubmit` on a form with no
+ * `action` and no `method` - with JS off, SEND issued a GET, the page reloaded
+ * with empty fields, and the lead was silently discarded while looking exactly
+ * like success. The audience is engineers on managed corporate machines, which
+ * is precisely where that fails.
  */
 export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'contact' }) {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-  const [message, setMessage] = useState('')
+  const [state, formAction, pending] = useActionState(submitLead, IDLE)
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setStatus('sending')
-    setMessage('')
-    const data = new FormData(e.currentTarget)
-    data.set('intent', intent)
-    const result = await submitLead(data)
-    if (result.ok) {
-      setStatus('sent')
-      return
-    }
-    setStatus('error')
-    setMessage(result.message ?? 'That did not send. Try again.')
-  }
-
-  if (status === 'sent') {
+  if (state.ok) {
     return (
       <div
         role="status"
@@ -46,11 +48,14 @@ export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'conta
     )
   }
 
+  // Restores what was typed when a validation failure round-trips the server
+  // without JavaScript. With JS the browser keeps the values itself.
+  const v = state.values ?? {}
+
   return (
-    // content-start: the form shares a stretched grid row with the aside, so
-    // without it the rows distribute over the full column height and park the
-    // submit button a couple of hundred pixels below the last field.
-    <form onSubmit={onSubmit} className="grid content-start gap-5">
+    <form action={formAction} className="grid content-start gap-5">
+      <input type="hidden" name="intent" value={intent} />
+
       {/* Honeypot - hidden from people, tempting to bots. */}
       <div aria-hidden className="absolute h-0 w-0 overflow-hidden">
         <label htmlFor="lf-website">Website</label>
@@ -58,7 +63,15 @@ export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'conta
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="lf-name" name="name" label="Name" autoComplete="name" required />
+        <Field
+          id="lf-name"
+          name="name"
+          label="Name"
+          autoComplete="name"
+          required
+          defaultValue={v.name}
+          invalid={state.field === 'name'}
+        />
         <Field
           id="lf-email"
           name="email"
@@ -66,9 +79,25 @@ export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'conta
           type="email"
           autoComplete="email"
           required
+          defaultValue={v.email}
+          invalid={state.field === 'email'}
         />
-        <Field id="lf-company" name="company" label="Company" autoComplete="organization" optional />
-        <Field id="lf-role" name="role" label="Role" placeholder="Verification lead, CAD…" optional />
+        <Field
+          id="lf-company"
+          name="company"
+          label="Company"
+          autoComplete="organization"
+          optional
+          defaultValue={v.company}
+        />
+        <Field
+          id="lf-role"
+          name="role"
+          label="Role"
+          placeholder="Verification lead, CAD…"
+          optional
+          defaultValue={v.role}
+        />
       </div>
 
       <div>
@@ -76,16 +105,22 @@ export default function LeadForm({ intent = 'demo' }: { intent?: 'demo' | 'conta
           What are you working on?
           <span className="ml-2 normal-case tracking-normal text-gray-2">optional</span>
         </label>
-        <textarea id="lf-note" name="note" rows={4} className={`${field} resize-y`} />
+        <textarea
+          id="lf-note"
+          name="note"
+          rows={4}
+          defaultValue={v.note}
+          className={`${field} resize-y`}
+        />
       </div>
 
       <p aria-live="polite">
-        {status === 'error' && <span className="text-xs text-white">{message}</span>}
+        {state.message && <span className="text-xs text-white">{state.message}</span>}
       </p>
 
       <div className="flex flex-wrap items-center gap-5">
-        <Button type="submit" variant="solid" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Sending' : 'Send'}
+        <Button type="submit" variant="solid" disabled={pending}>
+          {pending ? 'Sending' : 'Send'}
         </Button>
       </div>
     </form>
@@ -101,6 +136,8 @@ function Field({
   placeholder,
   required,
   optional,
+  defaultValue,
+  invalid,
 }: {
   id: string
   name: string
@@ -110,6 +147,8 @@ function Field({
   placeholder?: string
   required?: boolean
   optional?: boolean
+  defaultValue?: string
+  invalid?: boolean
 }) {
   return (
     <div>
@@ -124,7 +163,12 @@ function Field({
         autoComplete={autoComplete}
         placeholder={placeholder}
         required={required}
-        className={field}
+        defaultValue={defaultValue}
+        aria-invalid={invalid || undefined}
+        // No red: the system has no hue. A field that failed validation is
+        // marked by lifting its border to white, the same escalation the focus
+        // state uses, which is the only emphasis this palette has.
+        className={`${field} ${invalid ? 'border-white' : ''}`}
       />
     </div>
   )

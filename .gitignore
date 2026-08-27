@@ -46,3 +46,8 @@ next-env.d.ts
 .impeccable/live/
 .impeccable/critique/
 .impeccable/review/
+# transient screenshot scratch from critique/review agents
+.impeccable/shots*/
+
+# graphify knowledge-graph build output
+graphify-out/
