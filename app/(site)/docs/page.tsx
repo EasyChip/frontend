@@ -37,7 +37,6 @@ export default function DocsPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Docs</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Read first, <span className="text-gradient">then believe.</span>
           </h1>
@@ -48,13 +47,13 @@ export default function DocsPage() {
         </div>
       </section>
 
-      <Section eyebrow="The plan" title="What's being written">
+      <Section title="What's being written">
         <div className="grid gap-4 md:grid-cols-2">
           {sections.map((s) => (
             <div key={s.title} className="rounded-lg border border-dashed border-hair bg-surface-1/60 p-7">
               <div className="flex items-center justify-between gap-3">
                 <h2 className="font-display text-lg font-medium text-ink-2">{s.title}</h2>
-                <span className="eyebrow shrink-0 rounded-full bg-surface-2 px-2.5 py-1 text-[0.6rem] text-ink-3">
+                <span className="eyebrow shrink-0 rounded-full bg-surface-2 px-2.5 py-1 text-xs text-ink-3">
                   {s.status}
                 </span>
               </div>
@@ -70,7 +69,7 @@ export default function DocsPage() {
           - we&apos;ll get you real answers instead of a placeholder page.
         </p>
         <div className="mt-12 max-w-xl">
-          <p className="eyebrow mb-4 text-ink-3">Get notified as docs land</p>
+          <p className="mb-4 text-ink-2">Get an email as documentation lands.</p>
           <WaitlistForm />
         </div>
       </Section>

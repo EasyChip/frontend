@@ -1,6 +1,4 @@
-'use client'
-
-import { motion, useReducedMotion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 interface RevealProps {
   children: React.ReactNode
@@ -10,25 +8,24 @@ interface RevealProps {
 }
 
 /**
- * "Deposit" reveal: fade + 12px rise + blur-settle (DESIGN §8).
- * Honors prefers-reduced-motion.
+ * "Deposit" reveal: fade + rise + blur-settle as the block scrolls in.
+ *
+ * CSS-only and server-rendered. It used to be a framer-motion client component
+ * whose `initial` state shipped `opacity: 0` into the server HTML - so every
+ * section it wrapped was invisible until hydration, and stayed invisible if JS
+ * never ran. The declared state is now the finished state; the animation is a
+ * progressive enhancement that only exists where scroll-linked timelines are
+ * supported and the visitor has not asked for reduced motion.
+ *
+ * This also takes a client component off every page that used it.
  */
 export default function Reveal({ children, delay = 0, className }: RevealProps) {
-  const reduce = useReducedMotion()
-
-  if (reduce) {
-    return <div className={className}>{children}</div>
-  }
-
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      className={cn('reveal-on-view', className)}
+      style={delay ? ({ '--reveal-offset': `${Math.min(delay * 60, 30)}%` } as React.CSSProperties) : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

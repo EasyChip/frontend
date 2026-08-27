@@ -21,17 +21,11 @@ export default function CtaBand({
 }: CtaBandProps) {
   return (
     <section className="relative overflow-hidden border-t border-hair bg-base">
-      {/* drifting chevron light streak - ambient, one per view */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 w-40 opacity-[0.06]"
-        style={{
-          backgroundImage: 'var(--gradient-brand)',
-          animation: 'streak-drift 14s linear infinite',
-        }}
-      />
+      {/* No ambient streak. It ran on 14 pages, spent a gradient moment before
+          the page had drawn one, and at desktop read as banding rather than
+          light. The band earns its weight from the tonal step and the hairline. */}
       <div className="relative mx-auto max-w-6xl px-6 py-24 text-center md:py-32">
-        <h2 className="editorial mx-auto max-w-2xl text-4xl md:text-5xl">
+        <h2 className="editorial-title mx-auto max-w-2xl text-4xl md:text-5xl">
           {headline}
         </h2>
         {sub && <p className="mx-auto mt-5 max-w-xl text-lg font-light text-ink-2">{sub}</p>}

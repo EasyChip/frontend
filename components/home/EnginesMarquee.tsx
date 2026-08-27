@@ -1,6 +1,8 @@
 import { WRAPPED_ENGINES } from '@/lib/faq'
 
-const ITEMS = [...WRAPPED_ENGINES, 'Stella (ours)', 'SAC (ours)']
+// Third-party engines only. Padding this strip with our own tools was the
+// tell that the row existed before its contents did.
+const ITEMS = [...WRAPPED_ENGINES]
 
 /**
  * Credibility strip: the proven engines the platform orchestrates,

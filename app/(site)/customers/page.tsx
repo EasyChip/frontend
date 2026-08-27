@@ -14,7 +14,6 @@ export default function CustomersPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Customers</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Real teams, real flows - <span className="text-gradient">stories coming.</span>
           </h1>
@@ -26,7 +25,7 @@ export default function CustomersPage() {
         </div>
       </section>
 
-      <Section eyebrow="In the meantime" title="Become the first story">
+      <Section title="Become the first story">
         <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
           Design partners get deep engineering attention, direct access to the founding team, and a
           platform shaped around their flow. If that sounds like a trade worth making, let&apos;s

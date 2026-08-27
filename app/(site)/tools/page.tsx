@@ -3,7 +3,6 @@ import Link from 'next/link'
 import {
   BUCKETS,
   TOOLS,
-  TOOL_COUNTS,
   FUTURE_TRACKS,
   toolsByBucket,
 } from '@/lib/tools'
@@ -11,7 +10,6 @@ import { LiveToolCard, DevToolTile, FutureTrackTile } from '@/components/ui/Tool
 import ToolFinder from '@/components/tools/ToolFinder'
 import Reveal from '@/components/ui/Reveal'
 import CtaBand from '@/components/ui/CtaBand'
-import MetricBand from '@/components/ui/MetricBand'
 import StatusPill from '@/components/ui/StatusPill'
 import { cn } from '@/lib/utils'
 
@@ -27,17 +25,7 @@ export default function ToolsPage() {
     <>
       {/* ---------- Hero ---------- */}
       <section className="relative overflow-hidden border-b border-hair">
-        {/* single chevron light streak, low intensity (DESIGN §5.3) */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 opacity-20"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 45% at 50% 0%, rgba(78,85,252,0.5) 0%, rgba(124,8,245,0.25) 45%, transparent 75%)',
-          }}
-        />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">The Toolset</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Every stage of silicon. <span className="text-gradient">One platform.</span>
           </h1>
@@ -64,24 +52,11 @@ export default function ToolsPage() {
               href="#platform-layer"
               className="eyebrow rounded-full border border-brand-violet/40 bg-brand-violet/10 px-4 py-2 text-[#C79BFF] transition-colors hover:border-brand-violet/70"
             >
-              ✦ The Cockpit
+              The Cockpit
             </a>
           </nav>
         </div>
       </section>
-
-      {/* ---------- Derived metrics ---------- */}
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <MetricBand
-          metrics={[
-            { value: String(TOOL_COUNTS.total), label: 'Tools in the platform' },
-            { value: String(TOOL_COUNTS.live), label: 'Live today' },
-            { value: '5', label: 'Stages, spec → 3D-IC' },
-            { value: '1', label: 'Cockpit above them all' },
-          ]}
-          caveat="Counts reflect the public tool registry; in-development tools are labeled as such."
-        />
-      </div>
 
       {/* ---------- The five buckets ---------- */}
       {BUCKETS.map((bucket, i) => {
@@ -99,27 +74,31 @@ export default function ToolsPage() {
               <Reveal>
                 <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                   <div className="max-w-2xl">
-                    <p className="eyebrow flex items-center gap-3 text-ink-3">
+                    <h2 className="editorial-title w-fit text-3xl md:text-4xl">
+                      <span className="mr-3 font-mono text-xl font-normal text-brand-cyan">
+                        {String(bucket.order).padStart(2, '0')}
+                      </span>
+                      {bucket.name}
+                    </h2>
+                    {/* Status caption sits under the heading, not above it:
+                        it reports what is live, which the heading cannot. */}
+                    <p className="mt-3 flex items-center gap-3 text-sm text-ink-2">
                       {live.length > 0 ? (
                         <span aria-hidden className="led-dot" />
                       ) : (
                         <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-line" />
                       )}
-                      <span className="font-medium text-brand-cyan">
-                        {String(bucket.order).padStart(2, '0')}
-                      </span>
-                      {bucket.tagline}
+                      {live.length > 0
+                        ? `${live.length} live · ${bucket.tagline}`
+                        : `In development · ${bucket.tagline}`}
                     </p>
-                    <h2 className="editorial mt-3 w-fit text-3xl md:text-4xl">
-                      {bucket.name}
-                    </h2>
                     <p className="mt-6 text-lg leading-relaxed text-ink-2">{bucket.description}</p>
                   </div>
                   <div className="flex flex-wrap gap-2 md:justify-end">
                     {bucket.stages.map((stage) => (
                       <span
                         key={stage}
-                        className="eyebrow rounded-full bg-surface-2 px-3 py-1.5 text-[0.6rem] text-ink-3"
+                        className="eyebrow rounded-full bg-surface-2 px-3 py-1.5 text-xs text-ink-3"
                       >
                         {stage}
                       </span>
@@ -128,9 +107,19 @@ export default function ToolsPage() {
                 </div>
               </Reveal>
 
-              {/* Live tools - rich cards */}
+              {/* Live tools - rich cards. Columns follow the data: a bucket
+                  with one live tool gets one column, not a card marooned in
+                  two-thirds of empty row. */}
               {live.length > 0 && (
-                <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <div
+                  className={cn(
+                    'mt-12 grid gap-5',
+                    live.length === 1 && 'max-w-md',
+                    live.length === 2 && 'md:grid-cols-2',
+                    live.length >= 3 && 'md:grid-cols-2 xl:grid-cols-3'
+                  )}
+                >
+
                   {live.map((tool, j) => (
                     <Reveal key={tool.id} delay={j * 0.06}>
                       <LiveToolCard tool={tool} />
@@ -165,10 +154,8 @@ export default function ToolsPage() {
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow text-[#C79BFF]">✦ The layer above the stages</p>
-              <h2 className="editorial mt-3 w-fit text-3xl md:text-4xl">
-                The Cockpit
-              </h2>
+              <h2 className="editorial-title w-fit text-3xl md:text-4xl">The Cockpit</h2>
+              <p className="mt-3 text-sm text-ink-2">The layer above the stages</p>
               <p className="mt-6 text-lg leading-relaxed text-ink-2">
                 Cross-cutting infrastructure that turns fifty tools into one platform: local-first
                 orchestration, reproducible flows, and a managed PDK substrate. This is what makes

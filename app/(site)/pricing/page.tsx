@@ -53,7 +53,7 @@ const tiers = [
       'Built for isolated environments',
       'Deployment support & priority engineering',
     ],
-    cta: { label: 'Book a Demo', href: CTA.primary.href },
+    cta: { label: 'Talk about deployment', href: CTA.primary.href },
     deployment: 'Your infrastructure (Escanor)',
   },
 ]
@@ -64,7 +64,6 @@ export default function PricingPage() {
       {/* ---------- Hero ---------- */}
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 text-center md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Pricing</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Plans for every kind of <span className="text-gradient">chip team.</span>
           </h1>
@@ -84,16 +83,11 @@ export default function PricingPage() {
               <div
                 className={
                   tier.highlight
-                    ? 'relative h-full rounded-xl border border-brand-violet/50 bg-surface-1 p-8 shadow-glow-violet-sm'
-                    : 'h-full rounded-xl border border-hair bg-surface-1 p-8'
+                    ? 'relative h-full rounded-lg border border-brand-violet/50 bg-surface-1 p-8'
+                    : 'h-full rounded-lg border border-hair bg-surface-1 p-8'
                 }
               >
-                {tier.highlight && (
-                  <span className="eyebrow absolute -top-3 left-8 rounded-full bg-brand-violet px-3 py-1 text-[0.6rem] text-white">
-                    Most teams start here
-                  </span>
-                )}
-                <h2 className="font-display text-xl font-medium text-ink">{tier.name}</h2>
+                <h2 className="font-display text-xl font-semibold text-ink">{tier.name}</h2>
                 <p className="mt-1 text-sm text-ink-3">Ideal for: {tier.idealFor}</p>
                 <p className="eyebrow mt-5 text-ink-3">Deployment</p>
                 <p className="mt-1 text-sm font-medium text-ink-2">{tier.deployment}</p>
@@ -143,7 +137,7 @@ export default function PricingPage() {
                   <th className="eyebrow px-6 py-4 text-ink-3">Included</th>
                   <th className="px-6 py-4 font-medium text-ink-2">Individual / Academic</th>
                   <th className="px-6 py-4">
-                    <span className="font-display font-medium text-gradient">Team / Startup</span>
+                    <span className="font-display font-semibold text-ink">Team / Startup</span>
                   </th>
                   <th className="px-6 py-4 font-medium text-ink-2">Enterprise (Escanor)</th>
                 </tr>
@@ -171,7 +165,7 @@ export default function PricingPage() {
       </Section>
 
       {/* ---------- FAQ ---------- */}
-      <Section eyebrow="Pricing questions" title="The short answers" className="border-t border-hair bg-base">
+      <Section title="The short answers" className="border-t border-hair bg-base">
         <Faq items={PRICING_FAQ} />
       </Section>
 

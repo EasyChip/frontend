@@ -60,7 +60,7 @@ export default function ToolFinder({ tools }: { tools: Tool[] }) {
         />
         <kbd
           aria-hidden
-          className="eyebrow hidden shrink-0 rounded border border-hair bg-surface-2 px-2 py-1 text-[0.6rem] text-ink-3 md:block"
+          className="eyebrow hidden shrink-0 rounded border border-hair bg-surface-2 px-2 py-1 text-xs text-ink-3 md:block"
         >
           /
         </kbd>
@@ -79,7 +79,7 @@ export default function ToolFinder({ tools }: { tools: Tool[] }) {
                   <span className="flex items-center justify-between gap-3 px-4 py-3">
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-medium text-ink">{tool.name}</span>
-                      <span className="eyebrow text-[0.6rem] text-ink-3">{tool.category}</span>
+                      <span className="eyebrow text-xs text-ink-3">{tool.category}</span>
                     </span>
                     <StatusPill status={tool.status} />
                   </span>

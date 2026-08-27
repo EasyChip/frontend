@@ -19,7 +19,7 @@ const variants: Record<Variant, string> = {
 
 const sizes: Record<Size, string> = {
   md: 'h-10 px-6 text-sm',
-  lg: 'h-12 px-8 text-[15px]',
+  lg: 'h-12 px-8 text-base',
 }
 
 interface ButtonProps {

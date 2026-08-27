@@ -53,7 +53,7 @@ export default function WaitlistForm() {
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="inline-flex h-12 shrink-0 items-center justify-center rounded-md border border-line px-6 text-sm font-medium text-ink transition-colors hover:border-ink-3 hover:bg-surface-2 disabled:opacity-60"
+          className="inline-flex h-12 shrink-0 items-center justify-center rounded-full border border-line px-6 text-sm font-medium text-ink transition-colors hover:border-ink-3 hover:bg-surface-2 disabled:opacity-60"
         >
           {status === 'sending' ? 'Joining…' : 'Join the list'}
         </button>

@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { createClient } from '@/lib/supabase/server'
+import AppHeader from '@/components/layout/AppHeader'
 
 interface ToolEvent {
   id: number
@@ -8,129 +9,139 @@ interface ToolEvent {
   event_type: string
   metadata: Record<string, unknown> | null
   created_at: string
-  profiles: { full_name: string | null; company: string | null } | null
 }
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * Admin allowlist, server-only. `ADMIN_EMAILS` is a comma-separated list with
+ * no NEXT_PUBLIC prefix, so it never reaches a client bundle. Middleware gates
+ * this route already; this is the second lock.
+ */
+function isAllowed(email: string | undefined) {
+  const allowed = (process.env.ADMIN_EMAILS ?? '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean)
+  return Boolean(email && allowed.includes(email.toLowerCase()))
+}
+
+const EVENT_LABELS: Record<string, string> = {
+  download: 'Download',
+  demo_request: 'Demo request',
+  page_view: 'Page view',
+}
+
 export default async function AdminEventsPage() {
   const supabase = await createClient()
 
-  // Verify this is a founder (middleware already gates this, but double-check)
-  const { data: { user } } = await supabase.auth.getUser()
-  const founderEmails = [
-    'f20220056@goa.bits-pilani.ac.in',
-    'f20220687@goa.bits-pilani.ac.in',
-  ]
-  if (!user || !founderEmails.includes(user.email ?? '')) {
+  if (!supabase) {
     return (
-      <div style={{ minHeight: '100vh', background: '#04060F', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FF4D6D', fontFamily: 'var(--font-mono)' }}>
-        Access denied.
-      </div>
+      <Shell>
+        <p className="rounded-md border border-warning/30 bg-warning/5 px-4 py-3 text-ink-2">
+          Admin is unavailable: this deployment has no database configured.
+        </p>
+      </Shell>
     )
   }
 
-  // Fetch events with profile data using service role would be ideal,
-  // but we're using the user's session here. Since founders have their own
-  // events only via RLS, we'll query tool_events without joins for now.
-  // For full admin view, we'd need a server action with service role.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!isAllowed(user?.email)) {
+    return (
+      <Shell>
+        <p className="rounded-md border border-error/30 bg-error/5 px-4 py-3 text-error">
+          Access denied.
+        </p>
+      </Shell>
+    )
+  }
+
   const { data: events, error } = await supabase
     .from('tool_events')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(100)
 
+  const rows = (events ?? []) as ToolEvent[]
+
   return (
-    <div style={{
-      minHeight: '100vh', background: '#04060F', fontFamily: 'var(--font-sans)',
-      color: '#F5F7FA', paddingTop: 60,
-    }}>
+    <Shell>
+      <div className="flex items-baseline justify-between gap-4">
+        <h1 className="editorial-title text-3xl">Funnel events</h1>
+        <Link
+          href="/dashboard"
+          className="text-sm text-ink-2 transition-colors hover:text-ink"
+        >
+          ← Dashboard
+        </Link>
+      </div>
+      <p className="mt-2 text-ink-2">Recent tool downloads, demo requests, and page views.</p>
 
-      <main style={{ maxWidth: 1000, margin: '0 auto', padding: '40px 24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-          <h1 style={{ fontSize: 24, fontWeight: 600, margin: 0 }}>
-            Funnel Events
-          </h1>
-          <Link href="/dashboard" style={{ fontSize: 13, color: '#6B7590', textDecoration: 'none' }}>
-            ← Dashboard
-          </Link>
+      {error && (
+        <div className="mt-6 rounded-md border border-error/30 bg-error/5 px-4 py-3">
+          <p className="text-sm text-error">Could not load events: {error.message}</p>
+          <p className="mt-1 text-sm text-ink-2">
+            A full admin view needs a service-role key; this shows what your session can read.
+          </p>
         </div>
-        <p style={{ fontSize: 14, color: '#6B7590', margin: '0 0 32px' }}>
-          Recent tool downloads, demo requests, and page views.
-        </p>
+      )}
 
-        {error && (
-          <div style={{
-            padding: '12px 16px', background: 'rgba(255,77,109,0.08)',
-            border: '1px solid rgba(255,77,109,0.2)', borderRadius: 8,
-            fontSize: 13, color: '#FF4D6D', marginBottom: 24,
-          }}>
-            Error loading events: {error.message}
-            <br />
-            <span style={{ fontSize: 12, color: '#A7B0C6' }}>
-              Note: Full admin view requires service role key. Currently showing events visible to your session.
-            </span>
-          </div>
-        )}
+      {rows.length === 0 ? (
+        <div className="mt-8 rounded-lg border border-dashed border-hair p-12 text-center">
+          <p className="text-ink-2">No events yet.</p>
+          <p className="mt-2 text-sm text-ink-3">
+            Events appear here as people download tools and request demos.
+          </p>
+        </div>
+      ) : (
+        <div className="mt-8 overflow-x-auto rounded-lg border border-hair bg-surface-1">
+          <table className="w-full min-w-[680px] border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-line">
+                <th className="eyebrow px-4 py-3 text-ink-3">ID</th>
+                <th className="eyebrow px-4 py-3 text-ink-3">Tool</th>
+                <th className="eyebrow px-4 py-3 text-ink-3">Event</th>
+                <th className="eyebrow px-4 py-3 text-ink-3">User</th>
+                <th className="eyebrow px-4 py-3 text-ink-3">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((event) => (
+                <tr
+                  key={event.id}
+                  className="border-b border-hair transition-colors last:border-0 hover:bg-surface-2/40"
+                >
+                  <td className="px-4 py-3 font-mono text-xs text-ink-3">#{event.id}</td>
+                  <td className="px-4 py-3 font-mono text-brand-cyan">{event.tool}</td>
+                  <td className="px-4 py-3 text-ink">
+                    {EVENT_LABELS[event.event_type] ?? event.event_type}
+                  </td>
+                  <td className="px-4 py-3 font-mono text-xs text-ink-2">
+                    {event.user_id?.slice(0, 8)}…
+                  </td>
+                  <td className="px-4 py-3 font-mono text-xs text-ink-3">
+                    <time dateTime={event.created_at}>
+                      {new Date(event.created_at).toLocaleString()}
+                    </time>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </Shell>
+  )
+}
 
-        {(!events || events.length === 0) ? (
-          <div style={{
-            padding: '48px', textAlign: 'center', background: '#0D1120',
-            border: '1px solid #1E2740', borderRadius: 12,
-          }}>
-            <p style={{ fontSize: 16, color: '#6B7590', margin: '0 0 8px' }}>No events yet</p>
-            <p style={{ fontSize: 13, color: '#6B7590', margin: 0 }}>
-              Events will appear here as users download tools and request demos.
-            </p>
-          </div>
-        ) : (
-          <div style={{
-            border: '1px solid #1E2740', borderRadius: 10, overflow: 'hidden',
-          }}>
-            {/* Table header */}
-            <div style={{
-              display: 'grid', gridTemplateColumns: '80px 1fr 1fr 120px 180px',
-              padding: '12px 16px', background: '#0D1120',
-              borderBottom: '1px solid #1E2740',
-              fontSize: 11, fontFamily: 'var(--font-mono)', color: '#6B7590',
-            }}>
-              <span>ID</span>
-              <span>Tool</span>
-              <span>Event</span>
-              <span>User</span>
-              <span>Time</span>
-            </div>
-            {/* Rows */}
-            {(events as ToolEvent[]).map((event, i) => (
-              <div key={event.id} style={{
-                display: 'grid', gridTemplateColumns: '80px 1fr 1fr 120px 180px',
-                padding: '10px 16px',
-                background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)',
-                borderBottom: '1px solid #1E2740',
-                fontSize: 13,
-              }}>
-                <span style={{ color: '#6B7590', fontFamily: 'var(--font-mono)', fontSize: 11 }}>
-                  #{event.id}
-                </span>
-                <span style={{ color: '#00E5EE', fontFamily: 'var(--font-mono)' }}>
-                  {event.tool}
-                </span>
-                <span style={{ color: '#F5F7FA' }}>
-                  {event.event_type === 'download' ? '⬇ Download' :
-                   event.event_type === 'demo_request' ? '📅 Demo Request' :
-                   event.event_type === 'page_view' ? '👁 Page View' : event.event_type}
-                </span>
-                <span style={{ color: '#A7B0C6', fontSize: 11, fontFamily: 'var(--font-mono)' }}>
-                  {event.user_id?.slice(0, 8)}...
-                </span>
-                <span style={{ color: '#6B7590', fontSize: 11, fontFamily: 'var(--font-mono)' }}>
-                  {new Date(event.created_at).toLocaleString()}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-dvh flex-col">
+      <AppHeader />
+      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12">{children}</main>
     </div>
   )
 }

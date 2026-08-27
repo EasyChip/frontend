@@ -2,25 +2,31 @@
 
 /* ============================================================
    EasyChip Design System - deep-space dark + prism gradient
-   Source of truth: internal/DESIGN.md (never deployed)
+   Source of truth: DESIGN.md at the repo root (canonical)
    ============================================================ */
 
 @theme {
   /* ---- Type ----
-     One family, weight contrast only: Inter Tight for display (light,
-     tight-tracked), Inter for body, JetBrains Mono for code. */
-  --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
-  --font-editorial: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+     Sora for display (rounded-geometric, echoes the wordmark), Inter for body,
+     JetBrains Mono for labels and data. See DESIGN.md > Typography. */
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-editorial: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, 'JetBrains Mono', monospace;
 
-  /* Type scale (DESIGN §4.1) */
+  /* Type scale - the documented ramp. Nothing ships off these steps. */
   --text-display-xl: 4.5rem;
-  --text-display-xl--line-height: 1.04;
-  --text-display-xl--letter-spacing: -0.03em;
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.02em;
   --text-display-l: 3.5rem;
-  --text-display-l--line-height: 1.06;
-  --text-display-l--letter-spacing: -0.03em;
+  --text-display-l--line-height: 1.05;
+  --text-display-l--letter-spacing: -0.02em;
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.01em;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
 
   /* ---- Brand solids (§3.2) ---- */
   --color-brand-cyan: #00E5EE;
@@ -101,9 +107,10 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--color-ink);
+    text-wrap: balance;
   }
 
   ::selection {
@@ -168,13 +175,121 @@
   background-image: var(--gradient-brand);
 }
 
-/* Display voice - thin, tight-tracked sans headlines. Calm, lots of air.
-   em/i inside carry the gradient accent, upright and same weight. */
+/* ---- Entrance reveals ----
+   The declared state is the FINAL state, so the hero is readable before JS,
+   in a background tab, and with animation unsupported. @starting-style only
+   supplies the "from" frame; nothing here can leave content invisible. */
+
+@utility reveal-rise {
+  opacity: 1;
+  translate: none;
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    translate 0.6s var(--ease-out-expo);
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 14px;
+  }
+}
+
+/* Word-mask reveal: the word sits at rest and rises in from below its own
+   clipping box. Stagger with an inline transition-delay. */
+@utility reveal-word {
+  display: inline-block;
+  translate: none;
+  transition: translate 0.75s var(--ease-out-expo);
+
+  @starting-style {
+    translate: 0 110%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-rise,
+  .reveal-word {
+    transition: none;
+  }
+}
+
+/* Word-by-word brighten for the narrative statement.
+   Resting state is fully readable; the dim-to-bright fill only exists where
+   scroll-linked timelines are supported. This replaced 26 framer-motion
+   values driven by useScroll, which shipped the whole sentence at 0.18
+   opacity in the server HTML. */
+@keyframes word-brighten {
+  from { opacity: 0.18; }
+  to { opacity: 1; }
+}
+
+@utility word-brighten {
+  display: inline-block;
+  opacity: 1;
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: word-brighten linear both;
+      animation-timeline: view();
+      animation-range: entry calc(18% + (var(--word-i) * 1.4%)) entry
+        calc(38% + (var(--word-i) * 1.4%));
+    }
+  }
+}
+
+/* Scroll reveal, CSS-only.
+   The declared state is visible. The animation exists only where scroll-linked
+   timelines are supported and motion is welcome, so no-JS, reduced-motion and
+   older browsers all get finished content instead of an empty section. */
+@keyframes reveal-deposit {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@utility reveal-on-view {
+  opacity: 1;
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal-deposit linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--reveal-offset, 0%)) entry
+        calc(55% + var(--reveal-offset, 0%));
+    }
+  }
+}
+
+/* Display voice - Sora at display weight. Hero and page H1 only.
+   em/i inside stay upright and inherit weight. */
 @utility editorial {
   font-family: var(--font-editorial);
-  font-weight: 300;
-  letter-spacing: -0.028em;
-  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  text-wrap: balance;
+
+  & em,
+  & i {
+    font-style: normal;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+}
+
+/* Title voice - the section-heading step below display. H2 and H3. */
+@utility editorial-title {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-wrap: balance;
 
   & em,
   & i {
@@ -187,10 +302,10 @@
 /* Mono uppercase eyebrow (§4.2) - quiet overline, not a shout */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
   line-height: 1.4;
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -343,12 +458,19 @@
   100% { transform: translateX(130%) skewX(-18deg); }
 }
 
-/* Signal dot traveling the home pipeline strip */
+/* Signal dot traveling the home pipeline strip - horizontal (lg+) and
+   vertical (below lg), so the flow bus is drawn at every width. */
 @keyframes signal-x {
   0% { left: 0%; opacity: 0; }
   6% { opacity: 1; }
   94% { opacity: 1; }
   100% { left: 100%; opacity: 0; }
+}
+@keyframes signal-y {
+  0% { top: 0%; opacity: 0; }
+  6% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 /* Dash pulse for /platform consolidation map connectors */

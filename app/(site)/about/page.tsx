@@ -49,14 +49,13 @@ export default function AboutPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">About</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             The cockpit for chip design, <span className="text-gradient">built by chip designers.</span>
           </h1>
         </div>
       </section>
 
-      <Section eyebrow="Origin" title="It started with waiting">
+      <Section title="It started with waiting">
         <Reveal>
           <div className="max-w-3xl space-y-5 text-lg leading-relaxed text-ink-2">
             <p>
@@ -79,7 +78,7 @@ export default function AboutPage() {
         </Reveal>
       </Section>
 
-      <Section eyebrow="The team" title="Founders" className="border-t border-hair bg-base">
+      <Section title="Founders" className="border-t border-hair bg-base">
         <div className="grid gap-5 sm:grid-cols-2 lg:max-w-2xl">
           {team.map((person, i) => (
             <Reveal key={person.name} delay={i * 0.06}>
@@ -108,7 +107,7 @@ export default function AboutPage() {
         </p>
       </Section>
 
-      <Section eyebrow="How we work" title="Four principles, applied daily">
+      <Section title="Four principles, applied daily">
         <div className="grid gap-5 md:grid-cols-2">
           {values.map((value, i) => (
             <Reveal key={value.title} delay={i * 0.05}>

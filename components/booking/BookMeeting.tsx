@@ -3,62 +3,116 @@
 import { useEffect, useState } from 'react'
 import Cal, { getCalApi } from '@calcom/embed-react'
 import { createClient } from '@/lib/supabase/client'
+import { CALCOM_URL } from '@/lib/site'
 
 interface BookMeetingProps {
   context?: string // e.g. "FlowBit Demo", "General Discussion"
-  inline?: boolean // true = full inline embed, false = just the button (modal)
+  inline?: boolean // true = full inline embed
 }
 
+type EmbedState = 'loading' | 'ready' | 'failed'
+
+const calLinkFrom = (url: string) => url.replace('https://cal.com/', '')
+
+/**
+ * Cal.com booking embed.
+ *
+ * Two rules hold here, both learned the hard way:
+ *  1. The Supabase prefill is strictly optional. It is a convenience for
+ *     signed-in visitors and must never be able to unmount the calendar -
+ *     a missing env var used to throw here and delete the booking widget
+ *     from the public contact page.
+ *  2. There is always a reachable fallback. If the embed script fails, is
+ *     blocked, or JS is off, the visitor still gets a working link.
+ */
 export default function BookMeeting({ context, inline = false }: BookMeetingProps) {
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('')
+  const [state, setState] = useState<EmbedState>('loading')
 
-  const calLink = process.env.NEXT_PUBLIC_CALCOM_BOOKING_URL?.replace('https://cal.com/', '') || 'rakshit-mishra-5x7tan'
+  const calLink = calLinkFrom(CALCOM_URL)
 
+  // Optional prefill. Every failure path is swallowed on purpose.
   useEffect(() => {
-    // Prefill from auth session if logged in
-    const supabase = createClient()
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        setUserEmail(user.email || '')
-        setUserName(user.user_metadata?.full_name || user.user_metadata?.name || '')
-      }
-    })
+    let cancelled = false
+    try {
+      const supabase = createClient()
+      if (!supabase) return
+      supabase.auth
+        .getUser()
+        .then(({ data: { user } }) => {
+          if (cancelled || !user) return
+          setUserEmail(user.email || '')
+          setUserName(user.user_metadata?.full_name || user.user_metadata?.name || '')
+        })
+        .catch(() => {})
+    } catch {
+      // Prefill is a nicety; the calendar renders regardless.
+    }
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   useEffect(() => {
-    (async () => {
-      const cal = await getCalApi()
-      cal('ui', {
-        theme: 'dark',
-        styles: { branding: { brandColor: '#7C08F5' } },
-      })
+    let cancelled = false
+    ;(async () => {
+      try {
+        const cal = await getCalApi()
+        if (cancelled) return
+        cal('ui', {
+          theme: 'dark',
+          styles: { branding: { brandColor: '#7C08F5' } },
+        })
+        setState('ready')
 
-      // Log booking event
-      cal('on', {
-        action: 'bookingSuccessful',
-        callback: async () => {
-          try {
-            const supabase = createClient()
-            const { data: { user } } = await supabase.auth.getUser()
-            if (user) {
+        cal('on', {
+          action: 'bookingSuccessful',
+          callback: async () => {
+            try {
+              const supabase = createClient()
+              if (!supabase) return
+              const {
+                data: { user },
+              } = await supabase.auth.getUser()
+              if (!user) return
               await supabase.from('tool_events').insert({
                 user_id: user.id,
                 tool: context || 'General',
                 event_type: 'demo_request',
                 metadata: { source: 'cal.com', context },
               })
+            } catch {
+              // Analytics must never block the booking.
             }
-          } catch {
-            // Silent fail - don't block UX for analytics
-          }
-        },
-      })
+          },
+        })
+      } catch {
+        if (!cancelled) setState('failed')
+      }
     })()
+    return () => {
+      cancelled = true
+    }
   }, [context])
 
-  if (inline) {
-    return (
+  if (!inline) return null
+
+  if (state === 'failed') {
+    return <BookingFallback calUrl={CALCOM_URL} />
+  }
+
+  return (
+    <div className="relative h-full w-full">
+      {state === 'loading' && (
+        <div
+          aria-hidden
+          className="skeleton absolute inset-0 flex items-center justify-center rounded-lg"
+        >
+          <span className="eyebrow text-ink-3">Loading calendar</span>
+        </div>
+      )}
+
       <Cal
         calLink={calLink}
         style={{ width: '100%', height: '100%', overflow: 'auto' }}
@@ -69,79 +123,29 @@ export default function BookMeeting({ context, inline = false }: BookMeetingProp
           theme: 'dark',
         }}
       />
-    )
-  }
 
-  return null
+      {/* No JS, no embed - still a working path to the same calendar. */}
+      <noscript>
+        <BookingFallback calUrl={CALCOM_URL} />
+      </noscript>
+    </div>
+  )
 }
 
-export function BookMeetingButton({ context, label = 'Book a Meeting', style }: {
-  context?: string; label?: string; style?: React.CSSProperties
-}) {
-  const [userName, setUserName] = useState('')
-  const [userEmail, setUserEmail] = useState('')
-
-  const calLink = process.env.NEXT_PUBLIC_CALCOM_BOOKING_URL?.replace('https://cal.com/', '') || 'rakshit-mishra-5x7tan'
-
-  useEffect(() => {
-    const supabase = createClient()
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        setUserEmail(user.email || '')
-        setUserName(user.user_metadata?.full_name || user.user_metadata?.name || '')
-      }
-    })
-  }, [])
-
-  useEffect(() => {
-    (async () => {
-      const cal = await getCalApi()
-      cal('ui', {
-        theme: 'dark',
-        styles: { branding: { brandColor: '#7C08F5' } },
-      })
-      cal('on', {
-        action: 'bookingSuccessful',
-        callback: async () => {
-          try {
-            const supabase = createClient()
-            const { data: { user } } = await supabase.auth.getUser()
-            if (user) {
-              await supabase.from('tool_events').insert({
-                user_id: user.id,
-                tool: context || 'General',
-                event_type: 'demo_request',
-                metadata: { source: 'cal.com', context },
-              })
-            }
-          } catch { /* silent */ }
-        },
-      })
-    })()
-  }, [context])
-
+/** Shown when the embed cannot load. Same destination, no dependencies. */
+function BookingFallback({ calUrl }: { calUrl: string }) {
   return (
-    <button
-      data-cal-link={calLink}
-      data-cal-config={JSON.stringify({
-        name: userName,
-        email: userEmail,
-        notes: context ? `Context: ${context}` : undefined,
-        theme: 'dark',
-      })}
-      style={{
-        fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 500,
-        background: 'var(--amber)', color: '#0A0A0A',
-        padding: '0.75rem 1.5rem', borderRadius: 2,
-        border: 'none', cursor: 'pointer',
-        letterSpacing: '0.08em',
-        transition: 'opacity 0.2s',
-        ...style,
-      }}
-      onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
-      onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
-    >
-      {label} →
-    </button>
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 rounded-lg border border-hair bg-surface-1 p-8 text-center">
+      <p className="text-ink-2">The calendar could not load here.</p>
+      <a
+        href={calUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="sheen inline-flex h-12 items-center justify-center whitespace-nowrap rounded-full bg-brand-violet px-8 text-base font-medium text-white transition-all duration-200 hover:brightness-110 hover:shadow-glow-violet-sm active:scale-[0.98]"
+      >
+        Open the booking page
+      </a>
+      <p className="text-sm text-ink-3">It opens in a new tab.</p>
+    </div>
   )
 }

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <Section eyebrow="Legal" title="Privacy Policy">
+    <Section title="Privacy Policy" titleAs="h1">
       <div className="max-w-3xl space-y-6 leading-relaxed text-ink-2">
         <p className="rounded-md border border-warning/30 bg-warning/5 px-5 py-4 text-sm">
           The formal privacy policy (DPDP Act + GDPR aligned) is being finalized with counsel and

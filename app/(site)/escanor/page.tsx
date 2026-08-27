@@ -46,18 +46,9 @@ export default function EscanorPage() {
     <>
       {/* ---------- Hero ---------- */}
       <section className="relative overflow-hidden border-b border-hair">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 opacity-20"
-          style={{
-            background:
-              'radial-gradient(ellipse 55% 45% at 50% 0%, rgba(124,8,245,0.5) 0%, rgba(196,0,254,0.25) 50%, transparent 78%)',
-          }}
-        />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-[1fr_0.9fr]">
           <div>
             <div className="flex items-center gap-3">
-              <p className="eyebrow text-[#C79BFF]">Local-first</p>
               <StatusPill status="in-development" />
             </div>
             <h1 className="mt-4 max-w-3xl editorial text-5xl md:text-display-l">
@@ -81,7 +72,7 @@ export default function EscanorPage() {
       </section>
 
       {/* ---------- The problem ---------- */}
-      <Section eyebrow="The problem" title="Cloud AI tools ask for the one thing you can't give">
+      <Section title="Cloud AI tools ask for the one thing you can't give">
         <Reveal>
           <p className="max-w-3xl text-lg leading-relaxed text-ink-2">
             Most AI-EDA tools require shipping your RTL and PDKs to someone else&apos;s cloud. For
@@ -98,7 +89,6 @@ export default function EscanorPage() {
 
       {/* ---------- Guarantees ---------- */}
       <Section
-        eyebrow="How Escanor is different"
         title="Local-first as a hard invariant"
         className="border-t border-hair bg-base"
       >
@@ -119,10 +109,9 @@ export default function EscanorPage() {
 
       {/* ---------- Comparison ---------- */}
       <Section
-        eyebrow="Side by side"
         title={
           <>
-            Escanor vs. <span className="text-gradient">cloud-only AI-EDA</span>
+            Escanor vs. cloud-only AI-EDA
           </>
         }
       >
@@ -133,7 +122,7 @@ export default function EscanorPage() {
                 <tr className="border-b border-line">
                   <th className="eyebrow px-5 py-4 text-ink-3">Dimension</th>
                   <th className="px-5 py-4">
-                    <span className="font-display text-base font-medium text-gradient">
+                    <span className="font-display text-base font-semibold text-ink">
                       Escanor (local-first)
                     </span>
                   </th>
@@ -161,7 +150,7 @@ export default function EscanorPage() {
       </Section>
 
       {/* ---------- Who it's for ---------- */}
-      <Section eyebrow="Who it's for" title="Built for the teams with the most to protect" className="border-t border-hair bg-base">
+      <Section title="Built for the teams with the most to protect" className="border-t border-hair bg-base">
         <div className="grid gap-5 md:grid-cols-3">
           {[
             { title: 'Foundry-NDA teams', body: 'PDKs under NDA can’t touch third-party clouds. With Escanor they never have to.' },
@@ -186,7 +175,7 @@ export default function EscanorPage() {
       </Section>
 
       {/* ---------- FAQ + CTA ---------- */}
-      <Section eyebrow="Fair questions" title="Asked by every IP-sensitive buyer">
+      <Section title="Asked by every IP-sensitive buyer">
         <Faq items={ESCANOR_FAQ} />
       </Section>
 

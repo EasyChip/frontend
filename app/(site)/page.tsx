@@ -49,7 +49,6 @@ export default function Home() {
 
       {/* ---------- 3. Live tool grid ---------- */}
       <Section
-        eyebrow="Live today"
         title={`${TOOL_COUNTS.live} tools you can put to work now`}
         lede="Not a roadmap - shipped. Every tool below is live, local-first, and built to compose."
         className="border-t border-hair bg-base"
@@ -73,10 +72,9 @@ export default function Home() {
       <section className="border-t border-hair">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
           <Reveal>
-            <div className="rounded-xl border border-brand-violet/30 bg-gradient-to-br from-brand-violet/15 via-surface-1 to-void p-10 md:p-14">
-              <p className="eyebrow text-[#C79BFF]">Escanor - local-first</p>
-              <h2 className="editorial mt-4 max-w-2xl text-4xl md:text-5xl">
-                Secure by design. <em className="text-gradient">Local by default.</em>
+            <div className="rounded-lg border border-brand-violet/30 bg-surface-1 p-10 md:p-14">
+              <h2 className="editorial-title max-w-2xl text-4xl md:text-5xl">
+                Secure by design. <em>Local by default.</em>
               </h2>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-2">
                 Escanor runs EasyChip entirely on your own hardware - no data egress, no cloud
@@ -95,10 +93,9 @@ export default function Home() {
       <section className="border-t border-hair bg-base">
         <div className="mx-auto max-w-6xl px-6 py-24 text-center md:py-32">
           <Reveal>
-            <p className="eyebrow text-ink-3">Where this is going</p>
-            <blockquote className="editorial mx-auto mt-6 max-w-3xl text-3xl text-ink md:text-4xl">
+            <blockquote className="editorial-title mx-auto mt-6 max-w-3xl text-3xl text-ink md:text-4xl">
               Silicon should be as easy to create as software. One discipline throughout:{' '}
-              <span className="text-gradient">AI proposes, deterministic engines verify.</span>
+              AI proposes, deterministic engines verify.
             </blockquote>
             <div className="mt-9">
               <Button href="/vision" variant="ghost">
@@ -113,7 +110,7 @@ export default function Home() {
       <TheLatest />
 
       {/* ---------- 9. FAQ ---------- */}
-      <Section eyebrow="Fair questions" title="Before you ask">
+      <Section title="Before you ask">
         <Faq items={HOME_FAQ} />
       </Section>
 

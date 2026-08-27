@@ -15,10 +15,10 @@ function CardShell({ title, children }: { title: string; children: React.ReactNo
         <span className="h-2 w-2 rounded-full bg-brand-magenta/60" />
         <span className="h-2 w-2 rounded-full bg-brand-violet/60" />
         <span className="h-2 w-2 rounded-full bg-brand-cyan/60" />
-        <span className="eyebrow ml-2 text-[0.6rem] text-ink-3">{title}</span>
+        <span className="eyebrow ml-2 text-xs text-ink-3">{title}</span>
       </div>
       <div className="p-5">{children}</div>
-      <p className="border-t border-hair px-5 py-2 text-[0.62rem] text-ink-3">Illustrative interface</p>
+      <p className="border-t border-hair px-5 py-2 text-xs text-ink-3">Illustrative interface</p>
     </div>
   )
 }
@@ -27,14 +27,14 @@ function CardShell({ title, children }: { title: string; children: React.ReactNo
 function LintCard() {
   return (
     <CardShell title="lintbit - fifo_ctrl.sv">
-      <div className="space-y-3 font-mono text-[12.5px] leading-6">
+      <div className="space-y-3 font-mono text-sm leading-6">
         <div className="flex items-start gap-3">
           <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-warning" />
           <div className="min-w-0">
             <p className="text-ink">blocking assignment inside sequential block</p>
             <p className="text-ink-3">fifo_ctrl.sv:142 · rule W-1024</p>
           </div>
-          <span className="eyebrow ml-auto shrink-0 rounded-full bg-brand-cyan/15 px-2 py-0.5 text-[0.55rem] text-brand-cyan">
+          <span className="eyebrow ml-auto shrink-0 rounded-full bg-brand-cyan/15 px-2 py-0.5 text-xs text-brand-cyan">
             Fix available
           </span>
         </div>
@@ -44,7 +44,7 @@ function LintCard() {
             <p className="text-ink">latch inferred from incomplete case</p>
             <p className="text-ink-3">fifo_ctrl.sv:96 · rule E-0207</p>
           </div>
-          <span className="eyebrow ml-auto shrink-0 rounded-full bg-brand-cyan/15 px-2 py-0.5 text-[0.55rem] text-brand-cyan">
+          <span className="eyebrow ml-auto shrink-0 rounded-full bg-brand-cyan/15 px-2 py-0.5 text-xs text-brand-cyan">
             Fix available
           </span>
         </div>
@@ -65,7 +65,7 @@ function TimingCard() {
   ]
   return (
     <CardShell title="sac - report_timing --format json">
-      <div className="space-y-3 font-mono text-[12.5px]">
+      <div className="space-y-3 font-mono text-sm">
         {paths.map((p) => (
           <div key={p.path}>
             <div className="flex items-baseline justify-between gap-3">
@@ -98,7 +98,7 @@ function FlowCard() {
           <div key={node} className="flex min-w-0 items-center gap-1">
             <div
               className={cn(
-                'flex flex-col items-center gap-1.5 rounded-md border px-2.5 py-2 font-mono text-[11px]',
+                'flex flex-col items-center gap-1.5 rounded-md border px-2.5 py-2 font-mono text-xs',
                 i < 3 ? 'border-brand-cyan/30 bg-brand-cyan/[0.07] text-ink' : 'border-hair bg-surface-1 text-ink-2'
               )}
             >
@@ -113,7 +113,7 @@ function FlowCard() {
           </div>
         ))}
       </div>
-      <div className="mt-3 space-y-2 font-mono text-[12.5px]">
+      <div className="mt-3 space-y-2 font-mono text-sm">
         <div className="flex justify-between text-ink-2">
           <span>network egress</span>
           <span className="text-brand-cyan">0 bytes</span>
@@ -171,7 +171,7 @@ export default function PillarShowcase() {
                 <span className="mr-3 text-brand-cyan">{pillar.marker}</span>
                 {pillar.eyebrow}
               </p>
-              <h3 className="editorial mt-4 text-3xl md:text-5xl">{pillar.title}</h3>
+              <h3 className="editorial-title mt-4 text-3xl md:text-5xl">{pillar.title}</h3>
               <p className="mt-5 max-w-lg text-lg font-light leading-relaxed text-ink-2">{pillar.body}</p>
               <Link
                 href={pillar.link.href}

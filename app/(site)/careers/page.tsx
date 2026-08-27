@@ -11,16 +11,16 @@ export const metadata: Metadata = {
 
 const reasons = [
   {
-    title: 'A genuinely hard problem',
-    body: 'EDA meets AI meets systems engineering - the kind of technical depth most startups only claim.',
+    title: 'The work is EDA, not a wrapper',
+    body: 'Linting, power intent, timing constraints, synthesis, static timing - nine tools are live and running against real RTL. You would be working on the engines and the layer that orchestrates them.',
   },
   {
-    title: 'Real users, real silicon',
-    body: 'Chip teams run what you ship. The feedback loop is engineers you can name, not dashboards.',
+    title: 'Local-first is a constraint, not a slogan',
+    body: 'Escanor runs the whole suite on customer hardware, because the teams who need this most cannot send a PDK to anyone else. That rules out a lot of easy architecture.',
   },
   {
-    title: 'Early enough to matter',
-    body: 'Small team, big surface area. What you build becomes load-bearing - and so do you.',
+    title: 'Small enough that scope is real',
+    body: 'Two founders and a tool registry with forty-five entries still to build. Nothing here has an owner already.',
   },
 ]
 
@@ -29,7 +29,6 @@ export default function CareersPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Careers</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Build the platform that <span className="text-gradient">consolidates chip design.</span>
           </h1>
@@ -40,7 +39,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <Section eyebrow="Why here" title="Three honest reasons">
+      <Section title="Three honest reasons">
         <div className="grid gap-5 md:grid-cols-3">
           {reasons.map((reason) => (
             <div key={reason.title} className="h-full rounded-lg border border-hair bg-surface-1 p-7">
@@ -51,7 +50,7 @@ export default function CareersPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Open roles" title="Postings are being finalized" className="border-t border-hair bg-base">
+      <Section title="Postings are being finalized" className="border-t border-hair bg-base">
         <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
           Specific role listings land here soon. Impatient? Good - that&apos;s a signal.{' '}
           <Link href="/contact" className="text-brand-cyan hover:underline underline-offset-4">

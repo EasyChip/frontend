@@ -44,16 +44,7 @@ export default function VisionPage() {
     <>
       {/* ---------- Hero ---------- */}
       <section className="relative overflow-hidden border-b border-hair">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 opacity-20"
-          style={{
-            background:
-              'radial-gradient(ellipse 55% 45% at 50% 0%, rgba(0,229,238,0.45) 0%, rgba(124,8,245,0.3) 55%, transparent 80%)',
-          }}
-        />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 text-center md:pb-24 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Where this is going</p>
           <h1 className="mx-auto max-w-3xl editorial text-5xl md:text-display-l">
             Silicon should be as easy to create <span className="text-gradient">as software.</span>
           </h1>
@@ -66,7 +57,7 @@ export default function VisionPage() {
       </section>
 
       {/* ---------- The principle ---------- */}
-      <Section eyebrow="The principle" title="AI proposes. Deterministic engines verify." center>
+      <Section title="AI proposes. Deterministic engines verify." center>
         <Reveal>
           <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-ink-2">
             One discipline runs through everything we build: no output is trusted until a
@@ -83,7 +74,7 @@ export default function VisionPage() {
         <div className="mx-auto max-w-6xl px-6 py-16 text-center">
           <Reveal>
             <p className="eyebrow text-[#C79BFF]">The demo</p>
-            <h2 className="editorial mx-auto mt-4 max-w-2xl text-3xl md:text-4xl">
+            <h2 className="editorial-title mx-auto mt-4 max-w-2xl text-3xl md:text-4xl">
               We run this live in demos - not on the public internet.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-ink-2">
@@ -102,7 +93,6 @@ export default function VisionPage() {
 
       {/* ---------- Direction timeline ---------- */}
       <Section
-        eyebrow="Direction"
         title="The road, coarsely"
         lede="No dates, no promises dressed as plans - just the order in which the platform grows."
       >
@@ -113,11 +103,11 @@ export default function VisionPage() {
                 <div className="flex items-center justify-between">
                   <span className="eyebrow text-brand-cyan">{item.phase}</span>
                   {item.state === 'now' ? (
-                    <span className="eyebrow rounded-full bg-brand-cyan/15 px-2.5 py-1 text-[0.6rem] text-brand-cyan">
+                    <span className="eyebrow rounded-full bg-brand-cyan/15 px-2.5 py-1 text-xs text-brand-cyan">
                       Shipping
                     </span>
                   ) : (
-                    <span className="eyebrow rounded-full bg-surface-2 px-2.5 py-1 text-[0.6rem] text-ink-3">
+                    <span className="eyebrow rounded-full bg-surface-2 px-2.5 py-1 text-xs text-ink-3">
                       Direction
                     </span>
                   )}

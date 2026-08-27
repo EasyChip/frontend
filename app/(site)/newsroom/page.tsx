@@ -24,7 +24,6 @@ export default function NewsroomPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Newsroom</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Milestones, <span className="text-gradient">as they happen.</span>
           </h1>
@@ -35,7 +34,7 @@ export default function NewsroomPage() {
         </div>
       </section>
 
-      <Section eyebrow="Announcements" title="Latest">
+      <Section title="Latest">
         <div className="space-y-4">
           {items.map((item) => (
             <article key={item.title} className="rounded-lg border border-hair bg-surface-1 p-7">

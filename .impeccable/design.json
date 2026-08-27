@@ -1,0 +1,610 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-27T06-08-45Z",
+  "title": "Design System: EasyChip",
+  "extensions": {
+    "colorMeta": {
+      "brand-violet": {
+        "role": "primary",
+        "displayName": "Bias Violet",
+        "canonical": "#7C08F5",
+        "oklch": "oklch(51.8% 0.2826 294.22)",
+        "tonalRamp": [
+          "oklch(15% 0.1821 294.22)",
+          "oklch(26.4% 0.2313 294.22)",
+          "oklch(37.9% 0.2641 294.22)",
+          "oklch(49.3% 0.2805 294.22)",
+          "oklch(60.7% 0.2805 294.22)",
+          "oklch(72.1% 0.2641 294.22)",
+          "oklch(83.6% 0.2313 294.22)",
+          "oklch(95% 0.1821 294.22)"
+        ]
+      },
+      "brand-cyan": {
+        "role": "primary",
+        "displayName": "Probe Cyan",
+        "canonical": "#00E5EE",
+        "oklch": "oklch(83.8% 0.1424 199.86)",
+        "tonalRamp": [
+          "oklch(15% 0.0918 199.86)",
+          "oklch(26.4% 0.1166 199.86)",
+          "oklch(37.9% 0.1331 199.86)",
+          "oklch(49.3% 0.1414 199.86)",
+          "oklch(60.7% 0.1414 199.86)",
+          "oklch(72.1% 0.1331 199.86)",
+          "oklch(83.6% 0.1166 199.86)",
+          "oklch(95% 0.0918 199.86)"
+        ]
+      },
+      "brand-blue": {
+        "role": "secondary",
+        "displayName": "Signal Blue",
+        "canonical": "#0196E8",
+        "oklch": "oklch(64.9% 0.16 244.09)",
+        "tonalRamp": [
+          "oklch(15% 0.1031 244.09)",
+          "oklch(26.4% 0.131 244.09)",
+          "oklch(37.9% 0.1496 244.09)",
+          "oklch(49.3% 0.1589 244.09)",
+          "oklch(60.7% 0.1589 244.09)",
+          "oklch(72.1% 0.1496 244.09)",
+          "oklch(83.6% 0.131 244.09)",
+          "oklch(95% 0.1031 244.09)"
+        ]
+      },
+      "brand-indigo": {
+        "role": "secondary",
+        "displayName": "Trace Indigo",
+        "canonical": "#4E55FC",
+        "oklch": "oklch(55.3% 0.2422 273.4)",
+        "tonalRamp": [
+          "oklch(15% 0.1561 273.4)",
+          "oklch(26.4% 0.1982 273.4)",
+          "oklch(37.9% 0.2264 273.4)",
+          "oklch(49.3% 0.2404 273.4)",
+          "oklch(60.7% 0.2404 273.4)",
+          "oklch(72.1% 0.2264 273.4)",
+          "oklch(83.6% 0.1982 273.4)",
+          "oklch(95% 0.1561 273.4)"
+        ]
+      },
+      "brand-magenta": {
+        "role": "secondary",
+        "displayName": "Prism Magenta",
+        "canonical": "#C400FE",
+        "oklch": "oklch(61.5% 0.304 314.5)",
+        "tonalRamp": [
+          "oklch(15% 0.1959 314.5)",
+          "oklch(26.4% 0.2488 314.5)",
+          "oklch(37.9% 0.2841 314.5)",
+          "oklch(49.3% 0.3018 314.5)",
+          "oklch(60.7% 0.3018 314.5)",
+          "oklch(72.1% 0.2841 314.5)",
+          "oklch(83.6% 0.2488 314.5)",
+          "oklch(95% 0.1959 314.5)"
+        ]
+      },
+      "void": {
+        "role": "neutral",
+        "displayName": "Deep Void",
+        "canonical": "#04060F",
+        "oklch": "oklch(12.5% 0.0224 269.71)",
+        "tonalRamp": [
+          "oklch(15% 0.0144 269.71)",
+          "oklch(26.4% 0.0183 269.71)",
+          "oklch(37.9% 0.0209 269.71)",
+          "oklch(49.3% 0.0222 269.71)",
+          "oklch(60.7% 0.0222 269.71)",
+          "oklch(72.1% 0.0209 269.71)",
+          "oklch(83.6% 0.0183 269.71)",
+          "oklch(95% 0.0144 269.71)"
+        ]
+      },
+      "base": {
+        "role": "neutral",
+        "displayName": "Substrate",
+        "canonical": "#080B16",
+        "oklch": "oklch(15.3% 0.0243 271.18)",
+        "tonalRamp": [
+          "oklch(15% 0.0156 271.18)",
+          "oklch(26.4% 0.0199 271.18)",
+          "oklch(37.9% 0.0227 271.18)",
+          "oklch(49.3% 0.0241 271.18)",
+          "oklch(60.7% 0.0241 271.18)",
+          "oklch(72.1% 0.0227 271.18)",
+          "oklch(83.6% 0.0199 271.18)",
+          "oklch(95% 0.0156 271.18)"
+        ]
+      },
+      "surface-1": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "#0D1120",
+        "oklch": "oklch(18.2% 0.0315 271.62)",
+        "tonalRamp": [
+          "oklch(15% 0.0203 271.62)",
+          "oklch(26.4% 0.0258 271.62)",
+          "oklch(37.9% 0.0295 271.62)",
+          "oklch(49.3% 0.0313 271.62)",
+          "oklch(60.7% 0.0313 271.62)",
+          "oklch(72.1% 0.0295 271.62)",
+          "oklch(83.6% 0.0258 271.62)",
+          "oklch(95% 0.0203 271.62)"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Raised Panel",
+        "canonical": "#141A2E",
+        "oklch": "oklch(22.3% 0.0402 270.23)",
+        "tonalRamp": [
+          "oklch(15% 0.0259 270.23)",
+          "oklch(26.4% 0.0329 270.23)",
+          "oklch(37.9% 0.0376 270.23)",
+          "oklch(49.3% 0.0399 270.23)",
+          "oklch(60.7% 0.0399 270.23)",
+          "oklch(72.1% 0.0376 270.23)",
+          "oklch(83.6% 0.0329 270.23)",
+          "oklch(95% 0.0259 270.23)"
+        ]
+      },
+      "hair": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#1E2740",
+        "oklch": "oklch(27.7% 0.0482 268.13)",
+        "tonalRamp": [
+          "oklch(15% 0.0311 268.13)",
+          "oklch(26.4% 0.0394 268.13)",
+          "oklch(37.9% 0.045 268.13)",
+          "oklch(49.3% 0.0478 268.13)",
+          "oklch(60.7% 0.0478 268.13)",
+          "oklch(72.1% 0.045 268.13)",
+          "oklch(83.6% 0.0394 268.13)",
+          "oklch(95% 0.0311 268.13)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#2A3557",
+        "oklch": "oklch(33.6% 0.0619 269.29)",
+        "tonalRamp": [
+          "oklch(15% 0.0399 269.29)",
+          "oklch(26.4% 0.0507 269.29)",
+          "oklch(37.9% 0.0579 269.29)",
+          "oklch(49.3% 0.0615 269.29)",
+          "oklch(60.7% 0.0615 269.29)",
+          "oklch(72.1% 0.0579 269.29)",
+          "oklch(83.6% 0.0507 269.29)",
+          "oklch(95% 0.0399 269.29)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Instrument White",
+        "canonical": "#F5F7FA",
+        "oklch": "oklch(97.5% 0.0045 258.32)",
+        "tonalRamp": [
+          "oklch(15% 0.0029 258.32)",
+          "oklch(26.4% 0.0037 258.32)",
+          "oklch(37.9% 0.0042 258.32)",
+          "oklch(49.3% 0.0045 258.32)",
+          "oklch(60.7% 0.0045 258.32)",
+          "oklch(72.1% 0.0042 258.32)",
+          "oklch(83.6% 0.0037 258.32)",
+          "oklch(95% 0.0029 258.32)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Cool Slate",
+        "canonical": "#A7B0C6",
+        "oklch": "oklch(75.7% 0.0331 267.88)",
+        "tonalRamp": [
+          "oklch(15% 0.0214 267.88)",
+          "oklch(26.4% 0.0271 267.88)",
+          "oklch(37.9% 0.031 267.88)",
+          "oklch(49.3% 0.0329 267.88)",
+          "oklch(60.7% 0.0329 267.88)",
+          "oklch(72.1% 0.031 267.88)",
+          "oklch(83.6% 0.0271 267.88)",
+          "oklch(95% 0.0214 267.88)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Muted Slate",
+        "canonical": "#6B7590",
+        "oklch": "oklch(56.4% 0.0436 269.06)",
+        "tonalRamp": [
+          "oklch(15% 0.0281 269.06)",
+          "oklch(26.4% 0.0357 269.06)",
+          "oklch(37.9% 0.0407 269.06)",
+          "oklch(49.3% 0.0433 269.06)",
+          "oklch(60.7% 0.0433 269.06)",
+          "oklch(72.1% 0.0407 269.06)",
+          "oklch(83.6% 0.0357 269.06)",
+          "oklch(95% 0.0281 269.06)"
+        ]
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "On-Accent Dark",
+        "canonical": "#04060F",
+        "oklch": "oklch(12.5% 0.0224 269.71)",
+        "tonalRamp": [
+          "oklch(15% 0.0144 269.71)",
+          "oklch(26.4% 0.0183 269.71)",
+          "oklch(37.9% 0.0209 269.71)",
+          "oklch(49.3% 0.0222 269.71)",
+          "oklch(60.7% 0.0222 269.71)",
+          "oklch(72.1% 0.0209 269.71)",
+          "oklch(83.6% 0.0183 269.71)",
+          "oklch(95% 0.0144 269.71)"
+        ]
+      },
+      "success": {
+        "role": "semantic",
+        "displayName": "Closure Mint",
+        "canonical": "#00D68F",
+        "oklch": "oklch(77.3% 0.1736 160.47)",
+        "tonalRamp": [
+          "oklch(15% 0.1119 160.47)",
+          "oklch(26.4% 0.1421 160.47)",
+          "oklch(37.9% 0.1623 160.47)",
+          "oklch(49.3% 0.1724 160.47)",
+          "oklch(60.7% 0.1724 160.47)",
+          "oklch(72.1% 0.1623 160.47)",
+          "oklch(83.6% 0.1421 160.47)",
+          "oklch(95% 0.1119 160.47)"
+        ]
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Caution Amber",
+        "canonical": "#F5A623",
+        "oklch": "oklch(78.4% 0.1587 72.99)",
+        "tonalRamp": [
+          "oklch(15% 0.1023 72.99)",
+          "oklch(26.4% 0.1299 72.99)",
+          "oklch(37.9% 0.1484 72.99)",
+          "oklch(49.3% 0.1576 72.99)",
+          "oklch(60.7% 0.1576 72.99)",
+          "oklch(72.1% 0.1484 72.99)",
+          "oklch(83.6% 0.1299 72.99)",
+          "oklch(95% 0.1023 72.99)"
+        ]
+      },
+      "error": {
+        "role": "semantic",
+        "displayName": "Fault Rose",
+        "canonical": "#FF4D6D",
+        "oklch": "oklch(67.9% 0.2131 14.72)",
+        "tonalRamp": [
+          "oklch(15% 0.1373 14.72)",
+          "oklch(26.4% 0.1744 14.72)",
+          "oklch(37.9% 0.1992 14.72)",
+          "oklch(49.3% 0.2115 14.72)",
+          "oklch(60.7% 0.2115 14.72)",
+          "oklch(72.1% 0.1992 14.72)",
+          "oklch(83.6% 0.1744 14.72)",
+          "oklch(95% 0.1373 14.72)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero H1 only. Drops to 40-48px on mobile. The only place gradient text is permitted."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page H1 below the hero and major section openers."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section H2, card H3, sub-heads. Steps 2rem / 1.5rem / 1.25rem."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose. Ledes run 1.125rem light in Cool Slate; measure capped at max-w-3xl."
+      },
+      "label": {
+        "displayName": "Label / Mono",
+        "purpose": "Eyebrows, status pills, categories, specs, data. Mono is a brand voice here, not code styling - it never sets a sentence."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glow-cyan",
+        "value": "0 0 40px rgba(0, 229, 238, 0.35)",
+        "purpose": "Reserved for the mark and hero-scale emitters."
+      },
+      {
+        "name": "glow-violet",
+        "value": "0 0 40px rgba(124, 8, 245, 0.35)",
+        "purpose": "Large violet emitters."
+      },
+      {
+        "name": "glow-violet-sm",
+        "value": "0 0 24px rgba(124, 8, 245, 0.25)",
+        "purpose": "Primary button hover. The one glow most users actually see."
+      },
+      {
+        "name": "secondary-wash",
+        "value": "0 0 20px rgba(0, 229, 238, 0.08)",
+        "purpose": "Faint cyan wash on secondary button hover."
+      },
+      {
+        "name": "overlay",
+        "value": "0 20px 25px -5px rgba(0, 0, 0, 0.4)",
+        "purpose": "Nav dropdown only - the single true cast shadow in the system."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Standard easing for reveals and sheen."
+      },
+      {
+        "name": "fade-up",
+        "value": "0.7s ease-out-expo (opacity 0->1, translateY 12px->0)",
+        "purpose": "Scroll reveals and staggered mobile-drawer entries."
+      },
+      {
+        "name": "sheen",
+        "value": "0.55s",
+        "purpose": "Specular band crossing a primary button on hover."
+      },
+      {
+        "name": "beam-orbit",
+        "value": "3.2s linear infinite",
+        "purpose": "Conic highlight orbiting a card border on hover."
+      },
+      {
+        "name": "led-breathe",
+        "value": "2.4s ease-in-out infinite",
+        "purpose": "Live status dot - the powered-on signal."
+      },
+      {
+        "name": "streak-drift",
+        "value": "14s linear infinite",
+        "purpose": "Ambient chevron streak on CTA bands. The one motion not triggered by the user."
+      },
+      {
+        "name": "marquee-x",
+        "value": "30s linear infinite",
+        "purpose": "Engines ticker; pauses on hover."
+      },
+      {
+        "name": "shimmer-sweep",
+        "value": "1.5s ease-in-out infinite",
+        "purpose": "Skeleton loading sweep."
+      },
+      {
+        "name": "state",
+        "value": "150-250ms",
+        "purpose": "Hover, focus, and colour transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ],
+    "containers": [
+      {
+        "name": "standard",
+        "value": "1152px",
+        "purpose": "max-w-6xl - default for sections and prose."
+      },
+      {
+        "name": "wide",
+        "value": "1280px",
+        "purpose": "max-w-7xl - nav and true content grids only."
+      },
+      {
+        "name": "measure",
+        "value": "768px",
+        "purpose": "max-w-3xl - section header blocks and body measure."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single action per view. Violet pill with a specular sheen that crosses once on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Book a Demo</a>",
+      "css": ".ds-btn-primary { position: relative; overflow: hidden; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 24px; border-radius: 999px; background: var(--color-brand-violet, #7C08F5); color: #fff; font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.28) 50%, transparent 60%); transform: translateX(-120%); pointer-events: none; } .ds-btn-primary:hover { filter: brightness(1.1); box-shadow: 0 0 24px rgba(124, 8, 245, 0.25); } .ds-btn-primary:hover::after { transform: translateX(120%); transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:active { transform: scale(0.98); filter: brightness(0.95); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-brand-cyan, #00E5EE); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined companion to the primary. Fills to the raised panel tone on hover with a faint cyan wash.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Get Early Access</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--color-line, #2A3557); background: transparent; color: var(--color-ink, #F5F7FA); font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary:hover { background: var(--color-surface-2, #141A2E); border-color: var(--color-ink-3, #6B7590); box-shadow: 0 0 20px rgba(0, 229, 238, 0.08); } .ds-btn-secondary:active { transform: scale(0.98); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-brand-cyan, #00E5EE); outline-offset: 2px; }"
+    },
+    {
+      "name": "Live Status Pill",
+      "kind": "chip",
+      "refersTo": "status-pill-live",
+      "description": "The powered-on signal. Cyan at 15% with a 6px LED that breathes on a 2.4s loop.",
+      "html": "<span class=\"ds-pill-live\"><span class=\"ds-led\" aria-hidden=\"true\"></span>Live</span>",
+      "css": "@keyframes ds-led-breathe { 0%, 100% { opacity: 1; box-shadow: 0 0 6px 1px rgba(0, 229, 238, 0.7); } 50% { opacity: 0.55; box-shadow: 0 0 2px 0 rgba(0, 229, 238, 0.35); } } .ds-pill-live { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: rgba(0, 229, 238, 0.15); color: var(--color-brand-cyan, #00E5EE); font-family: var(--color-font-mono, JetBrains Mono, ui-monospace, monospace); font-size: 10.4px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.4; } .ds-led { display: inline-block; width: 6px; height: 6px; border-radius: 999px; background: var(--color-brand-cyan, #00E5EE); animation: ds-led-breathe 2.4s ease-in-out infinite; } @media (prefers-reduced-motion: reduce) { .ds-led { animation: none; } }"
+    },
+    {
+      "name": "In-Development Status Pill",
+      "kind": "chip",
+      "refersTo": "status-pill-in-development",
+      "description": "Violet at 20%, no LED. Nothing is breathing yet - the absence of the dot is the honest signal.",
+      "html": "<span class=\"ds-pill-dev\">In Development</span>",
+      "css": ".ds-pill-dev { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; background: rgba(124, 8, 245, 0.2); color: #C79BFF; font-family: var(--color-font-mono, JetBrains Mono, ui-monospace, monospace); font-size: 10.4px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.4; }"
+    },
+    {
+      "name": "Live Tool Card",
+      "kind": "card",
+      "refersTo": "card-tool",
+      "description": "The signature probe surface. A cursor-tracked spotlight, a conic beam orbiting the border on hover, and a corner via that lights cyan.",
+      "html": "<article class=\"ds-tool-card\"><div class=\"ds-tool-inner\"><span class=\"ds-via\" aria-hidden=\"true\"></span><div class=\"ds-tool-head\"><span class=\"ds-eyebrow\">RTL Linting</span><span class=\"ds-pill-live\"><span class=\"ds-led\" aria-hidden=\"true\"></span>Live</span></div><h3 class=\"ds-tool-name\">LintBit</h3><p class=\"ds-tool-body\">Catch RTL issues the moment they exist, with rules you can actually read.</p><span class=\"ds-tool-cta\">Explore LintBit &rarr;</span></div></article>",
+      "css": "@property --ds-beam { syntax: '<angle>'; initial-value: 0deg; inherits: false; } @keyframes ds-beam-orbit { to { --ds-beam: 360deg; } } .ds-tool-card { position: relative; border-radius: 16px; border: 1px solid var(--color-hair, #1E2740); background: var(--color-surface-1, #0D1120); background-image: radial-gradient(340px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(0, 229, 238, 0.07), transparent 65%); transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms; max-width: 340px; } .ds-tool-card::before { content: ''; position: absolute; inset: -1px; z-index: 0; border-radius: inherit; padding: 1px; background: conic-gradient(from var(--ds-beam), transparent 0%, rgba(0, 229, 238, 0.8) 12%, rgba(124, 8, 245, 0.6) 22%, transparent 34%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 250ms ease; } .ds-tool-card:hover { transform: translateY(-2px); border-color: var(--color-line, #2A3557); } .ds-tool-card:hover::before { opacity: 1; animation: ds-beam-orbit 3.2s linear infinite; } .ds-tool-inner { position: relative; z-index: 1; display: flex; flex-direction: column; padding: 24px; } .ds-via { position: absolute; top: 16px; right: 16px; width: 6px; height: 6px; border-radius: 999px; background: var(--color-line, #2A3557); transition: background 200ms; } .ds-tool-card:hover .ds-via { background: var(--color-brand-cyan, #00E5EE); } .ds-tool-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-right: 20px; } .ds-eyebrow { font-family: var(--color-font-mono, JetBrains Mono, ui-monospace, monospace); font-size: 11.2px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-ink-3, #6B7590); } .ds-tool-name { margin: 16px 0 0; font-family: var(--color-font-display, Sora, system-ui, sans-serif); font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: var(--color-ink, #F5F7FA); } .ds-tool-body { margin: 16px 0 0; font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; line-height: 1.6; color: var(--color-ink-2, #A7B0C6); } .ds-tool-cta { margin-top: 20px; font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; font-weight: 500; color: var(--color-brand-cyan, #00E5EE); opacity: 0; transition: all 200ms; } .ds-tool-card:hover .ds-tool-cta { opacity: 1; transform: translateX(2px); } @media (prefers-reduced-motion: reduce) { .ds-tool-card, .ds-tool-card::before, .ds-tool-cta { transition: none; animation: none; } }"
+    },
+    {
+      "name": "In-Development Tool Tile",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Name, category, pill. Nothing else - the restraint is the honesty about what has not shipped.",
+      "html": "<div class=\"ds-dev-tile\"><div><span class=\"ds-dev-name\">CDCBit</span><span class=\"ds-dev-cat\">CDC / RDC Analysis</span></div><span class=\"ds-pill-dev\">In Development</span></div>",
+      "css": ".ds-dev-tile { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--color-hair, #1E2740); background: color-mix(in srgb, var(--color-surface-1, #0D1120) 60%, transparent); transition: background 200ms, border-color 200ms; max-width: 340px; } .ds-dev-tile:hover { background: var(--color-surface-1, #0D1120); border-color: var(--color-line, #2A3557); } .ds-dev-name { display: block; font-family: var(--color-font-display, Sora, system-ui, sans-serif); font-size: 14px; font-weight: 500; color: var(--color-ink-2, #A7B0C6); transition: color 200ms; } .ds-dev-tile:hover .ds-dev-name { color: var(--color-ink, #F5F7FA); } .ds-dev-cat { display: block; font-family: var(--color-font-mono, JetBrains Mono, ui-monospace, monospace); font-size: 9.6px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-ink-3, #6B7590); }"
+    },
+    {
+      "name": "Email Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "The one place the instrument stays quiet - border shifts to cyan on focus, no glow.",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"you@company.com\" aria-label=\"Work email\" />",
+      "css": ".ds-input { height: 48px; width: 100%; max-width: 320px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--color-line, #2A3557); background: var(--color-surface-1, #0D1120); color: var(--color-ink, #F5F7FA); font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; outline: none; transition: border-color 200ms; } .ds-input::placeholder { color: var(--color-ink-3, #6B7590); } .ds-input:focus { border-color: var(--color-brand-cyan, #00E5EE); } .ds-input:focus-visible { outline: 2px solid var(--color-brand-cyan, #00E5EE); outline-offset: 2px; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Transparent over the void at rest; gains a backdrop blur and hairline bottom border on scroll. Active route carries a gradient underline.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main\"><a class=\"ds-nav-brand\" href=\"#\">EasyChip</a><div class=\"ds-nav-links\"><a class=\"ds-nav-link ds-nav-active\" href=\"#\">Platform<svg class=\"ds-chev\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></a><a class=\"ds-nav-link\" href=\"#\">Tools</a><a class=\"ds-nav-link\" href=\"#\">Pricing</a></div><a class=\"ds-nav-cta\" href=\"#\">Book a Demo</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 64px; padding: 0 24px; border-bottom: 1px solid var(--color-hair, #1E2740); background: color-mix(in srgb, var(--color-void, #04060F) 80%, transparent); backdrop-filter: blur(12px); } .ds-nav-brand { font-family: var(--color-font-display, Sora, system-ui, sans-serif); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--color-ink, #F5F7FA); text-decoration: none; } .ds-nav-links { display: flex; align-items: center; gap: 4px; } .ds-nav-link { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; border-radius: 12px; font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; color: var(--color-ink-2, #A7B0C6); text-decoration: none; transition: color 200ms; } .ds-nav-link:hover { color: var(--color-ink, #F5F7FA); } .ds-nav-active { color: var(--color-ink, #F5F7FA); } .ds-nav-active::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; border-radius: 999px; background: linear-gradient(90deg, #00E5EE 0%, #7C08F5 100%); } .ds-chev { transition: transform 200ms; } .ds-nav-link:hover .ds-chev { transform: rotate(180deg); } .ds-nav-cta { display: inline-flex; align-items: center; height: 36px; padding: 0 20px; border-radius: 999px; background: var(--color-brand-violet, #7C08F5); color: #fff; font-family: var(--color-font-sans, Inter, system-ui, sans-serif); font-size: 14px; font-weight: 500; text-decoration: none; transition: all 200ms; } .ds-nav-cta:hover { filter: brightness(1.1); box-shadow: 0 0 24px rgba(124, 8, 245, 0.25); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Instrument",
+    "overview": "EasyChip looks like a piece of test equipment powered on in a dark room. The default state is near-black, hairline-ruled, and silent - a calm instrument panel that asks nothing of the eye until you touch it. Structure is carried by tonal steps and 1px rules, not by boxes, fills, or shadows. Nothing glows at rest.\n\nThen the instrument responds. Light is the entire interaction language: a cursor-tracked spotlight sweeps the surface it hovers, a conic beam orbits a card's border, a live status dot breathes cyan, a specular sheen crosses a button once and is gone. Every one of these is a response to the user, never ambient decoration. The system emits light rather than casting shadow - depth here is a matter of what is powered on, not what is stacked.\n\nThe one loud thing is the prism gradient - cyan through blue, indigo, violet, to magenta - and it is spent exactly once per view. That scarcity is not a stylistic preference; it is what makes the gradient read as the brand rather than as chrome. A page that uses it twice has already diluted it. Restraint everywhere, one blaze of color where it counts.\n\nThe personality axes, in the order they resolve conflicts: technical over playful, dark over light, prismatic over flat, calm surface over loud everywhere. EasyChip is precision made vivid - a technical product for chip engineers, rendered with the clarity of cut crystal on deep space.",
+    "keyCharacteristics": [
+      "Near-black void base carrying ~95% of surface area; color is punctuation, never field",
+      "Hairline structure - 1px rules at two weights do the work borders and shadows would do elsewhere",
+      "Light as the interaction language: spotlight, beam, sheen, LED, all state-triggered",
+      "Monospace as a first-class brand voice, not code styling",
+      "One prism gradient, once per view",
+      "2% film grain over everything, killing OLED banding and giving the void a material floor"
+    ],
+    "rules": [
+      {
+        "name": "The Rule of One",
+        "body": "The prism gradient appears once per view - the hero H1, on a single non-wrapping word - plus hairline accents. It is never a fill for buttons, cards, or backgrounds, and sitewide chrome never spends it: the scroll-progress rail, the active-nav rail and the comparison-table cap are solid Probe Cyan. Audit test: screenshot any page and count the gradient moments. More than one means the page is wrong, not bold.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dark-on-Cyan Rule",
+        "body": "Never white text on Probe Cyan. Cyan fills take On-Accent Dark (#04060F). White on Bias Violet passes and is correct.",
+        "section": "colors"
+      },
+      {
+        "name": "The Void Is the Brand Rule",
+        "body": "No full-white page backgrounds, ever. If a light context is genuinely unavoidable, use Instrument White with the mark on white - never the gradient as a large fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Muted-Is-Meta Rule",
+        "body": "Instrument White and Cool Slate on Deep Void or Panel clear WCAG AA comfortably and carry everything a user must read. Muted Slate is for non-essential meta only - captions, eyebrows, disabled, timestamps. If a sentence matters, it is not Muted Slate.",
+        "section": "colors"
+      },
+      {
+        "name": "The 15% Ceiling Rule",
+        "body": "A brand color used as a fill stops at 15% alpha. Above that it is text, stroke, or glow - never a surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Word Rule",
+        "body": "Gradient text appears on the hero H1 only, on one word or one line - never a paragraph, never a metric, never body copy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Solid Fallback Rule",
+        "body": "Every gradient-text element declares its solid color (Probe Cyan) before the clip, and goes transparent only inside @supports (background-clip: text). Gradient is never the only signal for meaning.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Is a Voice Rule",
+        "body": "JetBrains Mono is brand voice, not code styling. It carries status, categories, specs, and data - short strings, uppercase, wide-tracked. It never sets a sentence.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Kicker Rule",
+        "body": "A mono label directly above a heading is banned. The heading carries its own weight, and a kicker that restates the page or section name labels something already named. Where the information is real - a status, a category, a stage code - it goes below the heading as a caption. The Section primitive has no eyebrow prop, so this cannot be reintroduced by accident.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two-Container Rule",
+        "body": "max-w-6xl by default; max-w-7xl only for the nav and true grids. A third container width is a bug, not a design decision.",
+        "section": "layout"
+      },
+      {
+        "name": "The Breathing Room Rule",
+        "body": "Section padding never drops below 96px. If a page feels long, cut a section - do not compress the rhythm.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-Until-Touched Rule",
+        "body": "Surfaces are flat and unlit at rest. Every glow, beam, spotlight, and sheen is a response to hover, focus, or live status. Ambient decorative glow is banned - it makes the instrument look like it is malfunctioning.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Light-Not-Shadow Rule",
+        "body": "Depth is emitted, not cast. If a component needs to feel raised, move it up the tonal ramp and give it a hairline. Reach for box-shadow with a black value only for true overlays.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Motif Rule",
+        "body": "One dominant motif per section. Traces plus chevrons plus glow plus gradient in the same band is noise, and it reads as a template rather than an instrument.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Pill-and-Panel Rule",
+        "body": "If it responds to a click, it is a pill. If it holds content, it is a panel. Nothing lands between the two - a 999px card or a square button is off-system.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Dashed-Means-Absent Rule",
+        "body": "A dashed border means \"does not exist yet.\" Never use it decoratively.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do keep the void dark base as the default and spend the prism gradient once per view.",
+      "Do treat JetBrains Mono as a brand voice - eyebrows, labels, status, specs, data.",
+      "Do build depth from the tonal ramp and hairlines, and let light appear only in response to the user.",
+      "Do compose new sections from Section so vertical rhythm stays 96px to 128px sitewide.",
+      "Do drive cursor-reactive effects through CSS custom properties written straight to the element (the GlowCard pattern) so pointer motion never triggers a React render.",
+      "Do ship every gradient-text element with its solid Probe Cyan fallback declared first.",
+      "Do render product screenshots in this exact dark ramp so they read as native to the site.",
+      "Do give in-development things a name, a category, and a pill - and nothing else."
+    ],
+    "donts": [
+      "Don’t gradient-fill buttons, cards, or backgrounds. The gradient stops being special the moment it becomes a surface.",
+      "Don’t put white text on Probe Cyan, or use a brand color as a fill above 15% alpha.",
+      "Don’t use full-white page backgrounds, or the retired navy #0F1B2D / mint #00C896 / amber palette.",
+      "Don’t add ambient glow, glow at rest, or a second CTA-band streak. Unprompted light reads as malfunction.",
+      "Don’t reach for box-shadow with a black value outside true overlays.",
+      "Don’t introduce a third container width or a third border weight.",
+      "Don’t stack motifs - traces, chevrons, glow, and gradient in one section is noise. One dominant motif per section.",
+      "Don’t use stock photography or generic \"glowing brain\" AI imagery.",
+      "Don’t re-typeset, recolor, rotate, or effect the logo, and never place the mark on mid-tones or on the gradient.",
+      "Don’t animate anything that ignores the global prefers-reduced-motion kill-switch in @layer base."
+    ]
+  }
+}

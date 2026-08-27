@@ -15,17 +15,8 @@ export default function MetricBand({ metrics, caveat }: { metrics: Metric[]; cav
       <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-hair bg-hair md:grid-cols-4">
         {metrics.map((m) => (
           <div key={m.label} className="relative bg-surface-1 px-6 py-8 text-center">
-            {/* measurement tick rail */}
-            <div
-              aria-hidden
-              className="absolute inset-x-6 top-3 h-1 opacity-40"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(90deg, var(--color-line) 0 1px, transparent 1px 10px)',
-              }}
-            />
-            <div className="font-display text-4xl font-light tracking-tight md:text-5xl">
-              <CountUp value={m.value} className="text-gradient tabular-nums" />
+            <div className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
+              <CountUp value={m.value} className="tabular-nums text-ink" />
             </div>
             <div className="eyebrow mt-3 text-ink-3">{m.label}</div>
           </div>

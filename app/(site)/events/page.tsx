@@ -13,7 +13,6 @@ export default function EventsPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Events</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             Meet <span className="text-gradient">EasyChip.</span>
           </h1>
@@ -24,7 +23,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <Section eyebrow="Can't wait?" title="Meet us anyway">
+      <Section title="Meet us anyway">
         <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
           You don&apos;t need a conference floor - book a call and we&apos;ll bring the demo to
           you. If you&apos;d like us at your meetup, university, or team offsite, say the word.

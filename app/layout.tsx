@@ -1,17 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google'
+import { Inter, Sora, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-// Variable fonts - the full weight axis is loaded so light display weights work.
+// Variable fonts - the full weight axis is loaded so the display steps work.
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
 })
 
-const interTight = Inter_Tight({
+// Display voice: rounded-geometric, echoes the faceted wordmark.
+const sora = Sora({
   subsets: ['latin'],
-  variable: '--font-inter-tight',
+  variable: '--font-sora',
   display: 'swap',
 })
 
@@ -64,7 +65,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${interTight.variable} ${jetbrains.variable}`}
+      className={`${inter.variable} ${sora.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-dvh bg-void text-ink antialiased">
         {children}

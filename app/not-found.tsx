@@ -20,10 +20,10 @@ export default function NotFound() {
           <line x1="252" y1="16" x2="244" y2="24" />
         </g>
       </svg>
-      <p className="eyebrow text-brand-cyan">404 · Open net</p>
-      <h1 className="mt-4 font-display text-4xl font-medium md:text-5xl">
+      <h1 className="font-display text-4xl font-semibold md:text-5xl">
         This trace <span className="text-gradient">doesn&apos;t route.</span>
       </h1>
+      <p className="eyebrow mt-4 text-brand-cyan">404 · Open net</p>
       <p className="mt-4 max-w-md text-lg text-ink-2">
         The page you&apos;re after moved or never existed. Here&apos;s the way back.
       </p>
@@ -37,7 +37,7 @@ export default function NotFound() {
           <Link
             key={link.href}
             href={link.href}
-            className="rounded-md border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface-2"
+            className="rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink-3 hover:bg-surface-2"
           >
             {link.label}
           </Link>

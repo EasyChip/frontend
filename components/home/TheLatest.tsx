@@ -19,7 +19,7 @@ export default function TheLatest() {
     <section className="border-t border-hair">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="flex items-baseline justify-between gap-4">
-          <h2 className="editorial text-3xl md:text-4xl">The latest</h2>
+          <h2 className="editorial-title text-3xl md:text-4xl">The latest</h2>
           <Link
             href="/newsroom"
             className="shrink-0 text-sm font-medium text-brand-cyan hover:underline underline-offset-4"

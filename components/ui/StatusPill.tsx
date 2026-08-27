@@ -19,7 +19,9 @@ export default function StatusPill({ status, className }: { status: PillStatus; 
   return (
     <span
       className={cn(
-        'eyebrow inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.65rem]',
+        // whitespace-nowrap: "In Development" was wrapping to two lines inside
+        // a pill on every in-development tile. A pill holds one line.
+        'eyebrow inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs',
         styles[status],
         className
       )}

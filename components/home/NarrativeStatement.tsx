@@ -1,13 +1,13 @@
-'use client'
-
-import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
-
 /**
- * The numbered narrative - one flowing editorial sentence carrying the
- * three product motions, words filling from dim to bright as you scroll.
- * Each word is an inline span followed by a plain-text space so the
- * paragraph wraps naturally at every word boundary.
+ * The numbered narrative - one flowing editorial sentence carrying the three
+ * product motions, words filling from dim to bright as you scroll.
+ *
+ * Server-rendered and CSS-only. This was 26 framer-motion values driven by a
+ * single `useScroll`, which cost a motion value per word on every scroll frame
+ * and - worse - shipped the entire sentence at 0.18 opacity in the server HTML,
+ * so the site's strongest paragraph was unreadable without JS. The fill now
+ * runs on a scroll-linked timeline where one is available, and the resting
+ * state is simply the finished sentence.
  */
 
 type Token = { text: string; marker?: string }
@@ -49,59 +49,22 @@ function Marker({ value }: { value: string }) {
   )
 }
 
-function Word({
-  token,
-  index,
-  total,
-  progress,
-}: {
-  token: Token
-  index: number
-  total: number
-  progress: MotionValue<number>
-}) {
-  const start = (index / total) * 0.85
-  const end = start + 0.15
-  const opacity = useTransform(progress, [start, end], [0.18, 1])
-
-  return (
-    <>
-      <motion.span style={{ opacity }} className="inline">
-        {token.text}
-        {token.marker && <Marker value={token.marker} />}
-      </motion.span>{' '}
-    </>
-  )
-}
-
 export default function NarrativeStatement() {
-  const ref = useRef<HTMLDivElement>(null)
-  const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start 0.85', 'end 0.4'],
-  })
-
   return (
-    <section ref={ref} className="border-t border-hair">
-      <div className="mx-auto max-w-5xl px-6 py-28 md:py-40">
-        <p className="editorial text-3xl leading-[1.25] text-ink md:text-5xl md:leading-[1.2]">
-          {reduce
-            ? SENTENCE.map((t, i) => (
-                <span key={`${t.text}-${i}`}>
-                  {t.text}
-                  {t.marker && <Marker value={t.marker} />}{' '}
-                </span>
-              ))
-            : SENTENCE.map((t, i) => (
-                <Word
-                  key={`${t.text}-${i}`}
-                  token={t}
-                  index={i}
-                  total={SENTENCE.length}
-                  progress={scrollYProgress}
-                />
-              ))}
+    <section className="border-t border-hair">
+      <div className="mx-auto max-w-6xl px-6 py-28 md:py-40">
+        <p className="editorial-title text-3xl leading-[1.25] text-ink md:text-5xl md:leading-[1.2]">
+          {SENTENCE.map((token, i) => (
+            <span key={`${token.text}-${i}`}>
+              <span
+                className="word-brighten"
+                style={{ ['--word-i' as string]: i }}
+              >
+                {token.text}
+                {token.marker && <Marker value={token.marker} />}
+              </span>{' '}
+            </span>
+          ))}
         </p>
       </div>
     </section>

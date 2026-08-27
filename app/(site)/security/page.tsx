@@ -16,7 +16,6 @@ export default function SecurityPage() {
     <>
       <section className="border-b border-hair">
         <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 md:pt-28">
-          <p className="eyebrow mb-5 text-ink-3">Security &amp; Trust</p>
           <h1 className="max-w-3xl editorial text-5xl md:text-display-l">
             How EasyChip <span className="text-gradient">handles your IP.</span>
           </h1>
@@ -28,7 +27,7 @@ export default function SecurityPage() {
         </div>
       </section>
 
-      <Section eyebrow="What we can say today" title="The architecture is the guarantee">
+      <Section title="The architecture is the guarantee">
         <div className="max-w-3xl space-y-6">
           <div className="rounded-lg border border-hair bg-surface-1 p-7">
             <h2 className="font-display text-lg font-medium text-ink">Local-first by design</h2>

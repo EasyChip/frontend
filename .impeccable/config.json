@@ -1,0 +1,29 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-radius",
+        "value": "2px",
+        "createdAt": "2026-08-27T06:34:30.936Z",
+        "reason": "focus-ring corner softening, not a component surface; DESIGN.md rounded scale governs surfaces (Assessment B verified)"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#fff",
+        "createdAt": "2026-08-27T06:34:31.087Z",
+        "reason": "alpha stencil inside -webkit-mask with mask-composite:exclude; never paints a pixel (Assessment B verified)"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-08-27T06:34:31.237Z",
+        "reason": "DESIGN.md Solid Fallback Rule mandates this exact construction; rule must keep firing at TSX call sites (Assessment B verified)"
+      }
+    ]
+  }
+}

@@ -7,31 +7,26 @@ import ObfuscatedEmail from '@/components/layout/ObfuscatedEmail'
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-hair bg-void">
-      {/* top bus trace with vias at column positions */}
+      {/* Bus trace with vias: the vias now sit ON a trace. Five dots that
+          connected to nothing read as decoration, not as a motif. */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0">
-        <div className="mx-auto flex max-w-7xl justify-between px-6">
+        <div className="relative mx-auto flex max-w-7xl justify-between px-6">
+          <span className="absolute inset-x-6 top-0 h-px bg-hair" />
           {[0, 1, 2, 3, 4].map((i) => (
             <span
               key={i}
-              className="-mt-[3px] h-[7px] w-[7px] rounded-full border border-line bg-void"
+              className="relative -mt-[3px] h-[7px] w-[7px] rounded-full border border-line bg-void"
             />
           ))}
         </div>
       </div>
-      {/* ghost wordmark watermark */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[11rem] font-medium leading-none tracking-tight text-white/[0.02]"
-      >
-        EASYCHIP
-      </span>
       <div className="relative mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* Brand block */}
           <div>
             <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
               <Image src="/brand/logo.png" alt="" width={32} height={22} className="h-6 w-auto" />
-              <span className="font-display text-lg font-medium text-ink">EasyChip</span>
+              <span className="font-display text-lg font-semibold text-ink">EasyChip</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-2">{SITE.positioning}</p>
             <p className="eyebrow mt-6 text-ink-3">{SITE.tagline}</p>

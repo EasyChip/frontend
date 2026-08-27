@@ -27,17 +27,6 @@ const TIMING_ROWS = [
 export default function CockpitLaptop() {
   return (
     <figure className="relative mx-auto w-full max-w-2xl">
-      {/* ambient glow under the machine */}
-      <div
-        aria-hidden
-        className="absolute inset-x-8 bottom-0 h-24 opacity-40"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 100% at 50% 100%, rgba(124,8,245,0.45) 0%, rgba(0,229,238,0.15) 55%, transparent 80%)',
-          filter: 'blur(24px)',
-        }}
-      />
-
       {/* screen */}
       <div className="relative rounded-t-xl border border-line bg-[#0A0E1C] p-2 pb-0 shadow-[0_32px_90px_-30px_rgba(78,85,252,0.45)]">
         <div className="overflow-hidden rounded-t-lg border border-hair border-b-0 bg-[#060913]">
@@ -46,8 +35,8 @@ export default function CockpitLaptop() {
             <span className="h-2 w-2 rounded-full bg-brand-magenta/60" />
             <span className="h-2 w-2 rounded-full bg-brand-violet/60" />
             <span className="h-2 w-2 rounded-full bg-brand-cyan/60" />
-            <span className="eyebrow ml-2 text-[0.6rem] text-ink-3">easychip cockpit - tapeout.fb</span>
-            <span className="eyebrow ml-auto flex items-center gap-1.5 rounded-full bg-brand-cyan/10 px-2 py-0.5 text-[0.55rem] text-brand-cyan">
+            <span className="eyebrow ml-2 text-xs text-ink-3">easychip cockpit - tapeout.fb</span>
+            <span className="eyebrow ml-auto flex items-center gap-1.5 rounded-full bg-brand-cyan/10 px-2 py-0.5 text-xs text-brand-cyan">
               <span aria-hidden className="led-dot" /> local · 0 B egress
             </span>
           </div>
@@ -58,7 +47,7 @@ export default function CockpitLaptop() {
               <div key={node.name} className="flex items-center gap-1">
                 <span
                   className={cn(
-                    'flex items-center gap-1.5 rounded border px-2 py-1 font-mono text-[10.5px]',
+                    'flex items-center gap-1.5 rounded border px-2 py-1 font-mono text-xs',
                     node.done
                       ? 'border-brand-cyan/30 bg-brand-cyan/[0.07] text-ink'
                       : 'border-hair bg-surface-1 text-ink-2'
@@ -72,22 +61,22 @@ export default function CockpitLaptop() {
                   {node.name}
                 </span>
                 {i < FLOW_NODES.length - 1 && (
-                  <span aria-hidden className="text-[10px] text-ink-3/60">
+                  <span aria-hidden className="text-xs text-ink-3/60">
                     →
                   </span>
                 )}
               </div>
             ))}
-            <span className="ml-auto hidden font-mono text-[10.5px] text-ink-3 sm:block">run #128</span>
+            <span className="ml-auto hidden font-mono text-xs text-ink-3 sm:block">run #128</span>
           </div>
 
           {/* panels */}
           <div className="grid gap-px bg-hair sm:grid-cols-2">
             <div className="bg-[#060913] p-4">
-              <p className="eyebrow mb-3 text-[0.55rem] text-ink-3">lint · 2 open</p>
+              <p className="eyebrow mb-3 text-xs text-ink-3">lint · 2 open</p>
               <div className="space-y-2.5">
                 {LINT_ROWS.map((row) => (
-                  <div key={row.loc} className="flex items-start gap-2 font-mono text-[10.5px] leading-4">
+                  <div key={row.loc} className="flex items-start gap-2 font-mono text-xs leading-4">
                     <span aria-hidden className={cn('mt-1 h-1 w-1 shrink-0 rounded-full', row.severity)} />
                     <span className="min-w-0">
                       <span className="block truncate text-ink-2">{row.text}</span>
@@ -98,10 +87,10 @@ export default function CockpitLaptop() {
               </div>
             </div>
             <div className="bg-[#060913] p-4">
-              <p className="eyebrow mb-3 text-[0.55rem] text-ink-3">timing · worst paths</p>
+              <p className="eyebrow mb-3 text-xs text-ink-3">timing · worst paths</p>
               <div className="space-y-2.5">
                 {TIMING_ROWS.map((row) => (
-                  <div key={row.path} className="font-mono text-[10.5px]">
+                  <div key={row.path} className="font-mono text-xs">
                     <div className="flex justify-between gap-2">
                       <span className="truncate text-ink-2">{row.path}</span>
                       <span className={row.ok ? 'shrink-0 text-success' : 'shrink-0 text-error'}>
@@ -130,7 +119,7 @@ export default function CockpitLaptop() {
         />
       </div>
 
-      <figcaption className="mt-3 text-center text-[0.62rem] text-ink-3">
+      <figcaption className="mt-3 text-center text-xs text-ink-3">
         Illustrative interface
       </figcaption>
     </figure>

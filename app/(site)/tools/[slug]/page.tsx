@@ -55,14 +55,6 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
 
       {/* ---------- Hero ---------- */}
       <section className="relative overflow-hidden border-b border-hair">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-32 right-[-10%] h-[420px] w-[640px] opacity-15"
-          style={{
-            background:
-              'radial-gradient(ellipse 55% 45% at 60% 20%, rgba(0,229,238,0.5) 0%, rgba(78,85,252,0.3) 50%, transparent 78%)',
-          }}
-        />
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 md:pt-24">
           <div className="flex items-center gap-3">
             <p className="eyebrow text-ink-3">{tool.category}</p>
@@ -94,7 +86,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
       </section>
 
       {/* ---------- The problem it removes ---------- */}
-      <Section eyebrow="Why it exists" title="The problem it removes">
+      <Section title="The problem it removes">
         <Reveal>
           <p className="max-w-3xl text-lg leading-relaxed text-ink-2">{tool.problem}</p>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ink">{tool.description}</p>
@@ -102,7 +94,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
       </Section>
 
       {/* ---------- Capabilities ---------- */}
-      <Section eyebrow="What it does" title="Capabilities" className="border-t border-hair bg-base">
+      <Section title="Capabilities" className="border-t border-hair bg-base">
         <div className="grid gap-5 md:grid-cols-2">
           {tool.capabilities?.map((cap, i) => (
             <Reveal key={cap.title} delay={i * 0.05}>
@@ -118,10 +110,9 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
       {/* ---------- Benchmark comparison ---------- */}
       {tool.comparison && (
         <Section
-          eyebrow="How it compares"
           title={
             <>
-              {tool.name} vs. <span className="text-gradient">the field</span>
+              {tool.name} vs. the field
             </>
           }
           lede="Where this tool stands against the open-source path and the commercial incumbents - capability by capability."
@@ -142,7 +133,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
               {tool.specs?.map((spec) => (
-                <span key={spec} className="eyebrow rounded-full bg-surface-2 px-3 py-1.5 text-[0.65rem] text-ink-2">
+                <span key={spec} className="eyebrow rounded-full bg-surface-2 px-3 py-1.5 text-xs text-ink-2">
                   {spec}
                 </span>
               ))}
@@ -172,7 +163,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
 
       {/* ---------- Open-source get-it block (VisUPF) ---------- */}
       {tool.openSource && (
-        <Section id="get-it" eyebrow="Open source" title={`Get ${tool.name}`}>
+        <Section id="get-it" title={`Get ${tool.name}`}>
           <Reveal>
             <div className="rounded-lg border border-brand-cyan/25 bg-surface-1 p-8">
               {VISUPF_DOWNLOAD ? (
@@ -218,7 +209,7 @@ export default async function ToolPage(props: PageProps<'/tools/[slug]'>) {
 
       {/* ---------- Related tools ---------- */}
       {related.length > 0 && (
-        <Section eyebrow="Keep exploring" title="Related tools" className="border-t border-hair bg-base">
+        <Section title="Related tools" className="border-t border-hair bg-base">
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {related.map((r) => (
               <LiveToolCard key={r.id} tool={r} />

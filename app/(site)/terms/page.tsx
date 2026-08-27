@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <Section eyebrow="Legal" title="Terms of Service">
+    <Section title="Terms of Service" titleAs="h1">
       <div className="max-w-3xl space-y-6 leading-relaxed text-ink-2">
         <p className="rounded-md border border-warning/30 bg-warning/5 px-5 py-4 text-sm">
           Formal terms of service are being finalized with counsel and will replace this interim

@@ -1,12 +1,29 @@
 'use client'
 
-import { useState, FormEvent, useEffect } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import CircuitBackground from '@/components/ui/CircuitBackground'
+import AppHeader from '@/components/layout/AppHeader'
+import { LIVE } from '@/lib/tools'
+import { cn } from '@/lib/utils'
 
 const COMPANY_STAGES = ['Academia', 'Startup', 'Mid-size', 'Enterprise'] as const
-const INTEREST_OPTIONS = ['FlowBit', 'VisUPF', 'RTL-to-GDS workflow', 'Just exploring'] as const
+
+/**
+ * Interest options come from the live tool registry, plus the two cross-cutting
+ * answers. Offering four hardcoded names out of a fifty-four-tool platform
+ * argued against the breadth thesis at the exact moment someone was telling us
+ * what they wanted.
+ */
+const INTEREST_OPTIONS = [
+  ...LIVE.map((t) => t.name),
+  'Escanor (local-first)',
+  'Full RTL-to-GDS flow',
+  'Still exploring',
+]
+
+const inputClass =
+  'w-full rounded-md border border-line bg-void px-4 py-3 text-base text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-brand-cyan'
 
 export default function OnboardingPage() {
   const router = useRouter()
@@ -21,244 +38,279 @@ export default function OnboardingPage() {
   const [interests, setInterests] = useState<string[]>([])
   const [useCase, setUseCase] = useState('')
 
-  // Prefill from auth metadata
   useEffect(() => {
     const supabase = createClient()
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (!user) { router.replace('/login'); return }
-      const meta = user.user_metadata
-      if (meta?.full_name || meta?.name) setFullName(meta.full_name || meta.name)
-      setPageLoading(false)
-    })
+    if (!supabase) {
+      router.replace('/login')
+      return
+    }
+    supabase.auth
+      .getUser()
+      .then(({ data: { user } }) => {
+        if (!user) {
+          router.replace('/login')
+          return
+        }
+        const meta = user.user_metadata
+        if (meta?.full_name || meta?.name) setFullName(meta.full_name || meta.name)
+        setPageLoading(false)
+      })
+      .catch(() => router.replace('/login'))
   }, [router])
 
-  const toggleInterest = (item: string) => {
-    setInterests(prev =>
-      prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]
+  const toggleInterest = (item: string) =>
+    setInterests((prev) =>
+      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     )
-  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!fullName.trim()) { setError('Please enter your name.'); return }
+    if (!fullName.trim()) return setError('Enter your name so we know who we are talking to.')
     setLoading(true)
     setError('')
 
+    const supabase = createClient()
+    if (!supabase) {
+      setError('Your session is unavailable. Sign in again.')
+      setLoading(false)
+      return
+    }
+
     try {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { router.replace('/login'); return }
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      if (!user) {
+        router.replace('/login')
+        return
+      }
+
+      const payload = {
+        full_name: fullName.trim(),
+        company: company.trim() || null,
+        role: role.trim() || null,
+        company_stage: companyStage || null,
+        interest_areas: interests.length > 0 ? interests : null,
+        primary_use_case: useCase.trim() || null,
+        onboarding_complete: true,
+      }
 
       const { error: updateError } = await supabase
         .from('profiles')
-        .update({
-          full_name: fullName.trim(),
-          company: company.trim() || null,
-          role: role.trim() || null,
-          company_stage: companyStage || null,
-          interest_areas: interests.length > 0 ? interests : null,
-          primary_use_case: useCase.trim() || null,
-          onboarding_complete: true,
-        })
+        .update(payload)
         .eq('id', user.id)
 
       if (updateError) {
-        // If profile doesn't exist yet (race condition), insert it
+        // Profile row may not exist yet - insert instead.
         if (updateError.code === 'PGRST116') {
           const { error: insertError } = await supabase
             .from('profiles')
-            .insert({
-              id: user.id,
-              full_name: fullName.trim(),
-              company: company.trim() || null,
-              role: role.trim() || null,
-              company_stage: companyStage || null,
-              interest_areas: interests.length > 0 ? interests : null,
-              primary_use_case: useCase.trim() || null,
-              onboarding_complete: true,
-            })
-          if (insertError) { setError(insertError.message); setLoading(false); return }
+            .insert({ id: user.id, ...payload })
+          if (insertError) {
+            setError(insertError.message)
+            setLoading(false)
+            return
+          }
         } else {
-          setError(updateError.message); setLoading(false); return
+          setError(updateError.message)
+          setLoading(false)
+          return
         }
       }
 
       router.push('/dashboard')
     } catch {
-      setError('Something went wrong. Please try again.')
+      setError('Something went wrong. Try again.')
       setLoading(false)
     }
   }
 
   const handleSkip = async () => {
     const supabase = createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (user) {
-      await supabase.from('profiles').update({ onboarding_complete: true }).eq('id', user.id)
+    if (supabase) {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser()
+        if (user) {
+          await supabase.from('profiles').update({ onboarding_complete: true }).eq('id', user.id)
+        }
+      } catch {
+        // Skipping must never block the route change.
+      }
     }
     router.push('/dashboard')
   }
 
   if (pageLoading) {
     return (
-      <div style={{
-        minHeight: '100vh', background: '#04060F', display: 'flex',
-        alignItems: 'center', justifyContent: 'center',
-      }}>
-        <div style={{ color: '#6B7590', fontFamily: 'var(--font-mono)', fontSize: 14 }}>
-          Loading...
-        </div>
+      <div className="flex min-h-dvh flex-col">
+        <AppHeader />
+        <main className="flex flex-1 items-center justify-center px-6">
+          <span className="eyebrow text-ink-3">Loading</span>
+        </main>
       </div>
     )
   }
 
   return (
-    <>
-      <CircuitBackground />
-      <div style={{
-        position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex',
-        alignItems: 'center', justifyContent: 'center', padding: '32px 16px',
-        fontFamily: 'var(--font-sans)', color: '#F5F7FA', paddingTop: 80,
-      }}>
-        <div style={{
-          width: '100%', maxWidth: 520, background: '#0D1120',
-          border: '1px solid #1E2740', borderRadius: 16,
-          padding: '40px 32px 32px',
-        }}>
-          {/* Header */}
-          <div style={{ marginBottom: 28 }}>
-            <h2 style={{ fontSize: 22, fontWeight: 600, margin: '0 0 6px' }}>
-              Complete your profile
-            </h2>
-            <p style={{ fontSize: 13, color: '#6B7590', margin: 0 }}>
-              Help us personalize your experience. Takes 30 seconds.
+    <div className="flex min-h-dvh flex-col">
+      <AppHeader />
+      <main className="flex flex-1 justify-center px-6 py-12 md:py-16">
+        <div className="w-full max-w-xl">
+          <h1 className="editorial-title text-3xl">Tell us how you work</h1>
+          <p className="mt-3 leading-relaxed text-ink-2">
+            This shapes what we show you first, and what we tell you about as tools go live.
+            Only your name is required.
+          </p>
+
+          <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+            <p aria-live="polite">
+              {error && (
+                <span className="block rounded-md border border-error/30 bg-error/5 px-4 py-3 text-sm text-error">
+                  {error}
+                </span>
+              )}
             </p>
-          </div>
 
-          {error && (
-            <div style={{
-              padding: '10px 14px', background: 'rgba(255,77,109,0.08)',
-              border: '1px solid rgba(255,77,109,0.2)', borderRadius: 8,
-              fontSize: 13, color: '#FF4D6D', marginBottom: 16,
-            }}>{error}</div>
-          )}
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <label htmlFor="ob-name" className="mb-2 block text-sm font-medium text-ink-2">
+                  Full name
+                </label>
+                <input
+                  id="ob-name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  autoComplete="name"
+                  className={inputClass}
+                />
+              </div>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            {/* Full Name */}
-            <InputField label="Full name *" value={fullName} onChange={setFullName} placeholder="Rakshit Mishra" />
+              <div>
+                <label htmlFor="ob-company" className="mb-2 block text-sm font-medium text-ink-2">
+                  Company or institution
+                  <span className="ml-2 font-normal text-ink-3">optional</span>
+                </label>
+                <input
+                  id="ob-company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  autoComplete="organization"
+                  className={inputClass}
+                />
+              </div>
 
-            {/* Company */}
-            <InputField label="Company / Institution" value={company} onChange={setCompany} placeholder="BITS Pilani, Synopsys, etc." />
-
-            {/* Role */}
-            <InputField label="Role" value={role} onChange={setRole} placeholder="Design Engineer, Student, VP Engineering..." />
-
-            {/* Company Stage */}
-            <div>
-              <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>
-                Organization type
-              </label>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                {COMPANY_STAGES.map(stage => (
-                  <button key={stage} type="button" onClick={() => setCompanyStage(companyStage === stage ? '' : stage)}
-                    style={{
-                      padding: '8px 16px', borderRadius: 6, fontSize: 13,
-                      fontFamily: 'var(--font-sans)', cursor: 'pointer',
-                      border: companyStage === stage ? '1px solid #00E5EE' : '1px solid #1E2740',
-                      background: companyStage === stage ? 'rgba(0,229,238,0.1)' : 'transparent',
-                      color: companyStage === stage ? '#00E5EE' : '#A7B0C6',
-                      transition: 'all 0.2s',
-                    }}
-                  >{stage}</button>
-                ))}
+              <div>
+                <label htmlFor="ob-role" className="mb-2 block text-sm font-medium text-ink-2">
+                  Role
+                  <span className="ml-2 font-normal text-ink-3">optional</span>
+                </label>
+                <input
+                  id="ob-role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  placeholder="Verification lead, PD engineer…"
+                  className={inputClass}
+                />
               </div>
             </div>
 
-            {/* Interests */}
-            <div>
-              <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>
-                What are you interested in?
-              </label>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                {INTEREST_OPTIONS.map(item => (
-                  <button key={item} type="button" onClick={() => toggleInterest(item)}
-                    style={{
-                      padding: '8px 16px', borderRadius: 6, fontSize: 13,
-                      fontFamily: 'var(--font-sans)', cursor: 'pointer',
-                      border: interests.includes(item) ? '1px solid #00E5EE' : '1px solid #1E2740',
-                      background: interests.includes(item) ? 'rgba(0,229,238,0.1)' : 'transparent',
-                      color: interests.includes(item) ? '#00E5EE' : '#A7B0C6',
-                      transition: 'all 0.2s',
-                    }}
-                  >{item}</button>
+            <fieldset>
+              <legend className="mb-3 text-sm font-medium text-ink-2">
+                Where you work
+                <span className="ml-2 font-normal text-ink-3">optional</span>
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {COMPANY_STAGES.map((stage) => (
+                  <Choice
+                    key={stage}
+                    selected={companyStage === stage}
+                    onClick={() => setCompanyStage(companyStage === stage ? '' : stage)}
+                  >
+                    {stage}
+                  </Choice>
                 ))}
               </div>
-            </div>
+            </fieldset>
 
-            {/* Use Case */}
+            <fieldset>
+              <legend className="mb-3 text-sm font-medium text-ink-2">
+                What you want to reach first
+                <span className="ml-2 font-normal text-ink-3">optional, pick any</span>
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {INTEREST_OPTIONS.map((item) => (
+                  <Choice
+                    key={item}
+                    selected={interests.includes(item)}
+                    onClick={() => toggleInterest(item)}
+                  >
+                    {item}
+                  </Choice>
+                ))}
+              </div>
+            </fieldset>
+
             <div>
-              <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
-                Primary use case (optional)
+              <label htmlFor="ob-usecase" className="mb-2 block text-sm font-medium text-ink-2">
+                What are you trying to get done?
+                <span className="ml-2 font-normal text-ink-3">optional</span>
               </label>
-              <textarea value={useCase} onChange={e => setUseCase(e.target.value)}
-                placeholder="What problem are you trying to solve?"
+              <textarea
+                id="ob-usecase"
+                value={useCase}
+                onChange={(e) => setUseCase(e.target.value)}
                 rows={3}
-                style={{
-                  width: '100%', padding: '10px 12px', background: '#04060F',
-                  border: '1px solid #1E2740', borderRadius: 6, color: '#F5F7FA',
-                  fontSize: 14, fontFamily: 'var(--font-sans)', outline: 'none',
-                  resize: 'vertical', transition: 'border-color 0.2s', boxSizing: 'border-box',
-                }}
-                onFocus={e => e.currentTarget.style.borderColor = '#00E5EE'}
-                onBlur={e => e.currentTarget.style.borderColor = '#1E2740'}
+                className={cn(inputClass, 'resize-y')}
               />
             </div>
 
-            {/* Actions */}
-            <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
-              <button type="submit" disabled={loading} style={{
-                flex: 1, padding: '12px 0', background: loading ? '#6B7590' : '#00E5EE',
-                color: '#04060F', border: 'none', borderRadius: 8, fontSize: 14,
-                fontWeight: 600, fontFamily: 'var(--font-mono)',
-                cursor: loading ? 'not-allowed' : 'pointer', transition: 'opacity 0.2s',
-              }}>
-                {loading ? 'Saving...' : 'Continue →'}
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
+              <button
+                type="submit"
+                disabled={loading}
+                className="sheen inline-flex h-12 items-center justify-center rounded-full bg-brand-violet px-8 text-base font-medium text-white transition-all duration-200 hover:brightness-110 hover:shadow-glow-violet-sm active:scale-[0.98] disabled:opacity-60"
+              >
+                {loading ? 'Saving…' : 'Continue'}
               </button>
-              <button type="button" onClick={handleSkip} style={{
-                padding: '12px 24px', background: '#04060F',
-                border: '1px solid #1E2740', borderRadius: 8, color: '#6B7590',
-                fontSize: 13, fontFamily: 'var(--font-sans)', cursor: 'pointer',
-                transition: 'border-color 0.2s, color 0.2s',
-              }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#A7B0C6'; e.currentTarget.style.color = '#A7B0C6' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#1E2740'; e.currentTarget.style.color = '#6B7590' }}
-              >Skip</button>
+              <button
+                type="button"
+                onClick={handleSkip}
+                className="text-sm text-ink-3 transition-colors hover:text-ink-2"
+              >
+                Skip for now
+              </button>
             </div>
           </form>
         </div>
-      </div>
-    </>
+      </main>
+    </div>
   )
 }
 
-function InputField({ label, value, onChange, placeholder }: {
-  label: string; value: string; onChange: (v: string) => void; placeholder?: string
+function Choice({
+  selected,
+  onClick,
+  children,
+}: {
+  selected: boolean
+  onClick: () => void
+  children: React.ReactNode
 }) {
   return (
-    <div>
-      <label style={{ display: 'block', fontSize: 13, color: '#A7B0C6', marginBottom: 6, fontFamily: 'var(--font-sans)' }}>
-        {label}
-      </label>
-      <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-        style={{
-          width: '100%', padding: '10px 12px', background: '#04060F',
-          border: '1px solid #1E2740', borderRadius: 6, color: '#F5F7FA',
-          fontSize: 14, fontFamily: 'var(--font-sans)', outline: 'none',
-          transition: 'border-color 0.2s', boxSizing: 'border-box',
-        }}
-        onFocus={e => e.currentTarget.style.borderColor = '#00E5EE'}
-        onBlur={e => e.currentTarget.style.borderColor = '#1E2740'}
-      />
-    </div>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={selected}
+      className={cn(
+        'rounded-full border px-4 py-2 text-sm transition-colors',
+        selected
+          ? 'border-brand-cyan/50 bg-brand-cyan/10 text-brand-cyan'
+          : 'border-hair text-ink-2 hover:border-line hover:text-ink'
+      )}
+    >
+      {children}
+    </button>
   )
 }

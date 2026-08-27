@@ -2,8 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
+import { createClient } from '@/lib/supabase/client'
+import AppHeader from '@/components/layout/AppHeader'
+import StatusPill from '@/components/ui/StatusPill'
+import { LIVE, type Tool } from '@/lib/tools'
+import { CTA } from '@/lib/site'
 
 interface Profile {
   id: string
@@ -15,6 +19,8 @@ interface Profile {
   primary_use_case: string | null
   avatar_url: string | null
   onboarding_complete: boolean
+  /** Optional column; when absent the admin entry simply does not render. */
+  is_admin?: boolean | null
 }
 
 interface ToolEvent {
@@ -34,12 +40,21 @@ export default function DashboardPage() {
   useEffect(() => {
     const load = async () => {
       const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { router.replace('/login'); return }
+      if (!supabase) {
+        router.replace('/login')
+        return
+      }
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      if (!user) {
+        router.replace('/login')
+        return
+      }
 
       setUserEmail(user.email || '')
 
-      // Check onboarding
       const { data: profileData } = await supabase
         .from('profiles')
         .select('*')
@@ -53,7 +68,6 @@ export default function DashboardPage() {
 
       setProfile(profileData)
 
-      // Load recent events
       const { data: eventsData } = await supabase
         .from('tool_events')
         .select('id, tool, event_type, created_at')
@@ -64,12 +78,12 @@ export default function DashboardPage() {
       setEvents(eventsData || [])
       setLoading(false)
     }
-    load()
+    load().catch(() => router.replace('/login'))
   }, [router])
 
   const handleLogout = async () => {
     const supabase = createClient()
-    await supabase.auth.signOut()
+    if (supabase) await supabase.auth.signOut()
     router.push('/')
   }
 
@@ -78,231 +92,168 @@ export default function DashboardPage() {
   const displayName = profile?.full_name || userEmail.split('@')[0] || 'there'
   const interests = profile?.interest_areas || []
 
-  const founderEmails = [
-    'f20220056@goa.bits-pilani.ac.in',
-    'f20220687@goa.bits-pilani.ac.in',
-  ]
-  const isFounder = founderEmails.includes(userEmail)
+  // Surface the tools this person actually asked about; fall back to the
+  // whole live suite rather than an arbitrary two.
+  const picked = LIVE.filter((t) => interests.includes(t.name))
+  const suggested: Tool[] = picked.length > 0 ? picked : LIVE
 
   return (
-    <div style={{
-      minHeight: '100vh', background: '#04060F', fontFamily: 'var(--font-sans)',
-      color: '#F5F7FA', paddingTop: 60,
-    }}>
-
-      <main style={{ maxWidth: 960, margin: '0 auto', padding: '40px 24px' }}>
-        {/* Top actions */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginBottom: 24 }}>
-          {isFounder && (
-            <Link href="/admin/events" style={{ fontSize: 13, color: '#00E5EE', textDecoration: 'none', transition: 'opacity 0.2s', fontFamily: 'var(--font-mono)' }}
-              onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
-              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-            >Admin</Link>
+    <div className="flex min-h-dvh flex-col">
+      <AppHeader>
+        <div className="flex items-center gap-3">
+          {profile?.is_admin && (
+            <Link
+              href="/admin/events"
+              className="text-sm text-ink-2 transition-colors hover:text-ink"
+            >
+              Admin
+            </Link>
           )}
-          <button onClick={handleLogout} style={{
-            background: 'none', border: '1px solid #1E2740', borderRadius: 6,
-            color: '#A7B0C6', padding: '6px 14px', fontSize: 12, cursor: 'pointer',
-            fontFamily: 'var(--font-sans)', transition: 'border-color 0.2s',
-          }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = '#FF4D6D'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = '#1E2740'}
-          >Sign out</button>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="rounded-full border border-line px-4 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
+          >
+            Sign out
+          </button>
         </div>
-        {/* Greeting */}
-        <div style={{ marginBottom: 40 }}>
-          <h1 style={{ fontSize: 28, fontWeight: 600, margin: '0 0 8px' }}>
-            Welcome back, <span style={{ color: '#00E5EE' }}>{displayName}</span>
-          </h1>
-          <p style={{ fontSize: 14, color: '#6B7590', margin: 0 }}>
-            {profile?.company && `${profile.company}`}
-            {profile?.company && profile?.role && ' · '}
-            {profile?.role && `${profile.role}`}
-            {!profile?.company && !profile?.role && userEmail}
-          </p>
-        </div>
+      </AppHeader>
 
-        {/* Quick links */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16, marginBottom: 40 }}>
-          {/* Prioritize tools user expressed interest in */}
-          {(interests.includes('FlowBit') || interests.length === 0) && (
-            <QuickCard
-              title="FlowBit"
-              description="Visual workflow orchestrator for semiconductor design. Request a demo to see it in action."
-              cta="Request Demo"
-              href="/tools/flowbit"
-              badge="Proprietary"
-            />
-          )}
-          {(interests.includes('VisUPF') || interests.length === 0) && (
-            <QuickCard
-              title="VisUPF"
-              description="Open-source UPF authoring tool. Download the package and start designing power intent."
-              cta="Download"
-              href="/tools/visupf"
-              badge="Open Source"
-            />
-          )}
-          <QuickCard
-            title="Book a Meeting"
-            description="Schedule a call with the founding team to discuss your use case and requirements."
-            cta="Book now"
-            href="/book"
-          />
-        </div>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12">
+        <h1 className="editorial-title text-3xl">
+          Welcome back, <span className="text-brand-cyan">{displayName}</span>
+        </h1>
+        <p className="mt-2 text-ink-2">
+          {[profile?.company, profile?.role].filter(Boolean).join(' · ') || userEmail}
+        </p>
 
-        {/* Two-column: Profile + Activity */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
-          {/* Profile card */}
-          <div style={{
-            background: '#0D1120', border: '1px solid #1E2740', borderRadius: 12,
-            padding: '24px',
-          }}>
-            <h3 style={{ fontSize: 16, fontWeight: 600, margin: '0 0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              Your Profile
-              <Link href="/onboarding" style={{
-                fontSize: 12, color: '#6B7590', textDecoration: 'none',
-                transition: 'color 0.2s',
-              }}
-                onMouseEnter={e => e.currentTarget.style.color = '#00E5EE'}
-                onMouseLeave={e => e.currentTarget.style.color = '#6B7590'}
-              >Edit</Link>
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        {/* Live tools */}
+        <section className="mt-12">
+          <h2 className="font-display text-lg font-semibold text-ink">Live and ready to use</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {suggested.map((tool) => (
+              <Link
+                key={tool.id}
+                href={`/tools/${tool.slug}`}
+                className="group flex flex-col rounded-lg border border-hair bg-surface-1 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-line hover:bg-surface-2"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <span className="eyebrow text-ink-3">{tool.category}</span>
+                  <StatusPill status="live" />
+                </div>
+                <h3 className="mt-3 font-display text-lg font-semibold text-ink">{tool.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-2">{tool.tagline}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Profile + activity */}
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <section className="rounded-lg border border-hair bg-surface-1 p-6">
+            <div className="flex items-center justify-between">
+              <h2 className="font-display text-lg font-semibold text-ink">Your profile</h2>
+              <Link
+                href="/onboarding"
+                className="text-sm text-brand-cyan transition-colors hover:underline underline-offset-4"
+              >
+                Edit
+              </Link>
+            </div>
+            <dl className="mt-5 space-y-4">
               <ProfileRow label="Name" value={profile?.full_name} />
               <ProfileRow label="Email" value={userEmail} />
               <ProfileRow label="Company" value={profile?.company} />
               <ProfileRow label="Role" value={profile?.role} />
               <ProfileRow label="Organization" value={profile?.company_stage} />
-              {interests.length > 0 && (
-                <div>
-                  <span style={{ fontSize: 12, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>Interests</span>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
-                    {interests.map(i => (
-                      <span key={i} style={{
-                        padding: '3px 10px', borderRadius: 4, fontSize: 12,
-                        background: 'rgba(0,229,238,0.08)', color: '#00E5EE',
-                        border: '1px solid rgba(0,229,238,0.15)',
-                      }}>{i}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Activity card */}
-          <div style={{
-            background: '#0D1120', border: '1px solid #1E2740', borderRadius: 12,
-            padding: '24px',
-          }}>
-            <h3 style={{ fontSize: 16, fontWeight: 600, margin: '0 0 20px' }}>
-              Your Activity
-            </h3>
-            {events.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '32px 0' }}>
-                <p style={{ fontSize: 14, color: '#6B7590', margin: '0 0 12px' }}>
-                  No activity yet
-                </p>
-                <p style={{ fontSize: 12, color: '#6B7590', margin: 0 }}>
-                  Download a tool or request a demo to get started.
-                </p>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {events.map(event => (
-                  <div key={event.id} style={{
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    padding: '10px 12px', background: '#04060F', borderRadius: 6,
-                    border: '1px solid #1E2740',
-                  }}>
-                    <div>
-                      <span style={{
-                        fontSize: 12, color: '#00E5EE', fontFamily: 'var(--font-mono)',
-                        marginRight: 8,
-                      }}>{event.tool}</span>
-                      <span style={{ fontSize: 13, color: '#A7B0C6' }}>
-                        {event.event_type === 'download' ? 'Downloaded' :
-                         event.event_type === 'demo_request' ? 'Requested demo' :
-                         event.event_type === 'page_view' ? 'Viewed' : event.event_type}
-                      </span>
-                    </div>
-                    <span style={{ fontSize: 11, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>
-                      {new Date(event.created_at).toLocaleDateString()}
+            </dl>
+            {interests.length > 0 && (
+              <div className="mt-5">
+                <p className="text-sm text-ink-3">Interests</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {interests.map((i) => (
+                    <span
+                      key={i}
+                      className="rounded-full border border-brand-cyan/15 bg-brand-cyan/10 px-3 py-1 text-sm text-brand-cyan"
+                    >
+                      {i}
                     </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
-          </div>
+          </section>
+
+          <section className="rounded-lg border border-hair bg-surface-1 p-6">
+            <h2 className="font-display text-lg font-semibold text-ink">Your activity</h2>
+            {events.length === 0 ? (
+              <div className="mt-5 rounded-md border border-dashed border-hair p-6 text-center">
+                <p className="text-ink-2">Nothing here yet.</p>
+                <p className="mt-2 text-sm text-ink-3">
+                  Demo requests and tool activity will show up here as you use the platform.
+                </p>
+                <Link
+                  href={CTA.primary.href}
+                  className="mt-5 inline-flex h-10 items-center justify-center rounded-full border border-line px-6 text-sm font-medium text-ink transition-colors hover:border-ink-3 hover:bg-surface-2"
+                >
+                  {CTA.primary.label}
+                </Link>
+              </div>
+            ) : (
+              <ul className="mt-5 space-y-3">
+                {events.map((event) => (
+                  <li
+                    key={event.id}
+                    className="flex items-baseline justify-between gap-4 border-b border-hair pb-3 last:border-0"
+                  >
+                    <span className="text-sm text-ink">
+                      {event.tool}
+                      <span className="text-ink-3"> · {event.event_type.replace(/_/g, ' ')}</span>
+                    </span>
+                    <time
+                      dateTime={event.created_at}
+                      className="shrink-0 font-mono text-xs text-ink-3"
+                    >
+                      {new Date(event.created_at).toLocaleDateString()}
+                    </time>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
         </div>
       </main>
     </div>
   )
 }
 
-function QuickCard({ title, description, cta, href, badge }: {
-  title: string; description: string; cta: string; href: string; badge?: string
-}) {
+function ProfileRow({ label, value }: { label: string; value?: string | null }) {
   return (
-    <Link href={href} style={{ textDecoration: 'none' }}>
-      <div style={{
-        background: '#0D1120', border: '1px solid #1E2740', borderRadius: 12,
-        padding: '24px', transition: 'border-color 0.2s', cursor: 'pointer',
-        height: '100%', display: 'flex', flexDirection: 'column',
-      }}
-        onMouseEnter={e => e.currentTarget.style.borderColor = '#00E5EE'}
-        onMouseLeave={e => e.currentTarget.style.borderColor = '#1E2740'}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-          <h4 style={{ fontSize: 16, fontWeight: 600, margin: 0, color: '#F5F7FA' }}>{title}</h4>
-          {badge && (
-            <span style={{
-              padding: '2px 8px', borderRadius: 4, fontSize: 10, fontWeight: 600,
-              fontFamily: 'var(--font-mono)', textTransform: 'uppercase',
-              background: badge === 'Open Source' ? 'rgba(0,214,143,0.1)' : 'rgba(0,229,238,0.1)',
-              color: badge === 'Open Source' ? '#00D68F' : '#00E5EE',
-              border: `1px solid ${badge === 'Open Source' ? 'rgba(0,214,143,0.2)' : 'rgba(0,229,238,0.2)'}`,
-            }}>{badge}</span>
-          )}
-        </div>
-        <p style={{ fontSize: 13, color: '#6B7590', margin: '0 0 16px', lineHeight: 1.5, flex: 1 }}>
-          {description}
-        </p>
-        <span style={{ fontSize: 13, color: '#00E5EE', fontFamily: 'var(--font-mono)' }}>
-          {cta} →
-        </span>
-      </div>
-    </Link>
-  )
-}
-
-function ProfileRow({ label, value }: { label: string; value: string | null | undefined }) {
-  return (
-    <div>
-      <span style={{ fontSize: 12, color: '#6B7590', fontFamily: 'var(--font-mono)' }}>{label}</span>
-      <p style={{ fontSize: 14, color: value ? '#F5F7FA' : '#6B7590', margin: '2px 0 0' }}>
-        {value || '-'}
-      </p>
+    <div className="flex items-baseline justify-between gap-4">
+      <dt className="text-sm text-ink-3">{label}</dt>
+      <dd className="text-right text-sm text-ink">{value || <span className="text-ink-3">—</span>}</dd>
     </div>
   )
 }
 
+/** Matches the real page: header, greeting, then the two content bands. */
 function DashboardSkeleton() {
   return (
-    <div style={{ minHeight: '100vh', background: '#04060F' }}>
-      <style>{`@keyframes sk-pulse { 0%, 100% { opacity: 0.06; } 50% { opacity: 0.12; } }`}</style>
-      <div style={{ height: 56, borderBottom: '1px solid #1E2740', display: 'flex', alignItems: 'center', padding: '0 24px', gap: 10 }}>
-        <div style={{ width: 28, height: 28, borderRadius: 4, background: '#F5F7FA', animation: 'sk-pulse 1.5s ease infinite' }} />
-        <div style={{ width: 80, height: 18, borderRadius: 4, background: '#F5F7FA', animation: 'sk-pulse 1.5s ease infinite' }} />
-      </div>
-      <div style={{ maxWidth: 960, margin: '40px auto', padding: '0 24px' }}>
-        <div style={{ width: 300, height: 32, borderRadius: 6, background: '#F5F7FA', animation: 'sk-pulse 1.5s ease infinite', marginBottom: 40 }} />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-          {[1,2,3].map(i => (
-            <div key={i} style={{ height: 160, borderRadius: 12, background: '#F5F7FA', animation: 'sk-pulse 1.5s ease infinite' }} />
+    <div className="flex min-h-dvh flex-col">
+      <AppHeader />
+      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12">
+        <div className="skeleton h-9 w-72" />
+        <div className="skeleton mt-3 h-5 w-48" />
+        <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="skeleton h-40" />
           ))}
         </div>
-      </div>
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <div className="skeleton h-72" />
+          <div className="skeleton h-72" />
+        </div>
+      </main>
     </div>
   )
 }

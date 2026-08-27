@@ -39,7 +39,7 @@ export function DevToolTile({ tool }: { tool: Tool }) {
         <span className="block truncate font-display text-sm font-medium text-ink-2 transition-colors group-hover:text-ink">
           {tool.name}
         </span>
-        <span className="eyebrow text-[0.6rem] text-ink-3">{tool.category}</span>
+        <span className="eyebrow text-xs text-ink-3">{tool.category}</span>
       </div>
       <StatusPill status="in-development" />
     </div>

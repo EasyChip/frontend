@@ -1,20 +1,14 @@
-'use client'
-
-import { motion, useReducedMotion } from 'framer-motion'
-
-/** Route-entrance: a clean deposit (fade + 8px settle) on every navigation. */
+/**
+ * Route-entrance: a clean deposit (fade + settle) on every navigation.
+ *
+ * This is the single most important place in the app to get right. It wraps
+ * the entire contents of every marketing route, and it used to be a
+ * framer-motion component whose `initial` state put `opacity: 0` on that
+ * wrapper in the server HTML - so until React hydrated, every page on the site
+ * was a blank column below the navbar, and it stayed blank if hydration never
+ * finished. Next remounts a template on each navigation, so `@starting-style`
+ * gives the same per-route entrance with the finished state as the default.
+ */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotion()
-
-  if (reduce) return <>{children}</>
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  )
+  return <div className="reveal-rise">{children}</div>
 }
