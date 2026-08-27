@@ -65,6 +65,8 @@ This taxonomy is product truth. Future work must not re-cut it for visual conven
 
 **Built and running.** Fifty tools written in-house. All nine engines are complete end to end. The DevOps and ML layers on top are what is being built now.
 
+**All fifty are built, and all fifty are patched into Escanor** (confirmed 2026-08-27). The orchestrator drives the whole suite, not a subset of it. This is a different statement from the live list below and must not be collapsed into it: *built and orchestrated* is the whole fifty; *live* is the five that are public and demo-able. The site says "written and functional" of all of them and reserves "live" for the five, which is the correct split.
+
 **Live today** — public and demo-able: **Escanor, FlowBit, LintBit, RegMap (RegBit) and VisUPF.** VisUPF is free and open source.
 
 **In build:** packaging and distribution (Apptainer images, offline signed licences, reproducible builds), and the ML layer across the suite — the models and the shared context they run on.
