@@ -51,3 +51,6 @@ next-env.d.ts
 
 # graphify knowledge-graph build output
 graphify-out/
+
+.env*
+!.env.example
