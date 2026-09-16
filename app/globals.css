@@ -244,3 +244,36 @@ summary::marker {
 @utility dim {
   color: var(--color-gray-2);
 }
+
+/* ============ Theater ============
+   The demo overlay is a native <dialog>, which is what buys the focus trap,
+   the Esc handler and the top layer without writing any of them. The UA
+   stylesheet gives it a border, padding, a white fill and a centred auto
+   margin, so all four are reset here rather than fought with utilities.
+
+   The backdrop is the system's own ground at 94% - the page is dimmed out,
+   not blurred. This system has no blur and does not acquire one for a modal. */
+dialog.theater {
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-off-white);
+  overflow: hidden;
+}
+
+dialog.theater::backdrop {
+  background: rgba(11, 11, 11, 0.97);
+}
+
+/* The page behind a modal must not scroll under it. `overflow: hidden` on
+   <html> is the one thing :has() buys that a class toggle would need JS for,
+   and it fails closed: no :has() support means the page scrolls, which is
+   untidy rather than broken. */
+html:has(dialog.theater[open]) {
+  overflow: hidden;
+}

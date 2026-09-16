@@ -54,3 +54,11 @@ graphify-out/
 
 .env*
 !.env.example
+
+# video masters
+# Source recordings, kept locally and deliberately not tracked. The site serves
+# the optimised copies in public/media/ and references nothing in these folders,
+# so tracking them would put ~149MB of unreferenced binaries in history forever
+# and publish the originals at easychip.org.
+/public/home_page_demo/
+/public/chronological_features_demo/

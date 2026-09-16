@@ -36,6 +36,39 @@ export const CTA = {
   secondary: { label: 'See the platform', href: '/platform' },
 } as const
 
+/**
+ * The product demo, as one source of truth for the hero window and the theater.
+ *
+ * `preview` is a silent 20s excerpt - 0:57 to 1:17, the floorplan initialising,
+ * the agent catching its own 237% utilisation error, the resize, then routing.
+ * That stretch was chosen over the opening because it is the only part of the
+ * film where the product visibly corrects itself, which is the thing worth
+ * showing to someone who has not decided to watch yet.
+ *
+ * It is silent by design and loses nothing: the source has no narration at all,
+ * only keyboard foley. H.264 only - the VP9 encode came out larger than the
+ * MP4 at matched quality, so a second source would have cost bytes, not saved
+ * them.
+ *
+ * `duration` is written into the window's caption. Telling someone it is under
+ * two minutes before they commit is what gets it watched to the end.
+ */
+export const DEMO = {
+  full: '/media/escanor-demo.mp4',
+  preview: '/media/escanor-preview.mp4',
+  /** Stands in for the preview: the same first frame, so nothing jumps on play. */
+  previewPoster: '/media/escanor-preview-poster.webp',
+  /**
+   * Stands in for the film, and is deliberately a different image: the preview
+   * opens mid-terminal, which means nothing to someone who has just opened a
+   * player. This is the nine-engine grid at 0:34, the most legible still in the
+   * film and the one that says what it is about.
+   */
+  theaterPoster: '/media/escanor-demo-poster.webp',
+  duration: '1:58',
+  label: 'Escanor · Product demo',
+} as const
+
 export interface NavLink {
   label: string
   href: string

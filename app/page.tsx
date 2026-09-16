@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import NavBar from '@/components/chrome/NavBar'
 import Hero from '@/components/media/Hero'
+import VideoWindow from '@/components/media/VideoWindow'
 import Section, { SectionBody } from '@/components/core/Section'
 import Button from '@/components/core/Button'
 import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { StatCard } from '@/components/lists/Cards'
-import { SITE, CTA } from '@/lib/site'
+import { SITE, CTA, DEMO } from '@/lib/site'
 import { COUNTS, ENGINES } from '@/lib/tools'
 
 export const metadata: Metadata = {
@@ -86,6 +87,15 @@ const CHANGES = [
 export default function HomePage() {
   return (
     <>
+      {/* The photograph stays the ground; the demo sits on it as an object.
+          Running the film itself behind the statement put two text layers in
+          one frame - the hero is the only place on the site with a display
+          statement, and log output is the only thing in the film - so the
+          product now runs in a window beside the statement instead of under it.
+          It starts on its own, and the whole 1:58 is one click into the theater.
+
+          The action row is untouched: the window carries the demo, so BOOK A
+          DEMO keeps the solid pill it has on every other route. */}
       <Hero
         media="/media/chip-macro-2000.webp"
         priority
@@ -93,12 +103,32 @@ export default function HomePage() {
         sub={
           <span className="label text-gray-3">9 Engines, 50 Tools, 1 Orchestrator</span>
         }
-        jump={
-          <Button href="/platform#suite" arrow>
-            See the full suite
-          </Button>
+        /* The window takes the bottom-right corner, so the jump link and the
+           chapter marker ride underneath it rather than staying in the hero's
+           own right column - left there they ended up stranded between the
+           buttons and the window, and the chapter marker lost the page edge it
+           is anchored to on every other route. */
+        aside={
+          <div className="flex w-full flex-col gap-3 md:w-[500px] lg:w-[560px]">
+            <VideoWindow
+              src={DEMO.full}
+              poster={DEMO.previewPoster}
+              theaterPoster={DEMO.theaterPoster}
+              preview={DEMO.preview}
+              title="Escanor · pico32"
+              duration={DEMO.duration}
+              label={DEMO.label}
+            />
+            <div className="flex items-center justify-between gap-4">
+              <Button href="/intelligence" arrow>
+                Explore Intelligence
+              </Button>
+              <Eyebrow bracket tone="muted">
+                Chapter - 01
+              </Eyebrow>
+            </div>
+          </div>
         }
-        chapter={<Eyebrow bracket tone="muted">Chapter - 01</Eyebrow>}
         actions={
           <>
             <Button href={CTA.primary.href} variant="solid">

@@ -12,6 +12,13 @@ interface HeroProps {
   jump?: React.ReactNode
   /** Chrome that sits inside the frame: nav, and the news bar on home. */
   top?: React.ReactNode
+  /**
+   * An object sitting beside the statement, bottom-aligned with it - the demo
+   * window on home. It is a sibling of the statement column rather than part of
+   * it, so the hero reads as two things on one baseline; below the wrap point it
+   * stacks underneath, full width.
+   */
+  aside?: React.ReactNode
   /** Primary action, under the sub-line. */
   actions?: React.ReactNode
   /**
@@ -51,6 +58,7 @@ export default function Hero({
   chapter,
   jump,
   top,
+  aside,
   actions,
   media,
   mediaAlt = '',
@@ -118,6 +126,8 @@ export default function Hero({
                 </div>
               </div>
             </div>
+
+            {aside}
           </div>
         </div>
       </section>
