@@ -7,6 +7,7 @@ import Button from '@/components/core/Button'
 import { Eyebrow, Headline, Accent, Body, DefinitionRow, RowEnd } from '@/components/core/Type'
 import { StatCard } from '@/components/lists/Cards'
 import { SITE, CTA, DEMO } from '@/lib/site'
+import { PROBLEM_FILM } from '@/lib/features'
 import { COUNTS, ENGINES } from '@/lib/tools'
 
 export const metadata: Metadata = {
@@ -147,28 +148,73 @@ export default function HomePage() {
         </Headline>
       </Hero>
 
-      {/* ---------- The problem ---------- */}
-      <Section
-        label="The problem"
-        title={
-          <span className="text-gray-2">
-            A chip takes twelve to twenty-four months.{' '}
-            <Accent>Very little of that is design.</Accent>
-          </span>
-        }
-      >
-        <SectionBody>
-          <Body className="max-w-[62ch] text-base">
-            Engineering time goes into moving data between tools that were never built to talk to
-            each other, rebuilding context the previous engine already had, and waiting on licence
-            servers. A single team runs dozens of point tools from six to ten vendors, each with
-            its own formats, scripts and failure modes.
-          </Body>
-          <p className="mt-8 max-w-[62ch] display-3 text-off-white">
-            The bottleneck is not the silicon. It is the toolchain around it.
-          </p>
+      {/* ---------- The problem ----------
+          The film sits beside the statement, not beside the list under it, and
+          that choice is about meaning before it is about height. Video 00 is the
+          market gap - India building the silicon while the design layer
+          underneath stays licensed from three vendors - so it belongs next to
+          "the bottleneck is not the silicon, it is the toolchain around it",
+          which is that film's thesis in one sentence. Its poster is the frame
+          where exactly that happens on screen. The three rows below are an
+          engineer's daily handoff tax, a different problem, and keep the full
+          width they had.
 
-          <div className="mt-14">
+          Built without Section's own title slot, because that slot puts the
+          title in a header row above the body, and the lead and punchline alone
+          stop ~200px short of a 16:9 window: the same dead space /intelligence
+          had to be rebuilt to remove. Moving the title into the column gives the
+          prose the height to meet the window, while the label keeps its 180px
+          column and its top edge still lines up with the title's, as on every
+          other section. The 1fr / 1.15fr split is /intelligence's, so this
+          window renders at the same size as the five feature windows. */}
+      <Section>
+        <div className="section-grid">
+          <div>
+            <Eyebrow tone="muted">The problem</Eyebrow>
+          </div>
+
+          {/* Which side is taller flips with the viewport: at 1536 the window
+              runs 62px past the prose, at 1280 the prose wraps further and runs
+              past the window. Both cases resolve to a shared edge rather than a
+              ragged one. The prose column stretches to the row and shares any
+              spare height equally between its three blocks, so title and window
+              meet at the top and punchline and window at the bottom; when the
+              prose is the taller item there is no spare height, its margins are
+              the rhythm it always had, and the window centres against it. */}
+          <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-start lg:gap-14">
+            <div className="lg:flex lg:flex-col lg:justify-between lg:self-stretch">
+              <Headline level={2} className="max-w-[820px]">
+                <span className="text-gray-2">
+                  A chip takes twelve to twenty-four months.{' '}
+                  <Accent>Very little of that is design.</Accent>
+                </span>
+              </Headline>
+              <Body className="mt-10 max-w-[62ch] text-base">
+                Engineering time goes into moving data between tools that were never built to talk
+                to each other, rebuilding context the previous engine already had, and waiting on
+                licence servers. A single team runs dozens of point tools from six to ten vendors,
+                each with its own formats, scripts and failure modes.
+              </Body>
+              <p className="mt-8 max-w-[62ch] display-3 text-off-white">
+                The bottleneck is not the silicon. It is the toolchain around it.
+              </p>
+            </div>
+
+            <div className="lg:self-center">
+              <VideoWindow
+                src={PROBLEM_FILM.video}
+                poster={PROBLEM_FILM.poster}
+                title={PROBLEM_FILM.title}
+                duration={PROBLEM_FILM.duration}
+                label={PROBLEM_FILM.label}
+                caption="Watch the film"
+              />
+            </div>
+          </div>
+        </div>
+
+        <SectionBody className="mt-12 md:mt-14">
+          <div>
             {/* Names the list below, so it is a label rather than a kicker
                 above a heading. The utility uppercases it. */}
             <Eyebrow tone="muted">Problems faced by engineers daily</Eyebrow>

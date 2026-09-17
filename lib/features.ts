@@ -118,3 +118,26 @@ export const FEATURES: Feature[] = [
 
 /** Every film in the series runs on the same design. */
 export const FEATURE_WINDOW_TITLE = 'Escanor · tt_um_regfile'
+
+/**
+ * Video 00: the problem the other five answer.
+ *
+ * It is a different kind of film from 01 to 05 - a briefing, not a recorded
+ * session. India is building fabs, packaging and fabless design; the one layer
+ * underneath all of it is EDA, three vendors hold 74% of it, and access to it
+ * has already been used as a trade lever. It ends on the five demos.
+ *
+ * The poster is 0:30, the frame where every row of the value chain dims and EDA
+ * lights up. Beside the home page's own "the bottleneck is not the silicon, it
+ * is the toolchain around it", that frame is the sentence drawn as a picture.
+ *
+ * The figures in the film carry their own on-screen sources. None of them is
+ * repeated in site copy, which keeps to the claims PRODUCT.md clears.
+ */
+export const PROBLEM_FILM = {
+  video: '/media/escanor-00-gap.mp4',
+  poster: '/media/escanor-00-gap-poster.webp',
+  duration: '1:13',
+  label: 'The EDA gap',
+  title: 'Escanor · the EDA gap',
+} as const
